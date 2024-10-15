@@ -10,12 +10,19 @@ fun input(): String {
 
 // 문자열 유효성 검사
 fun isValidString(string: String): Boolean {
-    val customString = if (string.length >= 5) string.substring(0, 5) else null
-    val allowedCharacters = mutableListOf(',', ':', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9')
-    if (customString != null)
-        allowedCharacters += customString[2]
+    val regex = Regex("^//.\\\\n")
+    val isCustomSeparator = if (string.length >= 5) {
+        regex.containsMatchIn(string)
+    } else {
+        false
+    }
 
-    val checkString = if (customString != null) string.substring(startIndex = 5) else string
+    val allowedCharacters = mutableListOf(',', ':', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9')
+    if (isCustomSeparator) {
+        allowedCharacters += string[2]
+    }
+
+    val checkString = if (isCustomSeparator) string.substring(startIndex = 5) else string
     for (c in checkString)
         if (c !in allowedCharacters)
             return false
@@ -24,13 +31,19 @@ fun isValidString(string: String): Boolean {
 
 // 숫자 추출
 fun extractNumbers(string: String): List<Int> {
-    val customString = if (string.length >= 5) string.substring(0, 5) else null
-    val separators = mutableListOf(',', ':')
-    if (customString != null)
-        separators += customString[2]
+    val regex = Regex("^//.\\\\n")
+    val isCustomSeparator = if (string.length >= 5) {
+        regex.containsMatchIn(string)
+    } else {
+        false
+    }
 
-    val checkString = if (customString != null) string.substring(startIndex = 5) else string
-    return if (customString != null) checkString.split(separators[0], separators[1], separators[2]).map { it.toInt() }
+    val separators = mutableListOf(',', ':')
+    if (isCustomSeparator)
+        separators += string[2]
+
+    val checkString = if (isCustomSeparator) string.substring(startIndex = 5) else string
+    return if (isCustomSeparator) checkString.split(separators[0], separators[1], separators[2]).map { it.toInt() }
     else checkString.split(separators[0], separators[1]).map { it.toInt() }
 }
 
