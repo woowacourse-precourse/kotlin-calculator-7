@@ -24,13 +24,7 @@ fun main() {
 
     separatorList.add(',')
     separatorList.add(':')
-    val startPoint: Int
-
-    try {
-        startPoint = findSeparator(info, separatorList)
-    } catch (e: IllegalArgumentException) {
-        Console.close(); return
-    }
+    val startPoint: Int = findSeparator(info, separatorList)
 
     val convertInfo: String = info.slice(startPoint until info.length)
     val separatorArr: CharArray = separatorList.toCharArray()
@@ -38,22 +32,18 @@ fun main() {
 
     var typeState = TypeState.INT
 
-    try {
-        val allTotal: String = infoArr.fold("0") { total, sum ->
-            val result = sum(
-                total,
-                sum.ifEmpty { "0" },
-                typeState)
+    val allTotal: String = infoArr.fold("0") { total, sum ->
+        val result = sum(
+            total,
+            sum.ifEmpty { "0" }.trim(),
+            typeState)
 
-            typeState = result.second
+        typeState = result.second
 
-            result.first
-        }
-
-        println(allTotal)
-    } catch (e: IllegalArgumentException) {
-        Console.close(); return
+        result.first
     }
+
+    println("결과 : $allTotal")
 
 
     Console.close()
@@ -61,68 +51,76 @@ fun main() {
 
 @Throws(IllegalArgumentException::class)
 fun sum(total: String, sum: String, flag: TypeState): Pair<String, TypeState> {
-    if (flag == TypeState.BIG_INTEGER) {
-        val totalConvert = BigInteger(total)
-        val operand = BigInteger(sum)
-        val result = totalConvert + operand
-
-        return Pair(result.toString(), TypeState.BIG_INTEGER)
+    if (sum.first() == '-') {
+        throw IllegalArgumentException()
     }
 
-    var currentState = flag
+    try {
+        if (flag == TypeState.BIG_INTEGER) {
+            val totalConvert = BigInteger(total)
+            val operand = BigInteger(sum)
+            val result = totalConvert + operand
 
-    while (currentState != TypeState.BIG_INTEGER) {
-        var maxStr = when (currentState) {
-            TypeState.INT -> Int.MAX_VALUE.toString()
-            TypeState.LONG -> Long.MAX_VALUE.toString()
-            else -> ""
+            return Pair(result.toString(), TypeState.BIG_INTEGER)
         }
-        val maxLength = Integer.max(sum.length, maxStr.length)
-        val compareSum = sum.padStart(maxLength, '0')
-        maxStr = maxStr.padStart(maxLength, '0')
 
-        /**
-         * T.MAX_VALUE >= total + sum 인 경우 현재 타입으로 연산하고 그렇지 않을 경우 타입을 올려줘야 하지만 우변이 범위를 넘어가 정상적인 연산이 불가능할 수 있음
-         * T.MAX_VALUE - sum >= total 의 식을 사용할 시 타입 내에서 안전하게 비교할 수 있음
-         */
-        if (maxStr >= compareSum) {
-            when (currentState) {
-                TypeState.INT -> {
-                    val totalConvert: Int = total.toInt()
-                    val sumConvert: Int = sum.toInt()
+        var currentState = flag
 
-                    if (Int.MAX_VALUE - sumConvert >= totalConvert) {
-                        break
+        while (currentState != TypeState.BIG_INTEGER) {
+            var maxStr = when (currentState) {
+                TypeState.INT -> Int.MAX_VALUE.toString()
+                TypeState.LONG -> Long.MAX_VALUE.toString()
+                else -> ""
+            }
+            val maxLength = Integer.max(sum.length, maxStr.length)
+            val compareSum = sum.padStart(maxLength, '0')
+            maxStr = maxStr.padStart(maxLength, '0')
+
+            /**
+             * T.MAX_VALUE >= total + sum 인 경우 현재 타입으로 연산하고 그렇지 않을 경우 타입을 올려줘야 하지만 우변이 범위를 넘어가 정상적인 연산이 불가능할 수 있음
+             * T.MAX_VALUE - sum >= total 의 식을 사용할 시 타입 내에서 안전하게 비교할 수 있음
+             */
+            if (maxStr >= compareSum) {
+                when (currentState) {
+                    TypeState.INT -> {
+                        val totalConvert: Int = total.toInt()
+                        val sumConvert: Int = sum.toInt()
+
+                        if (Int.MAX_VALUE - sumConvert >= totalConvert) {
+                            break
+                        }
                     }
-                }
-                TypeState.LONG -> {
-                    val totalConvert: Long = total.toLong()
-                    val sumConvert: Long = sum.toLong()
+                    TypeState.LONG -> {
+                        val totalConvert: Long = total.toLong()
+                        val sumConvert: Long = sum.toLong()
 
-                    if (Long.MAX_VALUE - sumConvert >= totalConvert) {
-                        break
+                        if (Long.MAX_VALUE - sumConvert >= totalConvert) {
+                            break
+                        }
                     }
+                    else -> {}
                 }
-                else -> {}
+            }
+
+            currentState = currentState.upgradeType()
+        }
+
+        val resultStr = when (currentState) {
+            TypeState.INT -> {
+                (total.toInt() + sum.toInt()).toString()
+            }
+            TypeState.LONG -> {
+                (total.toLong() + sum.toLong()).toString()
+            }
+            TypeState.BIG_INTEGER -> {
+                (BigInteger(total) + BigInteger(sum)).toString()
             }
         }
 
-        currentState = currentState.upgradeType()
+        return Pair(resultStr, currentState)
+    } catch (e: NumberFormatException) {
+        throw IllegalArgumentException()
     }
-
-    val resultStr = when (currentState) {
-        TypeState.INT -> {
-            (total.toInt() + sum.toInt()).toString()
-        }
-        TypeState.LONG -> {
-            (total.toLong() + sum.toLong()).toString()
-        }
-        TypeState.BIG_INTEGER -> {
-            (BigInteger(total) + BigInteger(sum)).toString()
-        }
-    }
-
-    return Pair(resultStr, currentState)
 }
 
 @Throws(IllegalArgumentException::class)
