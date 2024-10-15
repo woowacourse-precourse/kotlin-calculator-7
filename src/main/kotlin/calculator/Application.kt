@@ -9,7 +9,13 @@ private var delimiter = arrayOf(",",":")
 
 fun main() {
     val input = Console.readLine()
-    val numbers = input.split(*delimiter).toList()
+    val delimitedInput = input.split(*delimiter).toList()
+    try {
+        val numbers = delimitedInput.map { it.toIntOrNull() ?: throw IllegalArgumentException() }.toTypedArray()
+    }catch (e : IllegalArgumentException){
+        println("입력에 문제가 생겼습니다.")
+        return
+    }
 }
 
 private fun hasCustomDelimiters(input: String) =
