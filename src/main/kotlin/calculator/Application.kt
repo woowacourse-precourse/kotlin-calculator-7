@@ -10,7 +10,7 @@ fun input(): String {
 
 // 문자열 유효성 검사
 fun isValidString(string: String): Boolean {
-    val regex = Regex("^//.\n")
+    val regex = Regex("^//(.)\n")
     val isCustomSeparator = regex.containsMatchIn(string)
     val allowedCharacters = mutableListOf(',', ':', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9')
     if (isCustomSeparator)
@@ -46,15 +46,11 @@ fun printResult(result: Int) {
 }
 
 fun main() {
-    try {
-        val string = input()
-        if (!isValidString(string))
-            throw IllegalArgumentException("잘못된 값을 입력했습니다.")
-        val numbers = extractNumbers(string)
-        val result = calculate(numbers)
-        printResult(result)
-    } catch (e: IllegalArgumentException) {
-        println(e.message)
-    }
+    val string = input()
+    if (!isValidString(string))
+        throw IllegalArgumentException("잘못된 값을 입력했습니다.")
+    val numbers = extractNumbers(string)
+    val result = calculate(numbers)
+    printResult(result)
 }
 
