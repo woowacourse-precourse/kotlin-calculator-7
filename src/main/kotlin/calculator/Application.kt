@@ -32,6 +32,30 @@ fun main() {
         Console.close(); return
     }
 
+    val convertInfo: String = info.slice(startPoint until info.length)
+    val separatorArr: CharArray = separatorList.toCharArray()
+    val infoArr: List<String> = convertInfo.split(delimiters = separatorArr)
+
+    var typeState = TypeState.INT
+
+    try {
+        val allTotal: String = infoArr.fold("0") { total, sum ->
+            val result = sum(
+                total,
+                sum.ifEmpty { "0" },
+                typeState)
+
+            typeState = result.second
+
+            result.first
+        }
+
+        println(allTotal)
+    } catch (e: IllegalArgumentException) {
+        Console.close(); return
+    }
+
+
     Console.close()
 }
 
@@ -103,7 +127,7 @@ fun sum(total: String, sum: String, flag: TypeState): Pair<String, TypeState> {
 
 @Throws(IllegalArgumentException::class)
 fun findSeparator(inputString: String, separatorSet: MutableSet<Char>): Int {
-    if (inputString.length < 4) {
+    if (inputString.length < 5) {
         return 0
     }
 
