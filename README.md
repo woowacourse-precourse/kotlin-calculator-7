@@ -13,8 +13,8 @@
 ## 구현할 기능 목록
 
 - [x] 입력 기능
-- [ ] 숫자 추출 기능
-- [ ] 덧셈 기능
+- [x] 숫자 추출 기능
+- [x] 덧셈 기능
 - [ ] 결과 출력 기능
 - [ ] 예외 처리
 
@@ -56,4 +56,24 @@ fun numberExtraction(inputString: String): List<String> {
 - 커스텀 구분자를 지정했다면 `substring` 함수를 통해 커스텀 구분자를 지정하는 부분 다음부터 커스텀 구분자로 `split` 함수를 통해 숫자를 추출하여 `numArray`에 저장
 - 커스텀 구분자를 지정하지 않았다면 쉼표와 콜론으로 `split` 함수를 통해 숫자를 추출하여 `numArray`에 저장
 - 추출되어 저장된 숫자 배열을 리턴
+
+### 덧셈기능
+
+#### main
+
+```kotlin
+val sum = sumNumArray(numArray)
+```
+- `sumNumArray` 함수를 통해 `numArray` 배열 안의 숫자들의 합을 구한 후 리턴 값을 `sum`에 저장
+
+#### sumNumArray
+
+```kotlin
+fun sumNumArray(numArray: List<String>): Int {
+    var sum = 0
+    numArray.forEach { sum+=it.toInt() }
+    return sum
+}
+```
+- 고차함수 `forEach` 를 사용하여 `sum` 에 숫자 배열 요소들의 합을 저장후 `sum` 값을 리턴
 
