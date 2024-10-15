@@ -1,4 +1,4 @@
-## [kotlin-calculator-precourse]
+# kotlin-calculator-precourse
 
 # 문자열 덧셈 계산기
 
@@ -53,7 +53,7 @@
 
 
 ## 체크리스트
-- [ ] 문자열은 missionutils에서 제공하는 라이브러리의 readline()을 사용하여 입력받는다.
+- [X] 문자열은 missionutils에서 제공하는 라이브러리의 readline()을 사용하여 입력받는다.
 - [ ] 입력받은 문자열에서 쉽표(,) 또는 콜론(:) 을 구분하여 숫자를 분리하여 합을 반환한다.
 - [ ] 위의 구분자 외에 커스텀 구분자를 지정할 수 있는데, 이 경우에는 문자열 앞 부분의 `//`, `\n` 사이에 들어오는 문자를 구분자로 지정한다.
 - [ ] 사용자가 잘못된 값을 입력할 경우 IllegalArgumentException을 발생시킨 후 애플리케이션을 종료시킨다.
