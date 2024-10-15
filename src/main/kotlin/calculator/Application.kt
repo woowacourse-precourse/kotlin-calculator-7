@@ -8,10 +8,11 @@ private val CUSTOM_DELIMITER_START_INDEX = 2
 private var delimiter = arrayOf(",",":")
 
 fun main() {
-    val input = Console.readLine()
+    var input = Console.readLine()
 
     if(hasCustomDelimiters(input)){
         delimiter = setCustomDelimiter(input)
+        input = inputExcludeCustomContent(input)
     }
 
     val delimitedInput = input.split(*delimiter).toList()
@@ -32,5 +33,11 @@ private fun setCustomDelimiter(input: String): Array<String> {
     val customDelimiterEndIndex = input.indexOf(CUSTOM_DELIMITER_AFTER_FLAG)
     val delimiters = input.substring(CUSTOM_DELIMITER_START_INDEX, customDelimiterEndIndex)
     return delimiters.map { it.toString() }.toTypedArray()
+}
+
+private fun inputExcludeCustomContent(input: String): String {
+    // [//구분자\n] 커스텀 구분자의 구조에서 indexOf로 \n 의 인덱스의 시작 위치를 가져오므로 +2 해서 입력문자 추출
+    val inputStartIndex = input.indexOf(CUSTOM_DELIMITER_AFTER_FLAG) + 2
+    return input.substring(inputStartIndex)
 }
 
