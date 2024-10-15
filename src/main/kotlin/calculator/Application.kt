@@ -2,8 +2,17 @@ package calculator
 
 fun main() {
     println("덧셈할 문자열을 입력해 주세요.")
-    val inputString = readLine()!!
+    val inputString = readLine()
+
+    if (inputString.isNullOrBlank()) {
+        println("결과 : 0")
+        return
+    }
+
     val numArray = numberExtraction(inputString)
+
+    if(!isAllElementsNumeric(numArray)) throw IllegalArgumentException("잘못된 입력입니다.")
+
     val sum = sumNumArray(numArray)
     println("결과 : $sum")
 }
@@ -22,4 +31,8 @@ fun sumNumArray(numArray: Array<String>): Int {
     var sum = 0
     numArray.forEach { sum+=it.toInt() }
     return sum
+}
+
+fun isAllElementsNumeric(numArray: Array<String>): Boolean {
+    return numArray.all { it.toIntOrNull() != null }
 }

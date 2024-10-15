@@ -84,3 +84,30 @@ fun sumNumArray(numArray: List<String>): Int {
     println("결과 : $sum")
 ```
 - `println` 함수를 이용해 추출된 숫자 배열안의 요소의 합이 저장된 `sum` 값을 출력
+
+### 예외 처리 기능
+
+#### 사용자의 입력값이 "" 인 경우
+
+```kotlin
+    if (inputString.isNullOrBlank()) {
+        println("결과 : 0")
+        return
+    }
+```
+- `readLine` 으로 받은 값이 빈 문자열일 경우 결과 0을 바로 출력하고 프로그램 종료
+
+#### 사용자가 잘못된 값을 입력할 경우
+
+```kotlin
+    if(!isAllElementsNumeric(numArray)) throw IllegalArgumentException("잘못된 입력입니다.")
+```
+- `isAllElementsNumeric` 함수에서 `numArray` 에 저장된 요소가 전부 숫자인지 판단
+- 전부다 숫자가 아닌 경우 잘못된 입력값 임으로 IllegalArgumentException 예외를 던짐
+
+```kotlin
+fun isAllElementsNumeric(numArray: Array<String>): Boolean {
+    return numArray.all { it.toIntOrNull() != null }
+}
+```
+- 추출된 배열의 요소가 전부 숫자인지를 판별하고 전부 숫자라면 true, 숫자가 아닌 요소가 있다면 false를 리턴
