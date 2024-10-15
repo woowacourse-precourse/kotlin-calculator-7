@@ -9,8 +9,12 @@ private var delimiter = arrayOf(",",":")
 
 fun main() {
     val input = Console.readLine()
-    val delimitedInput = input.split(*delimiter).toList()
 
+    if(hasCustomDelimiters(input)){
+        delimiter = setCustomDelimiter(input)
+    }
+
+    val delimitedInput = input.split(*delimiter).toList()
     try {
         val numbers = delimitedInput.map { it.toIntOrNull() ?: throw IllegalArgumentException() }.toTypedArray()
         println(numbers.sum())
