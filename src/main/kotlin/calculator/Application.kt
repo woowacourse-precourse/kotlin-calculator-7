@@ -18,18 +18,24 @@ fun add(input: String): Int {
     var delimiters = listOf(",", ":")
     var numbers = input
 
-    // 입력 문자열이 "//"로 시작하는 경우
+    // //와 \n 사이 문자열을 커스텀 구분자로 추가
     if (input.startsWith("//")) {
-        val customDelimiter = input[2].toString()
+        val endOfDelimiterIndex = input.indexOf("\\n")
+
+        if (endOfDelimiterIndex == -1) {
+            throw IllegalArgumentException("-> Error) 커스텀 구분자 오류")
+        }
+
+        val customDelimiter = input.substring(2, endOfDelimiterIndex)
         delimiters = delimiters + customDelimiter
 
-        numbers = input.substring(5)
+        numbers = input.substring(endOfDelimiterIndex + 2)
     }
 
+    // numbers를 저장된 구분자(delimiters)로 split 후 sum 계산
     val tokens = numbers.split(*delimiters.toTypedArray())
-
     val sum = tokens.map {
-        it.toIntOrNull() ?: throw IllegalArgumentException("Error")
+        it.toIntOrNull() ?: throw IllegalArgumentException("-> Error) 숫자 입력 오류")
     }.sum()
 
     return sum
