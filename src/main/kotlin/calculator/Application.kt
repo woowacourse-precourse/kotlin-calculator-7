@@ -22,6 +22,17 @@ fun isValidString(string: String): Boolean {
     return true
 }
 
+// 숫자 추출
+fun extractNumbers(string: String): List<Int> {
+    val regex = Regex("^//.\n")
+    val separators = mutableListOf(',', ':')
+    val isCustomSeparator = regex.containsMatchIn(string)
+    if (isCustomSeparator)
+        separators += string[2]
+
+    return string.split(separators[0], separators[1], separators[2]).map { it.toInt() }
+}
+
 fun main() {
     // TODO: 프로그램 구현
 }
