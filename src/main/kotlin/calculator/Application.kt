@@ -33,6 +33,11 @@ fun extractNumbers(string: String): List<Int> {
     return string.split(separators[0], separators[1], separators[2]).map { it.toInt() }
 }
 
+// 연산
+fun calculate(numbers: List<Int>): Int {
+    return numbers.sum()
+}
+
 fun main() {
     // TODO: 프로그램 구현
 }
