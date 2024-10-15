@@ -22,23 +22,8 @@
 
 ### 입력 기능
 
-#### main 함수
-
 ```kotlin
     println("덧셈할 문자열을 입력해 주세요.")
-    var numList : IntArray = input()
+    var inputString = readLine()
 ```
-- input 함수를 실행
-
-#### input 함수
-
-```kotlin
-fun input(): IntArray {
-    val inputString = readLine()
-    val numList : IntArray = numberExtraction(inputString)
-    return numList
-}
-```
-- `readLine()`을 통해 사용자가 입력하는 값을 `inputString`에 저장 
-- `numberExtraction` 함수를 통해 `inputString`에서 추출된 숫자 배열을 `numList`에 저장
-- 추출된 숫자 배열인 `numList`를 리턴
+- `readLine()`을 통해 사용자가 입력하는 값을 `inputString`에 저장
