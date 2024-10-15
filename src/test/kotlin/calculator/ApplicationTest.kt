@@ -28,10 +28,47 @@ class ApplicationTest : NsTest() {
     fun testNoInput()
     {
         assertSimpleTest {
-            run("''")
+            run("")
             assertThat(output()).contains("결과 : 0")
         }
     }
+
+    @Test
+    fun testOneInput()
+    {
+        assertSimpleTest {
+            run("3")
+            assertThat(output()).contains("결과 : 3")
+        }
+    }
+
+    @Test
+    fun testCommaInput()
+    {
+        assertSimpleTest {
+            run("1,2,3")
+            assertThat(output()).contains("결과 : 6")
+        }
+    }
+
+    @Test
+    fun testColonInput()
+    {
+        assertSimpleTest {
+            run("1:2:3")
+            assertThat(output()).contains("결과 : 6")
+        }
+    }
+
+    @Test
+    fun testCommaColonInput()
+    {
+        assertSimpleTest {
+            run("1,2:3")
+            assertThat(output()).contains("결과 : 6")
+        }
+    }
+
     override fun runMain() {
         main()
     }
