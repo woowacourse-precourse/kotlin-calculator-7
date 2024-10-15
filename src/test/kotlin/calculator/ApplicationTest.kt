@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
 class ApplicationTest : NsTest() {
-    /*
+
     @Test
     fun `커스텀 구분자 사용`() {
         assertSimpleTest {
@@ -15,7 +15,7 @@ class ApplicationTest : NsTest() {
             assertThat(output()).contains("결과 : 1")
         }
     }
-
+    /*
     @Test
     fun `예외 테스트`() {
         assertSimpleTest {
