@@ -111,3 +111,11 @@ fun isAllElementsNumeric(numArray: Array<String>): Boolean {
 }
 ```
 - 추출된 배열의 요소가 전부 숫자인지를 판별하고 전부 숫자라면 true, 숫자가 아닌 요소가 있다면 false를 리턴
+
+## 실행 결과
+
+<img width="231" alt="image" src="https://github.com/user-attachments/assets/5a37e261-be0b-4c4a-bcdd-b3e0d980219c">
+
+<img width="187" alt="image" src="https://github.com/user-attachments/assets/9b1a15a3-fb32-42cc-97ed-1db69c449e7c">
+
+<img width="724" alt="image" src="https://github.com/user-attachments/assets/27628252-167d-40ee-99c4-2d9e5c6d3995">
