@@ -6,5 +6,5 @@ const val COMMAND_LENGTH = 5
 
 fun main() {
     val input: String = readLine()  // 문자열 입력 받기
-    println("결과 : ${StringCalculator.sumString(input)}")
+    println("결과 : ${InputStringManager.sumString(input)}")
 }
