@@ -39,6 +39,11 @@ fun calculate(numbers: List<Int>): Int {
     return numbers.sum()
 }
 
+// 출력
+fun printResult(result: Int) {
+    print("결과 : $result")
+}
+
 fun main() {
     // TODO: 프로그램 구현
 }
