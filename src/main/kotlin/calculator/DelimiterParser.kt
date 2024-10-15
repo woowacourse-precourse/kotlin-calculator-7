@@ -8,7 +8,7 @@ object DelimiterParser {
         val delimiterSet: MutableSet<Char> = mutableSetOf(',', ':') // 기본 구분자로 이루어진 가변 Set
 
         // input 문자열에 커맨드의 존재 여부를 체크한뒤 커맨드에 해당하는 문자를 Set에 추가하기
-        if (CommandVerifyer.verifyCommand(input)) {
+        if (CommandVerifier.verifyCommand(input)) {
             delimiterSet.add(input[2])
         }
 
