@@ -5,9 +5,11 @@ import camp.nextstep.edu.missionutils.Console
 private val CUSTOM_DELIMITER_BEFORE_FLAG = "//"
 private val CUSTOM_DELIMITER_AFTER_FLAG = "\\n"
 private val CUSTOM_DELIMITER_START_INDEX = 2
-private var delimiter = ",:"
+private var delimiter = arrayOf(",",":")
 
 fun main() {
+    val input = Console.readLine()
+    val numbers = input.split(*delimiter).toList()
 }
 
 private fun hasCustomDelimiters(input: String) =
@@ -18,3 +20,4 @@ private fun setCustomDelimiter(input: String): String {
     val customDelimiterEndIndex = input.indexOf(CUSTOM_DELIMITER_AFTER_FLAG)
     return input.substring(CUSTOM_DELIMITER_START_INDEX, customDelimiterEndIndex)
 }
+
