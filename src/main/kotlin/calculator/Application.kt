@@ -45,5 +45,15 @@ fun printResult(result: Int) {
 }
 
 fun main() {
-    // TODO: 프로그램 구현
+    try {
+        val string = input()
+        if (!isValidString(string))
+            throw IllegalArgumentException("잘못된 값을 입력했습니다.")
+        val numbers = extractNumbers(string)
+        val result = calculate(numbers)
+        printResult(result)
+    } catch (e: IllegalArgumentException) {
+        println(e.message)
+    }
 }
+
