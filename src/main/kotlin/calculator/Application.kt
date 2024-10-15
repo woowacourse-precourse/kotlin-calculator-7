@@ -10,17 +10,11 @@ fun input(): String {
 
 // 문자열 유효성 검사
 fun isValidString(string: String): Boolean {
-    val regex = Regex("^//.\\\\n")
-    val isCustomSeparator = if (string.length >= 5) {
-        regex.containsMatchIn(string)
-    } else {
-        false
-    }
+    val isCustomSeparator = isCustomSeparator(string)
 
     val allowedCharacters = mutableListOf(',', ':', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9')
-    if (isCustomSeparator) {
+    if (isCustomSeparator)
         allowedCharacters += string[2]
-    }
 
     val checkString = if (isCustomSeparator) string.substring(startIndex = 5) else string
     for (c in checkString)
@@ -31,12 +25,7 @@ fun isValidString(string: String): Boolean {
 
 // 숫자 추출
 fun extractNumbers(string: String): List<Int> {
-    val regex = Regex("^//.\\\\n")
-    val isCustomSeparator = if (string.length >= 5) {
-        regex.containsMatchIn(string)
-    } else {
-        false
-    }
+    val isCustomSeparator = isCustomSeparator(string)
 
     val separators = mutableListOf(',', ':')
     if (isCustomSeparator)
@@ -57,6 +46,16 @@ fun printResult(result: Int) {
     print("결과 : $result")
 }
 
+// 커스텀 구분자 유무 확인
+fun isCustomSeparator(string: String): Boolean {
+    val regex = Regex("^//.\\\\n")
+    return if (string.length >= 5) {
+        regex.containsMatchIn(string)
+    } else {
+        false
+    }
+}
+
 fun main() {
     val string = input()
     if (!isValidString(string))
@@ -65,4 +64,3 @@ fun main() {
     val result = calculate(numbers)
     printResult(result)
 }
-
