@@ -22,8 +22,38 @@
 
 ### 입력 기능
 
+#### main
+
 ```kotlin
     println("덧셈할 문자열을 입력해 주세요.")
     var inputString = readLine()
 ```
-- `readLine()`을 통해 사용자가 입력하는 값을 `inputString`에 저장
+- `readLine()` 을 통해 사용자가 입력하는 값을 `inputString` 에 저장
+
+### 숫자 추출 기능
+
+#### main
+
+```kotlin
+    val numArray = numberExtraction(inputString)
+```
+- `numberExtraction` 함수를 실행하여 `inputString` 에서 숫자 배열을 추출하여 리턴 값을 `numArray` 에 저장
+
+#### numberExtraction
+
+```kotlin
+fun numberExtraction(inputString: String): List<String> {
+    val numArray : List<String>
+    if(inputString[0]=='/'&&inputString[1]=='/'&&inputString[3]=='\\'&&inputString[4]=='n'){
+        numArray = inputString.substring(5).split(inputString[2])
+    }else{
+        numArray = inputString.trim().split(",",":")
+    }
+    return numArray
+}
+```
+- 사용자가 커스텀 구분자를 지정했는지 `if 문` 을 통해 확인
+- 커스텀 구분자를 지정했다면 `substring` 함수를 통해 커스텀 구분자를 지정하는 부분 다음부터 커스텀 구분자로 `split` 함수를 통해 숫자를 추출하여 `numArray`에 저장
+- 커스텀 구분자를 지정하지 않았다면 쉼표와 콜론으로 `split` 함수를 통해 숫자를 추출하여 `numArray`에 저장
+- 추출되어 저장된 숫자 배열을 리턴
+
