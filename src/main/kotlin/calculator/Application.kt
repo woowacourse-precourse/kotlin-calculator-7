@@ -8,7 +8,7 @@ fun main() {
 
     val inputString = readLine()
 
+    val result = inputString.split(',', ':').sumOf { it.toInt() }
 
-
-
+    println(result)
 }
