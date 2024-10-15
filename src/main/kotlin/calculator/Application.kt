@@ -24,14 +24,14 @@ fun isValidString(string: String): Boolean {
 
 // 숫자 추출
 fun extractNumbers(string: String): List<Int> {
-    val regex = Regex("^//.\n")
+    val customString = if (string.length >= 5) string.substring(0, 5) else null
     val separators = mutableListOf(',', ':')
-    val isCustomSeparator = regex.containsMatchIn(string)
-    if (isCustomSeparator)
-        separators += string[2]
+    if (customString != null)
+        separators += customString[2]
 
-    return if (isCustomSeparator) string.split(separators[0], separators[1], separators[2]).map { it.toInt() }
-    else string.split(separators[0], separators[1]).map { it.toInt() }
+    val checkString = if (customString != null) string.substring(startIndex = 5) else string
+    return if (customString != null) checkString.split(separators[0], separators[1], separators[2]).map { it.toInt() }
+    else checkString.split(separators[0], separators[1]).map { it.toInt() }
 }
 
 // 연산
