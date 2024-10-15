@@ -31,7 +31,8 @@ fun extractNumbers(string: String): List<Int> {
     if (isCustomSeparator)
         separators += string[2]
 
-    return string.split(separators[0], separators[1], separators[2]).map { it.toInt() }
+    return if (isCustomSeparator) string.split(separators[0], separators[1], separators[2]).map { it.toInt() }
+    else string.split(separators[0], separators[1]).map { it.toInt() }
 }
 
 // 연산
