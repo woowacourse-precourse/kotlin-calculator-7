@@ -5,7 +5,7 @@ fun main() {
     val inputString = readLine()!!
     val numArray = numberExtraction(inputString)
     val sum = sumNumArray(numArray)
-    println(sum)
+    println("결과 : $sum")
 }
 
 fun numberExtraction(inputString: String): Array<String> {

@@ -57,7 +57,7 @@ fun numberExtraction(inputString: String): List<String> {
 - 커스텀 구분자를 지정하지 않았다면 쉼표와 콜론으로 `split` 함수를 통해 숫자를 추출하여 `numArray`에 저장
 - 추출되어 저장된 숫자 배열을 리턴
 
-### 덧셈기능
+### 덧셈 기능
 
 #### main
 
@@ -77,3 +77,10 @@ fun sumNumArray(numArray: List<String>): Int {
 ```
 - 고차함수 `forEach` 를 사용하여 `sum` 에 숫자 배열 요소들의 합을 저장후 `sum` 값을 리턴
 
+### 결과 출력 기능
+
+#### main
+```kotlin
+    println("결과 : $sum")
+```
+- `println` 함수를 이용해 추출된 숫자 배열안의 요소의 합이 저장된 `sum` 값을 출력
