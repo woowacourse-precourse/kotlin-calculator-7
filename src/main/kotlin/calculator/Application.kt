@@ -10,6 +10,7 @@ private var delimiter = arrayOf(",",":")
 fun main() {
     val input = Console.readLine()
     val delimitedInput = input.split(*delimiter).toList()
+
     try {
         val numbers = delimitedInput.map { it.toIntOrNull() ?: throw IllegalArgumentException() }.toTypedArray()
         println(numbers.sum())
@@ -23,8 +24,9 @@ private fun hasCustomDelimiters(input: String) =
     input.startsWith(CUSTOM_DELIMITER_BEFORE_FLAG) &&
             input.indexOf(CUSTOM_DELIMITER_AFTER_FLAG) != -1
 
-private fun setCustomDelimiter(input: String): String {
+private fun setCustomDelimiter(input: String): Array<String> {
     val customDelimiterEndIndex = input.indexOf(CUSTOM_DELIMITER_AFTER_FLAG)
-    return input.substring(CUSTOM_DELIMITER_START_INDEX, customDelimiterEndIndex)
+    val delimiters = input.substring(CUSTOM_DELIMITER_START_INDEX, customDelimiterEndIndex)
+    return delimiters.map { it.toString() }.toTypedArray()
 }
 
