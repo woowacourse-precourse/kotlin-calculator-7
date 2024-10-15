@@ -1,5 +1,6 @@
 package calculator
+import camp.nextstep.edu.missionutils.Console.readLine
 
 fun main() {
-    // TODO: 프로그램 구현
+    val input = readLine()  // 문자열 입력받기
 }
