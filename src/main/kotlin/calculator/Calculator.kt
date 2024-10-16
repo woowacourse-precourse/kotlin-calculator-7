@@ -6,6 +6,8 @@ class Calculator {
         val splitList = splitString(inputString)
 
         // 2. 각 숫자들의 총 합을 구한다.
+        val sum = getSum(splitList)
+
         // 3. 결과를 출력한다.
     }
 
@@ -26,6 +28,11 @@ class Calculator {
 
         return splitList
     }
+
+    fun getSum(splitList: List<String>): Any =
+        splitList.sumOf {
+            it.toInt()
+        }
 
     companion object {
         private val validator = Validator()
