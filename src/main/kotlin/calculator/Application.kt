@@ -34,7 +34,9 @@ fun splitString(str: String): List<Int> {
         val delimiter = str[index + 2].toString()
         var result = str.removeRange(index, index + 5)
         result.split(",", ":", delimiter).map { it.toInt() }
-    } else str.split(",", ":").map { it.toInt() }
+    } else {
+        str.split(",", ":").map { it.toInt() }
+    }
 
 }
 
