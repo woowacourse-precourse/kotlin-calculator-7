@@ -4,18 +4,24 @@ package calculator
 object ErrorChecker {
     // 인풋 오류를 검사하는 메소드
     fun invalidInputCheck(input: String) {
-        if (input.isEmpty()) { // 비어있는 입력값을 탐지하여 예외 발생
-            throw IllegalArgumentException("오류: 입력한 값이 비었습니다")
-        }
         // 구분자와 구분자가 제거된 인풋 변수에 저장
         val delimiter = DelimiterParser.getDelimiter(input)
         val commandRemovedInput = InputStringManager.getCommandRemovedInput(input)
+        // 비어있는 값이 입력될 경우 예외처리를 건너뜀
+        if (commandRemovedInput.isEmpty()) {
+            return
+        }
+
         // 아라비아 숫자를 char타입의 리스트로 저장
         val validDigits = (0..9).toList().map { it.digitToChar() }
 
-        // 구분자가 2회 연속 등장하는지 탐지하기 위한 플래그 변수
-        var beforeNumber = false
+        // 커맨드를 제외한 인풋이 구분자로 시작하면 예외 발생
+        if (!validDigits.contains(commandRemovedInput[0])) {
+            throw IllegalArgumentException("오류: 구분자로 시작할 수 없습니다.")
+        }
 
+        // 구분자가 2회 연속 등장하는지 탐지하기 위한 플래그 변수
+        var beforeNumber = true
         // input 문자열을 char 단위로 순회
         for (c in commandRemovedInput) {
             if (validDigits.contains(c)) { // 숫자에 해당하면 플래그를 true으로 바꾸고 건너뛰기
@@ -34,6 +40,10 @@ object ErrorChecker {
         }
         if (!beforeNumber) { // 구분자로 끝나는 문자열을 탐지하여 예외 발생
             throw IllegalArgumentException("오류: 구분자 뒤에 숫자를 입력해 주세요")
+        }
+        // 0 입력을 탐지하여 예외 발생
+        if (InputStringManager.parseInputStringToNumbers(input).contains(0)) {
+            throw IllegalArgumentException("오류: 양수만 입력해 주세요")
         }
     }
 }

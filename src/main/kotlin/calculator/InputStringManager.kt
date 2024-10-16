@@ -3,7 +3,11 @@ package calculator
 // input 문자열을 조작하거나 연산을 수행하는 객체
 object InputStringManager {
     // input 문자열을 구분자로 쪼개서 List<Int>로 반환하는 메서드
-    private fun parseInputStringToNumbers(input: String): List<Int> {
+    fun parseInputStringToNumbers(input: String): List<Int> {
+        // 커맨드를 제외한 값이 비어있다면 비어있는 리스트를 반환
+        if (getCommandRemovedInput(input).isEmpty()) {
+            return emptyList()
+        }
         // input 문자열에서 Set<Char>으로 구분자를 추출해놓은 변수
         val delimiters: Set<Char> = DelimiterParser.getDelimiter(input)
 
