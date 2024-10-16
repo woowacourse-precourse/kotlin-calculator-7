@@ -25,6 +25,9 @@ fun isValidString(string: String): Boolean {
 
 // 숫자 추출
 fun extractNumbers(string: String): List<Int> {
+    if (string == "")
+        return emptyList()
+
     val isCustomSeparator = isCustomSeparator(string)
 
     val separators = mutableListOf(',', ':')
