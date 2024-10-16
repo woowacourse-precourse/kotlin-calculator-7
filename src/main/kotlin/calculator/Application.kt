@@ -2,6 +2,9 @@ package calculator
 
 import camp.nextstep.edu.missionutils.Console
 
+private val divider = mutableListOf<String>(",", ":")
+private var isCustomDividerUsed: Boolean = true
+
 fun main() {
     println("덧셈할 문자열을 입력해 주세요.")
     val input = Console.readLine().split(CUSTOM_DIVIDER_PREFIX, CUSTOM_DIVIDER_SUFFIX)
@@ -13,11 +16,17 @@ private fun checkInputValid(input: List<String>): Boolean {
     return when {
         input.size > CUSTOM_DIVIDER_EXCEEDING_COUNT -> false
 
-        input.size == CUSTOM_DIVIDER_NONE_COUNT -> true
+        input.size == CUSTOM_DIVIDER_NONE_COUNT -> {
+            isCustomDividerUsed = false
+            true
+        }
 
         input.first().isNotBlank() -> false
 
-        else -> true
+        else -> {
+            divider.addLast(input[CUSTOM_DIVIDER_INDEX])
+            true
+        }
     }
 }
 
@@ -28,3 +37,5 @@ private const val CUSTOM_DIVIDER_SUFFIX = "\\n"
 
 private const val CUSTOM_DIVIDER_EXCEEDING_COUNT = 3
 private const val CUSTOM_DIVIDER_NONE_COUNT = 1
+
+private const val CUSTOM_DIVIDER_INDEX = 1
