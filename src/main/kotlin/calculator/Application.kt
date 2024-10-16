@@ -12,6 +12,9 @@ fun main() {
     if (!checkInputValid(input)) throw IllegalArgumentException(INVALID_INPUT_MESSAGE)
 
     val numbers = splitByDivider(input)
+    val sum = getSum(numbers)
+
+    println("결과 : $sum")
 }
 
 private fun checkInputValid(input: List<String>): Boolean {
@@ -49,6 +52,16 @@ private fun splitByDivider(input: List<String>): List<Int> {
             throw IllegalArgumentException(INVALID_INPUT_MESSAGE)
         }
     }
+}
+
+private fun getSum(numbers: List<Int>): Int {
+    var sum = 0
+
+    numbers.forEach { number ->
+        sum += number
+    }
+
+    return sum
 }
 
 private const val INVALID_INPUT_MESSAGE = "유효하지 않은 입력입니다."
