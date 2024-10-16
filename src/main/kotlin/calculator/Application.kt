@@ -4,20 +4,25 @@ import camp.nextstep.edu.missionutils.Console
 
 val customDelimiterRegex = Regex("^//[^0-9]\\\\n.*")
 
+fun getOperands(input: String): List<String>
+{
+    if (customDelimiterRegex.matches(input)) {
+        val customDelimiter = input[2].toString()
+        val inputSubstring = input.substring(5)
+        return inputSubstring.split(",", ":", customDelimiter)
+    }
+    return input.split(",", ":")
+}
+
 fun main() {
     try {
-        var input = Console.readLine()
+        val input = Console.readLine()
         var result = 0
-        val delimiters = mutableListOf(",", ":")
-        if (customDelimiterRegex.matches(input))
-        {
-            val customDelimiter = input[2].toString()
-            input = input.substring(5)
-            delimiters.add(customDelimiter)
-        }
+        val operands = getOperands(input)
         if (input.isNotEmpty()) {
-            val delimiterRegex = Regex(delimiters.joinToString("|"))
-            val operands = input.split(delimiterRegex)
+            if (operands.any{it.toInt() <= 0}) {
+                throw IllegalArgumentException()
+            }
             result = operands.sumOf{it.toInt()}
         }
         println("결과 : $result")
@@ -26,6 +31,6 @@ fun main() {
         println("결과 : 0")
     }
     catch (e: IllegalArgumentException) {
-        return
+        throw e
     }
 }
