@@ -13,6 +13,9 @@ class DelimiterSplitter(
     // 커스텀 구분자 사용 여부
     private fun customDelimiterIsUsed(): Boolean = value.startsWith(CUSTOM_DELIMITER_FRONT)
 
+    // 커스텀 구분자 찾기
+    private fun findCustomDelimiter() = value.substring(CUSTOM_DELIMITER_FRONT.length, value.lastIndexOf(CUSTOM_DELIMITER_BACK))
+
     companion object {
         private const val COMMA_DELIMITER = ","
         private const val COLON_DELIMITER = ":"
