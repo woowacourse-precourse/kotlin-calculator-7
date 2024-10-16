@@ -10,6 +10,6 @@ fun main() {
     var calculator = Calculator(ans)
     calculator.findSeparator()
     calculator.findNumber()
-    //calculator.plus()
+    calculator.plus()
     //calculator.print()
 }

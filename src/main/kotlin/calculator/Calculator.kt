@@ -3,10 +3,11 @@ package calculator
 class Calculator(var input:String) {
     val list : MutableList<Char> = mutableListOf(',',':')
     var numberList : MutableList<Int>  = mutableListOf()
+    var tmpNumber = 0
     fun findSeparator(){
         if(input[0]=='/'&&input[1]=='/'&&input[3]=='\\'&&input[4]=='n') {
             list.add(input[2])
-            input.substring(5)
+            input = input.substring(5)
         }
     }
     fun findNumber(){
@@ -24,12 +25,15 @@ class Calculator(var input:String) {
     }
 
     fun toNumber(nowNumber:String):Int{
-        println(nowNumber)
         return try{
             nowNumber.toInt()
         } catch(e : IllegalArgumentException){
-            throw Exception("처리되지 않은 예외 발생!")
+            throw Exception(e)
         }
     }
-
+    fun plus(){
+        for( i in numberList){
+            tmpNumber += i
+        }
+    }
 }
