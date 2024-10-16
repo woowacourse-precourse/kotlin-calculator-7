@@ -4,6 +4,8 @@ import camp.nextstep.edu.missionutils.Console
 
 class Calculator {
     private val validator: Validator = Validator()
+    private val separator: Separator = Separator()
+
     private var result = 0
 
     fun turnOnCalculator() {
@@ -17,10 +19,45 @@ class Calculator {
                 return
             }
 
+            false -> useCalculator(inputString)
+        }
+    }
+
+    private fun useCalculator(inputString: String) {
+        val isDeclareCustomSeparator: Boolean = separator.isCustomSeparator(inputString)
+        when (isDeclareCustomSeparator) {
+            true -> {
+                val separatedInputFromSeparator: List<String> =
+                    inputString.drop(5).split(
+                        separator.colonSeparator,
+                        separator.commaSeparator,
+                        separator.customSeparator ?: "",
+                    ).map { it }
+
+                println(separatedInputFromSeparator)
+
+                val separatedInputNumber: List<Int> = separatedInputFromSeparator
+                    .filter { it.matches(Regex("\\d")) }
+                    .map { it.toInt() }
+
+                addInputNumbers(separatedInputNumber)
+            }
+
             false -> {
-                inputString.split(":", ",").map { result += it.toInt() }
-                println("결과 : $result")
+                val separatedInputFromSeparator: List<String> =
+                    inputString.split(separator.colonSeparator, separator.commaSeparator).map { it }
+                val separatedInputNumber: List<Int> = separatedInputFromSeparator
+                    .filter { it.matches(Regex("\\d")) }
+                    .map { it.toInt() }
+
+                addInputNumbers(separatedInputNumber)
             }
         }
+    }
+
+    private fun addInputNumbers(inputNumbers: List<Int>) {
+        inputNumbers.map { result += it }
+
+        println("결과 : $result")
     }
 }
