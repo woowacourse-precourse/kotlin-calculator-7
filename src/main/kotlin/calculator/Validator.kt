@@ -16,6 +16,8 @@ class Validator {
 
         for (char in checkString) {
         }
+
+        return true
     }
 
     // 앞 5문자의 유효성을 검증하는 기능
