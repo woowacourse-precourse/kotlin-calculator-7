@@ -36,4 +36,8 @@ class Calculator(var input:String) {
             tmpNumber += i
         }
     }
+    
+    fun print(){
+        println(tmpNumber)
+    }
 }

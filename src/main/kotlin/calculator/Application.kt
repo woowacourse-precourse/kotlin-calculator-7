@@ -11,5 +11,5 @@ fun main() {
     calculator.findSeparator()
     calculator.findNumber()
     calculator.plus()
-    //calculator.print()
+    calculator.print()
 }
