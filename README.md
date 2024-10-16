@@ -130,3 +130,91 @@ fun isAllElementsNumeric(numArray: Array<String>): Boolean {
 <img width="187" alt="image" src="https://github.com/user-attachments/assets/9b1a15a3-fb32-42cc-97ed-1db69c449e7c">
 
 <img width="724" alt="image" src="https://github.com/user-attachments/assets/27628252-167d-40ee-99c4-2d9e5c6d3995">
+
+## 추가 학습 내용 : Commit Message Conventions
+
+### 커밋 메시지 형식
+
+```
+<type>(<scope>): <subject>
+<BLANK LINE>
+<body>
+<BLANK LINE>
+<footer>
+```
+
+### 커밋 메시지 헤더
+`<type>(<scope>): <subject>`
+
+#### <type>
+
+- feat : 새로운 기능 추가
+- fix : 버그 수정
+- docs : 문서 관련
+- style : 스타일 변경 (포매팅 수정, 들여쓰기 추가, …)
+- refactor : 코드 리팩토링
+- test : 테스트 관련 코드
+- build : 빌드 관련 파일 수정
+- ci : CI 설정 파일 수정
+- perf : 성능 개선
+- chore : 그 외 자잘한 수정
+
+#### <scope>
+
+- 어디가 변경되었는지, 변경된 부분은 모두 들어갈 수 있음
+- scope는 생략 가능
+
+#### <subject>
+
+- short summary
+- 명령문, 현재 시제로 작성
+- 첫 글자는 대문자가 아닌 소문자
+- 마지막에 마침표(.)를 붙이지 않음
+
+### **메시지 내용 (Message Body)**
+
+- 명령문, 현재 시제로 작성하길 권장
+- 변경한 이유와 변경 전과의 차이점을 설명
+
+### **메시지 하단 (Message Footer)**
+
+#### **주요 변경 내역들 (Breaking Changes)**
+
+- 변경점 (description of the change)
+- 변경 사유 (justification)
+- 마이그레이션 지시 (migration instructions)
+
+#### **해결된 이슈 (Referencing Issues)**
+
+- 해결된 이슈는 커밋 메시지 하단에 `Closes #<이슈번호>` 와 같이 기록되어야 함
+- `Closes #234`
+- 해결된 이슈가 여러개인 경우는 다음과 같이 쓸 수 있음
+- `Closes #123 #245 #992`
+
+### 예시
+
+#### feat
+
+```
+feat($browser): onUrlChange event (popstate/hashchange/polling)
+
+Added new event to $browser:
+- forward popstate event if available
+- forward hashchange event if popstate not available
+- do polling when neither popstate nor hashchange available
+
+Breaks $browser.onHashChange, which was removed (use onUrlChange instead)
+```
+
+#### fix
+
+```
+fix($compile): couple of unit tests for IE9
+
+Older IEs serialize html uppercased, but IE9 does not...
+Would be better to expect case insensitive, unfortunately jasmine does
+not allow to user regexps for throw expectations.
+
+Closes #392
+Breaks foo.bar api, foo.baz should be used instead
+```
