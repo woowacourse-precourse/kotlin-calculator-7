@@ -26,9 +26,12 @@ class Calculator(var input:String) {
 
     fun toNumber(nowNumber:String):Int{
         return try{
+            if(nowNumber.toInt()<0){
+                throw IllegalArgumentException()
+            }
             nowNumber.toInt()
         } catch(e : IllegalArgumentException){
-            throw Exception(e)
+            throw IllegalArgumentException(e)
         }
     }
     fun plus(){
@@ -38,6 +41,6 @@ class Calculator(var input:String) {
     }
 
     fun print(){
-        println(tmpNumber)
+        println("결과 : $tmpNumber")
     }
 }
