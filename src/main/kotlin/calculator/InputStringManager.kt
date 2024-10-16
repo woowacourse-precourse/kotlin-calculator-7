@@ -14,7 +14,7 @@ object InputStringManager {
         // 구분자 Set의 각각의 원소를 정규식 이스케이프 처리하여 리스트로 저장
         val escapedDelimiters = delimiters.map { Regex.escape(it.toString()) }
         // 이스케이프 처리된 구분자 리스트를 하나의 문자열로 결합
-        val joinedDelimiters = escapedDelimiters.joinToString()
+        val joinedDelimiters = escapedDelimiters.joinToString(separator = "")
         // 결합한 문자열을 대괄호로 감싸서 각각의 구분자를 선택하는 정규식으로 변환
         val regex = "[${joinedDelimiters}]".toRegex()
         // 정규식을 사용해 커맨드를 제거한 인풋 문자열을 슬라이싱
