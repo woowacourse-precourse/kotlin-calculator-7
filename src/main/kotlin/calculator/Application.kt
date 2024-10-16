@@ -8,7 +8,8 @@ fun main() {
     val num = splitString(str)
 
     println(str)
-    println(num)
+    println(sumNumbers(num))
+
 
     Console.close()
 }
@@ -19,6 +20,8 @@ fun splitString(str: String): List<Int> {
 }
 
 // 방법2: 문자열에서 숫자만 필터링하는 함수
-fun filteringString(str: String) {
+/*fun filteringString(str: String): List<Int> {
 
-}
+}*/
+
+fun sumNumbers(numbers: List<Int>): Int = numbers.sum()
