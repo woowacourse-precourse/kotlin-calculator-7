@@ -19,9 +19,9 @@ fun main() {
 
 private fun checkInputValid(input: List<String>): Boolean {
     return when {
-        input.size > CUSTOM_DIVIDER_EXCEEDING_COUNT -> false
+        input.size > CUSTOM_DIVIDER_EXCEEDING_SIZE -> false
 
-        input.size == CUSTOM_DIVIDER_NONE_COUNT -> {
+        input.size == CUSTOM_DIVIDER_NONE_SIZE -> {
             isCustomDividerUsed = false
             true
         }
@@ -69,8 +69,8 @@ private const val INVALID_INPUT_MESSAGE = "유효하지 않은 입력입니다."
 private const val CUSTOM_DIVIDER_PREFIX = "//"
 private const val CUSTOM_DIVIDER_SUFFIX = "\\n"
 
-private const val CUSTOM_DIVIDER_EXCEEDING_COUNT = 3
-private const val CUSTOM_DIVIDER_NONE_COUNT = 1
+private const val CUSTOM_DIVIDER_EXCEEDING_SIZE = 3
+private const val CUSTOM_DIVIDER_NONE_SIZE = 1
 
 private const val CUSTOM_DIVIDER_INDEX = 1
 
