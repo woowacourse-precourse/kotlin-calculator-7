@@ -12,9 +12,11 @@ fun main() {
     if (!checkInputTypeAndValidity(input)) throw IllegalArgumentException(INVALID_INPUT_MESSAGE)
 
     val numbers = splitByDivider(input)
-    val sum = getSum(numbers)
 
-    println("결과 : $sum")
+    val sum = getSum(numbers)
+    val formattedSum = if (sum % 1 == 0.0) sum.toLong() else sum
+
+    println("결과 : $formattedSum")
 }
 
 private fun checkInputTypeAndValidity(input: List<String>): Boolean {
@@ -35,7 +37,7 @@ private fun checkInputTypeAndValidity(input: List<String>): Boolean {
     }
 }
 
-private fun splitByDivider(input: List<String>): List<Int> {
+private fun splitByDivider(input: List<String>): List<Double> {
     if (input == listOf("")) return emptyList()
 
     val regex = divider.joinToString("|") { Regex.escape(it) }.toRegex()
@@ -47,15 +49,15 @@ private fun splitByDivider(input: List<String>): List<Int> {
     val splitResult = expression.split(regex)
     return splitResult.map {
         try {
-            it.toInt()
+            it.toDouble()
         } catch (e: NumberFormatException) {
             throw IllegalArgumentException(INVALID_INPUT_MESSAGE)
         }
     }
 }
 
-private fun getSum(numbers: List<Int>): Int {
-    var sum = 0
+private fun getSum(numbers: List<Double>): Double {
+    var sum = 0.0
 
     numbers.forEach { number ->
         sum += number
