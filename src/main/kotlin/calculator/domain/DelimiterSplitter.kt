@@ -16,6 +16,21 @@ class DelimiterSplitter(
     // 커스텀 구분자 찾기
     private fun findCustomDelimiter() = value.substring(CUSTOM_DELIMITER_FRONT.length, value.lastIndexOf(CUSTOM_DELIMITER_BACK))
 
+    // 커스텀 구분자로 나누기
+    private fun customSplit(): List<String> {
+        val splitResult = value.split(CUSTOM_DELIMITER_FRONT, CUSTOM_DELIMITER_BACK, findCustomDelimiter())
+        return splitResult.drop(2)
+    }
+
+    // 기본 구분자로 나누기
+    private fun basicSplit(): List<String> = value.split(COMMA_DELIMITER, COLON_DELIMITER)
+
+    // 지정된 구분자를 이용하여 문자열 구분
+    fun getSplitResult(): List<String> {
+        if (customDelimiterIsUsed()) return customSplit().filter { it.isNotBlank() }
+        return basicSplit().filter { it.isNotBlank() }
+    }
+
     companion object {
         private const val COMMA_DELIMITER = ","
         private const val COLON_DELIMITER = ":"
