@@ -40,8 +40,8 @@ private fun splitByDivider(input: List<String>): List<Int> {
 
     val regex = divider.joinToString("|") { Regex.escape(it) }.toRegex()
     val expression = when (isCustomDividerUsed) {
-        true -> input[NUMBERS_INDEX_WITH_CUSTOM_DIVIDER]
-        false -> input[NUMBERS_INDEX_WITHOUT_CUSTOM_DIVIDER]
+        true -> input[NUMBERS_WITH_CUSTOM_DIVIDER_INDEX]
+        false -> input[NUMBERS_WITHOUT_CUSTOM_DIVIDER_INDEX]
     }
 
     val splitResult = expression.split(regex)
@@ -74,5 +74,5 @@ private const val CUSTOM_DIVIDER_NONE_COUNT = 1
 
 private const val CUSTOM_DIVIDER_INDEX = 1
 
-private const val NUMBERS_INDEX_WITH_CUSTOM_DIVIDER = 2
-private const val NUMBERS_INDEX_WITHOUT_CUSTOM_DIVIDER = 0
+private const val NUMBERS_WITH_CUSTOM_DIVIDER_INDEX = 2
+private const val NUMBERS_WITHOUT_CUSTOM_DIVIDER_INDEX = 0
