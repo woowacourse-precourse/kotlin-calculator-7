@@ -6,4 +6,12 @@ class Parser {
         val numbers = input.split(",", ":")
         return numbers
     }
+
+    fun parseNumber(list: List<String>): MutableList<Int> {
+        val numbers = mutableListOf<Int>()
+        list.forEach {
+            numbers.add(it.toInt())
+        }
+        return numbers
+    }
 }
