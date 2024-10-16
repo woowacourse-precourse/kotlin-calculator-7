@@ -11,12 +11,10 @@ fun main() {
 
     if (!checkInputTypeAndValidity(input)) throw IllegalArgumentException(INVALID_INPUT_MESSAGE)
 
-    val numbers = splitByDivider(input)
+    val numbers = input.splitByDivider()
+    val sum = numbers.getSum()
 
-    val sum = getSum(numbers)
-    val formattedSum = if (sum % 1 == 0.0) sum.toLong() else sum
-
-    println("결과 : $formattedSum")
+    println("결과 : $sum")
 }
 
 private fun checkInputTypeAndValidity(input: List<String>): Boolean {
@@ -37,13 +35,13 @@ private fun checkInputTypeAndValidity(input: List<String>): Boolean {
     }
 }
 
-private fun splitByDivider(input: List<String>): List<Double> {
-    if (input == listOf("")) return emptyList()
+private fun List<String>.splitByDivider(): List<Double> {
+    if (this == listOf("")) return emptyList()
 
     val regex = divider.joinToString("|") { Regex.escape(it) }.toRegex()
     val expression = when (isCustomDividerUsed) {
-        true -> input[NUMBERS_WITH_CUSTOM_DIVIDER_INDEX]
-        false -> input[NUMBERS_WITHOUT_CUSTOM_DIVIDER_INDEX]
+        true -> this[NUMBERS_WITH_CUSTOM_DIVIDER_INDEX]
+        false -> this[NUMBERS_WITHOUT_CUSTOM_DIVIDER_INDEX]
     }
 
     val splitResult = expression.split(regex)
@@ -56,14 +54,14 @@ private fun splitByDivider(input: List<String>): List<Double> {
     }
 }
 
-private fun getSum(numbers: List<Double>): Double {
+private fun List<Double>.getSum(): Number {
     var sum = 0.0
 
-    numbers.forEach { number ->
+    this.forEach { number ->
         sum += number
     }
 
-    return sum
+    return if (sum % 1 == 0.0) sum.toLong() else sum
 }
 
 private const val INVALID_INPUT_MESSAGE = "유효하지 않은 입력입니다."
