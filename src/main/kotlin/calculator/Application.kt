@@ -8,4 +8,7 @@ fun main() {
 
     //입력 값 받기
     val input = Console.readLine()
+
+    //입력 및 처리 계산
+    
 }
