@@ -5,7 +5,12 @@ class DelimiterSplitter(
 ) {
     init {
         require(customDelimiterFormatCheck())
+        require(otherCharacterCheck(getSplitResult()))
     }
+
+    // 구분된 결과 내 양수가 아닌 다른 문자 여부 확인
+    private fun otherCharacterCheck(splitResult: List<String>): Boolean =
+        splitResult.all { it.matches(Regex("^(?:0|[1-9]\\d*)(\\.\\d+)?\$")) }
 
     // 커스텀 구분자 사용 선언 포맷 확인
     private fun customDelimiterFormatCheck(): Boolean = value.startsWith(CUSTOM_DELIMITER_FRONT) == value.contains(CUSTOM_DELIMITER_BACK)
