@@ -31,8 +31,12 @@ fun extractNumbers(string: String): List<Int> {
     if (isCustomSeparator)
         separators += string[2]
 
-    val checkString = if (isCustomSeparator) string.substring(startIndex = 5) else string
-    return if (isCustomSeparator) checkString.split(separators[0], separators[1], separators[2]).map { it.toInt() }
+    var checkString = if (isCustomSeparator) string.substring(startIndex = 5) else string
+    if (checkString.last() in separators)
+        checkString = checkString.dropLast(1)
+
+    return if (checkString == "") emptyList()
+    else if (isCustomSeparator) checkString.split(separators[0], separators[1], separators[2]).map { it.toInt() }
     else checkString.split(separators[0], separators[1]).map { it.toInt() }
 }
 
