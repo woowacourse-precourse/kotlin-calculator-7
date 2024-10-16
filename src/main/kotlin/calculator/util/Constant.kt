@@ -1,4 +1,4 @@
-package calculator
+package calculator.util
 
 object Constant {
     const val CUSTOM_DELIMITER_DETERMINE_REGEX = "\\/\\/(.*?)\\\\n"
