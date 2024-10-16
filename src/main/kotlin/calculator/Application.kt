@@ -5,11 +5,13 @@ import camp.nextstep.edu.missionutils.Console
 fun main() {
     val str = Console.readLine()
 
-    val num = splitString(str)
-
     println(str)
-    println(sumNumbers(num))
 
+    val num1 = splitString(str)
+    println(sumNumbers(num1))
+
+    val num2 = filteringString(str)
+    println(sumNumbers(num2))
 
     Console.close()
 }
@@ -20,8 +22,9 @@ fun splitString(str: String): List<Int> {
 }
 
 // 방법2: 문자열에서 숫자만 필터링하는 함수
-/*fun filteringString(str: String): List<Int> {
+fun filteringString(str: String): List<Int> {
+    return str.filter { it.isDigit() }.map { it.toString().toInt() }
+}
 
-}*/
-
+// 숫자의 합을 반환하는 함수
 fun sumNumbers(numbers: List<Int>): Int = numbers.sum()
