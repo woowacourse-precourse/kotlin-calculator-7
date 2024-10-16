@@ -1,7 +1,7 @@
 package calculator
 
 class Validator {
-    fun validateString(inputString: String) {
+    fun validateString(inputString: String): String {
         // TODO: 문자열의 유효성 검증
 
         var checkString = inputString
@@ -33,6 +33,8 @@ class Validator {
         }
         // 4. 마지막 문자가 구분자인 경우
         if (beforeChar.isDelimiter(delimiterList)) throw IllegalArgumentException()
+
+        return checkString
     }
 
     // 앞 5문자의 유효성을 검증하는 기능
