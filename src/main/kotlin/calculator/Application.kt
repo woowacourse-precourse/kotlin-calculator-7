@@ -19,8 +19,18 @@ fun main() {
 
 fun numberExtraction(inputString: String): Array<String> {
     val numArray: Array<String>
-    if(inputString.length > 4 && inputString[0]=='/'&&inputString[1]=='/'&&inputString[3]=='\\'&&inputString[4]=='n'){
-        numArray = inputString.substring(5).split(inputString[2]).toTypedArray()
+    val regex = """//(.*?)\\n""".toRegex()
+    val matchResult = regex.find(inputString)
+    if(matchResult!=null){
+        val customSeparator = matchResult.groupValues[1]
+        val regex2 = """\\n(.*)""".toRegex()
+        val matchResult2 = regex2.find(inputString)
+        if (matchResult2 != null) {
+            val inputStringSub = matchResult2.groupValues[1]
+            numArray = inputStringSub.split(customSeparator).toTypedArray()
+        }else{
+            throw IllegalArgumentException("잘못된 입력입니다.")
+        }
     }else{
         numArray = inputString.trim().split(",",":").toTypedArray()
     }

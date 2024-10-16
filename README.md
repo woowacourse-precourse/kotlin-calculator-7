@@ -44,17 +44,28 @@
 ```kotlin
 fun numberExtraction(inputString: String): Array<String> {
     val numArray: Array<String>
-    if(inputString.length > 4 && inputString[0]=='/'&&inputString[1]=='/'&&inputString[3]=='\\'&&inputString[4]=='n'){
-        numArray = inputString.substring(5).split(inputString[2]).toTypedArray()
+    val regex = """//(.*?)\\n""".toRegex()
+    val matchResult = regex.find(inputString)
+    if(matchResult!=null){
+        val customSeparator = matchResult.groupValues[1]
+        val regex2 = """\\n(.*)""".toRegex()
+        val matchResult2 = regex2.find(inputString)
+        if (matchResult2 != null) {
+            val inputStringSub = matchResult2.groupValues[1]
+            numArray = inputStringSub.split(customSeparator).toTypedArray()
+        }else{
+            throw IllegalArgumentException("잘못된 입력입니다.")
+        }
     }else{
         numArray = inputString.trim().split(",",":").toTypedArray()
     }
     return numArray
 }
 ```
-- 사용자가 커스텀 구분자를 지정했는지 `if 문` 을 통해 확인
-- 커스텀 구분자를 지정했다면 `substring` 함수를 통해 커스텀 구분자를 지정하는 부분 다음부터 커스텀 구분자로 `split` 함수를 통해 숫자를 추출하여 `numArray`에 저장
-- 커스텀 구분자를 지정하지 않았다면 쉼표와 콜론으로 `split` 함수를 통해 숫자를 추출하여 `numArray`에 저장
+- 사용자가 커스텀 구분자를 지정했는지 정규식을 통해 정해진 커스텀 구분자 지정 형식대로 추출한후 `if 문` 을 통해 확인
+- 커스텀 구분자를 지정했다면 정규식을 통해 커스텀 구분자를 지정하는 부분을 제외한 나머지 문자열을 추출 이때 추출되지 않는다면 잘못된 형식으로 입력한 것임으로 예외 처리후 종료
+- 구한 커스텀 구분자로 `split` 함수를 통해 숫자를 추출하여 `numArray`에 저장
+- 커스텀 구분자를 지정하지 않았다면 쉼표와 콜론으로 `split` 함수를 통해 숫자를 추출하여 `numArray` 에 저장
 - 추출되어 저장된 숫자 배열을 리턴
 
 ### 덧셈 기능
