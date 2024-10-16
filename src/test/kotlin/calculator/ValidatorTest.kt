@@ -81,6 +81,13 @@ class ValidatorTest : NsTest() {
     }
 
     @Test
+    fun `빈문자열 인풋_0반환`() {
+        assertSimpleTest {
+            assertThat(validator.validate("")).isEqualTo(0)
+        }
+    }
+
+    @Test
     fun `숫자와 구분자 인풋_기본구분자와 양수숫자1개_에러발생`() {
         assertSimpleTest {
             assertThrows<IllegalArgumentException> {
