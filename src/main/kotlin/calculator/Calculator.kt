@@ -9,6 +9,7 @@ class Calculator {
         val sum = getSum(splitList)
 
         // 3. 결과를 출력한다.
+        printResult(sum)
     }
 
     fun splitString(inputString: String): List<String> {
@@ -29,10 +30,14 @@ class Calculator {
         return splitList
     }
 
-    fun getSum(splitList: List<String>): Any =
+    fun getSum(splitList: List<String>): Int =
         splitList.sumOf {
             it.toInt()
         }
+
+    fun printResult(sum: Int) {
+        println("결과 : $sum")
+    }
 
     companion object {
         private val validator = Validator()
