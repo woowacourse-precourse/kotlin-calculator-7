@@ -49,6 +49,21 @@ class ApplicationTest : NsTest() {
         }
     }
 
+    @Test
+    fun `문자열 유효성 검증`() {
+        assertSimpleTest {
+            inputStringArray.map {
+                try {
+                    Validator().validateString(it)
+                    println("Passed : $it")
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    println("Failed : $it")
+                }
+            }
+        }
+    }
+
     companion object {
         val inputString1 = "0,2r3;4" // 비정상 - 유효하지 않은 문자 'r'
         val inputString2 = "0,2,3;4;" // 비정상 - 마지막 문자가 구분자
@@ -58,7 +73,7 @@ class ApplicationTest : NsTest() {
         val inputString6 = "//;\\n0;22,33:4" // 정상
         val inputString7 = "//r\\n0,22r33:4" // 정상
         val inputString8 = "// \\n0 22,33:4" // 정상
-        val inputString9 = "//;\\n10:2,3" // 비정상 - 유효하지 않은 문자 'n'
+        val inputString9 = "//;\\nn10:2,3" // 비정상 - 유효하지 않은 문자 'n'
         val inputString10 = "//0\\n10:2,3" // 비정상 - 커스텀 구분자가 숫자임
         val inputString11 = "/;\\n10:2,3" // 비정상 - 앞 두문자가 "//" 이 아님
         val inputString12 = "//;,\\n10:2,3" // 비정상 - 커스텀 구분자가 char 가 아님
