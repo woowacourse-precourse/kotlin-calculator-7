@@ -9,6 +9,27 @@ class Calculator(var input:String) {
             input.substring(5)
         }
     }
-    
+    fun findNumber(){
+        var nowNumber = ""
+        for(j in input){
+            if(list.contains(j)){
+                numberList.add(toNumber(nowNumber))
+                nowNumber = ""
+            }
+            else{
+                nowNumber += j
+            }
+        }
+        numberList.add(toNumber(nowNumber))
+    }
+
+    fun toNumber(nowNumber:String):Int{
+        println(nowNumber)
+        return try{
+            nowNumber.toInt()
+        } catch(e : IllegalArgumentException){
+            throw Exception("처리되지 않은 예외 발생!")
+        }
+    }
 
 }
