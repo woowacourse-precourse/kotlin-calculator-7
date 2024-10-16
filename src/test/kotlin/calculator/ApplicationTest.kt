@@ -64,6 +64,17 @@ class ApplicationTest : NsTest() {
         }
     }
 
+    @Test
+    fun `문자열 분리 테스트`() {
+        assertSimpleTest {
+            val validInputStringArray =
+                arrayOf(inputString4, inputString6, inputString7, inputString8)
+            validInputStringArray.map {
+                println("input = $it : ${Calculator().splitString(it)}")
+            }
+        }
+    }
+
     companion object {
         val inputString1 = "0,2r3;4" // 비정상 - 유효하지 않은 문자 'r'
         val inputString2 = "0,2,3;4;" // 비정상 - 마지막 문자가 구분자
