@@ -14,4 +14,10 @@ class Parser {
         }
         return numbers
     }
+
+    fun parseCustomSeparator(input: String): String {
+        val userInput = input.split("//", "\\n")
+            .filter { it.isNotEmpty() }
+        return userInput[0]
+    }
 }

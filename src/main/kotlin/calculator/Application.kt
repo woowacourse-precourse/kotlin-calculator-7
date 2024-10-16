@@ -6,5 +6,5 @@ fun main() {
     //user.run()
     val userInput = user.enterString()
     val parseString = parser.parseSeparator(userInput)
-    println(parser.parseNumber(parseString))
+    println(parser.parseCustomSeparator(userInput))
 }
