@@ -1,23 +1,38 @@
 package calculator
 
 class Validator {
-    fun validateString(inputString: String): Boolean {
+    fun validateString(inputString: String) {
         // TODO: 문자열의 유효성 검증
 
         var checkString = inputString
 
         var delimiter = ",|:"
         if (checkString[0] == '/') {
-            // 첫 문자가 '/' 인 경우 앞 5문자의 유효성을 검증함.
+            // 첫 문자가 '/' 인 경우 앞의 5부분 문자열 검증
             val customDelimiter = validateCustomDelimiter(checkString)
             delimiter = "$delimiter|$customDelimiter"
             checkString = checkString.substring(5, checkString.length)
         }
 
-        for (char in checkString) {
-        }
+        val delimiterList = delimiter.split("|")
+        var beforeChar = checkString[0]
 
-        return true
+        for (char in checkString) {
+            // 1. 유효하지 않은 문자
+            if (char.isNotValid(delimiterList)) {
+                throw IllegalArgumentException()
+            }
+
+            // 2. 첫 문자가 구분자인 경우
+            // 3. 구분자가 연속으로 나오는 경우
+            if (beforeChar.isDelimiter(delimiterList) and char.isDelimiter(delimiterList)) {
+                throw IllegalArgumentException()
+            }
+
+            beforeChar = char
+        }
+        // 4. 마지막 문자가 구분자인 경우
+        if (beforeChar.isDelimiter(delimiterList)) throw IllegalArgumentException()
     }
 
     // 앞 5문자의 유효성을 검증하는 기능
@@ -41,7 +56,7 @@ class Validator {
         val isValidDigit = this.isDigit()
         val isValidDelimiter = this.isDelimiter(delimiterList)
 
-        return !(isValidDigit && isValidDelimiter)
+        return !(isValidDigit or isValidDelimiter)
     }
 
     private fun Char.isDelimiter(delimiterList: List<String>): Boolean = this.toString() in delimiterList
