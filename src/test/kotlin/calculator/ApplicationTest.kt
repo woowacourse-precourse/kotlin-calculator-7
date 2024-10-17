@@ -13,6 +13,13 @@ class ApplicationTest : NsTest() {
         }
     }
 
+    @Test
+    fun `"2"를 입력 했을 경우 2를 반환`() {
+        assertSimpleTest {
+            assertThat(getOne("2")).isEqualTo(2)
+        }
+    }
+
 //    @Test
 //    fun `커스텀 구분자 사용`() {
 //        assertSimpleTest {
