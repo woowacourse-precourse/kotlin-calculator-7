@@ -9,5 +9,8 @@ fun calculate(string: String): Int {
         return 0
     }
     
-    return string.toInt()
+    val strings = string.split(",")
+    val ints = strings.map { it.toInt() }
+
+    return ints.sum()
 }
