@@ -10,7 +10,8 @@ class StringSumCalculator {
     private val outputView = OutputView()
 
     fun start() {
-        val result = SumCalculator(inputRequest()).calculateTotal()
+        val splitResult = inputRequest()
+        val result = SumCalculator(splitResult).calculateTotal()
         val formatResult = ResultFormatter(result).toNumberFormat()
         outputView.printSumResult(formatResult)
     }
