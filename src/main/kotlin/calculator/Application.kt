@@ -26,9 +26,11 @@ class Calculator {
         identifyDelimiters()
         val DELIMITER_RULES = ("[$delimiter]").toRegex()
         var inputList = inputProcessing.split(DELIMITER_RULES) // 구분자를 기준으로 문자열 나누기
+        var number: Int? = 0
         for (numbers in inputList) {
             try {
-                numbers.toInt() // 숫자인가?
+                number = numbers.toInt() // 숫자인가?
+                if (number < 1) throw IllegalArgumentException("입력값이 올바르지 않습니다.") // 양수인가?
             } catch (e: Exception) {
                 throw IllegalArgumentException("입력값이 올바르지 않습니다.")
             }
