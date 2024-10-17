@@ -1,23 +1,20 @@
 package calculator
 
-import java.io.BufferedReader
-import java.io.InputStreamReader
+import camp.nextstep.edu.missionutils.Console
 
 class MyReader {
-    private val reader = BufferedReader(InputStreamReader(System.`in`))
-    fun readLine(): String {
-        return runCatching {
-            reader.readLine()
+    fun readLine(): String =
+        runCatching {
+            Console.readLine()
         }.getOrElse {
             throw IllegalArgumentException()
         }
-    }
 
-    fun close() {
+
+    fun close() =
         runCatching {
-            reader.close()
+            Console.close()
         }.onFailure {
             throw IllegalArgumentException()
         }
-    }
 }
