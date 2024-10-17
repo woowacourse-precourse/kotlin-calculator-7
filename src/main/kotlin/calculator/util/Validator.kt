@@ -5,9 +5,11 @@ object Validator {
     fun validNumber(number: String, delimiter: Array<String>) {
         if (isZero(number)) return
 
-        val numbers = number.split(*delimiter).toList()
+        val numbers = number.split(*delimiter).filter { it != "" }.map { it }.toTypedArray()
         numbers.forEach {
-            if (it != "") it.toBigIntegerOrNull() ?: throw IllegalArgumentException()
+            it.toBigIntegerOrNull() ?: throw IllegalArgumentException(
+                String.format(Constant.ERROR_MESSAGE, number, delimiter.joinToString(""))
+            )
         }
     }
 
