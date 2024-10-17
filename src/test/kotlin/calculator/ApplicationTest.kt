@@ -9,40 +9,39 @@ import org.junit.jupiter.api.assertThrows
 class ApplicationTest : NsTest() {
 
     @Test
-    fun `정상적인 입력`() {
+    fun `valid input`() {
         assertSimpleTest {
             run("1,2,3")
-            assertThat(output()).contains("결과 : 6")
+            assertThat(output()).contains("결과: 6")
         }
     }
 
     @Test
-    fun `빈 문자열 입력`() {
+    fun `empty string input`() {
         assertSimpleTest {
-            // 사용자 입력으로 빈 문자열은 그냥 엔터를 입력하는 것을 의미합니다.
+            // An empty string input means the user just presses enter.
             run("\n")
-            assertThat(output()).contains("결과 : 0")
+            assertThat(output()).contains("결과: 0")
         }
     }
 
     @Test
-    fun `잘못된 입력`() {
+    fun `invalid input`() {
         assertSimpleTest {
             assertThrows<IllegalArgumentException> { runException("1,2,3,") }
         }
     }
 
-
     @Test
-    fun `커스텀 구분자 사용`() {
+    fun `custom delimiter usage`() {
         assertSimpleTest {
             run("//;\\n1")
-            assertThat(output()).contains("결과 : 1")
+            assertThat(output()).contains("결과: 1")
         }
     }
 
     @Test
-    fun `입력 값이 음수인 경우`() {
+    fun `input contains negative numbers`() {
         assertSimpleTest {
             assertThrows<IllegalArgumentException> { runException("-1,2,3") }
         }

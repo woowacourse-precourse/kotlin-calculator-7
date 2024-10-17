@@ -1,6 +1,6 @@
 package calculator.view
 
-import camp.nextstep.edu.missionutils.Console;
+import camp.nextstep.edu.missionutils.Console
 
 class InputView {
     fun inputExpression(): String {
