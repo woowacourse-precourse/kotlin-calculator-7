@@ -32,7 +32,7 @@ fun parseNumbers(input: String): List<Int> {
             throw IllegalArgumentException("커스텀 구분자가 빈 문자열입니다.")
         }
 
-        delimiters = listOf(Regex.escape(customDelimiter),",",":")// 커스텀 구분자 설정
+        delimiters = listOf(Regex.escape(customDelimiter),",",":")// 커스텀 구분자 설정, 기본 구분자도 함께 사용 가능하도록 수정
         numbersSection = input.substring(delimiterEnd + 2) // 숫자 부분 추출
     }
     val tokens = numbersSection.split(Regex(delimiters.joinToString ("|"))) // 구분자를 기준으로 숫자 분리
