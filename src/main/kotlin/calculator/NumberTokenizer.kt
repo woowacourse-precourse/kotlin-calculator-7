@@ -22,6 +22,19 @@ class NumberTokenizer {
         return result
     }
 
+    fun extractCustomDelimiters(input: String): List<String> {
+        val customDelimiters = mutableListOf<String>()
+        val parts = input.split("\n")
+        for (part in parts) {
+            val delimiterStartIndex = part.indexOf("//")
+            if (delimiterStartIndex == -1) break
+            val customDelimiter = part.substring(delimiterStartIndex+2)
+            println(customDelimiter)
+            customDelimiters.add(customDelimiter)
+        }
+        return customDelimiters
+    }
+
     private fun getNumber(strings: LinkedList<Char>): BigDecimal {
         val result = StringBuilder()
         while (strings.isNotEmpty()) {

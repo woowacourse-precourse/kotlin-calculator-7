@@ -36,7 +36,7 @@ class NumberTokenizerTest {
 
     @Test
     fun `문자열에서 커스텀 구분자 추출 테스트`(){
-        val result = numberTokenizer.getCustomDelimiters("//;\\n1;2and3//and\\n//&&\\n")
+        val result = numberTokenizer.extractCustomDelimiters("//;\n1;2and3//and\n//&&\n")
         val expect = listOf(";","and","&&")
         assertEquals(expect, result)
     }
