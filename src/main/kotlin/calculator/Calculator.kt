@@ -34,6 +34,8 @@ class Calculator {
                         separator.customSeparator ?: "",
                     ).map { it }
 
+                validateSeparatedInputString(separatedInputFromSeparator)
+
                 val separatedInputNumber: List<Int> = separatedInputFromSeparator
                     .filter { it.matches(Regex("\\d")) }
                     .map { it.toInt() }
@@ -45,12 +47,31 @@ class Calculator {
                 val separatedInputFromSeparator: List<String> =
                     inputString.split(separator.colonSeparator, separator.commaSeparator).map { it }
 
+                validateSeparatedInputString(separatedInputFromSeparator)
+
                 val separatedInputNumber: List<Int> = separatedInputFromSeparator
                     .filter { it.matches(Regex("\\d")) }
                     .map { it.toInt() }
 
                 addInputNumbers(separatedInputNumber)
             }
+        }
+    }
+
+    private fun validateSeparatedInputString(separatedInputFromSeparator: List<String>) {
+        val isNegativeNumber: Boolean = separatedInputFromSeparator.any { it.contains("-") }
+        val isAnySeparatedInputFromSeparator: Boolean = separatedInputFromSeparator.any { it.isBlank() }
+        val isWrongSeparator: Boolean =
+            separatedInputFromSeparator.any { !it.matches(Regex("\\d")) }
+
+        if (isNegativeNumber) {
+            throw IllegalArgumentException("음수는 포함될 수 없습니다.")
+        }
+        if (isAnySeparatedInputFromSeparator) {
+            throw IllegalArgumentException("숫자를 입력해야 합니다.")
+        }
+        if (isWrongSeparator) {
+            throw IllegalArgumentException("잘못된 구분자입니다.")
         }
     }
 
