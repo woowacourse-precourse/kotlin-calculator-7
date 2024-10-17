@@ -1,5 +1,9 @@
 package calculator
 
+import camp.nextstep.edu.missionutils.Console
+
 fun main() {
-    // TODO: 프로그램 구현
+    // 사용자 입력
+    val input = Console.readLine()
+    print(input)
 }
