@@ -6,6 +6,7 @@ import camp.nextstep.edu.missionutils.Console.readLine
 const val COMMAND_LENGTH = 5
 
 fun main() {
+    println("덧셈할 문자열을 입력해 주세요.")
     val input: String = readLine()  // 문자열 입력 받기
     ErrorChecker.invalidInputCheck(input)
     println("결과 : ${InputStringManager.sumString(input)}")
