@@ -12,6 +12,7 @@ class StringSumCalculator {
     fun start() {
         val result = SumCalculator(inputRequest()).calculateTotal()
         val formatResult = ResultFormatter(result).toNumberFormat()
+        outputView.printSumResult(formatResult)
     }
 
     private fun inputRequest(): List<String> {
