@@ -3,7 +3,7 @@ package calculator
 class Calculator {
     fun calculateString(inputString: String) {
         // 1. 커스텀 구분자가 있다면 커스텀 구분자를 추가하고, 각 문자를 분리한다.
-        val splitList = splitString(inputString)
+        val splitList = splitStringToList(inputString)
 
         // 2. 각 숫자들의 총 합을 구한다.
         val sum = getSum(splitList)
@@ -12,7 +12,7 @@ class Calculator {
         printResult(sum)
     }
 
-    fun splitString(inputString: String): List<String> {
+    private fun splitStringToList(inputString: String): List<String> {
         var delimiter = "[,:]"
         if (inputString[0] == '/') {
             val customDelimiter = validator.validateCustomDelimiter(inputString)
@@ -30,12 +30,12 @@ class Calculator {
         return splitList
     }
 
-    fun getSum(splitList: List<String>): Int =
+    private fun getSum(splitList: List<String>): Int =
         splitList.sumOf {
             it.toInt()
         }
 
-    fun printResult(sum: Int) {
+    private fun printResult(sum: Int) {
         println("결과 : $sum")
     }
 
