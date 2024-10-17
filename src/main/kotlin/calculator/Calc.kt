@@ -9,7 +9,7 @@ class Calc {
     }
 
     fun addition() {
-        val userNumbers = user.extractedNumbers()
+        val userNumbers = user.getNumbers()
         add.addNum(userNumbers)
     }
 }
