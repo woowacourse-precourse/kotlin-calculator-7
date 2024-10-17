@@ -28,22 +28,32 @@ fun isValid(str: String): Boolean {
     return true
 }
 
-fun checkCustom(str: String): String? {
+fun checkCustom(str: String): Boolean {
+    var str = str
+
+    if(str.contains("\\\\") && str.contains("\\n")) {
+        return true
+    }
+    return false
+}
+
+fun replaceCustom(str: String): String {
     var str = str
     var newStr = ""
     var customSeparator = ""
 
-    if(str.contains("\\\\") && str.contains("\\n")) {
-        val beforeIndex = str.indexOf("\\\\")
-        val afterIndex = str.indexOf("\\n")
-        if (beforeIndex < afterIndex) {
-            customSeparator = str.substring(beforeIndex + 2, afterIndex)
-            newStr = str.substring(afterIndex + 2)
-            newStr = newStr.replace(customSeparator, ",")
-            return newStr
-        }
+    val beforeIndex = str.indexOf("\\\\")
+    val afterIndex = str.indexOf("\\n")
+    if (beforeIndex < afterIndex) {
+        customSeparator = str.substring(beforeIndex + 2, afterIndex)
+        newStr = str.substring(afterIndex + 2)
+        newStr = newStr.replace(customSeparator, ",")
     }
-    return null
+    return newStr
+}
+
+fun throwException(str: String) {
+    throw IllegalArgumentException()
 }
 
 fun main() {
@@ -51,11 +61,12 @@ fun main() {
 
     var inputString = input()
 
-    if (!isValid(inputString)) {
-        inputString = checkCustom(inputString) ?: return println("예외 처리")
+    if (!isValid(inputString) && checkCustom(inputString)) {
+        inputString = replaceCustom(inputString)
+    } else {
+        throwException(inputString)
     }
     val numbers = splitNumber(inputString)
     val result = sum(numbers)
-
     println("결과 : $result")
 }
