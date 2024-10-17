@@ -4,13 +4,12 @@ import camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest
 import camp.nextstep.edu.missionutils.test.NsTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertThrows
 
 class ApplicationTest : NsTest() {
     @Test
     fun `"1"을 입력 했을 경우 1을 반환`() {
         assertSimpleTest {
-            assertThat(a("1")).isEqualTo(1)
+            assertThat(getOne("1")).isEqualTo(1)
         }
     }
 
