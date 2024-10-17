@@ -12,11 +12,11 @@ class ResultFormatter(
     }
 
     private fun positiveDecimalPattern(): String {
-        var ori = "#,###."
+        val ori = StringBuilder("#,###.")
         repeat(countDecimalPlaces()) {
-            ori += "#"
+            ori.append("#")
         }
-        return ori
+        return ori.toString()
     }
 
     private fun countDecimalPlaces(): Int = "$result".split(".")[1].length
