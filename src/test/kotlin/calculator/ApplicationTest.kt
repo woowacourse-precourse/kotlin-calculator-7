@@ -9,14 +9,14 @@ class ApplicationTest : NsTest() {
     @Test
     fun `"1"을 입력 했을 경우 1을 반환`() {
         assertSimpleTest {
-            assertThat(getOne("1")).isEqualTo(1)
+            assertThat(calculate("1")).isEqualTo(1)
         }
     }
 
     @Test
     fun `"2"를 입력 했을 경우 2를 반환`() {
         assertSimpleTest {
-            assertThat(getOne("2")).isEqualTo(2)
+            assertThat(calculate("2")).isEqualTo(2)
         }
     }
 
