@@ -6,7 +6,7 @@ import java.text.DecimalFormat
 class ResultFormatter(
     private val result: BigDecimal
 ) {
-    fun formatResult(): String {
+    fun toNumberFormat(): String {
         if (isPositiveDecimal()) return DecimalFormat(positiveDecimalPattern()).format(result)
         return DecimalFormat("#,###").format(result)
     }
