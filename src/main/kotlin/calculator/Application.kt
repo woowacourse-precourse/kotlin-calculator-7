@@ -28,6 +28,9 @@ fun main() {
             num = 0
             continue
         }
+        if ((c.code - '0'.code) < 0 || (c.code - '0'.code) > 9){
+            throw IllegalArgumentException()
+        }
         num = (num * 10) + (c.code - '0'.code)
     }
     answer += num
