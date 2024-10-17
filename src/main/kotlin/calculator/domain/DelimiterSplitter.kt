@@ -8,6 +8,12 @@ class DelimiterSplitter(
         require(otherCharacterCheck(getSplitResult()))
     }
 
+    // 지정된 구분자를 이용하여 문자열 구분
+    fun getSplitResult(): List<String> {
+        if (customDelimiterIsUsed()) return customSplit().filter { it.isNotBlank() }
+        return basicSplit().filter { it.isNotBlank() }
+    }
+
     // 구분된 결과 내 양수가 아닌 다른 문자 여부 확인
     private fun otherCharacterCheck(splitResult: List<String>): Boolean =
         splitResult.all { it.matches(Regex("^(?:0|[1-9]\\d*)(\\.\\d+)?\$")) }
@@ -31,12 +37,6 @@ class DelimiterSplitter(
 
     // 기본 구분자로 나누기
     private fun basicSplit(): List<String> = value.split(COMMA_DELIMITER, COLON_DELIMITER)
-
-    // 지정된 구분자를 이용하여 문자열 구분
-    fun getSplitResult(): List<String> {
-        if (customDelimiterIsUsed()) return customSplit().filter { it.isNotBlank() }
-        return basicSplit().filter { it.isNotBlank() }
-    }
 
     companion object {
         private const val COMMA_DELIMITER = ","
