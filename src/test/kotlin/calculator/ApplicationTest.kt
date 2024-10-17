@@ -7,6 +7,13 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
 class ApplicationTest : NsTest() {
+    @Test
+    fun `"1"을 입력 했을 경우 1을 반환`() {
+        assertSimpleTest {
+            assertThat(a("1")).isEqualTo(1)
+        }
+    }
+
 //    @Test
 //    fun `커스텀 구분자 사용`() {
 //        assertSimpleTest {
