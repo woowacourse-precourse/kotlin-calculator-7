@@ -4,7 +4,7 @@ import java.math.BigInteger
 
 object Converter {
 
-    private val defaultDelimiters = arrayOf(",", ";")
+    private val defaultDelimiters = arrayOf(",", ":")
 
     fun extractNumberByInput(input: String): List<BigInteger> {
         var delimiters = defaultDelimiters
