@@ -4,7 +4,7 @@
 - [X] 프리코스 진행 방식 학습하기
 - [X] commit convention 학습하기
 - [X] 과제 확인하기
-- [ ] IntelliJ IDEA - kotlin 2.0.0 -> 1.9.24로 변경
+- [X] IntelliJ IDEA - kotlin 2.0.0 -> 1.9.24로 변경
 
 ## 기능 목록
 - [ ]
