@@ -20,6 +20,13 @@ class ApplicationTest : NsTest() {
         }
     }
 
+    @Test
+    fun `""를 입력 했을 경우 0을 반환`() {
+        assertSimpleTest {
+            assertThat(calculate("")).isEqualTo(0)
+        }
+    }
+
 //    @Test
 //    fun `커스텀 구분자 사용`() {
 //        assertSimpleTest {
