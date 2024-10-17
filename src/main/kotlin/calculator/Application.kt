@@ -5,5 +5,8 @@ fun main() {
 }
 
 fun calculate(string: String): Int {
+    if (string == "") {
+        return 0
+    }
     return string.toInt()
 }
