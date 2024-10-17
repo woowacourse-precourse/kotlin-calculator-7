@@ -1,10 +1,12 @@
 package calculator.util
 
+import java.math.BigInteger
+
 object Converter {
 
     private val defaultDelimiters = arrayOf(",", ";")
 
-    fun extractNumberByInput(input: String): List<String> {
+    fun extractNumberByInput(input: String): List<BigInteger> {
         var delimiters = defaultDelimiters
         var number = input
         if (hasCustomDelimiter(input)) {
@@ -32,8 +34,8 @@ object Converter {
         return Constant.CUSTOM_DELIMITER_DETERMINE_REGEX.find(input)!!.groups[2]!!.value
     }
 
-    private fun extractNumber(number: String, delimiters: Array<String>): List<String> {
-        return number.split(*delimiters).toList()
+    private fun extractNumber(number: String, delimiters: Array<String>): List<BigInteger> {
+        return number.split(*delimiters).map { if (it == "") BigInteger.ZERO else BigInteger(it) }.toList()
     }
 
 }
