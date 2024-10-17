@@ -6,6 +6,7 @@ fun main() {
     val inputStr = Console.readLine()
     val result = calculate(inputStr)
 
+    //결과값에 소숫점 아래 자리 수가 없다면 정수형으로 변환 후 출력
     if (result % 1 == 0f) {
         println("결과 : ${result.toInt()}")
     } else {
@@ -14,40 +15,58 @@ fun main() {
 }
 
 fun calculate(inputStr : String) : Float{
-    val numbers = setString(inputStr)
+
     var result = 0f
+    //사용자가 빈 문자열 입력 시
+    if(inputStr=="") return result
 
+    //문자열을 구분자로 나눠 numbers에 저장
+    val numbers = setString(inputStr)
     for(num in numbers){
-        val n = num.toFloatOrNull() //숫자가 아닌 값들은 null로 변환
 
-        if (n == null || n <= 0 ) { //양수가 아닌 값들이 존재할 경우
-            throw IllegalArgumentException("잘못된 입력입니다")
+        //저장된 값을 float로 변환하고 숫자가 아니면 null로 변환
+        val n = num.toFloatOrNull()
+
+        //값이 양수가 아니거나 null이면 Error
+        if (n == null || n <= 0 ) {
+            throw IllegalArgumentException("잘못된 입력입니다 : \"${num}\"")
         }
         result+=n
     }
     return result
-
 }
+
+//문자열을 구분자로 나누어 리스트에 저장하는 함수
 fun setString(str : String) : List<String>{
+
     val numbers : List<String>
 
-    //커스텀 구분자 확인
+    // 커스텀 구분자 존재 여부를 확인
     if(str.startsWith("//") && str.contains("\\n")){
         val start = 2
         val end = str.indexOf("\\n")
-        if(end-start<=0){
-            throw IllegalArgumentException("커스텀 구분자가 입력되지 않았습니다.")
-        }
-        else{
-            val customSplit = str.substring(start, end)
-            numbers = str.substringAfter("\\n").split(",",":",customSplit)
-        }
+
+        val customSplit = str.substring(start, end)
+
+        //입력된 커스텀 구분자가 없으면 Error
+        checkException(customSplit, "커스텀 구분자")
+
+        val subStr = str.substringAfter("\\n")
+
+        //커스텀 구분자 뒤에 입력된 값이 없으면 Error
+        checkException(subStr)
+        numbers = subStr.split(",",":",customSplit)
     }
     else{
         numbers = str.split(',',':')
     }
-    if (str.isEmpty()) {
-        throw IllegalArgumentException("입력된 숫자가 없습니다.")
-    }
+
     return numbers
+}
+
+fun checkException(str : String, content : String = "값"){
+    if (str.isEmpty()) {
+        throw IllegalArgumentException("입력된 ${content}이(가) 없습니다.")
+    }
+
 }
