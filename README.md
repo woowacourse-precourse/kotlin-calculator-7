@@ -21,6 +21,6 @@
   - 결과 범위는 제한하지 않는다.
 
 ## ResultFormatter 덧셈 결과 형식 맞춤기
-- [ ] 결과를 일반적인 숫자 포맷팅
+- [x] 결과를 일반적인 숫자 포맷팅
 
 ## IllegalArgumentException 발생 시 애플리케이션은 종료되어야 한다.
