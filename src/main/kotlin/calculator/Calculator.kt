@@ -34,8 +34,6 @@ class Calculator {
                         separator.customSeparator ?: "",
                     ).map { it }
 
-                println(separatedInputFromSeparator)
-
                 val separatedInputNumber: List<Int> = separatedInputFromSeparator
                     .filter { it.matches(Regex("\\d")) }
                     .map { it.toInt() }
@@ -46,6 +44,7 @@ class Calculator {
             false -> {
                 val separatedInputFromSeparator: List<String> =
                     inputString.split(separator.colonSeparator, separator.commaSeparator).map { it }
+
                 val separatedInputNumber: List<Int> = separatedInputFromSeparator
                     .filter { it.matches(Regex("\\d")) }
                     .map { it.toInt() }
