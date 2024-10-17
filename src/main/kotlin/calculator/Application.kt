@@ -31,6 +31,15 @@ fun parseNumbers(input: String): List<Int> {
         if (customDelimiter.isEmpty()) {
             throw IllegalArgumentException("커스텀 구분자가 빈 문자열입니다.")
         }
+        if (customDelimiter.length != 1) {
+            throw IllegalArgumentException("커스텀 구분자는 한 글자여야 합니다.")
+        }
+        if (customDelimiter.all{it.isDigit()}) {
+            throw IllegalArgumentException("커스텀 구분자로 숫자는 사용할 수 없습니다.")
+        }
+        if (customDelimiter.any{it.isWhitespace()}) {
+            throw IllegalArgumentException("커스텀 구분자로 공백 문자는 사용할 수 없습니다.")
+        }
 
         delimiters = listOf(Regex.escape(customDelimiter),",",":")// 커스텀 구분자 설정, 기본 구분자도 함께 사용 가능하도록 수정
         numbersSection = input.substring(delimiterEnd + 2) // 숫자 부분 추출
