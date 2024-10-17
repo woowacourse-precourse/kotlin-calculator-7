@@ -9,11 +9,11 @@ class UtilsTest {
 
     @Test
     fun `String List를 Int Array로 변환 성공`() {
-        val v1 = 123
-        val v2 = 234
+        val v1: Long = 123
+        val v2: Long = 234
         val input = mutableListOf("$v1", "$v2")
 
-        val result = convertStringListToIntArray(input)
+        val result = convertStringListToLongArray(input)
 
         assertTrue(result.contains(v1))
         assertTrue(result.contains(v2))
@@ -21,12 +21,12 @@ class UtilsTest {
 
     @Test
     fun `String List를 Int Array로 변환 실패 - 너무 큰 값`() {
-        val v1 = 123
-        val v2 = Int.MAX_VALUE
+        val v1: Long = 123
+        val v2: Long = Long.MAX_VALUE
         val input = mutableListOf("$v1", "${v2}1")
 
         assertThrows<IllegalArgumentException> {
-            convertStringListToIntArray(input)
+            convertStringListToLongArray(input)
         }
     }
 

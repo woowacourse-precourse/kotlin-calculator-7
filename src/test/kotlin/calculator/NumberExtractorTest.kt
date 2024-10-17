@@ -44,10 +44,10 @@ class NumberExtractorTest {
 
     @Test
     fun `문자열에서 숫자 추출 성공 - 기본 구분자`() {
-        val value = intArrayOf(1, 22, 333, 1111, 666666, 777)
+        val value = longArrayOf(1, 22, 333, 1111, 666666, 777)
         val input = "${value[0]},${value[1]},${value[2]}:${value[3]}:${value[4]}:${value[5]}"
 
-        val result: IntArray = numberExtractor.extractNumbers(input)
+        val result: LongArray = numberExtractor.extractNumbers(input)
 
         assertEquals(result.size, value.size)
         for (i in value.indices) {
@@ -58,15 +58,15 @@ class NumberExtractorTest {
     @ValueSource(strings = ["", ",", ":", "::", ",,", ",:", ":,"])
     @ParameterizedTest
     fun `문자열에서 숫자 추출 성공 - 공백 결과`(input: String) {
-        val result: IntArray = numberExtractor.extractNumbers(input)
+        val result: LongArray = numberExtractor.extractNumbers(input)
 
-        assertTrue(result.contentEquals(intArrayOf()))
+        assertTrue(result.contentEquals(longArrayOf()))
     }
 
     @ValueSource(strings = ["1:", ":12", ":12::", "::2:"])
     @ParameterizedTest
     fun `문자열에서 숫자 추출 성공 - 빈칸 포함 문자열 1`(input: String) {
-        val result: IntArray = numberExtractor.extractNumbers(input)
+        val result: LongArray = numberExtractor.extractNumbers(input)
 
         assertEquals(result.size, 1)
     }
@@ -74,7 +74,7 @@ class NumberExtractorTest {
     @ValueSource(strings = ["1:2:", ":1,2", "1::2", "::1:2:"])
     @ParameterizedTest
     fun `문자열에서 숫자 추출 성공 - 빈칸 포함 문자열 2`(input: String) {
-        val result: IntArray = numberExtractor.extractNumbers(input)
+        val result: LongArray = numberExtractor.extractNumbers(input)
 
         assertEquals(result.size, 2)
     }
@@ -90,7 +90,7 @@ class NumberExtractorTest {
     @Test
     fun `문자열에서 숫자 추출 실패 - 너무 큰 값`() {
         assertThrows<IllegalArgumentException> {
-            numberExtractor.extractNumbers("1:2,${Int.MAX_VALUE}1:3")
+            numberExtractor.extractNumbers("1:2,${Long.MAX_VALUE}1:3")
         }
     }
 }

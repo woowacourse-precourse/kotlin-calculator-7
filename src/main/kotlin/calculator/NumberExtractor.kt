@@ -11,7 +11,7 @@ class NumberExtractor {
         separators.add(separator)
     }
 
-    fun extractNumbers(input: String): IntArray {
+    fun extractNumbers(input: String): LongArray {
         inputValidator(input)
 
         var slice = mutableListOf(input)
@@ -26,7 +26,7 @@ class NumberExtractor {
         }
 
         removeBlankStringList(slice)
-        return convertStringListToIntArray(slice)
+        return convertStringListToLongArray(slice)
     }
 
     private fun inputValidator(input: String) {
