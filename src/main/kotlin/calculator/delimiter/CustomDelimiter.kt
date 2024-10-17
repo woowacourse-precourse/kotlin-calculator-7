@@ -20,6 +20,7 @@ class CustomDelimiter {
             val endIndexOfCustomDelimiterSuffix = input.indexOf(DelimiterConst.CUSTOM_DELIMITER_SUFFIX)
             _customDelimiter =
                 input.substring(DelimiterConst.CUSTOM_DELIMITER_PREFIX.length, endIndexOfCustomDelimiterSuffix)
+            println(_customDelimiter)
             val inputWithoutCustomDelimiter: String =
                 getInputWithoutCustomDelimiter(input, endIndexOfCustomDelimiterSuffix)
             return inputWithoutCustomDelimiter
