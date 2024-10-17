@@ -2,6 +2,21 @@ package calculator.util
 
 object Converter {
 
+    private val defaultDelimiters = arrayOf(",", ";")
+
+    fun extractNumberByInput(input: String): List<String> {
+        var delimiters = defaultDelimiters
+        var number = input
+        if (hasCustomDelimiter(input)) {
+            delimiters = extractCustomDelimiter(input)
+            number = extractNumberByCustomDelimiter(input)
+        }
+
+        Validator.validNumber(number, delimiters)
+
+        return extractNumber(number, delimiters)
+    }
+
     private fun hasCustomDelimiter(input: String): Boolean {
         return Constant.CUSTOM_DELIMITER_DETERMINE_REGEX.matches(input)
     }
@@ -15,6 +30,10 @@ object Converter {
     // 입력에서 커스텀 정규표현식에 해당하는 그룹을 찾은 후 찾고자하는 숫자에 해당하는 groups[2]의 값을 반환한다.
     private fun extractNumberByCustomDelimiter(input: String): String {
         return Constant.CUSTOM_DELIMITER_DETERMINE_REGEX.find(input)!!.groups[2]!!.value
+    }
+
+    private fun extractNumber(number: String, delimiters: Array<String>): List<String> {
+        return number.split(*delimiters).toList()
     }
 
 }
