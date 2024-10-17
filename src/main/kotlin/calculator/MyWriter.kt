@@ -13,10 +13,8 @@ class MyWriter {
             throw IllegalArgumentException()
         }
 
-    fun printf(format: String, vararg args: Any?) {
+    fun printf(format: String, vararg args: Any?) =
         print(String.format(format, *args))
-    }
-
 
     fun println(a: Any?) =
         runCatching {
