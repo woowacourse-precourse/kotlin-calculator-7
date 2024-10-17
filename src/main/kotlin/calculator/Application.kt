@@ -9,13 +9,21 @@ fun main() {
 
     // 구분자 리스트 생성
     var sepList = mutableListOf<Char>(':',',');
-    
+
+    // 추가 구분자 구성
+    if (input.length >= 5){
+        if (input[0] == '/' && input[1] == '/' && input[3] == '\\' && input[4] == 'n'){
+            sepList.add(input[2]);
+            input = input.substring(5);
+        }
+    }
+
     // 덧셈 계산기
     var num = 0
     var answer = 0
 
     for(c in input){
-        if(c==',' || c==':'){
+        if(sepList.contains(c)){
             answer += num
             num = 0
             continue
