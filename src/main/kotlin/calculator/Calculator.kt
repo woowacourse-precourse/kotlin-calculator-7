@@ -33,7 +33,7 @@ class Calculator {
 
     private fun operateCalculatorWithCustomSeparatorLogic(inputString: String) {
         val separatedInputFromSeparator: List<String> =
-            inputString.drop(Separator.DECLARE_CUSTOM_SEPARATOR_LENGTH).split(
+            inputString.drop(Separator.CUSTOM_SEPARATOR_DECLARE_LENGTH).split(
                 separator.colonSeparator,
                 separator.commaSeparator,
                 separator.customSeparator ?: "",
