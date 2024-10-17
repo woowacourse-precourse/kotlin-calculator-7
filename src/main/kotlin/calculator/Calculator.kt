@@ -50,7 +50,7 @@ class Calculator {
                 validateSeparatedInputString(separatedInputFromSeparator)
 
                 val separatedInputNumber: List<Int> = separatedInputFromSeparator
-                    .filter { it.matches(Regex("\\d")) }
+                    .filter { it.matches(Regex("\\d+")) }
                     .map { it.toInt() }
 
                 addInputNumbers(separatedInputNumber)
@@ -62,7 +62,7 @@ class Calculator {
         val isNegativeNumber: Boolean = separatedInputFromSeparator.any { it.contains("-") }
         val isAnySeparatedInputFromSeparator: Boolean = separatedInputFromSeparator.any { it.isBlank() }
         val isWrongSeparator: Boolean =
-            separatedInputFromSeparator.any { !it.matches(Regex("\\d")) }
+            separatedInputFromSeparator.any { !it.matches(Regex("\\d+")) }
 
         if (isNegativeNumber) {
             throw IllegalArgumentException("음수는 포함될 수 없습니다.")
