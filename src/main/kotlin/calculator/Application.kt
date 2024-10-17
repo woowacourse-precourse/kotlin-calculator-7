@@ -18,7 +18,7 @@ fun main() {
         return
     }
 
-    val numbers = splitString(str)
+    val numbers = filteringString(str)
     val sum = sumNumbers(numbers)
     printResult(str, sum)
 
@@ -30,7 +30,7 @@ fun splitString(str: String): List<Int> {
     return if (str.contains("/")) {
         val index = str.indexOf("//")
         val delimiter = str[index + 2].toString()
-        var result = str.removeRange(index, index + 5)
+        val result = str.removeRange(index, index + 5)
         result.split(",", ":", delimiter).map { it.toInt() }
     } else {
         str.split(",", ":").map { it.toInt() }
@@ -38,9 +38,10 @@ fun splitString(str: String): List<Int> {
 }
 
 // 방법2: 문자열에서 숫자만 필터링하는 함수
-/*fun filteringString(str: String): List<Int> {
-
-}*/
+fun filteringString(str: String): List<Int> {
+    val regex = "\\d+".toRegex()
+    return regex.findAll(str).map { it.value.toInt() }.toList()
+}
 
 // 숫자의 합을 반환하는 함수
 fun sumNumbers(numbers: List<Int>): Int = numbers.sum()
