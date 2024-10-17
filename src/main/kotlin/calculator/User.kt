@@ -9,6 +9,21 @@ class User {
         // 입력 받기
         val input = readLine()
 
+        when (isCustom(input)) {
+            true -> {
+                calculator.calculateCustom(input)
+            }
+
+            false -> {
+                calculator.calculate(input)
+            }
+        }
+
+    }
+
+    private fun isCustom(input: String): Boolean {
+        val custom = input.take(CUSTOM_COUNT)
+        return custom.contains("//") && custom.contains("\\n")
     }
 
     private fun readLine(): String {
