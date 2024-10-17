@@ -2,13 +2,11 @@ package calculator.util
 
 object Validator {
 
-    fun isValidNumber(input: String, delimiter: Array<String>): Boolean {
-        if (isZero(input)) return true
+    fun validNumber(number: String, delimiter: Array<String>) {
+        if (isZero(number)) return
 
-        val numbers = input.split(*delimiter).toList()
-        numbers.forEach { it.toIntOrNull() ?: return false }
-
-        return true
+        val numbers = number.split(*delimiter).toList()
+        numbers.forEach { it.toIntOrNull() ?: throw IllegalArgumentException() }
     }
 
     private fun isZero(input: String) = input.isEmpty()
