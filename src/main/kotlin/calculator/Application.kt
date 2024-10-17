@@ -22,6 +22,7 @@ fun main() {
                 }
             }
         } else {
+            var sum = 0
             val numberList = input
                 .split(regex = Regex("[,:]"))
                 .map {
@@ -31,7 +32,9 @@ fun main() {
                 if (it < 0) {
                     throw IllegalArgumentException()
                 }
+                sum += it
             }
+            print("결과 : $sum")
         }
     } catch (e: NumberFormatException) {
         throw IllegalArgumentException()
