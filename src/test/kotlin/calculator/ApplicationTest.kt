@@ -65,6 +65,42 @@ class ApplicationTest : NsTest() {
         }
     }
 
+    @Test
+    fun `잘못된 구분자 사용`() {
+        assertSimpleTest {
+            assertThrows<IllegalArgumentException> { runException("//n\n3#4") }
+        }
+    }
+
+    @Test
+    fun `커스텀 구분자와 기본 구분자 섞어 사용`() {
+        assertSimpleTest {
+            run("//$\\n3$4:5")
+            assertThat(output()).contains("결과 : 12")
+        }
+    }
+
+    @Test
+    fun `커스텀 구분자 예외 테스트_공백`() {
+        assertSimpleTest {
+            assertThrows<IllegalArgumentException> { runException("// \\n3 4") }
+        }
+    }
+
+    @Test
+    fun `커스텀 구분자 예외 테스트_숫자`() {
+        assertSimpleTest {
+            assertThrows<IllegalArgumentException> { runException("//2\\n324") }
+        }
+    }
+
+    @Test
+    fun `커스텀 구분자 예외 테스트_Dash`() {
+        assertSimpleTest {
+            assertThrows<IllegalArgumentException> { runException("//-\\n3-2-4") }
+        }
+    }
+
     override fun runMain() {
         main()
     }
