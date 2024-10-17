@@ -11,6 +11,24 @@ class NumberExtractor {
         separators.add(separator)
     }
 
+    fun extractNumbers(input: String): IntArray {
+        inputValidator(input)
+
+        var slice = mutableListOf(input)
+        for (separator in separators) {
+            val tmp = mutableListOf<String>()
+            val iterator = slice.iterator()
+
+            while (iterator.hasNext()) {
+                tmp.addAll(iterator.next().split(separator))
+            }
+            slice = tmp
+        }
+
+        removeBlankStringList(slice)
+        return convertStringListToIntArray(slice)
+    }
+
     private fun inputValidator(input: String) {
         val validNumbers = getNumberList()
 
