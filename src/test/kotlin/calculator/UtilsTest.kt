@@ -1,7 +1,6 @@
 package calculator
 
-import org.junit.jupiter.api.Assertions.assertFalse
-import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -41,5 +40,23 @@ class UtilsTest {
         assertTrue(input.contains(v1))
         assertTrue(input.contains(v2))
         assertFalse(input.contains(""))
+    }
+
+    @Test
+    fun `배열의 값을 더하는데 성공`() {
+        val input = longArrayOf(1, 2, 3)
+
+        val result = longArraySum(input)
+
+        assertEquals(result, 6)
+    }
+
+    @Test
+    fun `배열의 값을 더하는데 실패 - 범위 초과`() {
+        val input = longArrayOf(1, 2, 3, Long.MAX_VALUE)
+
+        assertThrows<IllegalArgumentException> {
+            longArraySum(input)
+        }
     }
 }

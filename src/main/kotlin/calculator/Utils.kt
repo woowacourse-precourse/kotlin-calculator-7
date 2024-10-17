@@ -20,3 +20,17 @@ fun removeBlankStringList(list: MutableList<String>) {
         list.removeAt(i)
     }
 }
+
+fun longArraySum(array: LongArray): Long {
+    var result: Long = 0
+
+    for (num in array) {
+        if (num + result < result) {
+            throw IllegalArgumentException("너무 큰 값이 입력되었습니다.")
+        }
+
+        result += num
+    }
+
+    return result
+}
