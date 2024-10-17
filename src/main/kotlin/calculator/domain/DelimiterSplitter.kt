@@ -5,7 +5,7 @@ class DelimiterSplitter(
 ) {
     init {
         require(customDelimiterFormatCheck())
-        require(otherCharacterCheck(getSplitResult()))
+        require(allPositiveCheck(getSplitResult()))
     }
 
     // 지정된 구분자를 이용하여 문자열 구분
@@ -14,8 +14,8 @@ class DelimiterSplitter(
         return basicSplit().filter { it.isNotBlank() }
     }
 
-    // 구분된 결과 내 양수가 아닌 다른 문자 여부 확인
-    private fun otherCharacterCheck(splitResult: List<String>): Boolean =
+    // 구분된 이후 모든 값이 양수 인치 확인
+    private fun allPositiveCheck(splitResult: List<String>): Boolean =
         splitResult.all { it.matches(Regex("^(?:0|[1-9]\\d*)(\\.\\d+)?\$")) }
 
     // 커스텀 구분자 사용 선언 포맷 확인
