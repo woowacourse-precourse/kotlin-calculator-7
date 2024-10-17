@@ -5,5 +5,5 @@ fun main() {
 }
 
 fun getOne(string: String): Int {
-    return 1
+    return string.toInt()
 }
