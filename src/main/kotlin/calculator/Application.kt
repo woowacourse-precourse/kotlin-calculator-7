@@ -7,26 +7,24 @@ class Calculator {
     private val INIT_MESSAGE = "덧셈할 문자열을 입력해 주세요."
     private var input: String? = ""
     private lateinit var inputProcessing: StringBuilder
-    private var answer: Int? = 0
+    private var answer: Int = 0
     private var delimiter: String = ",:"
     private val CUSTOMDEVIDER_RULES = """//(.+)\\n""".toRegex()
 
     fun initCalculator() { // 계산기 초기화
         println(INIT_MESSAGE)
         input = Console.readLine()
-        validation()
-        input = inputProcessing.toString()
-        println(delimiter)
-        println(input)
-    }
-
-    fun validation() { // 입력 문자열 검증
         if (input?.length == 0) return // 문자열 null 여부 확인
         inputProcessing = StringBuilder(input)
+        validation()
+        println(answer)
+    }
+
+    fun validation() { // 입력 문자열 검증 및 계산
         identifyDelimiters()
         val DELIMITER_RULES = ("[$delimiter]").toRegex()
         var inputList = inputProcessing.split(DELIMITER_RULES) // 구분자를 기준으로 문자열 나누기
-        var number: Int? = 0
+        var number: Int = 0
         for (numbers in inputList) {
             try {
                 number = numbers.toInt() // 숫자인가?
@@ -34,6 +32,8 @@ class Calculator {
             } catch (e: Exception) {
                 throw IllegalArgumentException("입력값이 올바르지 않습니다.")
             }
+            answer += number
+            number = 0
         }
     }
     fun identifyDelimiters() { // 커스텀 구분자 식별
