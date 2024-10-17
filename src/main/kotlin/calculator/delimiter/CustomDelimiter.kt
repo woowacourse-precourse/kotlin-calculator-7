@@ -8,8 +8,7 @@ class CustomDelimiter {
     val customDelimiter: String?
         get() = _customDelimiter
 
-    private fun hasCustomDelimiter(input: String?): Boolean {
-        if (input == null) return false
+    private fun hasCustomDelimiter(input: String): Boolean {
         val hasCustomDelimiterPrefix: Boolean = input.startsWith(DelimiterConst.CUSTOM_DELIMITER_PREFIX)
         val customDelimiterSuffixIndex: Int = input.indexOf(DelimiterConst.CUSTOM_DELIMITER_SUFFIX)
         return hasCustomDelimiterPrefix && customDelimiterSuffixIndex == DelimiterConst.CUSTOM_DELIMITER_PREFIX.length + 1
@@ -20,7 +19,6 @@ class CustomDelimiter {
             val endIndexOfCustomDelimiterSuffix = input.indexOf(DelimiterConst.CUSTOM_DELIMITER_SUFFIX)
             _customDelimiter =
                 input.substring(DelimiterConst.CUSTOM_DELIMITER_PREFIX.length, endIndexOfCustomDelimiterSuffix)
-            println(_customDelimiter)
             val inputWithoutCustomDelimiter: String =
                 getInputWithoutCustomDelimiter(input, endIndexOfCustomDelimiterSuffix)
             return inputWithoutCustomDelimiter
