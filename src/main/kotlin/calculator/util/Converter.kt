@@ -1,7 +1,7 @@
 package calculator.util
 
 class Converter {
-    
+
     private fun hasCustomDelimiter(input: String): Boolean {
         return Constant.CUSTOM_DELIMITER_DETERMINE_REGEX.matches(input)
     }
@@ -11,5 +11,9 @@ class Converter {
         return Constant.CUSTOM_DELIMITER_DETERMINE_REGEX.find(input)!!.groups[1]!!.value
     }
 
+    // 입력에서 커스텀 정규표현식에 해당하는 그룹을 찾은 후 찾고자하는 숫자에 해당하는 groups[2]의 값을 반환한다.
+    private fun extractNumberByCustomDelimiter(input: String): String {
+        return Constant.CUSTOM_DELIMITER_DETERMINE_REGEX.find(input)!!.groups[2]!!.value
+    }
 
 }
