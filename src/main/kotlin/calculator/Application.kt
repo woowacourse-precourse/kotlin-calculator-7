@@ -31,7 +31,7 @@ fun isValid(str: String): Boolean {
 fun checkCustom(str: String): Boolean {
     var str = str
 
-    if(str.contains("\\\\") && str.contains("\\n")) {
+    if(str.contains("//") && str.contains("\\n")) {
         return true
     }
     return false
@@ -42,7 +42,7 @@ fun replaceCustom(str: String): String {
     var newStr = ""
     var customSeparator = ""
 
-    val beforeIndex = str.indexOf("\\\\")
+    val beforeIndex = str.indexOf("//")
     val afterIndex = str.indexOf("\\n")
     if (beforeIndex < afterIndex) {
         customSeparator = str.substring(beforeIndex + 2, afterIndex)
