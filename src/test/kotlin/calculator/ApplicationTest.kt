@@ -7,70 +7,6 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
 class ApplicationTest : NsTest() {
-    //    @Test
-//    fun `앞 5문자 유효성 검증`() {
-//        assertSimpleTest {
-//            val inputStringArray =
-//                arrayOf(
-//                    inputString6,
-//                    inputString7,
-//                    inputString8,
-//                    inputString9,
-//                    inputString10,
-//                    inputString11,
-//                    inputString12,
-//                    inputString13,
-//                    inputString14,
-//                    inputString15,
-//                )
-//            inputStringArray.map {
-//                try {
-//                    println("Passed : $it - ${Validator().validateCustomDelimiter(it)}")
-//                } catch (e: Exception) {
-//                    e.printStackTrace()
-//                    println("Failed : $it")
-//                }
-//            }
-//        }
-//    }
-//
-//    @Test
-//    fun `문자열 유효성 검증`() {
-//        assertSimpleTest {
-//            inputStringArray.map {
-//                try {
-//                    Validator().validateString(it)
-//                    println("Passed : $it")
-//                } catch (e: Exception) {
-//                    e.printStackTrace()
-//                    println("Failed : $it")
-//                }
-//            }
-//        }
-//    }
-//
-//    @Test
-//    fun `문자열 분리 테스트`() {
-//        assertSimpleTest {
-//            val validInputStringArray =
-//                arrayOf(inputString4, inputString6, inputString7, inputString8)
-//            validInputStringArray.map {
-//                println("input = $it : ${Calculator().splitString(it)}")
-//            }
-//        }
-//    @Test
-//    fun `합계 테스트`() {
-//        assertSimpleTest {
-//            val validInputStringArray =
-//                arrayOf(inputString4, inputString6, inputString7, inputString8)
-//            validInputStringArray.map {
-//                val calculator = Calculator()
-//                val splitList = calculator.splitString(it)
-//                println("input = $it : ${calculator.getSum(splitList)}")
-//            }
-//        }
-//    }
-
     @Test
     fun `커스텀 구분자 사용`() {
         assertSimpleTest {
@@ -85,8 +21,6 @@ class ApplicationTest : NsTest() {
             assertThrows<IllegalArgumentException> { runException("-1,2,3") }
         }
     }
-
-//    }
 
     @Test
     fun `최종 테스트`() {
