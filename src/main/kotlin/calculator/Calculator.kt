@@ -8,7 +8,7 @@ class Calculator {
 
     fun sum(numbers: List<BigInteger>): BigInteger {
         calculateMemory.add(numbers)
-        return numbers.reduce { BigIn, bigInteger -> BigIn.plus(bigInteger) }
+        return numbers.reduce { sum, number -> sum.plus(number) }
     }
 
 }
