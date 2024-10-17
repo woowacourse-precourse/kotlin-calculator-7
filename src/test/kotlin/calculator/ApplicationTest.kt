@@ -35,8 +35,8 @@ class ApplicationTest : NsTest() {
     @Test
     fun `custom delimiter usage`() {
         assertSimpleTest {
-            run("//;\\n1")
-            assertThat(output()).contains("결과: 1")
+            run("//;\\n1;3,3")
+            assertThat(output()).contains("결과: 7")
         }
     }
 
