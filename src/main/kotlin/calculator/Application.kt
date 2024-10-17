@@ -23,7 +23,18 @@ fun parseNumbers(input: String): List<Int> {
         .filter { it.isNotBlank() } // 구분자 뒤 공백이 올 경우 무시하고 값 처리
 
     return tokens.map {
-        val number = it.trim() //리스트의 공백 제거
-        number.toInt() // 문자열을 숫자로 변환
+        val number = it.trim() //리스트의 공백 제거(ex:1, 2, 3을 입력 할 경우 공백 제거되서 6 반환)
+
+        if (number.isEmpty()) {
+            0 // 빈 문자열이 있을 경우 0으로 처리
+
+        } else { // 숫자가 아닌 값이나 음수에 대한 예외 처리
+            val num = number.toIntOrNull() ?: throw IllegalArgumentException("유효한 숫자가 아닙니다.")
+
+            if (num < 0) {
+                throw IllegalArgumentException("음수는 허용되지 않습니다.")
+            }
+            num // 예외 조건을 통과할 경우 수 반환
+        }
     }
 }
