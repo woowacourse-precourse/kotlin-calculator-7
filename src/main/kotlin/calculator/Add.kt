@@ -1,8 +1,8 @@
 package calculator
 
 class Add {
-    fun addNum(userString: List<Int>) {
-        val result = userString.sum()
+    fun addNum(userNumbers: List<Int>) {
+        val result = userNumbers.sum()
         UserView.printResult(result)
     }
 }
