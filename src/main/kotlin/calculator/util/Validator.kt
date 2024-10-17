@@ -7,7 +7,7 @@ object Validator {
 
         val numbers = number.split(*delimiter).toList()
         numbers.forEach {
-            if (it != "") it.toIntOrNull() ?: throw IllegalArgumentException()
+            if (it != "") it.toBigIntegerOrNull() ?: throw IllegalArgumentException()
         }
     }
 
