@@ -7,6 +7,7 @@ class Calculator {
     fun calculate(input: String) {
         val splitInput = input.split(",", ":")
         validateInput(splitInput)
+        printResult(splitInput.sumOf { it.toInt() })
     }
 
     fun calculateCustom(input: String) {
@@ -14,6 +15,8 @@ class Calculator {
             .split("//", "\\n")
             .filter { it.isNotEmpty() }
         validateInputCustom(customSeparator, customInput)
+        val splitInput = customInput.split(customSeparator)
+        printResult(splitInput.sumOf { it.toInt() })
     }
 
     private fun validateInput(splitInput: List<String>) {
@@ -32,5 +35,9 @@ class Calculator {
         if (customSeparator.first().isDigit()) throw IllegalArgumentException("커스텀 문자 입력이 잘못되었습니다")
 
         validateInput(customInput.split(customSeparator))
+    }
+
+    private fun printResult(result: Int) {
+        println("결과 : $result")
     }
 }
