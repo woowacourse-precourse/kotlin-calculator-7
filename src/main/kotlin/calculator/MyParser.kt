@@ -12,6 +12,15 @@ class MyParser {
             ?.groupValues
             ?: throw IllegalArgumentException()
 
+    private fun String.toPositiveInt(): Int =
+        runCatching {
+            val i = toInt()
+            if (i > 0) i
+            else throw IllegalArgumentException()
+        }.getOrElse {
+            throw IllegalArgumentException()
+        }
+
     private fun getDelimiters(extraDelimiter: String): List<String> =
         if (extraDelimiter.isNotEmpty()) defaultDelimiters + extraDelimiter
         else defaultDelimiters

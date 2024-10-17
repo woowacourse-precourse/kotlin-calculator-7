@@ -13,7 +13,7 @@
   - [ ] 숫자부 분리
 - 검증
   - [x] 전체 형식 검증
-  - [ ] 양수 검증
+  - [x] 양수 검증
 
 ## 🚧 트러블 슈팅
 - ### UnsupportedClassVersionError
