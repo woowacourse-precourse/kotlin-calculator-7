@@ -47,6 +47,15 @@ class ApplicationTest : NsTest() {
         }
     }
 
+    //minus 기호가 delimiter로 사용되는 경우
+    @Test
+    fun `input contains minus sign custom delimiter`() {
+        assertSimpleTest {
+            run("//-\\n2-1,2,3")
+            assertThat(output()).contains("결과: 8")
+        }
+    }
+
     override fun runMain() {
         main()
     }

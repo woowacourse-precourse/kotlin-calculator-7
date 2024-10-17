@@ -7,9 +7,12 @@ class Calculator {
         val (delimiter, numbers) = parseInput(input)
         val tokens = splitNumbers(numbers, delimiter)
 
-        return tokens.sumOf {
-            //if it is negative number, throw exception
-            it.toIntOrNull() ?: throw IllegalArgumentException("Invalid number")
+        return tokens.sumOf { token ->
+            val number = token.toIntOrNull() ?: throw IllegalArgumentException("숫자가 아닌 값이 입력되었습니다.")
+            if (number < 0) {
+                throw IllegalArgumentException("음수는 입력할 수 없습니다.")
+            }
+            number
         }
     }
 
