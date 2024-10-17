@@ -8,8 +8,17 @@ fun main() {
     var isCustom = false
     var customDelimeter = ";"
 
+    if (input.length >= 5
+        && input.substring(IntRange(0, 1)) == "//"
+        && input.substring(IntRange(3, 4)) == "\\n"
+    ) {
+        isCustom = true
+        customDelimeter = input[2].toString()
+    }
+
     try {
         if (isCustom) {
+            var sum = 0
             val numberList = input
                 .substring(5)
                 .split(customDelimeter)
@@ -20,7 +29,9 @@ fun main() {
                 if (it < 0) {
                     throw IllegalArgumentException()
                 }
+                sum += it
             }
+            print("결과 : $sum")
         } else {
             var sum = 0
             val numberList = input
