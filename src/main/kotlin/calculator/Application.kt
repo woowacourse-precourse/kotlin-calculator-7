@@ -5,6 +5,9 @@ fun main() {
 
     val input = readLine()
     var answer = 0
+    val numberList = input?.split(Regex("\\D+"))
+        ?.filter { it.isNotEmpty() }
+        ?.map { it.toInt() }
 
-    println("결과 : ${answer}")
+    println("추출된 숫자 리스트: ${numberList}")
 }
