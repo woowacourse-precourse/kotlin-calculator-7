@@ -6,7 +6,9 @@ object Validator {
         if (isZero(number)) return
 
         val numbers = number.split(*delimiter).toList()
-        numbers.forEach { it.toIntOrNull() ?: throw IllegalArgumentException() }
+        numbers.forEach {
+            if (it != "") it.toIntOrNull() ?: throw IllegalArgumentException()
+        }
     }
 
     private fun isZero(input: String) = input.isEmpty()
