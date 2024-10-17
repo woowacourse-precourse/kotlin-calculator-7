@@ -12,18 +12,24 @@ import camp.nextstep.edu.missionutils.Console
 */
 
 fun main() {
-    val str = try {
-        Console.readLine().trim()
+    try {
+        val str = Console.readLine().trim()
+        val numbers = splitString(str)
+
+        if (numbers.any { it < 0 }) {
+            throw IllegalArgumentException()
+        }
+
+        val sum = sumNumbers(numbers)
+        printResult(str, sum)
+
     } catch (e: IllegalArgumentException) {
         return
+    } finally {
+        Console.close()
     }
-
-    val numbers = filteringString(str)
-    val sum = sumNumbers(numbers)
-    printResult(str, sum)
-
-    Console.close()
 }
+
 
 // 방법1: 문자열을 구분자로 나누는 함수
 fun splitString(str: String): List<Int> {
