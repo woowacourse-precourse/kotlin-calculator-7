@@ -10,8 +10,8 @@ class DelimiterSplitter(
 
     // 지정된 구분자를 이용하여 문자열 구분
     fun getSplitResult(): List<String> {
-        if (customDelimiterIsUsed()) return customSplit().filter { it.isNotBlank() }
-        return basicSplit().filter { it.isNotBlank() }
+        if (customDelimiterIsUsed()) return customSplit()
+        return basicSplit()
     }
 
     // 구분된 이후 모든 값이 양수 인치 확인
