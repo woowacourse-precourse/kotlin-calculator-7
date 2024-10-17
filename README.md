@@ -63,7 +63,7 @@
   - 0, 음수, 문자 등
 - 커스텀 구분자만 입력한 경우
 - “//”과 “\n”사이에 커스텀 문자를 입력하지 않았을 경우
-`IllegalArgumentException`  를 발생시키고 프로그램 종료
+  `IllegalArgumentException`  를 발생시키고 프로그램 종료
 
 ## 기타
 
