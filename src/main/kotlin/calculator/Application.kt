@@ -28,12 +28,32 @@ fun isValid(str: String): Boolean {
     return true
 }
 
+fun checkCustom(str: String): String? {
+    var str = str
+    var newStr = ""
+    var customSeparator = ""
+
+    if(str.contains("\\\\") && str.contains("\\n")) {
+        val beforeIndex = str.indexOf("\\\\")
+        val afterIndex = str.indexOf("\\n")
+        if (beforeIndex < afterIndex) {
+            customSeparator = str.substring(beforeIndex + 2, afterIndex)
+            newStr = str.substring(afterIndex + 2)
+            newStr = newStr.replace(customSeparator, ",")
+            return newStr
+        }
+    }
+    return null
+}
+
 fun main() {
     println("덧셈할 문자열을 입력해주세요.")
 
-    val inputString = input()
+    var inputString = input()
 
-    if (!isValid(inputString)) { println("유효하지 않은 식") }
+    if (!isValid(inputString)) {
+        inputString = checkCustom(inputString) ?: return println("예외 처리")
+    }
     val numbers = splitNumber(inputString)
     val result = sum(numbers)
 
