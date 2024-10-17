@@ -35,8 +35,9 @@ fun extractNumbers(string: String): List<Int> {
         separators += string[2]
 
     var checkString = if (isCustomSeparator) string.substring(startIndex = 5) else string
-    if (checkString.last() in separators)
-        checkString = checkString.dropLast(1)
+
+    if (checkString.first() in separators) checkString = checkString.drop(1)
+    if (checkString.last() in separators) checkString = checkString.dropLast(1)
 
     return if (checkString == "") emptyList()
     else if (isCustomSeparator) checkString.split(separators[0], separators[1], separators[2]).map { it.toInt() }
