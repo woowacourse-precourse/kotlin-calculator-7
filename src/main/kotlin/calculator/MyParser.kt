@@ -1,9 +1,10 @@
 package calculator
 
 class MyParser {
-    fun parse(input: String) {
+    fun parse(input: String): List<Int> {
         val tokens = tokenize(input)
         val delimiters = getDelimiters(tokens[2])
+        return getNumbers(tokens[3], delimiters)
     }
 
     private fun tokenize(input: String): List<String> =
@@ -11,6 +12,16 @@ class MyParser {
             .find(input)
             ?.groupValues
             ?: throw IllegalArgumentException()
+
+    private fun getNumbers(numbers: String, delimiters: List<String>): List<Int> =
+        runCatching {
+            numbers
+                .split(*delimiters.toTypedArray())
+                .filter(String::isNotEmpty)
+                .map { it.toPositiveInt() }
+        }.getOrElse {
+            throw IllegalArgumentException()
+        }
 
     private fun String.toPositiveInt(): Int =
         runCatching {
