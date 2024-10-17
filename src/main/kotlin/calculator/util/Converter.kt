@@ -35,7 +35,7 @@ object Converter {
     }
 
     private fun extractNumber(number: String, delimiters: Array<String>): List<BigInteger> {
-        return number.split(*delimiters).map { if (it == "") BigInteger.ZERO else BigInteger(it) }.toList()
+        return number.split(*delimiters).map { BigInteger(it) }.toList()
     }
 
 }
