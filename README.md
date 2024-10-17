@@ -19,7 +19,7 @@
       - Console 라이브러리 이용해서 입력을 담당한다.
     - 검증 : Validator ✅
       - 정상적인 입력인지 검증하는 역할을 한다.
-    - main : Application
+    - main : Application ✅
       - 프로그램 실행을 위한 전체적인 흐름을 담당한다.
     - 계산 : Calculator ✅
       - 입력에 대한 계산을 담당한다.
