@@ -1,6 +1,5 @@
 package calculator
 
-import camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
@@ -31,19 +30,15 @@ class NumberExtractorTest {
 
     @Test
     fun `커스텀 구분자 추가 실패 - 2글자 이상`() {
-        assertSimpleTest {
-            assertThrows<IllegalArgumentException> {
-                numberExtractor.addSeparator(";;")
-            }
+        assertThrows<IllegalArgumentException> {
+            numberExtractor.addSeparator(";;")
         }
     }
 
     @Test
     fun `커스텀 구분자 추가 실패 - 0글자`() {
-        assertSimpleTest {
-            assertThrows<IllegalArgumentException> {
-                numberExtractor.addSeparator("")
-            }
+        assertThrows<IllegalArgumentException> {
+            numberExtractor.addSeparator("")
         }
     }
 
