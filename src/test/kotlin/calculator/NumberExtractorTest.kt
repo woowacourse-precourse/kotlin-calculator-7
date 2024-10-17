@@ -17,7 +17,7 @@ class NumberExtractorTest {
     @Test
     fun `커스텀 구분자 추가 성공`() {
         val separator = ";"
-        numberExtractor.addExtractor(separator)
+        numberExtractor.addSeparator(separator)
 
         val separatorsField = NumberExtractor::class.java.getDeclaredField("separators")
         separatorsField.isAccessible = true;
@@ -30,7 +30,7 @@ class NumberExtractorTest {
     fun `커스텀 구분자 추가 실패 - 2글자 이상`() {
         assertSimpleTest {
             assertThrows<IllegalArgumentException> {
-                numberExtractor.addExtractor(";;")
+                numberExtractor.addSeparator(";;")
             }
         }
     }
@@ -39,7 +39,7 @@ class NumberExtractorTest {
     fun `커스텀 구분자 추가 실패 - 0글자`() {
         assertSimpleTest {
             assertThrows<IllegalArgumentException> {
-                numberExtractor.addExtractor("")
+                numberExtractor.addSeparator("")
             }
         }
     }
