@@ -15,10 +15,23 @@ class User {
     }
 
     private fun inputException(inputString: String, delimiter: List<String>): Boolean {
-        val matchResult = customPattern.find(inputString)
-        val inputFiltered = matchResult?.groups?.get(3)?.value ?: inputString
-        val isPattern = Regex("") // 조건에 맞는 패턴 정의
-        return !isPattern.matches(inputFiltered) // 조건에 맞는 패턴이 아니면 true를 반환
+        if (delimiter.size == 2) {
+            val pattern = Regex("[^\\d,:]")
+            val matchResult = pattern.find(inputString)
+            if (matchResult != null) {
+                return true
+            }
+        }
+        if (delimiter.size == 3) {
+            val pattern = Regex("[^\\d,:$delimiter[2]]")
+            val matchResult = customPattern.find(inputString)
+            val inputFiltered = matchResult?.groups?.get(3)?.value ?: inputString
+            val matchFilteredResult = pattern.find(inputFiltered)
+            if (matchFilteredResult != null) {
+                return true
+            }
+        }
+        return false
     }
 
     private fun customDelimiter(inputString: String): List<String> {
