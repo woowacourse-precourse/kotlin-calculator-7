@@ -4,6 +4,7 @@ import camp.nextstep.edu.missionutils.Console.readLine
 
 fun main() {
     val input = i()
+    val parser = Parser(input)
 }
 
 private fun i(): String {
