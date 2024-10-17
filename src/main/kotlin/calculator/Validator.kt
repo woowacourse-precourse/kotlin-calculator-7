@@ -37,22 +37,31 @@ class Validator {
         return checkString
     }
 
-    // 앞 5문자의 유효성을 검증하는 기능
-    fun validateCustomDelimiter(inputString: String): String {
-        val slashIndex = inputString.substring(0, 2) == "//"
-        val enterIndex = inputString.substring(3, 5) == "\\n"
-        val customDelimiter = inputString[2]
-
-        if (slashIndex and enterIndex and !customDelimiter.isDigit()) {
-            return customDelimiter.toString()
+    // 첫 문자가 '/' 이라면 앞선 5문자의 유효성을 검증하고, 앞선 5문자를 제외한 남은 부분을 리턴한다.
+    // 첫 문자가 '/' 이 아니라면 그냥 입력을 그대로 리턴한다.
+    private fun validatePrecedingString(inputString: String): String {
+        if (inputString[0] == '/') {
+            val slashIndex = inputString.substring(0, 2) == "//"
+            val enterIndex = inputString.substring(3, 5) == "\\n"
+            val customDelimiter = inputString[2]
+            // 유효하지 않다면 예외 발생
+            if (!slashIndex || !enterIndex || customDelimiter.isDigit()) {
+                throw IllegalArgumentException()
+            }
+            return inputString.substring(5, inputString.length)
         } else {
-            // 첫 두 문자가 "//" 가 아니고,
-            // 3번째 문자가 숫자가 아니고,
-            // 4,5 번째 문자가 각각 '\' , 'n' 이 아니면,
-            // IllegalArgumentException() 발생
-            throw IllegalArgumentException()
+            return inputString
         }
     }
+
+    // 커스텀 구분자가 있다면 그 구분자를 반환한다
+    fun getDelimiter(inputString: String): String =
+        if (inputString[0] == '/') {
+            val customDelimiter = inputString[2]
+            "[,:$customDelimiter]"
+        } else {
+            "[,:]"
+        }
 
     private fun Char.isNotValid(delimiterList: List<String>): Boolean {
         val isValidDigit = this.isDigit()

@@ -13,18 +13,9 @@ class Calculator {
     }
 
     private fun splitStringToList(inputString: String): List<String> {
-        var delimiter = "[,:]"
-        if (inputString[0] == '/') {
-            val customDelimiter = validator.validateCustomDelimiter(inputString)
-            delimiter =
-                if (customDelimiter.isNotEmpty()) {
-                    "$delimiter|$customDelimiter"
-                } else {
-                    delimiter
-                }
-        }
-
         val checkString = validator.validateString(inputString)
+        val delimiter = validator.getDelimiter(inputString)
+
         val splitList = checkString.split(delimiter.toRegex())
 
         return splitList
