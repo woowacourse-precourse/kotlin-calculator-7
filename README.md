@@ -61,7 +61,8 @@
 - 어느 것도 아니라면 -1를 반환한다.
 
 `negativeNumberCheck`:
-- 
+- `inputValueList`를 매개변수로 지정한다.
+- `inputValueList`의 원소에 음수가 있다면 `true`를 반환한다.
 ## [view]
 ### - MsgView
 `inputMsg`: 
