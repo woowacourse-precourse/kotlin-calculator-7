@@ -14,7 +14,7 @@
 - 출력
   - 결과 출력
 
-### 리팩토링으로 추가한 기능
+## 리팩토링으로 추가한 기능
 - 커스텀 구분자 유무 확인
   - val regex = Regex("^//.\\\\n")
   - 문자열이 정규 표현식이랑 일치하는지 확인하고 Boolean을 return
@@ -42,4 +42,3 @@
 ## 빌드 테스트
 
 ![image](https://github.com/user-attachments/assets/8b230aac-5097-4491-a42a-2ea1664f6e75)
-
