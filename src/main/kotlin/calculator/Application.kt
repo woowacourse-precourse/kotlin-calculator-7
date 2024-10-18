@@ -6,7 +6,8 @@ fun main() {
     println("덧셈할 문자열을 입력해 주세요.")
     val str = Console.readLine()
     val splitStr = splitStr(str)
-    println(splitStr)
+    val result = calculate(splitStr)
+    println(result)
 }
 
 fun splitStr(str: String): List<Int> {
@@ -32,4 +33,12 @@ fun findCustomSeparator(str: String): String {
 
     // "//"와 "\n" 사이의 문자열을 추출하여 반환
     return str.substring(startIndex, endIndex)
+}
+
+fun calculate(strList: List<Int>): Int {
+    var sum = 0
+    for (n in strList) {
+        sum += n
+    }
+    return sum
 }
