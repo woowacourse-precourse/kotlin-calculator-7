@@ -9,5 +9,7 @@ fun main() {
         ?.filter { it.isNotEmpty() }
         ?.map { it.toInt() }
 
-    println("추출된 숫자 리스트: ${numberList}")
+    answer = numberList?.sum() ?: 0
+
+    println("결과 : ${answer}")
 }
