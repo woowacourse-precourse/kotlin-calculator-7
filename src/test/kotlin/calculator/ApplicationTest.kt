@@ -41,6 +41,13 @@ class ApplicationTest : NsTest() {
         }
     }
 
+    @Test
+    fun `"1,2,3colon4"를 입력했을 경우 10을 반환`() {
+        assertSimpleTest {
+            assertThat(calculate("1,2,3:4")).isEqualTo(10)
+        }
+    }
+
 //    @Test
 //    fun `커스텀 구분자 사용`() {
 //        assertSimpleTest {
