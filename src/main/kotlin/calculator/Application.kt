@@ -8,9 +8,17 @@ private const val CUSTOM_DELIMITER_SUFFIX = "\\n"
 private const val CUSTOM_DELIMITER_SUFFIX_NOT_FOUND = -1
 private const val CUSTOM_DELIMITER_PREFIX_LENGTH = 2
 
+private const val ERROR_INVALID_INPUT = "입력이 유효하지 않습니다."
+
 fun main() {
     println("덧셈할 문자열을 입력해 주세요.")
     val input = Console.readLine()
+
+    val (isValid, delimiter, numbersPart) = checkInputValidity(input)
+
+    if (!isValid) {
+        throw IllegalArgumentException(ERROR_INVALID_INPUT)
+    }
 }
 
 private fun checkInputValidity(input: String): Triple<Boolean, String?, String> {
