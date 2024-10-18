@@ -32,4 +32,13 @@ fun parseUserInput(input: String): List<Int>{
     }
 }
 
+fun checkNumberList(numberList: List<Int>) {
+    //입력 값 확인하는 기능
+    numberList.forEach {
+        if (it < 0) {
+            throw IllegalArgumentException()
+        }
+    }
+}
+
 
