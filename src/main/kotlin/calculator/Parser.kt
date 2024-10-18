@@ -14,22 +14,22 @@ class Parser(private val input: String) {
         if (findCustomDelimiter()) delimiters.add(input[CUSTOM_DELIMITER_INDEX])
     }
 
-    fun getParsingList(): List<Int> {
+    fun getParsingList(): List<Long> {
         updateDelimiters()
         val splitRegex = "[${delimiters.joinToString()}]".toRegex()
         val parsingList = input.split(splitRegex)
-        return parsingList.map { parsingStr -> checkValidAndConvertToInt(parsingStr) }
+        return parsingList.map { parsingStr -> checkValidAndConvertToLong(parsingStr) }
     }
 
-    private fun checkValidAndConvertToInt(str: String): Int {
+    private fun checkValidAndConvertToLong(str: String): Long {
         if (str == "") return 0
         try {
             if (str.length > MAX_NUMBER_LENGTH) throw IllegalArgumentException()
-            if (str.toInt() < 0) throw IllegalArgumentException()
+            if (str.toLong() < 0) throw IllegalArgumentException()
         } catch (e: NumberFormatException) {
             throw IllegalArgumentException()
         }
-        return str.toInt()
+        return str.toLong()
     }
 }
 
