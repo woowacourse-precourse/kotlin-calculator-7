@@ -49,13 +49,9 @@ fun replaceCustom(str: String): String {
         newStr = str.substring(afterIndex + 2)
         newStr = newStr.replace(customSeparator, ",")
     } else {
-        throwException()
+        throw IllegalArgumentException()
     }
     return newStr
-}
-
-fun throwException() {
-    throw IllegalArgumentException()
 }
 
 fun main() {
@@ -65,10 +61,14 @@ fun main() {
 
     if (!isValid(inputString) && checkCustom(inputString)) {
         inputString = replaceCustom(inputString)
-    } else {
-        throwException()
     }
-    val numbers = splitNumber(inputString)
-    val result = sum(numbers)
-    println("결과 : $result")
+
+    try {
+        val numbers = splitNumber(inputString)
+        val result = sum(numbers)
+        println("결과 : $result")
+    } catch (e: IllegalArgumentException) {
+        throw e
+    }
+
 }
