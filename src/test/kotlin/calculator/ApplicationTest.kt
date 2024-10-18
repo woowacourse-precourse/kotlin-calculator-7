@@ -34,6 +34,13 @@ class ApplicationTest : NsTest() {
         }
     }
 
+    @Test
+    fun `"1,2,3"를 입력했을 경우 6을 반환`() {
+        assertSimpleTest {
+            assertThat(calculate("1,2,3")).isEqualTo(6)
+        }
+    }
+
 //    @Test
 //    fun `커스텀 구분자 사용`() {
 //        assertSimpleTest {
