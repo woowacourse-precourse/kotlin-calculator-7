@@ -7,6 +7,15 @@ fun main() {
     println("덧셈할 문자열을 입력해 주세요.")
     val userInput = Console.readLine()
 
+    val result = returnResult(userInput)
+    println("결과 : $result")
+}
+
+fun returnResult(numbers: String): Int{
+    //결과값을 반환
+    val numberList = parseUserInput(numbers)
+    checkNumberList(numberList)
+    return sumNumber(numberList)
 }
 
 fun parseUserInput(input: String): List<Int>{
