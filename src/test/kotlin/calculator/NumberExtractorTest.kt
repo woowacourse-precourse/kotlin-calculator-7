@@ -44,7 +44,7 @@ class NumberExtractorTest {
 
     @Test
     fun `문자열에서 숫자 추출 성공 - 기본 구분자`() {
-        val value = longArrayOf(1, 22, 333, 1111, 666666, 777)
+        val value = longArrayOf(1, 22, 333, 1111, 666666, 70)
         val input = "${value[0]},${value[1]},${value[2]}:${value[3]}:${value[4]}:${value[5]}"
 
         val result: LongArray = numberExtractor.extractNumbers(input)

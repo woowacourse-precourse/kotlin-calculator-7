@@ -44,6 +44,7 @@ class NumberExtractor {
         const val COMMA = ","
         const val COLON = ":"
 
+        private const val ZERO = "0"
         private const val ONE = "1"
         private const val TWO = "2"
         private const val THREE = "3"
@@ -55,7 +56,7 @@ class NumberExtractor {
         private const val NINE = "9"
 
         fun getNumberList(): List<String> {
-            return listOf(ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE)
+            return listOf(ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE)
         }
     }
 }
