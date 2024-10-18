@@ -1,12 +1,28 @@
 package calculator
 import camp.nextstep.edu.missionutils.Console
 
+// 잘못된 숫자나 음수 입력에 대한 예외 처리 함수
+fun runException(input: String) {
+    // 문자열을 구분자 기준으로 분리
+    val numbers = input.split(",", ":")
+    // 각 숫자에 대한 유효성 검사
+    for (number in numbers) {
+        // 문자열을 정수로 변환, 변환할 수 없으면 예외 발생
+        val value = number.toIntOrNull() ?: throw IllegalArgumentException("잘못된 숫자입니다: $number")
+        // 음수일 경우 예외 발생
+        if (value < 0) {
+            throw IllegalArgumentException("음수는 허용되지 않습니다: $value")
+        }
+    }
+}
+
 // 기본 구분자에 대한 숫자 합산하는 함수
 fun defaultSum(input: String?): Int {
 
     if (input.isNullOrEmpty()) {
         return 0
     }
+    runException(input)
     val sep1= input.split(",",":")   // 기본 구분자를 기준으로 분리
     return sep1.sumOf { it.toInt() }
 }
