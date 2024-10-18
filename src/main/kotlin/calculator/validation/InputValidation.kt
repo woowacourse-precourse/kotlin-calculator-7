@@ -7,8 +7,7 @@ class InputValidation {
         validateInputNull(listOfInput)
         val checkEmptyInput: List<String> = validateInputEmpty(listOfInput!!)
         val checkIsNumberInput = validateInputNumber(checkEmptyInput)
-        val checkIsPositiveNumberInput = validateInputPositiveNumber(checkIsNumberInput)
-        return checkIsPositiveNumberInput
+        return checkIsNumberInput
     }
 
     private fun validateInputNull(listOfInput: List<String>?) {
@@ -23,12 +22,16 @@ class InputValidation {
 
     private fun validateInputNumber(listOfInput: List<String>): List<String> {
         for (element in listOfInput) {
-            if (element.toIntOrNull() == null) {
+            if (!isNumber(element) || !isPositiveNumber(element)) {
                 validateInputElement(element)
             }
         }
         return listOfInput
     }
+
+    private fun isNumber(element: String): Boolean = element.toIntOrNull() != null
+
+    private fun isPositiveNumber(element: String): Boolean = element.toInt() >= 0
 
     private fun validateInputElement(element: String) {
         if (element.any { it.isLetter() }) {
@@ -49,14 +52,5 @@ class InputValidation {
         if (element.toInt() < 0) {
             throw IllegalArgumentException(ErrorConst.INPUT_ERROR_MSG + element + ErrorConst.INPUT_NOT_POSITIVE_NUMBER_EXCEPTION_MSG)
         }
-    }
-
-    private fun validateInputPositiveNumber(listOfInput: List<String>): List<String> {
-        for (element in listOfInput) {
-            if (element.toInt() < 0) {
-                validateInputElement(element)
-            }
-        }
-        return listOfInput
     }
 }
