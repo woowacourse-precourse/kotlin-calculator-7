@@ -4,7 +4,9 @@ fun main() {
     val input = inputNumber()
     val numberList = splitString(input)
     didEnterCorrect(numberList)
-    println(translate2Int(numberList))
+    val numberListInt = translate2Int(numberList)
+    val result = sumNumbers(numberListInt)
+    println(result)
 }
 
 fun inputNumber(): String? {
@@ -63,4 +65,9 @@ fun isListNotDigit(numbers: List<String>): Boolean {
         }
     }
     return false
+}
+
+fun sumNumbers(numbers: List<Int>): Int {
+    println("calculating...")
+    return numbers.sum()
 }
