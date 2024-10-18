@@ -44,13 +44,17 @@
 ### - Calculator
 `defaultCal`:
 - 기본구분자의 숫자를 추출하여 배열에 저장한다.
-- 배열에 저장된 모든 숫자들을 for문을 통해 더한 후, `value`변수에 저장한다.
-- `value`를 반환한다.
+- 배열에 저장된 모든 숫자들을 for문을 통해 더한 후, `total`변수에 저장한다.
+- `total`를 반환한다.
 
 `customCal`: 
 - 커스텀구분자의 숫자를 추출하여 배열에 저장한다.
-- 배열에 저장된 모든 숫자들을 for문에 통해 더한 후, `value`변수에 저장한다.
-- `value`를 반환한다.
+- 배열에 저장된 모든 숫자들을 for문에 통해 더한 후, `total`변수에 저장한다.
+- `total`를 반환한다.
+
+`negativeNumberCheck`
+- `inputValueList`를 매개변수로 받는다
+- `inputValueList`에 음수가 포함되어 있으면 `true`를 반환한다.
 
 ## [view]
 ### - MsgView
@@ -82,5 +86,9 @@
 #### 아래와 같이 상수를 정의한다.
 - `덧셈할 문자열을 입력해 주세요.` ➡ INPUT_MSG
 - `결과 : ` ➡ RESULT_MSG
+- `,` ➡ COMMA
+- `:` ➡ COLON
+- `//` ➡ DOUBLE_SLASH
+- `\\n` ➡ DOUBLE_BACKSLASH_N
 
 
