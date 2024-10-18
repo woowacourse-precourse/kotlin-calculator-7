@@ -48,6 +48,13 @@ class ApplicationTest : NsTest() {
         }
     }
 
+    @Test
+    fun `"50colon60"를 입력했을 경우 110을 반환`() {
+        assertSimpleTest {
+            assertThat(calculate("50:60")).isEqualTo(110)
+        }
+    }
+
 //    @Test
 //    fun `커스텀 구분자 사용`() {
 //        assertSimpleTest {
