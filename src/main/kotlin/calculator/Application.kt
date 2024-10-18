@@ -5,9 +5,10 @@ fun main() {
 }
 
 fun calculate(string: String): Int {
-    if (string == "") {
-        return 0
-    }
+    if (string == "") return 0
     
-    return string.toInt()
+    val strings = string.split(",", ":")
+    val numbers = strings.map { it.toInt() }
+
+    return numbers.sum()
 }
