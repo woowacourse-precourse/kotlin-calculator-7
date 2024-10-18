@@ -4,7 +4,6 @@ import camp.nextstep.edu.missionutils.Console
 
 class Calculator {
     private val separator: Separator = Separator()
-
     private var result = 0
 
     fun turnOnCalculator() {
@@ -13,7 +12,6 @@ class Calculator {
 
         when (inputString.isEmpty()) {
             true -> {
-                result = 0
                 showResult()
                 return
             }
