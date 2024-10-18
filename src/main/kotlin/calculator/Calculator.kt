@@ -27,7 +27,7 @@ class Calculator {
 
         when (isDeclareCustomSeparator) {
             true -> operateCalculatorWithCustomSeparatorLogic(inputString)
-            false -> operatedCalculatorWithDefaultSeparatorLogic(inputString)
+            false -> operateCalculatorWithDefaultSeparatorLogic(inputString)
         }
     }
 
@@ -47,7 +47,7 @@ class Calculator {
         addInputNumbers(separatedInputNumber)
     }
 
-    private fun operatedCalculatorWithDefaultSeparatorLogic(inputString: String) {
+    private fun operateCalculatorWithDefaultSeparatorLogic(inputString: String) {
         val separatedInputFromSeparator: List<String> =
             inputString.split(separator.colonSeparator, separator.commaSeparator).map { it }
 
