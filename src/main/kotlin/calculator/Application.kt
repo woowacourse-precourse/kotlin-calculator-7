@@ -14,8 +14,20 @@ fun main() {
 fun sumNumbersInString(input: String): Int {
     if (input.isBlank()) return 0
 
-    val delimiters = listOf(",", ":")
-    val numbers = input.split(*delimiters.toTypedArray())
+    val numbers = splitByDelimiter(input)
 
     return numbers.mapNotNull { it.toIntOrNull() }.sum()
+}
+
+fun splitByDelimiter(input: String): List<String> {
+    return if (input.startsWith("//")) {
+        val delimiterAndNumbers = input.split("\\n", limit = 2)
+
+        val customDelimiters = delimiterAndNumbers[0].substring(2)
+        val numbers = delimiterAndNumbers[1]
+
+        numbers.split(customDelimiters)
+    } else {
+        input.split(",", ":")
+    }
 }
