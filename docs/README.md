@@ -18,9 +18,9 @@
 ### InputManager
 
 - [x] 문자열에서 커스텀 구분자 정의 부분을 제거할 수 있다.
-- [ ] `delimiters`를 통해 입력받은 문자열에서 숫자를 추출할 수 있다.
-    - [ ] 추출 중 음수가 존재한다면 `IllegalArgumentException`을 발생시킬 수 있다.
-    - [ ] 추출 중 숫자가 아닌 문자가 존재한다면 `IllegalArgumentException`을 발생시킬 수 있다.
+- [x] `delimiters`를 통해 입력받은 문자열에서 숫자를 추출할 수 있다.
+    - [x] 추출 중 음수가 존재한다면 `IllegalArgumentException`을 발생시킬 수 있다.
+    - [x] 추출 중 숫자가 아닌 문자가 존재한다면 `IllegalArgumentException`을 발생시킬 수 있다.
 
 ### Calculator
 
