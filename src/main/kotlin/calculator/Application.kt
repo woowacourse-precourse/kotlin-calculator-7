@@ -1,5 +1,6 @@
 package calculator
 
+import calculator.calculator.Calculator
 import calculator.delimiter.CustomDelimiter
 import calculator.separation.Separation
 import calculator.util.MessageUtil
@@ -14,4 +15,5 @@ fun main() {
     val inputWithoutCustomDelimiter = customDelimiter.extractCustomDelimiter(input)
     val listOfInput: List<String>? = Separation().splitInput(inputWithoutCustomDelimiter, customDelimiter)
     val doneValidation: List<String> = InputValidation().validateInput(listOfInput)
+    val result = Calculator().calculateInput(doneValidation)
 }
