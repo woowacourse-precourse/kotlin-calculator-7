@@ -27,6 +27,10 @@ fun splitByDelimiter(input: String): List<String> {
     return if (input.startsWith("//")) {
         val delimiterAndNumbers = input.split("\\n", limit = 2)
 
+        if (delimiterAndNumbers.size < 2) {
+            throw IllegalArgumentException("구분자 형식이 잘못되었습니다. 형식은 '//[구분자]\\n[숫자와 구분자]'입니다.")
+        }
+
         val customDelimiters = delimiterAndNumbers[0].substring(2)
         val numbers = delimiterAndNumbers[1]
 
