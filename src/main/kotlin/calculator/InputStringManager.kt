@@ -1,8 +1,9 @@
 package calculator
 
+import calculator.StringUtility.splitByCollection
+
 // input 문자열을 조작하거나 연산을 수행하는 객체
 object InputStringManager {
-
     fun getSplitStringList(input: String): List<String> {
         // 커맨드를 제외한 값이 비어있다면 비어있는 리스트를 반환
         if (getCommandRemovedInput(input).isEmpty()) {
@@ -10,15 +11,7 @@ object InputStringManager {
         }
         // input 문자열에서 Set<Char>으로 구분자를 추출해놓은 변수
         val delimiters: Set<Char> = DelimiterParser.getDelimiter(input)
-
-        // 구분자 Set의 각각의 원소를 정규식 이스케이프 처리하여 리스트로 저장
-        val escapedDelimiters = delimiters.map { Regex.escape(it.toString()) }
-        // 이스케이프 처리된 구분자 리스트를 하나의 문자열로 결합
-        val joinedDelimiters = escapedDelimiters.joinToString(separator = "")
-        // 결합한 문자열을 대괄호로 감싸서 각각의 구분자를 선택하는 정규식으로 변환
-        val regex = "[${joinedDelimiters}]".toRegex()
-        // 정규식을 사용해 커맨드를 제거한 인풋 문자열을 슬라이싱
-        return getCommandRemovedInput(input).split(regex)
+        return getCommandRemovedInput(input).splitByCollection(delimiters)
     }
 
     // input 문자열을 구분자로 쪼개서 List<Int>로 반환하는 메서드
