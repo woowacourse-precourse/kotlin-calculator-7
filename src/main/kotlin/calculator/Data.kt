@@ -1,3 +1,6 @@
 package calculator
 
-data class Data( )
+data class Data(
+    val numbers: List<Int>,
+    val sepList: List<String>
+)
