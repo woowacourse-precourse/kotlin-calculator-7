@@ -1,8 +1,11 @@
 package calculator.model
 
+import calculator.constants.Constants.COLON
+import calculator.constants.Constants.COMMA
+
 class Calculator {
     fun defaultCal(inputValue: String): Int {
-        val inputValueList = inputValue.split(',', ':').map { it.toInt() }
+        val inputValueList = inputValue.split(COMMA, COLON).map { it.toInt() }
         if (negativeNumberCheck(inputValueList)) return -1
         val value = inputValueList.sum()
 
