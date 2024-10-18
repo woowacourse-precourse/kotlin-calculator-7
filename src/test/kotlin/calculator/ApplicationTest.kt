@@ -22,6 +22,22 @@ class ApplicationTest : NsTest() {
         }
     }
 
+    @Test
+    fun `기본 구분자 콤마 사용`() {
+        assertSimpleTest {
+            run("1,2")
+            assertThat(output()).contains("결과 : 3")
+        }
+    }
+
+    @Test
+    fun `기본 구분자 콜론 사용`() {
+        assertSimpleTest {
+            run("2:3")
+            assertThat(output()).contains("결과 : 5")
+        }
+    }
+
     override fun runMain() {
         main()
     }
