@@ -33,6 +33,14 @@
 - 커스텀구분자는 1을 반환한다.
 - 어느 것도 아니라면 2를 반환한다.
 
+`isCustom`:
+- `inputValue`를 매개변수로 지정한다.
+- `//`와 `\n`을 포함하면 `true`를 반환한다.
+
+`isDefault`:
+- `inputValue`를 매개변수로 지정한다.
+- `isCustom`이 `false`이며 `,`나 `:`를 포함하면 `true`를 반환한다.
+
 ### - Calculator
 `defaultCal`:
 - 기본구분자의 숫자를 추출하여 배열에 저장한다.
@@ -61,7 +69,7 @@
 `run` :
 - `result` 변수를 정수타입으로 생성한다.
 - `inputMsg`메서드를 호출한다.
-- `readIn()`메서드를 호출하여 `inputValue` 변수에 저장한다.
+- `readLine()`메서드를 호출하여 `inputValue` 변수에 저장한다.
 - `checkDivider`메서드를 호출하여 `isCheck` 변수에 저장한다.
 - `isCheck`가 0이면 `defaultCal`를 `result`변수에 저장한다.
 - `isCheck`가 1이면 `customCal`를 `result`변수에 저장한다.
