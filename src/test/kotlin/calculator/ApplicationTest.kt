@@ -66,7 +66,7 @@ class ApplicationTest : NsTest() {
     }
 
     @Test
-    fun `잘못된 구분자 사용`() {
+    fun `알 수 없는 문자열 사용`() {
         assertSimpleTest {
             assertThrows<IllegalArgumentException> { runException("//n\n3#4") }
         }

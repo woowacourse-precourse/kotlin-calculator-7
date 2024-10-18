@@ -60,7 +60,7 @@ class Calculator {
     private fun validateSeparatedInputString(separatedInputFromSeparator: List<String>) {
         val isNegativeNumber: Boolean = separatedInputFromSeparator.any { it.contains(NEGATIVE_NUMBER_SIGN) }
         val isAnySeparatedInputFromSeparator: Boolean = separatedInputFromSeparator.any { it.isBlank() }
-        val isWrongSeparator: Boolean = separatedInputFromSeparator.any { !it.matches(DIGIT_REGEX) }
+        val isUndefinedString: Boolean = separatedInputFromSeparator.any { !it.matches(DIGIT_REGEX) }
 
         if (isNegativeNumber) {
             throw IllegalArgumentException("음수는 포함될 수 없습니다.")
@@ -68,8 +68,8 @@ class Calculator {
         if (isAnySeparatedInputFromSeparator) {
             throw IllegalArgumentException("숫자를 입력해야 합니다.")
         }
-        if (isWrongSeparator) {
-            throw IllegalArgumentException("잘못된 구분자입니다.")
+        if (isUndefinedString) {
+            throw IllegalArgumentException("알 수 없는 문자가 포함되어 있습니다.")
         }
     }
 
