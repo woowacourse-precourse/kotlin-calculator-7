@@ -25,7 +25,7 @@ object Validator {
             if(endOfCustomDelimiter == -1){
                 throw IllegalArgumentException(ERROR_INPUT_CUSTOM_DELIMITER)
             }
-            if(endOfCustomDelimiter != 4){
+            if(endOfCustomDelimiter != 3){
                 throw IllegalArgumentException(ERROR_INPUT_CUSTOM_DELIMITER_COUNT)
             }
         }
