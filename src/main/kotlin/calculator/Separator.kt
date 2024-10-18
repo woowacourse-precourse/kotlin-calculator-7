@@ -10,16 +10,9 @@ class Separator {
         when (inputString.length >= CUSTOM_SEPARATOR_DECLARE_LENGTH) {
             true -> {
                 val inputItems: List<String> = inputString.map { it.toString() }
+                val isComparedCustomSeparatorDeclare: Boolean = isComparedCustomSeparatorDeclare(inputItems)
 
-                val inputItemsFrontToCompared: String =
-                    inputItems[CUSTOM_SEPARATOR_DECLARE_INDEX_FIRST] + inputItems[CUSTOM_SEPARATOR_DECLARE_INDEX_SECOND]
-                val inputItemsBackToCompared: String =
-                    inputItems[CUSTOM_SEPARATOR_DECLARE_INDEX_FOURTH] + inputItems[CUSTOM_SEPARATOR_DECLARE_INDEX_FIFTH]
-
-                val isComparedCustomDeclare: Boolean =
-                    (inputItemsFrontToCompared == CUSTOM_SEPARATOR_DECLARE_START) && (inputItemsBackToCompared == CUSTOM_SEPARATOR_DECLARE_END)
-
-                when (isComparedCustomDeclare) {
+                when (isComparedCustomSeparatorDeclare) {
                     true -> {
                         validateCustomSeparator(inputItems[CUSTOM_SEPARATOR_DECLARE_DEFINITION])
                         customSeparator = inputItems[CUSTOM_SEPARATOR_DECLARE_DEFINITION]
@@ -32,6 +25,16 @@ class Separator {
 
             false -> return false
         }
+    }
+
+    private fun isComparedCustomSeparatorDeclare(inputItems: List<String>): Boolean {
+        val inputItemsFrontToCompared: String =
+            inputItems[CUSTOM_SEPARATOR_DECLARE_INDEX_FIRST] + inputItems[CUSTOM_SEPARATOR_DECLARE_INDEX_SECOND]
+        val inputItemsBackToCompared: String =
+            inputItems[CUSTOM_SEPARATOR_DECLARE_INDEX_FOURTH] + inputItems[CUSTOM_SEPARATOR_DECLARE_INDEX_FIFTH]
+
+        return (inputItemsFrontToCompared == CUSTOM_SEPARATOR_DECLARE_START)
+                && (inputItemsBackToCompared == CUSTOM_SEPARATOR_DECLARE_END)
     }
 
     private fun validateCustomSeparator(customSeparator: String) {
