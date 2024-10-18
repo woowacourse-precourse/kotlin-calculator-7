@@ -6,9 +6,13 @@ fun main() {
     println("덧셈할 문자열을 입력해 주세요.")
 
     val inputString = Console.readLine()
-    val result = sumNumbersInString(inputString)
 
-    println("결과 : $result")
+    try {
+        val result = sumNumbersInString(inputString)
+        println("결과 : $result")
+    } catch (e: IllegalArgumentException) {
+        println("잘못된 입력입니다 : ${e.message}")
+    }
 }
 
 fun sumNumbersInString(input: String): Int {
@@ -16,7 +20,7 @@ fun sumNumbersInString(input: String): Int {
 
     val numbers = splitByDelimiter(input)
 
-    return numbers.mapNotNull { it.toIntOrNull() }.sum()
+    return numbers.sumOf { it.toIntOrNull() ?: throw IllegalArgumentException("유효한 숫자 또는 구분자를 입력하세요.") }
 }
 
 fun splitByDelimiter(input: String): List<String> {
