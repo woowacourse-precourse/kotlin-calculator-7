@@ -20,6 +20,8 @@ fun sumNumbersInString(input: String): Int {
 
     val numbers = splitByDelimiter(input)
 
+    checkNegativeNumber(numbers)
+
     return numbers.sumOf { it.toIntOrNull() ?: throw IllegalArgumentException("유효한 숫자 또는 구분자를 입력하세요.") }
 }
 
@@ -37,5 +39,15 @@ fun splitByDelimiter(input: String): List<String> {
         numbers.split(customDelimiters)
     } else {
         input.split(",", ":")
+    }
+}
+
+fun checkNegativeNumber(numbers: List<String>) {
+    val negativeNumber = numbers.filter {
+        it.toIntOrNull()?.let { num -> num < 0 } ?: false
+    }
+
+    if (negativeNumber.isNotEmpty()) {
+        throw IllegalArgumentException("음수는 입력할 수 없습니다.")
     }
 }
