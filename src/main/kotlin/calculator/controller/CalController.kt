@@ -1,7 +1,7 @@
 package calculator.controller
 
 import calculator.model.Calculator
-import calculator.model.Divider
+import calculator.model.ErrorCheck
 import calculator.view.ErrorMsg
 import calculator.view.MsgView
 
@@ -14,11 +14,12 @@ class CalController {
     fun run() {
         msgView.inputMsg()
         val inputValue = readLine()!!
-        val isCheck = Divider().checkDivider(inputValue)
+        val isCheck = ErrorCheck().dividerCheck(inputValue)
+
         when (isCheck) {
+            -1 -> errorMsg.errorMsg()
             0 -> result = calculator.defaultCal(inputValue)
             1 -> result = calculator.customCal(inputValue)
-            2 -> errorMsg.errorMsg()
         }
         if (result == -1) errorMsg.errorMsg()
         msgView.outputMsg(result)

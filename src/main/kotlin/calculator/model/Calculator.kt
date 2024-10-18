@@ -4,9 +4,11 @@ import calculator.constants.Constants.COLON
 import calculator.constants.Constants.COMMA
 
 class Calculator {
+    private val errorCheck = ErrorCheck()
+
     fun defaultCal(inputValue: String): Int {
         val inputValueList = inputValue.split(COMMA, COLON).map { it.toInt() }
-        if (negativeNumberCheck(inputValueList)) return -1
+        if (errorCheck.negativeNumberCheck(inputValueList)) return -1
         val total = inputValueList.sum()
 
         return total
@@ -15,16 +17,9 @@ class Calculator {
     fun customCal(inputValue: String): Int {
         val customDivider = inputValue[2]
         val inputValueList = inputValue.substring(5).split(customDivider).map { it.toInt() }
-        if (negativeNumberCheck(inputValueList)) return -1
+        if (errorCheck.negativeNumberCheck(inputValueList)) return -1
         val total = inputValueList.sum()
 
         return total
-    }
-
-    private fun negativeNumberCheck(inputValueList: List<Int>): Boolean {
-        for (i in inputValueList.indices) {
-            if (inputValueList[i] < 0) return true
-        }
-        return false
     }
 }
