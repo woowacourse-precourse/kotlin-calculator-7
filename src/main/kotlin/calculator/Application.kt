@@ -18,13 +18,17 @@ fun main() {
         parsedInput = input.substring(customDelimiter.length + 4)
     }
 
+    val numbers: List<Int>
     // 숫자 추출
     try {
-        val numbers = splitByDelimiters(parsedInput, delimiters).toNumbers()
-        println(numbers)
+        numbers = splitByDelimiters(parsedInput, delimiters).toNumbers()
     } catch (e: Exception) {
         throw IllegalArgumentException("unable to extract numbers")
     }
+
+    // 합 계산
+    if (numbers.hasNegativeNumber()) throw IllegalArgumentException("contains a negative number")
+    print(numbers.getSum())
 }
 
 fun hasCustomDelimiter(regex: Regex, input: String) = input.matches(regex)
@@ -34,3 +38,7 @@ fun getCustomDelimiter(regex: Regex, input: String) = regex.find(input)?.groupVa
 fun splitByDelimiters(input: String, delimiters: List<String>) = input.split(*delimiters.toTypedArray()).filter { it.isNotBlank() }
 
 fun List<String>.toNumbers() = this.map { it.toInt() }
+
+fun List<Int>.hasNegativeNumber() = this.any { it < 0 }
+
+fun List<Int>.getSum() = this.sum()
