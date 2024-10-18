@@ -17,7 +17,7 @@ fun splitStr(str: String): List<Int> {
         val customSeparator = findCustomSeparator(str)
         // 커스텀 구분자 입력 부분을 제거
         val strWithoutSep = Regex("""//.+\\n""").replace(str, "")
-        return strWithoutSep.split(",", ":", customSeparator).filter { it.isNotEmpty() }.map { it.toInt() }
+        return strWithoutSep.split(",", ":", customSeparator).filter { it.isNotEmpty() }.map { convertToIntOrThrow(it) }
     }
 }
 
@@ -41,4 +41,12 @@ fun calculate(strList: List<Int>): Int {
         sum += n
     }
     return sum
+}
+
+fun convertToIntOrThrow(str: String): Int {
+    // 음수인 경우 예외 발생
+    if (str.startsWith("-")) {
+        throw IllegalArgumentException("음수는 입력할 수 없습니다.")
+    }
+    return str.toInt()
 }
