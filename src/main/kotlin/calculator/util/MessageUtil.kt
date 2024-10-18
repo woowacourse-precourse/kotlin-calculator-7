@@ -8,4 +8,8 @@ object MessageUtil {
     fun printInputMessage(): Unit {
         println(MessageConst.INPUT_MESSAGE)
     }
+
+    fun printOutputMessage(sum: Int): Unit {
+        println(MessageConst.OUTPUT_MESSAGE + sum)
+    }
 }

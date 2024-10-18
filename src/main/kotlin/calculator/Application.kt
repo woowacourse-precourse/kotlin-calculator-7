@@ -16,4 +16,5 @@ fun main() {
     val listOfInput: List<String>? = Separation().splitInput(inputWithoutCustomDelimiter, customDelimiter)
     val doneValidation: List<String> = InputValidation().validateInput(listOfInput)
     val sum = Calculator().calculateInput(doneValidation)
+    MessageUtil.printOutputMessage(sum)
 }
