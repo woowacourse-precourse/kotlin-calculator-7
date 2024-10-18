@@ -6,7 +6,7 @@ fun main() {
     didEnterCorrect(numberList)
     val numberListInt = translate2Int(numberList)
     val result = sumNumbers(numberListInt)
-    println(result)
+    printSum(result)
 }
 
 fun inputNumber(): String? {
@@ -17,7 +17,7 @@ fun inputNumber(): String? {
 }
 
 fun splitString(input: String?): List<String> {
-    println("spliting elements...")
+//    println("spliting elements...")
     var delimiters = "[,:]".toRegex()
     var numbers = input ?: return listOf("0")
 
@@ -31,7 +31,7 @@ fun splitString(input: String?): List<String> {
 }
 
 fun findCustomDelimiterIndex(input: String): Int {
-    println("searching custom delimiter...")
+//    println("searching custom delimiter...")
     for (i in 3..<input.length) {
         if (input[i] == '\\' && input[i + 1] == 'n') {
             return i - 1
@@ -41,24 +41,24 @@ fun findCustomDelimiterIndex(input: String): Int {
 }
 
 fun translate2Int(numbers: List<String>): List<Int> {
-    println("translating...")
+//    println("translating...")
     return numbers.map { it.toInt() }
 }
 
 fun didEnterCorrect(numbers: List<String>) {
-    println("checking elements...")
+//    println("checking elements...")
     if (doesListHaveEmptyValue(numbers) || isListNotDigit(numbers)) {
         throw IllegalArgumentException()
     }
 }
 
 fun doesListHaveEmptyValue(numbers: List<String>): Boolean {
-    println("checking empty value...")
+//    println("checking empty value...")
     return numbers.contains("")
 }
 
 fun isListNotDigit(numbers: List<String>): Boolean {
-    println("checking not digit...")
+//    println("checking not digit...")
     for (n in numbers.map { it.single() }) {
         if (!n.isDigit()) {
             return true
@@ -68,6 +68,11 @@ fun isListNotDigit(numbers: List<String>): Boolean {
 }
 
 fun sumNumbers(numbers: List<Int>): Int {
-    println("calculating...")
+//    println("calculating...")
     return numbers.sum()
+}
+
+fun printSum(sum: Int) {
+//    println("printing...")
+    println("결과 : $sum")
 }
