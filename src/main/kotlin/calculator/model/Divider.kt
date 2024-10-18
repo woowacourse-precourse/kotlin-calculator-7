@@ -14,8 +14,6 @@ class Divider {
     }
 
     private fun isCustom(inputValue: String): Boolean {
-        return (inputValue.substring(0) == "/" && inputValue.substring(1) == "/"
-                && inputValue.substring(3) == "\\" && inputValue.substring(4) == "n")
+        return (inputValue.substring(0, 1) == "//" && inputValue.substring(3, 4) == "\n")
     }
-
 }
