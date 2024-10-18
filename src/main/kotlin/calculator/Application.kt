@@ -41,4 +41,8 @@ fun checkNumberList(numberList: List<Int>) {
     }
 }
 
+fun sumNumber(numberList: List<Int>): Int {
+    //분리된 숫자를 합하는 기능
+    return numberList.sum()
+}
 
