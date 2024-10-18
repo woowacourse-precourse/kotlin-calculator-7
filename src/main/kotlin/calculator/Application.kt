@@ -7,12 +7,8 @@ fun main() {
 
     val inputString = Console.readLine()
 
-    try {
-        val result = sumNumbersInString(inputString)
-        println("결과 : $result")
-    } catch (e: IllegalArgumentException) {
-        println("잘못된 입력입니다 : ${e.message}")
-    }
+    val result = sumNumbersInString(inputString)
+    println("결과 : $result")
 }
 
 fun sumNumbersInString(input: String): Int {
