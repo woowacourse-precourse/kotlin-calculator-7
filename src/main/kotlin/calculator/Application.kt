@@ -5,7 +5,6 @@ import camp.nextstep.edu.missionutils.Console
 fun main() {
     var result : Int = 0
 
-    // 문자열 입력
     println("덧셈할 문자열을 입력해 주세요.")
     val inputStr = Console.readLine()
     Console.close()
@@ -19,4 +18,5 @@ fun main() {
         }
     }
 
+    println("결과 : $result")
 }
