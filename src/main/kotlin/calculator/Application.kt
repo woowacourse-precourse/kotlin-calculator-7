@@ -10,7 +10,7 @@ fun calculate(string: String): Int {
     }
     
     val strings = string.split(",")
-    val ints = strings.map { it.toInt() }
+    val numbers = strings.map { it.toInt() }
 
-    return ints.sum()
+    return numbers.sum()
 }
