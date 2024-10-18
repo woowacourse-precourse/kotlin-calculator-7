@@ -12,6 +12,7 @@ fun main() {
     val numArray = numberExtraction(inputString)
 
     if(!isAllElementsNumeric(numArray)) throw IllegalArgumentException("잘못된 입력입니다.")
+    if(!isAllElementsNumericPositive(numArray)) throw IllegalArgumentException("잘못된 입력입니다.")
 
     val sum = sumNumArray(numArray)
     println("결과 : $sum")
@@ -45,4 +46,8 @@ fun sumNumArray(numArray: Array<String>): Int {
 
 fun isAllElementsNumeric(numArray: Array<String>): Boolean {
     return numArray.all { it.toIntOrNull() != null }
+}
+
+fun isAllElementsNumericPositive(numArray: Array<String>): Boolean {
+    return numArray.all { it.toInt() > 0 }
 }

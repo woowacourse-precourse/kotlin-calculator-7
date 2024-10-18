@@ -112,9 +112,12 @@ fun sumNumArray(numArray: Array<String>): Int {
 
 ```kotlin
     if(!isAllElementsNumeric(numArray)) throw IllegalArgumentException("잘못된 입력입니다.")
+    if(!isAllElementsNumericPositive(numArray)) throw IllegalArgumentException("잘못된 입력입니다.")
 ```
 - `isAllElementsNumeric` 함수에서 `numArray` 에 저장된 요소가 전부 숫자인지 판단
 - 전부다 숫자가 아닌 경우 잘못된 입력값 임으로 IllegalArgumentException 예외를 던짐
+- `isAllElementsNumericPositive` 함수에서 `numArray` 에 저장된 숫자가 전부 양의 정수인지 판단
+- 전부다 양의 정수가 아닌 경우 잘못된 입력값 임으로 IllegalArgumentException 예외를 던짐
 
 ```kotlin
 fun isAllElementsNumeric(numArray: Array<String>): Boolean {
@@ -122,6 +125,14 @@ fun isAllElementsNumeric(numArray: Array<String>): Boolean {
 }
 ```
 - 추출된 배열의 요소가 전부 숫자인지를 판별하고 전부 숫자라면 true, 숫자가 아닌 요소가 있다면 false를 리턴
+
+```kotlin
+fun isAllElementsNumericPositive(numArray: Array<String>): Boolean {
+    return numArray.all { it.toInt() > 0 }
+}
+```
+
+- 추출된 배열의 요소가 전부 양의 정수인지를 판별하고 전부 숫자라면 true, 숫자가 아닌 요소가 있다면 false를 리턴
 
 ## 실행 결과
 
