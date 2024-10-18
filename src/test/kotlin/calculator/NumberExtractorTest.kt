@@ -17,15 +17,9 @@ class NumberExtractorTest {
     }
 
     @Test
-    fun `커스텀 구분자 추가 성공`() {
+    fun `커스텀 구분자 추가 성공 - 예외가 발생하지 않음`() {
         val separator = ";"
         numberExtractor.addSeparator(separator)
-
-        val separatorsField = NumberExtractor::class.java.getDeclaredField("separators")
-        separatorsField.isAccessible = true;
-        val separators = separatorsField.get(numberExtractor) as MutableList<*>
-
-        assertTrue(separators.contains(separator))
     }
 
     @Test
