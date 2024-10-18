@@ -34,6 +34,9 @@
 
 ### feature 5: 잘못된 값이 입력된 경우 에러 반환
 5-1 "a:50"을 입력했을 경우 IllegalArgumentException을 발생시킨 후 애플리케이션은 종료된다.
+
 5-2 "a,b,c"을 입력했을 경우 IllegalArgumentException을 발생시킨 후 애플리케이션은 종료된다.
+
 5-3 "a,b,c:100"을 입력했을 경우 IllegalArgumentException을 발생시킨 후 애플리케이션은 종료된다.
+
 5-4 "//,\n1,2,c"을 입력했을 경우 IllegalArgumentException을 발생시킨 후 애플리케이션은 종료된다.
