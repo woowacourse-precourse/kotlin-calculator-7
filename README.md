@@ -26,13 +26,6 @@
 
 ## [model]
 ### - Divider
-`checkDivider`: 
-- `inputValue`를 매개변수로 지정한다. 
-- 기본구분자로 이루어진 값인지 커스텀구분자로 이루어진 값인지 구분한다.
-- 기본구분자는 0을 반환한다.
-- 커스텀구분자는 1을 반환한다.
-- 어느 것도 아니라면 2를 반환한다.
-
 `isCustom`:
 - `inputValue`를 매개변수로 지정한다.
 - `//`와 `\n`을 포함하면 `true`를 반환한다.
@@ -44,18 +37,31 @@
 ### - Calculator
 `defaultCal`:
 - 기본구분자의 숫자를 추출하여 배열에 저장한다.
-- 배열에 저장된 모든 숫자들을 for문을 통해 더한 후, `total`변수에 저장한다.
+- 배열의 모든 숫자들을 `sum()`을 통해 더한 후, `total`변수에 저장한다.
+- `errorCheck`메서드가 `true`일 경우 -1를 반환한다.
 - `total`를 반환한다.
 
 `customCal`: 
-- 커스텀구분자의 숫자를 추출하여 배열에 저장한다.
-- 배열에 저장된 모든 숫자들을 for문에 통해 더한 후, `total`변수에 저장한다.
+- `inputValue`의 3번째 배열을 `customDivider`로 지정한다.
+- `customDivider`를 통해 커스텀구분자의 숫자를 추출하여 배열에 저장한다.
+- 배열의 모든 숫자들을 `sum()`을 통해 더한 후, `total`변수에 저장한다.
+- `errorCheck`메서드가 `true`일 경우 -1를 반환한다.
 - `total`를 반환한다.
 
 `negativeNumberCheck`
 - `inputValueList`를 매개변수로 받는다
 - `inputValueList`에 음수가 포함되어 있으면 `true`를 반환한다.
 
+### - ErrorCheck
+`checkDivider`:
+- `inputValue`를 매개변수로 지정한다.
+- 기본구분자로 이루어진 값인지 커스텀구분자로 이루어진 값인지 구분한다.
+- 기본구분자는 0을 반환한다.
+- 커스텀구분자는 1을 반환한다.
+- 어느 것도 아니라면 -1를 반환한다.
+
+`negativeNumberCheck`:
+- 
 ## [view]
 ### - MsgView
 `inputMsg`: 
@@ -77,7 +83,8 @@
 - `checkDivider`메서드를 호출하여 `isCheck` 변수에 저장한다.
 - `isCheck`가 0이면 `defaultCal`를 `result`변수에 저장한다.
 - `isCheck`가 1이면 `customCal`를 `result`변수에 저장한다.
-- `isCheck`가 2면 `errorMsg`를 호출한다.
+- `isCheck`가 -1면 `errorMsg`를 호출한다.
+- `result`가 -1이면 `errorMsg`를 호출한다.
 - `outputMsg`에 `result` 값을 삽입하여 호출한다.
 
 
