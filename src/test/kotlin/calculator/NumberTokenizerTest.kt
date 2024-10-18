@@ -36,14 +36,14 @@ class NumberTokenizerTest {
 
     @Test
     fun `문자열에서 커스텀 구분자 추출 테스트`(){
-        val result = numberTokenizer.extractCustomDelimiters("//;\n1;2and3//and\n//&&\n")
+        val result = numberTokenizer.extractCustomDelimiters("//;\\n1;2and3//and\\n//&&\\n")
         val expect = listOf(";","and","&&")
         assertEquals(expect, result)
     }
 
     @Test
     fun `문자열 커스텀 구분자 포함 나누기 테스트`(){
-        val result = numberTokenizer.tokenize("//;\n1;23a43//3a4\n//&&\n&&44")
+        val result = numberTokenizer.tokenize("//;\\n1;23a43//3a4\\n//&&\\n&&44")
         val expect = listOf("1","2","3","44").map { it.toBigDecimal() }
         assertEquals(expect, result)
     }
