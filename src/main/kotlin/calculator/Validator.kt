@@ -1,8 +1,16 @@
 package calculator
 
+import calculator.PromptText.Companion.ERROR_INPUT_NULL
+
 object Validator {
 
-    fun validateUserInput(userInput: String?){
-        // 입력받은 userInput을 검증하는 함수
+    fun validateUserInput(userInput: String?) {
+        userInputNull(userInput)
+    }
+
+    private fun userInputNull(userInput: String?) {
+        if(userInput == null){
+            throw IllegalArgumentException(ERROR_INPUT_NULL)
+        }
     }
 }
