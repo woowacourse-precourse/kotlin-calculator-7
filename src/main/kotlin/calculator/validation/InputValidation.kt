@@ -5,9 +5,10 @@ import calculator.constant.ErrorConst
 class InputValidation {
     fun validateInput(listOfInput: List<String>?): List<String> {
         validateInputNull(listOfInput)
-        val checkEmptyInput: List<String> = validateInputEmpty(listOfInput!!)
-        val checkIsNumberInput = validateInputNumber(checkEmptyInput)
-        return checkIsNumberInput
+        val checkEmpty: List<String> = validateEmpty(listOfInput!!)
+        val checkEmptyAndWhitespace: List<String> = validateInputEmptyAndWhitespace(checkEmpty)
+        val checkNumber = validateInputNumber(checkEmptyAndWhitespace)
+        return checkNumber
     }
 
     private fun validateInputNull(listOfInput: List<String>?) {
@@ -16,8 +17,19 @@ class InputValidation {
         }
     }
 
-    private fun validateInputEmpty(listOfInput: List<String>): List<String> {
+    // enter(\n)만 입력한 경우
+    private fun validateEmpty(listOfInput: List<String>): List<String> {
         return listOfInput.ifEmpty { listOf<String>("0") }
+    }
+
+    // 공백과 요소의 값이 빈 경우
+    private fun validateInputEmptyAndWhitespace(listOfInput: List<String>): List<String> {
+        val mutableListOfInput = listOfInput.toMutableList()
+        for (idx in mutableListOfInput.indices) {
+            mutableListOfInput[idx] = isEmpty(mutableListOfInput[idx])
+            mutableListOfInput[idx] = isWhitespace(mutableListOfInput[idx])
+        }
+        return mutableListOfInput
     }
 
     private fun validateInputNumber(listOfInput: List<String>): List<String> {
@@ -29,6 +41,10 @@ class InputValidation {
         return listOfInput
     }
 
+    private fun isWhitespace(element: String): String = if (element.all { it.isWhitespace() }) "0" else element
+
+    private fun isEmpty(element: String): String = if (element.isEmpty()) "0" else element
+
     private fun isNumber(element: String): Boolean = element.toIntOrNull() != null
 
     private fun isPositiveNumber(element: String): Boolean = element.toInt() >= 0
@@ -36,9 +52,6 @@ class InputValidation {
     private fun validateInputElement(element: String) {
         if (element.any { it.isLetter() }) {
             throw IllegalArgumentException(ErrorConst.INPUT_ERROR_MSG + element + ErrorConst.INPUT_LETTER_EXCEPTION_MSG)
-        }
-        if (element.any { it.isWhitespace() }) {
-            throw IllegalArgumentException(ErrorConst.INPUT_ERROR_MSG + element + ErrorConst.INPUT_WHITESPACE_EXCEPTION_MSG)
         }
         if (element.any { it.isSurrogate() }) {
             throw IllegalArgumentException(ErrorConst.INPUT_ERROR_MSG + element + ErrorConst.INPUT_SURROGATE_EXCEPTION_MSG)
