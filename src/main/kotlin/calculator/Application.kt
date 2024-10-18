@@ -13,5 +13,5 @@ fun main() {
     val customDelimiter = CustomDelimiter()
     val inputWithoutCustomDelimiter = customDelimiter.extractCustomDelimiter(input)
     val listOfInput: List<String>? = Separation().splitInput(inputWithoutCustomDelimiter, customDelimiter)
-    InputValidation().validateInput(listOfInput)
+    val doneValidation: List<String> = InputValidation().validateInput(listOfInput)
 }
