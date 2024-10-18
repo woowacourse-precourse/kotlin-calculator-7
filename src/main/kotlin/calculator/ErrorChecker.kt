@@ -11,12 +11,20 @@ object ErrorChecker {
             return
         }
 
-        // 아라비아 숫자를 char타입의 리스트로 저장
-        val validDigits = (0..9).toList().map { it.digitToChar() }
+        // 아라비아 숫자를 char타입의 가변 리스트로 저장
+        val validDigits = (0..9).toList().map { it.digitToChar() }.toMutableList()
+
+        // 커스텀 구분자가 숫자일경우 validDigits 리스트에서 제거하기 위한 코드
+        val delimiter = DelimiterParser.getDelimiter(input)
+        delimiter.forEach { validDigits.remove(it) }
 
         // 커맨드를 제외한 인풋이 구분자로 시작하면 예외 발생
         if (!validDigits.contains(commandRemovedInput[0])) {
             throw IllegalArgumentException("오류: 구분자로 시작할 수 없습니다.")
+        }
+        // 커맨드를 제외한 인풋이 구분자로 끝나면 예외 발생
+        if (!validDigits.contains(commandRemovedInput.last())) {
+            throw IllegalArgumentException("오류: 구분자로 끝날 수 없습니다.")
         }
 
         // 구분자로 분할한 String타입 리스트를 불러옴
@@ -24,6 +32,9 @@ object ErrorChecker {
 
         // 구분자로 분할된 각각의 원소를 검사
         strList.map {
+            if (it.isEmpty()) { // 연속된 구분자로 인한 비어있는 원소를 탐지할때 예외처리
+                throw IllegalArgumentException("오류: 구분자를 연속으로 입력할 수 없습니다.")
+            }
             // 점이 2번 이상 사용되었는지 검사하기 위한 플래그
             var pointFlag = true
             // 원소의 값을 문자단위로 다시 쪼개서 검사
