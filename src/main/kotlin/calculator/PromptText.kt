@@ -9,5 +9,8 @@ class PromptText {
         const val ERROR_INPUT_CUSTOM_DELIMITER_COUNT = "입력 값의 커스텀 구분자를 하나의 문자로만 입력해주세요."
         const val INPUT_DELIMITER_FRONT = "//"
         const val INPUT_DELIMITER_END = "\\n"
+        const val DELIMITER_TYPE_COMMA = ","
+        const val DELIMITER_TYPE_COLON = ":"
+
     }
 }
