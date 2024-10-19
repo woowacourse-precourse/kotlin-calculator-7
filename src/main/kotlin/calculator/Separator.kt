@@ -10,9 +10,8 @@ class Separator {
         when (inputString.length >= CUSTOM_SEPARATOR_DECLARE_LENGTH) {
             true -> {
                 val inputItems: List<String> = inputString.map { it.toString() }
-                val isComparedCustomSeparatorDeclare: Boolean = isComparedCustomSeparatorDeclare(inputItems)
 
-                when (isComparedCustomSeparatorDeclare) {
+                when (isComparedCustomSeparatorDeclare(inputItems)) {
                     true -> {
                         validateCustomSeparator(inputItems[CUSTOM_SEPARATOR_DECLARE_DEFINITION])
                         customSeparator = inputItems[CUSTOM_SEPARATOR_DECLARE_DEFINITION]
