@@ -47,6 +47,12 @@ class CustomCalculator : Calculator {
         val newInput = input.drop(SEPARATOR_PREFIX.length + separator.length + SEPARATOR_POSTFIX.length)
         validate(separator, newInput)
 
+        val inputs = newInput.split(separator)
+        return when {
+            newInput.isEmpty() -> 0
+            else -> inputs.sumOf { it.toInt() }
+        }
+    }
 
     private fun validate(separator: String, input: String) {
         val inputs = input.split(separator)
