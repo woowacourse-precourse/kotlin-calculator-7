@@ -33,6 +33,7 @@ fun totalSum(numbers: List<Int>): Int {
 }
 
 fun main() {
+    println("덧셈할 문자열을 입력해 주세요.")
     val input = Console.readLine()
     // 입력값이 null이나 빈문자열인지 확인
     if (input.isNullOrEmpty()) {
