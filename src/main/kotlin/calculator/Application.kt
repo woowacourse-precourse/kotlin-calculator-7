@@ -4,53 +4,57 @@ import camp.nextstep.edu.missionutils.Console
 
 fun main() {
     var input: String //입력 문자열
-    var result: Int = 0 //결과값
 
     //입력 문자열 받기
     input = readInput()
 
-    //입력 문자열이 공백이면 결과값은 0
-    if (input.isBlank()) {
-        showResult(0)
+    when {
+        //입력 문자열이 공백인 경우 결과값은 0
+        input.isBlank() -> showResult(0)
+
+        //입력 문자열이 '//'로 시작하는 경우
+        input.startsWith("//") -> customDelimiter(input)
+
+        //입력 문자열이 숫자, 쉼표, 콜론으로 시작하는 경우
+        input[0].isDigit() || input[0] == ',' || input[0] == ':' -> defaultDelimiter(input)
+
+        //잘못된 값을 입력한 경우 IllegalArgumentException 발생, 애플리케이션 종료
+        else -> throw IllegalArgumentException()
     }
+}
 
-    //입력 문자열이 '//'로 시작하는 경우
-    if (input.startsWith("//")) {
-        val parts = input.split("\\n") //커스텀 구분자 파트와 숫자 파트로 분리
+/* 커스텀 구분자 처리 함수 */
+fun customDelimiter(input: String) {
+    val parts = input.split("\\n") //커스텀 구분자 파트와 숫자 파트로 분리
 
-        //'\n'이 없는 경우 IllegalArgumentException 발생, 애플리케이션 종료
-        if (parts.size != 2) {
-            throw IllegalArgumentException()
-        }
-
-        val delimiter = parts[0].substring(2) //커스텀 구분자
-
-        //커스텀 구분자가 없는 경우 IllegalArgumentException 발생, 애플리케이션 종료
-        if (delimiter.isEmpty()) {
-            throw IllegalArgumentException()
-        }
-
-        //숫자가 없는 경우 결과값은 0
-        if (parts[1].isEmpty()) {
-            showResult(0)
-        }
-
-        val numberParts = splitByDelimiter(parts[1], delimiter)
-
-        result = sumNumbers(numberParts)
-    }
-    //입력 문자열이 숫자, 쉼표, 콜론으로 시작하는 경우
-    else if (input[0].isDigit() || input[0] == ',' || input[0] == ':') {
-        val numberParts = splitByDelimiter(input)
-
-        result = sumNumbers(numberParts)
-    }
-    //잘못된 값을 입력한 경우 IllegalArgumentException 발생, 애플리케이션 종료
-    else {
+    //'\n'이 없는 경우 IllegalArgumentException 발생, 애플리케이션 종료
+    if (parts.size != 2) {
         throw IllegalArgumentException()
     }
 
-    //결과 출력
+    val delimiter = parts[0].substring(2) //커스텀 구분자
+
+    //커스텀 구분자가 없는 경우 IllegalArgumentException 발생, 애플리케이션 종료
+    if (delimiter.isEmpty()) {
+        throw IllegalArgumentException()
+    }
+
+    //숫자가 없는 경우 결과값은 0
+    if (parts[1].isEmpty()) {
+        showResult(0)
+    }
+
+    val numberParts = splitByDelimiter(parts[1], delimiter)
+    val result = sumNumbers(numberParts)
+
+    showResult(result)
+}
+
+/* 기본 구분자 처리 함수 */
+fun defaultDelimiter(input: String) {
+    val numberParts = splitByDelimiter(input)
+    val result = sumNumbers(numberParts)
+
     showResult(result)
 }
 
