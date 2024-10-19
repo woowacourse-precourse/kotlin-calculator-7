@@ -22,6 +22,15 @@ fun taskClassification(inputExt: String){
 
     } else{
         // Basic Calculator
+        extNumTosStr(inputExt)
     }
+}
+
+fun extNumTosStr(inputExt: String) {
+    val split1 = inputExt.split(":")
+    val split2 = split1.joinToString().replace(" ", "").split(',')
+
+    val sum = split2.mapNotNull { it.toIntOrNull() }.sum()
+    println(sum)
 }
 
