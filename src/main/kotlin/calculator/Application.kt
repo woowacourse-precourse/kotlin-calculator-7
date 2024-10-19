@@ -2,10 +2,12 @@ package calculator
 import camp.nextstep.edu.missionutils.Console
 
 fun sumOfNumber(input : String) : Int{
-    val regex = Regex("[,;]")
-    val ()
+    if (input.isEmpty()) return 0
+
+    val customDelimiterPattern = """//(.)\n(.*)""".toRegex()
+
 }
 fun main() {
     val input = Console.readLine()
-    println("출력 : ${sumOfNumber(input)}")
+
 }
