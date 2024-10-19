@@ -47,4 +47,12 @@ class InOutController(private val repo: Repository) {
         // 예외 출력
         if (occurException) throw IllegalArgumentException("잘못된 값을 입력하였습니다.")
     }
+
+    fun userInputGuide() {
+        println("덧셈할 문자열을 입력해 주세요.")
+    }
+
+    fun printResult() {
+        println("결과 : ${repo.sum}")
+    }
 }
