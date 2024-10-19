@@ -62,6 +62,14 @@ class ApplicationTest : NsTest() {
         }
     }
 
+    @Test
+    fun `숫자가 두 자리 이상`() {
+        assertSimpleTest {
+            run("12,2:3")
+            assertThat(output()).contains("결과 : 17")
+        }
+    }
+
     override fun runMain() {
         main()
     }
