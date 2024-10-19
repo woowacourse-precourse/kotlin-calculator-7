@@ -1,5 +1,6 @@
 package calculator
 
+import camp.nextstep.edu.missionutils.Console
 import java.util.regex.Pattern
 
 fun main() {
@@ -12,7 +13,7 @@ class CalculatorImpl {
 
     fun start() {
         println("덧셈할 문자열을 입력해 주세요.")
-        process(readln())
+        process(Console.readLine())
     }
 
     private fun process(input: String) {
