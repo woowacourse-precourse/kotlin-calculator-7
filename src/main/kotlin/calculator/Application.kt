@@ -3,7 +3,7 @@ package calculator
 fun main() {
     // TODO: 프로그램 구현
     val SEPARATOR_COMMAND_FRONT = "//"
-    val SEPARATOR_COMMAND_BACK = "\\n"
+    val SEPARATOR_COMMAND_BACK = "\\\\n"
 
     val userInput = readlnOrNull() ?: ""
 
