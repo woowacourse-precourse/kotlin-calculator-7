@@ -1,5 +1,7 @@
 package calculator
 
+import java.math.BigDecimal
+
 class CalculatorService(
     private val userInput: UserInput,
     private val guideOutput: GuideOutput,
@@ -11,16 +13,20 @@ class CalculatorService(
     fun execute() {
         guideCalculator()
         val input = userInput.getString()
-        val numbers = numberTokenizer.tokenize(input)
         val customDelimiters = numberTokenizer.extractCustomDelimiters(input)
-        val sum = calculator.sum(numbers)
+        val sum = calculateSum(input)
         resultOutput.outputCustomDelimiters(customDelimiters)
         resultOutput.outputAddition(sum)
     }
 
-    private fun guideCalculator(){
+    private fun guideCalculator() {
         guideOutput.guideDelimiters()
         guideOutput.guideCustomDelimiters()
         guideOutput.guideAdditionInput()
+    }
+
+    private fun calculateSum(input: String): BigDecimal {
+        val numbers = numberTokenizer.tokenize(input)
+        return calculator.sum(numbers)
     }
 }
