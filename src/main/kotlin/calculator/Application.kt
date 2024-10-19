@@ -30,8 +30,8 @@ fun sum(numbers: List<Int>): Int = numbers.sum()
 
 
 fun isValid(str: String): Boolean {
-    str.forEach { if (it !in '0'..'9' && it != ',' && it != ':') return false }
-    return true
+    val inputRegex = "^[0-9,:]*$".toRegex()
+    return inputRegex.matches(str)
 }
 
 fun checkCustom(str: String): Boolean {
