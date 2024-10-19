@@ -9,14 +9,18 @@ class CalculatorService(
 ) {
 
     fun execute() {
-        guideOutput.guideDelimiters()
-        guideOutput.guideCustomDelimiters()
-        guideOutput.guideAdditionInput()
+        guideCalculator()
         val input = userInput.getString()
         val numbers = numberTokenizer.tokenize(input)
         val customDelimiters = numberTokenizer.extractCustomDelimiters(input)
         val sum = calculator.sum(numbers)
         resultOutput.outputCustomDelimiters(customDelimiters)
         resultOutput.outputAddition(sum)
+    }
+
+    private fun guideCalculator(){
+        guideOutput.guideDelimiters()
+        guideOutput.guideCustomDelimiters()
+        guideOutput.guideAdditionInput()
     }
 }
