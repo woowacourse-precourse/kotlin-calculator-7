@@ -13,7 +13,7 @@ class ErrorCheck {
 
     fun negativeNumberCheck(inputValueList: List<Int>): Boolean {
         for (i in inputValueList.indices) {
-            if (inputValueList[i] < 0) return true
+            if (inputValueList[i] <= 0) return true
         }
         return false
     }
