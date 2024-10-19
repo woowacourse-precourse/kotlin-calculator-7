@@ -2,22 +2,13 @@ package calculator
 
 import camp.nextstep.edu.missionutils.Console
 
-/*
-* 예상 입력 형식
-* 2,2,3:3:5     15
-* //;\n1;2;3    6
-* 1,2:3;4//;\n  10
-* 1,2:3/4///\n  10
-* 10,10:10      30
-*/
-
 fun main() {
     try {
         val str = Console.readLine().trim()
         val numbers = splitString(str)
 
         if (numbers.any { it < 0 }) {
-            throw IllegalArgumentException()
+            throw IllegalArgumentException("양수를 입력해 주세요.")
         }
 
         val sum = sumNumbers(numbers)
