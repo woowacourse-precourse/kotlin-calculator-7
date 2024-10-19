@@ -12,6 +12,10 @@ class Calculator(
         parseNumbers()
     }
 
+    fun add(): Int {
+        return numbers.sum()
+    }
+
     private fun parseCustomDelimiter() {
         if (input.startsWith(CUSTOM_DELIMITER_PREFIX)) {
             val customDelimiterStartIndex = CUSTOM_DELIMITER_PREFIX.length
@@ -27,7 +31,6 @@ class Calculator(
 
     private fun parseNumbers() {
         numbers.addAll(stringNumbers.split(*delimiters.toTypedArray()).map { it.toInt() })
-        println(numbers)
     }
 
     companion object {

@@ -11,5 +11,7 @@ class CalculatorController {
     fun start() {
         val userInput: String = inputView.inputAdditionString()
         val calculator = Calculator(userInput)
+        val result = calculator.add()
+        outputView.printResult(result)
     }
 }
