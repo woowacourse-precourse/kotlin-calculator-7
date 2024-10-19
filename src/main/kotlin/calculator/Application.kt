@@ -1,53 +1,57 @@
 package calculator
 
 import camp.nextstep.edu.missionutils.Console
-import java.lang.StringBuilder
+import kotlin.text.StringBuilder
 
-class Calculator {
-    private val INIT_MESSAGE = "덧셈할 문자열을 입력해 주세요."
-    private var input: String? = ""
-    private lateinit var inputProcessing: StringBuilder
+class Calculator(input: String) {
+    private var inputProcessing: StringBuilder
     private var answer: Int = 0
     private var delimiter: String = ",:"
-    private val CUSTOMDEVIDER_RULES = """//(.+)\\n""".toRegex()
+    private val customDelimiterRule = """//(.+)\\n""".toRegex()
 
-    fun initCalculator() { // 계산기 초기화
-        println(INIT_MESSAGE)
-        input = Console.readLine()
-        if (input?.length == 0) return // 문자열 null 여부 확인
+    init {
         inputProcessing = StringBuilder(input)
-        validation()
-        println(answer)
     }
 
-    fun validation() { // 입력 문자열 검증 및 계산
+    fun calculate() {
         identifyDelimiters()
-        val DELIMITER_RULES = ("[$delimiter]").toRegex()
-        var inputList = inputProcessing.split(DELIMITER_RULES) // 구분자를 기준으로 문자열 나누기
-        var number: Int = 0
-        for (numbers in inputList) {
-            try {
-                number = numbers.toInt() // 숫자인가?
-                if (number < 1) throw IllegalArgumentException("입력값이 올바르지 않습니다.") // 양수인가?
-            } catch (e: Exception) {
-                throw IllegalArgumentException("입력값이 올바르지 않습니다.")
-            }
-            answer += number
-            number = 0
-        }
+        val delimiterRules = ("[$delimiter]").toRegex()
+        val numberList = validationCheck(delimiterRules)
+        answer = numberList.sum()
+        println("결과 : $answer")
     }
-    fun identifyDelimiters() { // 커스텀 구분자 식별
-        while (CUSTOMDEVIDER_RULES.containsMatchIn(inputProcessing)) {
+
+    private fun identifyDelimiters() {
+        while (customDelimiterRule.containsMatchIn(inputProcessing)) {
             val startIndex = inputProcessing.indexOf("//")
             val endIndex = inputProcessing.indexOf("\\n")
-            delimiter += inputProcessing.substring(startIndex+2, endIndex)
-            inputProcessing.delete(startIndex, endIndex+2)
+            delimiter += inputProcessing.substring(startIndex + 2, endIndex)
+            inputProcessing.delete(startIndex, endIndex + 2)
         }
+    }
+
+    private fun validationCheck(delimiterRules: Regex): Array<Int> {
+        try {
+            return validate(delimiterRules)
+        } catch (e: Exception) {
+            throw IllegalArgumentException("입력값이 올바르지 않습니다.")
+        }
+    }
+
+    private fun validate(delimiterRules: Regex): Array<Int> {
+        val stringList = inputProcessing.split(delimiterRules)
+        val numberList = Array<Int>(stringList.size) { 0 }
+        var number = 0
+        for (i in 0..stringList.lastIndex) {
+            number = stringList[i].toInt()
+            if (number < 1) throw IllegalArgumentException("입력값이 올바르지 않습니다.")
+            numberList[i] = number
+        }
+        return numberList
     }
 }
 
 fun main() {
-    // TODO: 프로그램 구현
-    val calculator = Calculator()
-    calculator.initCalculator()
+    val calculator = Calculator(Console.readLine())
+    calculator.calculate()
 }
