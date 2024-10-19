@@ -56,9 +56,9 @@ fun calculate(strList: List<Int>): Int {
 }
 
 fun convertToIntOrThrow(str: String): Int {
-    // 음수인 경우 예외 발생
-    if (str.toInt() < 0) {
-        throw IllegalArgumentException("음수는 입력할 수 없습니다.")
+    // 양수가 아닌 경우 예외 발생
+    if (str.toInt() <= 0) {
+        throw IllegalArgumentException("양수만 입력해 주세요.")
     }
     return str.toInt()
 }
