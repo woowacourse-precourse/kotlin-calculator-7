@@ -35,8 +35,7 @@ fun main() {
             showResult(0)
         }
 
-        val numberParts = parts[1]
-            .split(delimiter, ",", ":") //커스텀 구분자, 쉼표(,)와 콜론(:)으로 문자열 분리
+        val numberParts = splitByDelimiter(parts[1], delimiter)
 
         result = numberParts
             .map { it.toInt() } //분리한 문자열을 정수로 변환
@@ -44,8 +43,7 @@ fun main() {
     }
     //입력 문자열이 숫자, 쉼표, 콜론으로 시작하는 경우
     else if (input[0].isDigit() || input[0] == ',' || input[0] == ':') {
-        val numberParts = input
-            .split(",", ":") //기본 구분자인 쉼표(,)와 콜론(:)으로 문자열 분리
+        val numberParts = splitByDelimiter(input)
 
         result = numberParts
             .map{ it.toInt() } //분리한 문자열을 정수로 변환
@@ -58,6 +56,21 @@ fun main() {
 
     //결과 출력
     showResult(result)
+}
+
+/* 구분자 기준 문자열 분리 함수 */
+fun splitByDelimiter(input: String, customDelimiter: String? = null): List<String> {
+    //커스텀 구분자가 있으면 추가하고, 없으면 기본 구분자만 사용
+    val delimiters =
+        if (customDelimiter != null)
+            arrayOf(",", ":", customDelimiter)
+        else
+            arrayOf(",", ":")
+
+    //구분자 기준으로 문자열 분리
+    val numbers = input.split(*delimiters)
+
+    return numbers
 }
 
 /* 문자열 입력 함수 */
