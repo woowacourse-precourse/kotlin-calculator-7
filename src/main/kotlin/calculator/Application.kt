@@ -14,3 +14,14 @@ fun main() {
     }
 }
 
+fun taskClassification(inputExt: String){
+    val customStart = inputExt.indexOf("//")
+    val customEnd = inputExt.indexOf("\n")
+    if (customStart == 0 && customEnd >= 4){
+        // Custom Calculator
+
+    } else{
+        // Basic Calculator
+    }
+}
+
