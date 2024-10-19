@@ -36,8 +36,10 @@
 
 - 입력값이 //로 시작할때
     - \n이 포함되지 않으면 IllegalArgumentException 발생시킴
-    - \n이 포함되어 있지만 커스텀 구분자가 숫자이면 IllegalArgumentException 발생시킴
-    - \n이 포함되어 있으면 구분자 리스트에 커스텀 구분자 add한 뒤 true를 반환
+    - \n이 포함되어 있을 때
+        - 커스텀 구분자가 2글자 이상이면 IllegalArgumentException 발생시킴
+        - 커스텀 구분자가 숫자이면 IllegalArgumentException 발생시킴
+        - 예외 발생하지 않은 경우 구분자 리스트에 커스텀 구분자 add한 뒤 true를 반환
 - 입력값이 //로 시작하지 않을 때
     - false를 반환
 
