@@ -40,6 +40,12 @@ class CalculatorImpl {
 interface Calculator {
     fun calculate(input: String): Int
 }
+
+class CustomCalculator : Calculator {
+    override fun calculate(input: String): Int {
+    }
+}
+
 class BasicCalculator : Calculator {
     override fun calculate(input: String): Int {
         validate(input)
