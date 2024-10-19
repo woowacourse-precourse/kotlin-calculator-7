@@ -8,7 +8,7 @@ const val DELIMITER_UNIFIED = " "
 const val NUMBER_MINIMUM_LIMIT = 0
 const val CUSTOM_DELIMITER_PREFIX = "//"
 const val CUSTOM_DELIMITER_SUFFIX = "\\n"
-const val INDEX_NOT_FOUND = 1
+const val INDEX_NOT_FOUND = -1
 
 class NumberTokenizer {
 
@@ -34,7 +34,7 @@ class NumberTokenizer {
 
     private fun validateNumbers(numbers: List<BigDecimal>) {
         numbers.forEach { number ->
-            require(number > NUMBER_MINIMUM_LIMIT.toBigDecimal())
+            require(number >= NUMBER_MINIMUM_LIMIT.toBigDecimal())
         }
     }
 
@@ -43,13 +43,16 @@ class NumberTokenizer {
         val customDelimiters = mutableListOf<String>()
         val parts = input.split(CUSTOM_DELIMITER_SUFFIX)
         for (part in parts) {
-            val delimiterStartIndex = part.indexOf(CUSTOM_DELIMITER_PREFIX)
-            if (delimiterStartIndex == INDEX_NOT_FOUND) break
-            val customDelimiter = part.substring(delimiterStartIndex)
-            customDelimiters.add(customDelimiter.removeSuffix(CUSTOM_DELIMITER_PREFIX))
+            val delimiterPrefixIndex = part.indexOf(CUSTOM_DELIMITER_PREFIX)
+            if (delimiterPrefixIndex == INDEX_NOT_FOUND) break
+            customDelimiters.add(extractDelimiter(part, delimiterPrefixIndex))
         }
         return customDelimiters
     }
+
+    private fun extractDelimiter(part: String, prefixIndex: Int) = part.substring(prefixIndex).removePrefix(
+        CUSTOM_DELIMITER_PREFIX
+    )
 
     private fun filterCustom(input: String, customDelimiters: List<String>): String {
         val filteringInput = customDelimiters.fold(input) { acc, removeDelimiters ->
