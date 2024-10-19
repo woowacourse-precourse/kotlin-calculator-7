@@ -4,12 +4,18 @@ import camp.nextstep.edu.missionutils.Console
 
 class Calculator {
     var separators = mutableListOf(':', ',')
+    private var splitInput = listOf<String>()
 
     fun start() {
         printInput()
 
         val input = Console.readLine()
 
+        splitInput = if (customSeparatorCheck(input)) {
+            customSeparatorSplit(input)
+        } else {
+            defaultSeparatorSplit(input)
+        }
     }
 
     private fun printInput() = println(INPUT_MESSAGE)
@@ -29,6 +35,14 @@ class Calculator {
             return true
         }
         return false
+    }
+
+    fun customSeparatorSplit(input: String): List<String> {
+        return input.substring(5).split(*separators.toCharArray())
+    }
+
+    fun defaultSeparatorSplit(input: String): List<String> {
+        return input.split(":", ",")
     }
 
     companion object {
