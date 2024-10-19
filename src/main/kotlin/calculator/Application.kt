@@ -21,10 +21,18 @@ fun main() {
             // 커스텀 연산자인지 판단
             if (calc.substring(0..1) == "//") {
                 // 커스텀 연산자인 경우
+
             }
             else {
                 // 커스텀 연산자를 활용하지 않은 경우
-                val numbers = calc.split(",", ":").map { it.toInt() }
+                val numbers = calc.split(",", ":").map {
+                    try {
+                        it.toInt()
+                    } catch (e: NumberFormatException){
+                        throw IllegalArgumentException("string must be...")
+                    }
+
+                }
                 println("결과 : ${numbers.sum()}")
             }
 
