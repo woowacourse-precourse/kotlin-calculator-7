@@ -4,6 +4,7 @@ import calculator.model.Calculator
 import calculator.model.ErrorCheck
 import calculator.view.ErrorMsg
 import calculator.view.MsgView
+import camp.nextstep.edu.missionutils.Console
 
 class CalController {
     private var result = 0
@@ -13,7 +14,7 @@ class CalController {
 
     fun run() {
         msgView.inputMsg()
-        val inputValue = readLine()!!
+        val inputValue = Console.readLine()!!
         val isCheck = ErrorCheck().dividerCheck(inputValue)
 
         when (isCheck) {
