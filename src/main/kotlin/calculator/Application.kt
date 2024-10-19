@@ -20,6 +20,9 @@ fun main() {
     if (input.startsWith("//")) {
         val parts = input.split("\\n") //커스텀 구분자 파트와 숫자 파트로 분리
         val delimiter = parts[0].substring(2) //커스텀 구분자
+
+        val numberParts = parts[1]
+            .split(delimiter, ",", ":") //커스텀 구분자, 쉼표(,)와 콜론(:)으로 문자열 분리
     }
     //입력 문자열이 숫자, 쉼표, 콜론으로 시작하는 경우
     else if (input[0].isDigit() || input[0] == ',' || input[0] == ':') {
