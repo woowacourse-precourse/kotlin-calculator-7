@@ -4,6 +4,7 @@ import camp.nextstep.edu.missionutils.Console
 
 fun main(args: Array<String>) {
     // 사용자로부터 입력값 받기
+    println("덧셈할 문자열을 입력해 주세요.")
     val input = Console.readLine()
 
     // try-catch를 이용해서 예외 처리하기
