@@ -16,3 +16,19 @@ private fun splitWithDefaultDelimiters(input: String): List<String> {
     return input.split(*defaultDelimiters.toTypedArray())
 }
 
+/**
+ * 커스텀 구분자를 판별하고
+ * 만약 있다면 반환, 없다면 null을 반환한다.
+ */
+private fun getCustomDelimiter(input: String): String? {
+    val delimiterConditions = listOf("//", "\\n")
+    var cnt = 0
+    delimiterConditions.forEach { dc ->
+        if (dc in input) cnt++
+    }
+    if (cnt != delimiterConditions.size) {
+        return null
+    }
+    val customDelimiter = input.split(*delimiterConditions.toTypedArray())
+    return customDelimiter[1]
+}
