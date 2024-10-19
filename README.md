@@ -4,7 +4,7 @@
 - [X] Console API를 통한 문자열 입력
 - [X] 문자열에서 숫자만 추출하기 위한 정규표현식 작성
 - [X] 정규표현식을 통해 구분자로 구분된 숫자들의 합 도출
-- [ ] 예외처리
+- [X] 예외처리
 - [ ] 테스트 코드 작성
 
 ## 구현 과정
@@ -13,7 +13,7 @@ camp.nextstep.edu.missionutils.Console의 readLine()을 통해 입력을 받도�
 
 그렇기에 먼저 camp.nextstep.edu.missionutils.Console 라이브러리를 import한 뒤 그냥 readLine()을 통해 입력을 받으면 기본  kotlin.io의 readLine()을 사용하게 된다.
 
-그렇기에 "Console.readLine()"을 통해 입력을 받는다.
+그러므로 "Console.readLine()"을 통해 입력을 받는다.
 
 ```
 package calculator
@@ -51,3 +51,38 @@ val customDelimiterPattern = """//(.)\n(.*)""".toRegex()
 + 만약 커스텀구분자가 없다면 input 을 바로 사용  
 
 그렇기에 각각을 구분하여 spilt()을 사용하고 나눠진 문자를 정수로 변환한 뒤 합을 구하고 그것을 return한다.
+
+### 예외 처리
+> 사용자가 잘못된 값을 입력할 경우 IllegalArgumentException을 발생시킨 후 애플리케이션은 종료되어야 한다.
+
+사용자가 잘못된 값을 입력하는 경우는 구분자 사이의 값이 숫자가 아닐 때이다.
+숫자가 아닐 때 에러가 발생하는 경우는 코드에서 
+```
+return if (matchResult != null) {
+            val delimiter = matchResult.groupValues[1]
+            val numbers = matchResult.groupValues[2]
+            numbers.split("[$delimiter,:]".toRegex()).sumOf { it.toInt() }
+        } else {
+            input.split("[,:]".toRegex()).sumOf { it.toInt() }
+        }
+```
+이 부분으로 toInt()로 정수로 변활할 때 숫자가 아니면 에러가 발생하게 된다.
+
+그러므로 Exception이 발생하면 IllegalArgumentException을 throw해준다.
+```
+try {
+        return if (matchResult != null) {
+            val delimiter = matchResult.groupValues[1]
+            val numbers = matchResult.groupValues[2]
+            numbers.split("[$delimiter,:]".toRegex()).sumOf { it.toInt() }
+        } else {
+            input.split("[,:]".toRegex()).sumOf { it.toInt() }
+        }
+    }catch (e : Exception){
+        throw IllegalArgumentException()
+    }
+```
+
++ 실행결과
+
+![img_1.png](img_1.png)
