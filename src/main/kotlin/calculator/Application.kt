@@ -13,7 +13,13 @@ fun main() {
     val onlyNumberInputString =
         userSeparator?.length?.plus(SEPARATOR_COMMAND_FRONT.length + SEPARATOR_COMMAND_BACK.length - 1) ?: 0
 
-    val result = userInput.substring(onlyNumberInputString).split(",|:|${userSeparator}".toRegex())
+    val numberList = userInput.substring(onlyNumberInputString).split(",|:|${userSeparator}".toRegex())
+
+    // 더하기
+    var result = 0
+    for (i in 0 until numberList.count()) {
+        result += numberList[i].toInt()
+    }
 
     println("결과 : ${result}")
 
