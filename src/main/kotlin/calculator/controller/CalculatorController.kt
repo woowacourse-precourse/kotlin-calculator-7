@@ -1,5 +1,6 @@
 package calculator.controller
 
+import calculator.domain.Calculator
 import calculator.view.InputView
 import calculator.view.OutputView
 
@@ -9,5 +10,6 @@ class CalculatorController {
 
     fun start() {
         val userInput: String = inputView.inputAdditionString()
+        val calculator = Calculator(userInput)
     }
 }
