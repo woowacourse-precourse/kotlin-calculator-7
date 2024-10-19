@@ -4,7 +4,7 @@ fun main() {
     val input = readln()
     val inputNumbers = splitInput(input)
     val sum = addNumbers(inputNumbers)
-    println("결과: $sum")
+    println("결과 : $sum")
 }
 
 
