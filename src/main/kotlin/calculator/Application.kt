@@ -7,16 +7,15 @@ fun main() {
     val br = BufferedReader(InputStreamReader(System.`in`))
     println("덧셈할 문자열을 입력해 주세요.")
     var calc = br.readLine()
+    var result = 0
     when(calc.length) {
         0 -> {
-            // 아무것도 입력하지 않았을 때 0 출력
-            println("결과 : 0")
-            return
+            // 아무것도 입력하지 않았을 때
         }
 
         1 -> {
-            // 하나만 입력했을 때 숫자인지 확인 & 결과 출력
-            println("결과 : ${calc.toIntOrNull()?:throw IllegalArgumentException("Input must be start with number")}")
+            // 하나만 입력했을 때
+            result = calc.toIntOrNull()?:throw IllegalArgumentException("Input must be start with number")
         }
 
         else -> {
@@ -40,10 +39,10 @@ fun main() {
                 }
 
             }
-            println("결과 : ${numbers.sum()}")
+            result = numbers.sum()
 
         }
     }
-
+    println("결과 : ${result}")
 
 }
