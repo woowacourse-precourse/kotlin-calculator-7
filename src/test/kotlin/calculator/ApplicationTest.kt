@@ -38,6 +38,30 @@ class ApplicationTest : NsTest() {
         }
     }
 
+    @Test
+    fun `입력 값 없음`() {
+        assertSimpleTest {
+            run("")
+            assertThat(output()).contains("결과 : 0")
+        }
+    }
+
+    @Test
+    fun `예시 입력 값 1`() {
+        assertSimpleTest {
+            run("1,2,3")
+            assertThat(output()).contains("결과 : 6")
+        }
+    }
+
+    @Test
+    fun `예시 입력 값 2`() {
+        assertSimpleTest {
+            run("1,2:3")
+            assertThat(output()).contains("결과 : 6")
+        }
+    }
+
     override fun runMain() {
         main()
     }
