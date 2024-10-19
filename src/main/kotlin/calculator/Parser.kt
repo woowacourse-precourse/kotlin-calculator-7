@@ -3,8 +3,16 @@ package calculator
 class Parser {
 
     fun parseSeparator(input: String): List<String> {
-        val numbers = input.split(",", ":")
-        return numbers
+        var userInput = input
+        if (input.contains("\\n") and input.contains("//")) {
+            val customSeparator = getCustomSeparator(input)
+            userInput = userInput.substring(5)
+            return userInput.split(",", ":", customSeparator)
+                .filter { it.isNotEmpty() }
+        } else {
+            return userInput.split(",", ":")
+                .filter { it.isNotEmpty() }
+        }
     }
 
     fun parseNumber(list: List<String>): MutableList<Int> {
@@ -15,9 +23,5 @@ class Parser {
         return numbers
     }
 
-    fun parseCustomSeparator(input: String): String {
-        val userInput = input.split("//", "\\n")
-            .filter { it.isNotEmpty() }
-        return userInput[0]
-    }
+    fun getCustomSeparator(input: String) = input.split("//", "\\n").filter { it.isNotEmpty() }.first()
 }
