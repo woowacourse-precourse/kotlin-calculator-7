@@ -20,6 +20,7 @@ class Calculator {
         splitInputValidationCheck(splitInput)
 
         result = calculate(splitInput)
+        printOutput(result)
     }
 
     private fun printInput() = println(INPUT_MESSAGE)
@@ -63,8 +64,15 @@ class Calculator {
         return splitInput.sumOf { if (it.isBlank()) 0 else it.toLong() }
     }
 
+    fun printOutput(result: Long): String {
+        val output = "$RESULT_MESSAGE $result"
+        println(output)
+        return output
+    }
+
     companion object {
         const val INPUT_MESSAGE = "덧셈할 문자열을 입력해 주세요."
+        const val RESULT_MESSAGE = "결과 :"
         const val ERROR_MESSAGE = "잘못된 입력값입니다."
     }
 }
