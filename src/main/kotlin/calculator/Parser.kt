@@ -3,18 +3,32 @@ package calculator
 class Parser {
     private val validator = Validator()
 
-    private fun getCustomSeparator(input: String) = input.split("//", "\\n").first { it.isNotEmpty() }
+    private fun getSeparators(input: String): List<String> {
+        val defalutSeparators = listOf(",", ":")
+        val regex = """^//(.+)\\n(.*)""".toRegex()
+        val matchResult = regex.find(input)
 
-    private fun getNumbers(input: String) = input.split("//", "\\n").last { it.isNotEmpty() }
+        return if (matchResult != null) {
+            val customSeparator = matchResult.groupValues[1]
+            defalutSeparators + customSeparator
+        } else {
+            defalutSeparators
+        }
+    }
+
+    private fun getNumbers(input: String, separator: List<String>): String {
+        return if (separator.size > 2) {
+            input.substringAfter("\\n")
+        } else {
+            input
+        }
+    }
 
     fun parseSeparator(input: String): List<String> {
-        val numbers = getNumbers(input)
-        if (input.contains("\\n") and input.contains("//")) {
-            val customSeparator = getCustomSeparator(input)
-            return numbers.split(",", ":", customSeparator)
-        } else {
-            return numbers.split(",", ":")
-        }
+        val separators = getSeparators(input)
+        val numbers = getNumbers(input, separators)
+
+        return numbers.split(*separators.toTypedArray())
     }
 
     fun parseNumber(list: List<String>): MutableList<Int> {
