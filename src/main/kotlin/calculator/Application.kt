@@ -37,17 +37,13 @@ fun main() {
 
         val numberParts = splitByDelimiter(parts[1], delimiter)
 
-        result = numberParts
-            .map { it.toInt() } //분리한 문자열을 정수로 변환
-            .sum() //변환한 정수의 합을 계산하여 저장
+        result = sumNumbers(numberParts)
     }
     //입력 문자열이 숫자, 쉼표, 콜론으로 시작하는 경우
     else if (input[0].isDigit() || input[0] == ',' || input[0] == ':') {
         val numberParts = splitByDelimiter(input)
 
-        result = numberParts
-            .map{ it.toInt() } //분리한 문자열을 정수로 변환
-            .sum() //변환한 정수의 합을 계산하여 저장
+        result = sumNumbers(numberParts)
     }
     //잘못된 값을 입력한 경우 IllegalArgumentException 발생, 애플리케이션 종료
     else {
@@ -56,6 +52,11 @@ fun main() {
 
     //결과 출력
     showResult(result)
+}
+
+/* 숫자 문자열의 합 계산 함수 */
+fun sumNumbers(numbers: List<String>): Int {
+    return numbers.map { it.toInt() }.sum()
 }
 
 /* 구분자 기준 문자열 분리 함수 */
