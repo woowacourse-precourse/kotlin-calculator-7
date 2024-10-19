@@ -21,3 +21,5 @@ fun String.splitWithCustomOperator(): List<String> {
     val numberPart = matchResult.groupValues[2]
     return numberPart.split(COLON.value, COMMA.value, delimiter)
 }
+
+fun String.toIntListAppliedCustomOperator(): List<Int> = splitWithCustomOperator().map { it.toInt() }
