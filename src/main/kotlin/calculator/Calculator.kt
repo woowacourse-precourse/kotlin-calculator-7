@@ -5,6 +5,9 @@ import camp.nextstep.edu.missionutils.Console
 class Calculator {
     fun start() {
         printInput()
+
+        val input = Console.readLine()
+
     }
 
     private fun printInput() = println(INPUT_MESSAGE)
