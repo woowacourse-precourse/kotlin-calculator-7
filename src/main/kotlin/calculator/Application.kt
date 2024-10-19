@@ -12,8 +12,7 @@ fun main() {
 
     //입력 문자열이 공백이면 결과값은 0
     if (input.isBlank()) {
-        print("결과 : 0")
-        return
+        showResult(0)
     }
 
     //입력 문자열이 '//'로 시작하는 경우
@@ -34,8 +33,7 @@ fun main() {
 
         //숫자가 없는 경우 결과값은 0
         if (parts[1].isEmpty()) {
-            print("결과 : 0")
-            return
+            showResult(0)
         }
 
         val numberParts = parts[1]
@@ -60,6 +58,11 @@ fun main() {
     }
 
     //결과 출력
+    showResult(result)
+}
+
+/* 결과 출력 함수 */
+fun showResult(result: Int) {
     print("결과 : ${result}")
     return
 }
