@@ -1,30 +1,37 @@
 package calculator
 
+import calculator.model.Calculator
 import calculator.utils.Extractor
+import calculator.utils.Validator
 import calculator.view.InputView
 import calculator.view.OutputView
 
 class CalculatorApp(
     private val inputView: InputView,
-    private val outputView: OutputView
+    private val outputView: OutputView,
+    private val calculator: Calculator
 ) {
 
     fun run() {
         val input = inputView.readString()
         val result = extract(input)
+        validate(result)
         val sum = calculate(result)
         displayResult(sum)
     }
 
-    private fun extract(input: String): List<Int> {
-        val result = Extractor.extractNumbers(input)
-        return result
+    private fun extract(input: String): List<Int> = Extractor.extractNumbers(input)
+
+    private fun validate(numbers: List<Int>) {
+        Validator.validateNumbers(numbers)
     }
 
-    private fun calculate(input: List<Int>): Int {
-        Calculator.sum(input)
-        return Calculator.getResult()
-    }
+    private fun calculate(input: List<Int>) = calculator.sum(input)
 
     private fun displayResult(sum: Int) = outputView.printResultOfSum(sum)
+
+    companion object {
+        fun create(inputView: InputView, outputView: OutputView, calculator: Calculator): CalculatorApp =
+            CalculatorApp(inputView, outputView, calculator)
+    }
 }
