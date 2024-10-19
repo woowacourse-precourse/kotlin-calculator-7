@@ -4,6 +4,7 @@ import camp.nextstep.edu.missionutils.Console
 
 class Calculator {
     var separators = mutableListOf(':', ',')
+    private var result = 0L
     private var splitInput = listOf<String>()
 
     fun start() {
@@ -17,6 +18,8 @@ class Calculator {
             defaultSeparatorSplit(input)
         }
         splitInputValidationCheck(splitInput)
+
+        result = calculate(splitInput)
     }
 
     private fun printInput() = println(INPUT_MESSAGE)
@@ -55,6 +58,11 @@ class Calculator {
             }
         }) { IllegalArgumentException(ERROR_MESSAGE) }
     }
+
+    fun calculate(splitInput: List<String>): Long {
+        return splitInput.sumOf { if (it.isBlank()) 0 else it.toLong() }
+    }
+
     companion object {
         const val INPUT_MESSAGE = "덧셈할 문자열을 입력해 주세요."
         const val ERROR_MESSAGE = "잘못된 입력값입니다."
