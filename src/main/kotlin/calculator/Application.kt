@@ -37,6 +37,10 @@ fun main() {
             .map{ it.toInt() } //분리한 문자열을 정수로 변환
             .sum() //변환한 정수의 합을 계산하여 저장
     }
+    //잘못된 값을 입력한 경우 IllegalArgumentException 발생, 애플리케이션 종료
+    else {
+        throw IllegalArgumentException()
+    }
 
     //결과 출력
     print("결과 : ${result}")
