@@ -21,7 +21,7 @@ fun splitStr(str: String): List<Int> {
             .filter { it.isNotBlank() }
             .map {
                 try {
-                    convertToIntOrThrow(it)
+                    convertToIntOrThrow(it.trim()) // 공백 제거하여 메서드 호출
                 } catch (e: NumberFormatException) {
                     throw IllegalArgumentException("잘못된 문자열 형식이 포함되어 있어요: '$it'")
                 }
