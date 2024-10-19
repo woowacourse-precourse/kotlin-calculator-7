@@ -47,9 +47,6 @@ class User {
         val numbers = Regex("\\d+")
         val matchResult = customPattern.find(inputString)
         val inputFiltered = matchResult?.groups?.get(3)?.value ?: inputString
-        if (inputString == "") {
-            return emptyList()
-        }
         val userNumbers = numbers.findAll(inputFiltered).map{ it.value.toInt() }.toList()
         return userNumbers
     }
