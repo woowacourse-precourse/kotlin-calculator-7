@@ -6,14 +6,21 @@ fun main() {
     println("덧셈할 문자열을 입력해 주세요.")
 
     val input = Console.readLine()
-    var answer = 0
-    val numberList = input?.split(Regex("\\D+"))
+
+    val numberList = if (input != null && input.startsWith("//")) {
+        val parts = input.replace("\\n", "\n").split("\n", limit = 2)
+        val custom = parts[0].substring(2)
+
+        parts[1].split(custom)
+    } else {
+        input?.split(",", ":")
+    }
+
+    val answer = numberList
         ?.filter { it.isNotEmpty() }
         ?.map { it.toInt() }
-
-    answer = numberList?.sum() ?: 0
+        ?.sum() ?: 0
 
     println("결과 : ${answer}")
-
     Console.close()
 }
