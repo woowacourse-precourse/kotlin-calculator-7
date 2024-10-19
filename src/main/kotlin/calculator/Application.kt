@@ -6,17 +6,17 @@ fun main() {
     try {
         val str = Console.readLine().trim()
         val numbers = splitString(str)
+        // val numbers = filteringString(str)
 
         if (numbers.any { it < 0 }) {
-            throw IllegalArgumentException("양수를 입력해 주세요.")
+            throw IllegalArgumentException("잘못 입력하셨습니다.\n양수를 입력해 주세요.")
         }
 
         val sum = sumNumbers(numbers)
         printResult(str, sum)
 
-    } catch (e: IllegalArgumentException) {
-        return
-    } finally {
+    }
+    finally {
         Console.close()
     }
 }
