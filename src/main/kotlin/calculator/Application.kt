@@ -6,7 +6,7 @@ fun runException(input: String): List<Int> {
     // 문자열을 구분자 기준으로 분리하는 기능
     val numbers = if (input.startsWith("//")) {    // 커스텀 구분자일때
         val part = input.split("\\n")
-        // 입력이 \n을 기준으로 두 부분(구분자 정의와 숫자 부분)으로 올바르게 나뉘는지 확인
+        // 입력이 \n을 기준으로 두 파트(구분자 정의와 숫자 부분)로 나뉘지 않을 시 예외 발생
         if (part.size != 2) {
             throw IllegalArgumentException("잘못된 입력입니다. 구분자와 숫자를 포함해야 합니다.")
         }
