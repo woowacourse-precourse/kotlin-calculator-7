@@ -13,14 +13,15 @@ fun main() {
         if(str.length >= 5 &&
             str.substring(0,2) == "//"
             && str.substring(3,5) == "\\n"
-            && !str[2].isDigit()
             ) {
             // 커스텀 구분자 존재 시 -> 구분자 리스트에 추가
-            delimiterList.add(str[2])
-            str = str.substring(5, str.length)
+           if(!str[2].isDigit()) {
+               delimiterList.add(str[2])
+               str = str.substring(5, str.length)
+           } else throwInvalidStringException("구분자로 숫자는 사용할 수 없습니다.")
+
         }
-
-
+    
         var currentNumber = ""
         for(c in str) {
             if(c.isDigit()) currentNumber += c
