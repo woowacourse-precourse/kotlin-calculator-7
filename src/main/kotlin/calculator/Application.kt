@@ -1,7 +1,22 @@
 package calculator
 
+// 구분자입력 형식
+val SEPARATOR_COMMAND_FRONT = "//"
+val SEPARATOR_COMMAND_BACK = "\\\\n"
 
-fun getNumberList(onlyNumberInputString: String, userSeparator: String?): List<Int> {
+fun getUserSeparator(userInput: String): String? {
+    val separatorRegex = Regex("(?<=${SEPARATOR_COMMAND_FRONT})(.*?)(?=${SEPARATOR_COMMAND_BACK})") // 정규식
+    return separatorRegex.find(userInput)?.value
+}
+
+fun getNumberList(userInput: String, userSeparator: String?): List<Int> {
+    //구분자입력까지 길이
+    val onlyNumberInputStringIndex =
+        userSeparator?.length?.plus(SEPARATOR_COMMAND_FRONT.length + SEPARATOR_COMMAND_BACK.length - 1) ?: 0
+
+    //구분자입력 이후로 숫자만 추출
+    val onlyNumberInputString = userInput.substring(onlyNumberInputStringIndex)
+
     try {
         return onlyNumberInputString.split(",|:|${userSeparator}".toRegex()).map { it.toInt() }
     } catch (err: NumberFormatException) {
@@ -9,32 +24,24 @@ fun getNumberList(onlyNumberInputString: String, userSeparator: String?): List<I
     }
 }
 
-
 fun checkNegative(numberList: List<Int>) {
     if (!numberList.all { it > 0 }) {
         throw IllegalArgumentException("양수만 입력가능합니다.")
     }
 }
 
-
 fun main() {
-    // TODO: 프로그램 구현
-    val SEPARATOR_COMMAND_FRONT = "//"
-    val SEPARATOR_COMMAND_BACK = "\\\\n"
-
+    // 입력
     println("덧셈할 문자열을 입력해 주세요.")
     val userInput = readlnOrNull() ?: ""
 
-    val separatorRegex = Regex("(?<=${SEPARATOR_COMMAND_FRONT})(.*?)(?=${SEPARATOR_COMMAND_BACK})") // 정규식
-    val userSeparator = separatorRegex.find(userInput)?.value
+    // 구분자
+    val userSeparator = getUserSeparator(userInput)
 
-    val onlyNumberInputString =
-        userSeparator?.length?.plus(SEPARATOR_COMMAND_FRONT.length + SEPARATOR_COMMAND_BACK.length - 1) ?: 0
-
-    val numberList = getNumberList(userInput.substring(onlyNumberInputString), userSeparator)
-
+    // 숫자
+    val numberList = getNumberList(userInput, userSeparator)
     checkNegative(numberList)
 
+    // 합
     println("결과 : ${numberList.sum()}")
-
 }
