@@ -1,67 +1,62 @@
 package calculator
 
-// 오류를 검사하기 위한 객체
+import calculator.InputStringManager as ISM
+
 object ErrorChecker {
-    // 인풋 오류를 검사하는 메소드
+    /**
+     * 원본 입력 문자열을 Parse하여 예외를 체크
+     * @param input 원본 입력 문자열
+     * @throws IllegalArgumentException 잘못된 입력 탐지시 예외 발생
+     */
     fun invalidInputCheck(input: String) {
-        val isAllInt = InputStringManager.detectAllIntInput(input)
-        val commandRemovedInput = InputStringManager.getCommandRemovedInput(input)
-        // 비어있는 값이 입력될 경우 예외처리를 건너뜀
+        val commandRemovedInput = ISM.getCommandRemovedInput(input)
         if (commandRemovedInput.isEmpty()) {
             return
         }
 
-        // 아라비아 숫자를 char타입의 가변 리스트로 저장
-        val validDigits = (0..9).toList().map { it.digitToChar() }.toMutableList()
-
-        // 커스텀 구분자가 숫자일경우 validDigits 리스트에서 제거하기 위한 코드
+        // 현재 입력에서 사용가능한 숫자를 저장하기 위한 가변 리스트
+        val availableDigits = (0..9).toList().map { it.digitToChar() }.toMutableList()
         val delimiter = DelimiterParser.getDelimiter(input)
-        delimiter.forEach { validDigits.remove(it) }
+        delimiter.forEach { availableDigits.remove(it) }
 
-        // 커맨드를 제외한 인풋이 구분자로 시작하면 예외 발생
-        if (!validDigits.contains(commandRemovedInput[0])) {
+        if (commandRemovedInput.first() !in availableDigits) {
             throw IllegalArgumentException("오류: 구분자로 시작할 수 없습니다.")
         }
-        // 커맨드를 제외한 인풋이 구분자로 끝나면 예외 발생
-        if (!validDigits.contains(commandRemovedInput.last())) {
+        if (commandRemovedInput.last() !in availableDigits) {
             throw IllegalArgumentException("오류: 구분자로 끝날 수 없습니다.")
         }
 
-        // 구분자로 분할한 String타입 리스트를 불러옴
-        val strList = InputStringManager.getSplitStringList(input)
-
-        // 구분자로 분할된 각각의 원소를 검사
-        strList.map {
-            if (it.isEmpty()) { // 연속된 구분자로 인한 비어있는 원소를 탐지할때 예외처리
+        val splitInputString = ISM.getSplitStringList(input)
+        splitInputString.forEach { splitInputElement ->
+            if (splitInputElement.isEmpty()) {
                 throw IllegalArgumentException("오류: 구분자를 연속으로 입력할 수 없습니다.")
             }
-            if (it.first() == '.' || it.last() == '.') {
+            if (splitInputElement.first() == '.' || splitInputElement.last() == '.') {
                 throw IllegalArgumentException("오류: 각각의 숫자는 .으로 시작하거나 끝날 수 없습니다.")
             }
-            // 점이 2번 이상 사용되었는지 검사하기 위한 플래그
-            var pointFlag = true
-            // 원소의 값을 문자단위로 다시 쪼개서 검사
-            for ((index, char) in it.withIndex()) {
-                // 숫자이면 다음 문자로 이동
-                if (validDigits.contains(char)) {
+
+            // 구분자로 잘려진 각각의 숫자 요소에 .이 2번이상 포함되는지 체크하는 코드
+            // ex) "1:2.0.3:2" 입력시 "2.0.3"에 '.'이 두번 입력되어 있으므로 예외 처리
+            var doublePointCheckFlag = true
+            for ((index, char) in splitInputElement.withIndex()) {
+                if (availableDigits.contains(char)) {
                     continue
                 }
-                // .이 2번 연속 나오지 않고 0번 인덱스가 아니면 다음문자로 이동
-                if (pointFlag && index != 0 && char == '.') {
-                    pointFlag = false
+                if (doublePointCheckFlag && index > 0 && char == '.') {
+                    doublePointCheckFlag = false
                     continue
                 }
-                // .이 두번 등장하거나 .이 맨 앞에 등장하거나 .이나 숫자가 아닌경우 예외처리됨
                 throw IllegalArgumentException("오류: 잘못된 구분자 입력입니다.")
             }
         }
 
-        // 0 또는 0.0 입력을 탐지하여 예외 발생
-        if (isAllInt && InputStringManager.parseInputStringToIntList(input).contains(0)) {
-            throw IllegalArgumentException("오류: 양수만 입력해 주세요")
+        // 입력값은 양수로 한정되므로 0 또는 0.0 입력시 예외 발생
+        val isAllInt = ISM.hasDoubleInput(input)
+        if (isAllInt && ISM.parseInputStringToIntList(input).contains(0)) {
+            throw IllegalArgumentException("오류: 양수만 입력해 주세요.")
         }
-        if (InputStringManager.parseInputStringToDoubleList(input).contains(0.0)) {
-            throw IllegalArgumentException("오류: 양수만 입력해 주세요")
+        if (ISM.parseInputStringToDoubleList(input).contains(0.0)) {
+            throw IllegalArgumentException("오류: 양수만 입력해 주세요.")
         }
     }
 }
