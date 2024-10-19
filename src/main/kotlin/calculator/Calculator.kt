@@ -16,6 +16,7 @@ class Calculator {
         } else {
             defaultSeparatorSplit(input)
         }
+        splitInputValidationCheck(splitInput)
     }
 
     private fun printInput() = println(INPUT_MESSAGE)
@@ -45,6 +46,15 @@ class Calculator {
         return input.split(":", ",")
     }
 
+    fun splitInputValidationCheck(splitInput: List<String>) {
+        require(splitInput.all {
+            if (it.isBlank()) true
+            else {
+                val number = it.toLongOrNull() ?: throw IllegalArgumentException(ERROR_MESSAGE)
+                number > 0
+            }
+        }) { IllegalArgumentException(ERROR_MESSAGE) }
+    }
     companion object {
         const val INPUT_MESSAGE = "덧셈할 문자열을 입력해 주세요."
         const val ERROR_MESSAGE = "잘못된 입력값입니다."
