@@ -1,16 +1,19 @@
 package calculator
 
 class Parser {
-    val validator = Validator()
+    private val validator = Validator()
+
+    private fun getCustomSeparator(input: String) = input.split("//", "\\n").first { it.isNotEmpty() }
+
+    private fun getNumbers(input: String) = input.split("//", "\\n").last { it.isNotEmpty() }
 
     fun parseSeparator(input: String): List<String> {
-        var userInput = input
+        val numbers = getNumbers(input)
         if (input.contains("\\n") and input.contains("//")) {
             val customSeparator = getCustomSeparator(input)
-            userInput = userInput.substring(5)
-            return userInput.split(",", ":", customSeparator)
+            return numbers.split(",", ":", customSeparator)
         } else {
-            return userInput.split(",", ":")
+            return numbers.split(",", ":")
         }
     }
 
@@ -23,6 +26,4 @@ class Parser {
         }
         return numbers
     }
-
-    private fun getCustomSeparator(input: String) = input.split("//", "\\n").filter { it.isNotEmpty() }.first()
 }
