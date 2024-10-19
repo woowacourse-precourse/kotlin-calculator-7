@@ -1,10 +1,12 @@
 package calculator
 
+import calculator.model.Calculator
 import calculator.view.InputView
 import calculator.view.OutputView
 
 fun main() {
     val inputView = InputView()
     val outputView = OutputView()
-    CalculatorApp(inputView, outputView).run()
+    val calculator = Calculator()
+    CalculatorApp.create(inputView, outputView, calculator).run()
 }
