@@ -16,7 +16,7 @@ fun main() {
 
         1 -> {
             // 하나만 입력했을 때 숫자인지 확인 & 결과 출력
-            println("결과 : ${calc.toIntOrNull()?:throw IllegalArgumentException("string must be...")}")
+            println("결과 : ${calc.toIntOrNull()?:throw IllegalArgumentException("Input must be start with number")}")
         }
 
         else -> {
@@ -31,12 +31,12 @@ fun main() {
                 delimiters.add(custom)
 
             }
-            
+
             val numbers = calc.split(*delimiters.toTypedArray()).map {
                 try {
                     it.toInt()
                 } catch (e: NumberFormatException){
-                    throw IllegalArgumentException("string must be...")
+                    throw IllegalArgumentException("Input cannot be entered as values other than the specified delimiter")
                 }
 
             }

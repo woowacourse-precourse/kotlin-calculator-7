@@ -7,6 +7,19 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
 class ApplicationTest : NsTest() {
+
+    @Test
+    fun `일반 구분자 사용`() {
+        val testInput = arrayOf("1", "1,2", "1,2:3")
+        val testOutput = arrayOf("결과 : 1", "결과 : 3", "결과 : 6")
+        assertSimpleTest {
+            for(i in 0 until testInput.size) {
+                run(testInput[i])
+                assertThat(output().contains(testOutput[i]))
+            }
+        }
+    }
+
     @Test
     fun `커스텀 구분자 사용`() {
         assertSimpleTest {
