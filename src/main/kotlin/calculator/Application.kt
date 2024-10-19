@@ -8,7 +8,7 @@ fun main() {
     var inputString = Console.readLine()
     try {
         // Classification
-        //taskClassification(inputString)
+        taskClassification(inputString)
     } catch (e: IllegalArgumentException){
         println(e.message)
     }
@@ -16,10 +16,12 @@ fun main() {
 
 fun taskClassification(inputExt: String){
     val customStart = inputExt.indexOf("//")
-    val customEnd = inputExt.indexOf("\n")
-    if (customStart == 0 && customEnd >= 4){
+    val customEnd = inputExt.indexOf("\\n")
+    if (customStart == 0 && customEnd >= 3){
         // Custom Calculator
-
+        val cus = inputExt.substring(customStart+2 until customEnd)
+        val processedString = inputExt.substring(cus.length+4)
+        cusExtNumToStr(processedString, cus)
     } else{
         // Basic Calculator
         extNumTosStr(inputExt)
@@ -34,3 +36,9 @@ fun extNumTosStr(inputExt: String) {
     println(sum)
 }
 
+fun cusExtNumToStr(procStr: String, cus: String){
+    val splitStr = procStr.split(cus)
+
+    val sum = splitStr.mapNotNull { it.toIntOrNull() }.sum()
+    println(sum)
+}
