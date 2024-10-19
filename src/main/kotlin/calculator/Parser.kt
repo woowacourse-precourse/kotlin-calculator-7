@@ -1,6 +1,7 @@
 package calculator
 
 class Parser {
+    val validator = Validator()
 
     fun parseSeparator(input: String): List<String> {
         var userInput = input
@@ -18,7 +19,9 @@ class Parser {
     fun parseNumber(list: List<String>): MutableList<Int> {
         val numbers = mutableListOf<Int>()
         list.forEach {
-            numbers.add(it.toInt())
+            if (validator.validatePositiveNumber(it)) {
+                numbers.add(it.toInt())
+            }
         }
         return numbers
     }
