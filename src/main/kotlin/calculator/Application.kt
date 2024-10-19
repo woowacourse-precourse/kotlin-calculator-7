@@ -20,6 +20,10 @@ fun main() {
     if (input[0].isDigit() || input[0] == ',' || input[0] == ':') {
         val numberParts = input
             .split(",", ":") //기본 구분자인 쉼표(,)와 콜론(:)으로 문자열 분리
+
+        result = numberParts
+            .map{ it.toInt() } //분리한 문자열을 정수로 변환
+            .sum() //변환한 정수의 합을 계산하여 저장
     }
 
     //결과 출력
