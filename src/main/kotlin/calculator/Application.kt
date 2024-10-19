@@ -22,7 +22,7 @@ class CalculatorImpl {
 
     private fun setCalculator(input: String) {
         calculator = if (isCustomSeparator(input)) {
-            // TODO : 커스텀 구분자 계산기
+            CustomCalculator()
         } else {
             BasicCalculator()
         }
@@ -45,6 +45,22 @@ class CustomCalculator : Calculator {
     override fun calculate(input: String): Int {
         val separator = generateSeparator(input)
         val newInput = input.drop(SEPARATOR_PREFIX.length + separator.length + SEPARATOR_POSTFIX.length)
+        validate(separator, newInput)
+
+
+    private fun validate(separator: String, input: String) {
+        val inputs = input.split(separator)
+        return when {
+            input.isEmpty() -> Unit
+            separator.isEmpty() -> throw IllegalArgumentException("구분자가 존재하지 않는 경우")
+            inputs.any { it.first() == '+' || it.first() == '-' } -> throw IllegalArgumentException("+ 또는 - 으로 시작하는 숫자가 있는 경우")
+            inputs.any { it.first() == '0' } -> throw IllegalArgumentException("0 으로 시작한 숫자가 있는 경우")
+            inputs.map { it.toIntOrNull() }.any { it == null } -> throw IllegalArgumentException("숫자 형식(Int)이 올바르지 않은 경우(커스텀 구분자가 아닌 문자포함, 공백포함, 오버플로우)") // 원소 오버플로
+            inputs.isOverflowOnIntSum() -> throw IllegalArgumentException("합계가 양수(Int)범위를 넘어갈 경우(오버플로우)")
+            else -> Unit
+        }
+    }
+
     private fun generateSeparator(input: String): String =
         input.split(SEPARATOR_POSTFIX).first().drop(SEPARATOR_PREFIX.length)
 
