@@ -35,6 +35,9 @@ object ErrorChecker {
             if (it.isEmpty()) { // 연속된 구분자로 인한 비어있는 원소를 탐지할때 예외처리
                 throw IllegalArgumentException("오류: 구분자를 연속으로 입력할 수 없습니다.")
             }
+            if (it.first() == '.' || it.last() == '.') {
+                throw IllegalArgumentException("오류: 각각의 숫자는 .으로 시작하거나 끝날 수 없습니다.")
+            }
             // 점이 2번 이상 사용되었는지 검사하기 위한 플래그
             var pointFlag = true
             // 원소의 값을 문자단위로 다시 쪼개서 검사
