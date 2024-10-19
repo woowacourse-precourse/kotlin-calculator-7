@@ -1,12 +1,10 @@
 package calculator
 
-import java.io.BufferedReader
-import java.io.InputStreamReader
+import camp.nextstep.edu.missionutils.Console.readLine
 
 fun main() {
-    val br = BufferedReader(InputStreamReader(System.`in`))
     println("덧셈할 문자열을 입력해 주세요.")
-    var calc = br.readLine()
+    var calc = readLine()
     var result = 0
     when(calc.length) {
         0 -> {
