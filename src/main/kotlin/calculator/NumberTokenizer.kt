@@ -18,16 +18,26 @@ class NumberTokenizer {
         val customDelimiters = extractCustomDelimiters(input)
         val filteringInput = filterCustom(input, customDelimiters)
         val totalDelimiters = customDelimiters + delimiters
-        return splitInput(filteringInput, totalDelimiters).map { numberInput ->
-            val number = numberInput.toBigDecimal()
-            require(number >= NUMBER_MINIMUM_LIMIT.toBigDecimal())
-            number
+        val inputTokens = splitByDelimiters(filteringInput, totalDelimiters)
+        val numberTokens = parseNumbers(inputTokens)
+        validateNumbers(numberTokens)
+        return numberTokens
+    }
+
+    private fun splitByDelimiters(input: String, delimiters: List<String>) = delimiters.fold(input) { acc, delimiter ->
+        acc.replace(delimiter, DELIMITER_UNIFIED)
+    }.split(DELIMITER_UNIFIED)
+
+    private fun parseNumbers(tokens: List<String>) = tokens.map { numberInput ->
+        numberInput.toBigDecimal()
+    }
+
+    private fun validateNumbers(numbers: List<BigDecimal>) {
+        numbers.forEach { number ->
+            require(number > NUMBER_MINIMUM_LIMIT.toBigDecimal())
         }
     }
 
-    private fun splitInput(input: String, delimiters: List<String>) = delimiters.fold(input) { acc, delimiter ->
-        acc.replace(delimiter, DELIMITER_UNIFIED)
-    }.split(DELIMITER_UNIFIED)
 
     fun extractCustomDelimiters(input: String): List<String> {
         val customDelimiters = mutableListOf<String>()
