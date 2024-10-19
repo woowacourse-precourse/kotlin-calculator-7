@@ -43,6 +43,12 @@ interface Calculator {
 class BasicCalculator : Calculator {
     override fun calculate(input: String): Int {
         validate(input)
+
+        val inputs = input.split(",", ":")
+        return when {
+            input.isEmpty() -> 0
+            else -> inputs.sumOf { it.toInt() }
+        }
     }
 
     private fun validate(input: String) {
