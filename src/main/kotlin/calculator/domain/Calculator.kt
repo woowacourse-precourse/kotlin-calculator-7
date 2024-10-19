@@ -1,15 +1,18 @@
 package calculator.domain
 
 class Calculator(
-    private var numbers: String
+    private var input: String
 ) {
     private val delimiters = mutableSetOf(BASIC_DELIMITER_COMMA, BASIC_DELIMITER_COLON)
+    private var stringNumbers: String = input
+    private val numbers = mutableListOf<Int>()
 
     init {
-        parseCustomDelimiter(numbers)
+        parseCustomDelimiter()
+        parseNumbers()
     }
 
-    private fun parseCustomDelimiter(input: String) {
+    private fun parseCustomDelimiter() {
         if (input.startsWith(CUSTOM_DELIMITER_PREFIX)) {
             val customDelimiterStartIndex = CUSTOM_DELIMITER_PREFIX.length
             val customDelimiterEndIndex = input.indexOf(CUSTOM_DELIMITER_SUFFIX)
@@ -17,9 +20,14 @@ class Calculator(
             if (customDelimiterEndIndex != -1) {
                 val customDelimiter = input.substring(customDelimiterStartIndex, customDelimiterEndIndex)
                 delimiters.add(customDelimiter)
-                numbers = input.substring(customDelimiterEndIndex + CUSTOM_DELIMITER_SUFFIX.length)
+                stringNumbers = input.substring(customDelimiterEndIndex + CUSTOM_DELIMITER_SUFFIX.length)
             }
         }
+    }
+
+    private fun parseNumbers() {
+        numbers.addAll(stringNumbers.split(*delimiters.toTypedArray()).map { it.toInt() })
+        println(numbers)
     }
 
     companion object {
