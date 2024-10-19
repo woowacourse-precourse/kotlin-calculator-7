@@ -21,6 +21,12 @@ fun add(input: String): Int {
     // 빈 문자열 입력 시 0 출력 기능 구현
     if(input.isEmpty()) return 0
 
-    // 빈 문자열 이외의 처리 기능 구현 전
-    throw IllegalArgumentException("빈 문자열 이외의 입력 처리 기능이 아직 구현되지 않았습니다.")
+    // 정규 표현식을 이용한 구분자로 숫자 구분
+    val delimiters = "[,:]".toRegex()
+    val numbers = input.split(delimiters)
+
+    // 각 숫자를 더한 값을 계산
+    return numbers.map {
+        it.trim().toInt() // 공백 제거 후 숫자로 변환
+    }.sum() // 합산
 }
