@@ -5,7 +5,7 @@
 - [X] 문자열에서 숫자만 추출하기 위한 정규표현식 작성
 - [X] 정규표현식을 통해 구분자로 구분된 숫자들의 합 도출
 - [X] 예외처리
-- [ ] 테스트 코드 작성
+- [X] 테스트 코드 작성
 
 ## 구현 과정
 ### Console API를 통한 문자열 출력
@@ -86,3 +86,61 @@ try {
 + 실행결과
 
 ![img_1.png](img_1.png)
+
+### 테스트 코드
++ 예외처리 추가
+입력 조건을 확인하니 양수로 구성된 문자열이므로 수가 음수라면 예외 처리를 수행해주어야 한다.
+```
+fun minusCheck(number : Int) : Int{
+    if(number < 0) throw IllegalArgumentException()
+    return number
+}
+```
+를 통해 구분자로 구분한 문자가 음수인지 여부를 체크한다.
+그렇기에 return 문도 수정된다.
+```
+return if (matchResult != null) {
+            val delimiter = matchResult.groupValues[1]
+            val numbers = matchResult.groupValues[2]
+            numbers.split("[$delimiter,:]".toRegex()).sumOf { minusCheck(it.toInt()) }
+        } else {
+            input.split("[,:]".toRegex()).sumOf { minusCheck(it.toInt()) }
+        }
+```
+
+이제 출력값을 테스트할 테스트 코드를 추가하려한다.
+1. 기본 구분자로 구성된 문자열
+2. 커스텀 구분자로 구분된 문자열
+3. 커스텀 구분자와 기본 구분자가 함께 사용된 문자열
+4. 음수가 들어간 문자열
+5. 숫자가 아닌 다른 값이 들어간 문자열
+
+각각의 경우를 테스트해보자
+
+```
+fun test1(){
+    println("결과 : ${sumOfNumber("1:2:3,4,5:6")}")
+    println("결과 : ${sumOfNumber("//;\n1;2;3;4")}")
+    println("결과 : ${sumOfNumber("//;\n1;2:3,4,5;6")}")
+}
+
+fun test2(){
+    println("결과 : ${sumOfNumber("1:2:3;-6")}")
+}
+
+fun test3(){
+    println("결과 : ${sumOfNumber("1:2:a,bb,5:6")}")
+}
+```
+정상작동 된다면 출력은 21 10 21, IllegalArgumentExeption, IllegalArgumentExeption이 나와야할 것이다.
++ test1()
+
+![img_2.png](img_2.png)
++ test2()
+
+![img_3.png](img_3.png)
++ test3()
+
+![img_4.png](img_4.png)
+
+정상적으로 출력되는 것을 확인할 수 있다.
