@@ -1,8 +1,10 @@
 package calculator
 
+import camp.nextstep.edu.missionutils.Console
+
 fun main() {
     println("덧셈할 문자열을 입력해 주세요.")
-    var str : String = readln()
+    var str : String = Console.readLine()
 
     var sum = 0
     val delimiterList : MutableList<Char> = mutableListOf(',', ':') // 구분자 리스트
