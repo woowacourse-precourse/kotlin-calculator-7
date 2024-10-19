@@ -3,12 +3,16 @@ import camp.nextstep.edu.missionutils.Console
 
 // 잘못된 숫자나 음수 입력에 대한 예외 처리 함수
 fun runException(input: String): List<Int> {
-    // 문자열을 구분자 기준으로 분리
-    val numbers = if (input.startsWith("//")) {
+    // 문자열을 구분자 기준으로 분리하는 기능
+    val numbers = if (input.startsWith("//")) {    // 커스텀 구분자일때
         val part = input.split("\\n")
+        // 입력이 \n을 기준으로 두 부분(구분자 정의와 숫자 부분)으로 올바르게 나뉘는지 확인
+        if (part.size != 2) {
+            throw IllegalArgumentException("잘못된 입력입니다. 구분자와 숫자를 포함해야 합니다.")
+        }
         val delimiter = part[0][2]
-        part[1].split(delimiter)
-    } else {
+        part[1].split(delimiter)    // \n의 다음 부분을 커스텀 구분자 기준으로 분리
+    } else {    // 기본 구분자일때
         input.split(",", ":")
     }
     // 각 숫자에 대한 유효성 검사
@@ -23,20 +27,19 @@ fun runException(input: String): List<Int> {
     }
 }
 
-// 기본 구분자 또는 커스텀 구분자에 대한 숫자 합산하는 함수
+// 기본 구분자 또는 커스텀 구분자에 대한 숫자 리스트 합산하는 함수
 fun totalSum(numbers: List<Int>): Int {
     return numbers.sum()
 }
 
 fun main() {
-
     val input = Console.readLine()
+    // 입력값이 null이나 빈문자열인지 확인
     if (input.isNullOrEmpty()) {
         println("결과 : 0")
     } else {
         val numbers = runException(input)   //예외 처리, 숫자 리스트 반환
         val result = totalSum(numbers)
-
         println("결과 : $result")
     }
 }
