@@ -70,6 +70,28 @@ class ApplicationTest : NsTest() {
         }
     }
 
+    @Test
+    fun `십의 자리 예외 테스트`() {
+        assertSimpleTest {
+            assertThrows<IllegalArgumentException> { runException("-12,2,3") }
+        }
+    }
+
+    @Test
+    fun `십의 자리 커스텀 구분자 사용`() {
+        assertSimpleTest {
+            run("//;\\n123;1")
+            assertThat(output()).contains("결과 : 124")
+        }
+    }
+
+    @Test
+    fun `십의 자리 커스텀 예외 테스트`() {
+        assertSimpleTest {
+            assertThrows<IllegalArgumentException> { runException("\\n-//12,2,3") }
+        }
+    }
+
     override fun runMain() {
         main()
     }
