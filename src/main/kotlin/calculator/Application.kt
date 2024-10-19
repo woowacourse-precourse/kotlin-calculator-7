@@ -6,13 +6,16 @@ private val DEFAULT_DELIMITERS = listOf(",", ":")
 private val DELIMITERS_CONDITIONS = listOf("//", "\\n")
 
 fun main() {
+    println("덧셈할 문자열을 입력해 주세요.")
+
     val input = readLine()
     val customDelimiters = getCustomDelimiter(input)
     val finalDelimiters = createFinalDelimiters(customDelimiters)
     val inputStringList = splitByDelimiters(input, finalDelimiters)
     val inputIntList = inputStringList.map { it.toInt() }
     val sumOfIntList = inputIntList.sum()
-    println(sumOfIntList)
+
+    println("결과 : $sumOfIntList")
 }
 
 // 구분자를 기준으로 문자열을 나눈다.
