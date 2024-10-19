@@ -60,6 +60,13 @@ fun defaultDelimiter(input: String) {
 
 /* 숫자 문자열의 합 계산 함수 */
 fun sumNumbers(numbers: List<String>): Int {
+    numbers.forEach {
+        //숫자가 아닌 문자가 포함된 경우 IllegalArgumentException 발생, 애플리케이션 종료
+        if (!it.all { char -> char.isDigit() }) {
+            throw IllegalArgumentException()
+        }
+    }
+
     return numbers.map { it.toInt() }.sum()
 }
 
