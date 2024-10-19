@@ -5,8 +5,7 @@ import camp.nextstep.edu.missionutils.Console.readLine
 fun main() {
     val input: String = getInput("덧셈할 문자열을 입력해 주세요.")
     val operands: MutableList<Long> = parseInput(input)
-    // 피연산자 출력 확인
-    println(operands)
+    printSum("결과 : ", operands)
 }
 
 /** 문자열을 입력받고, 이를 MutableList로 반환
@@ -62,4 +61,14 @@ fun parseExpression(expression: String, delimiterList: MutableList<Char>): Mutab
 
     if (number.size > 0) numberList.add(number.joinToString("").toLong())
     return numberList
+}
+
+fun printSum(responseMessage: String, numberList: MutableList<Long>) {
+    var sum: Long = 0
+    numberList.forEach { number -> sum += number }
+    println("$responseMessage$sum")
+}
+
+fun inspectError(input: String) {
+
 }
