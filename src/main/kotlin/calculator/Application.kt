@@ -9,6 +9,14 @@ fun getNumberList(onlyNumberInputString: String, userSeparator: String?): List<I
     }
 }
 
+
+fun checkNegative(numberList: List<Int>) {
+    if (!numberList.all { it > 0 }) {
+        throw IllegalArgumentException("양수만 입력가능합니다.")
+    }
+}
+
+
 fun main() {
     // TODO: 프로그램 구현
     val SEPARATOR_COMMAND_FRONT = "//"
@@ -24,6 +32,8 @@ fun main() {
         userSeparator?.length?.plus(SEPARATOR_COMMAND_FRONT.length + SEPARATOR_COMMAND_BACK.length - 1) ?: 0
 
     val numberList = getNumberList(userInput.substring(onlyNumberInputString), userSeparator)
+
+    checkNegative(numberList)
 
     println("결과 : ${numberList.sum()}")
 
