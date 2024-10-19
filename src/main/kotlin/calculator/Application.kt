@@ -34,14 +34,7 @@ fun isValid(str: String): Boolean {
     return inputRegex.matches(str)
 }
 
-fun checkCustom(str: String): Boolean {
-    var str = str
-
-    if (str.contains("//") && str.contains("\\n")) {
-        return true
-    }
-    throw IllegalArgumentException()
-}
+fun checkCustom(str: String): Boolean = str.contains("//") && str.contains("\\n")
 
 fun replaceCustom(str: String): String {
     var str = str
