@@ -43,6 +43,15 @@ interface Calculator {
 
 class CustomCalculator : Calculator {
     override fun calculate(input: String): Int {
+        val separator = generateSeparator(input)
+        val newInput = input.drop(SEPARATOR_PREFIX.length + separator.length + SEPARATOR_POSTFIX.length)
+    private fun generateSeparator(input: String): String =
+        input.split(SEPARATOR_POSTFIX).first().drop(SEPARATOR_PREFIX.length)
+
+
+    companion object {
+        private const val SEPARATOR_PREFIX = "//"
+        private const val SEPARATOR_POSTFIX = "\\n"
     }
 }
 
