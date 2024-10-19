@@ -1,5 +1,6 @@
 package calculator
 
+import calculator.utils.Extractor
 import calculator.view.InputView
 import calculator.view.OutputView
 

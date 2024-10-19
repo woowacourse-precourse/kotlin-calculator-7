@@ -15,7 +15,7 @@ fun String.isContainCustomOperator(): Boolean {
 
 
 fun String.splitWithCustomOperator(): List<String> {
-    val regex = Regex(SPLIT_OPERATOR.pattern);
+    val regex = Regex(SPLIT_OPERATOR.pattern)
     val matchResult = regex.find(this)
     val delimiter = matchResult!!.groupValues[1]
     val numberPart = matchResult.groupValues[2]

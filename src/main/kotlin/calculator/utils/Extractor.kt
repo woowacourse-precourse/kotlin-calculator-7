@@ -1,4 +1,8 @@
-package calculator
+package calculator.utils
+
+import calculator.isContainCustomOperator
+import calculator.splitWithCustomOperator
+import calculator.toIntListByOperator
 
 object Extractor {
 
