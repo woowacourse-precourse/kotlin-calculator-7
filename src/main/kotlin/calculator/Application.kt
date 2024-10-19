@@ -9,7 +9,7 @@ fun main() {
     val str = Console.readLine()
     val splitStr = splitStr(str)
     val result = calculate(splitStr)
-    println(result)
+    println("결과 : $result")
 }
 
 fun splitStr(str: String): List<Int> {
@@ -17,17 +17,22 @@ fun splitStr(str: String): List<Int> {
         throw IllegalArgumentException("구분자와 양수로 구성된 문자열을 입력해 주세요.")
     } else {
         val strWithoutSep = findCustomSeparator(str)
-        println(strWithoutSep)
-        return strWithoutSep.split(*sepList.toTypedArray()).filter { it.isNotBlank() }.map { convertToIntOrThrow(it) }
+        return strWithoutSep.split(*sepList.toTypedArray())
+            .filter { it.isNotBlank() }
+            .map {
+                try {
+                    convertToIntOrThrow(it)
+                } catch (e: NumberFormatException) {
+                    throw IllegalArgumentException("잘못된 문자열 형식이 포함되어 있어요: '$it'")
+                }
+            }
     }
 }
 
 fun findCustomSeparator(str: String): String {
     if (str.startsWith("//") && str.contains("\\n")) {
         val customSeparator = getCustomSeparator(str)
-        println("커스텀 구분자: ${customSeparator.length}")
         sepList.add(customSeparator)
-        println(sepList)
         return Regex("""//.*\\n""").replace(str, "")
     }
     return str
@@ -38,13 +43,15 @@ fun getCustomSeparator(str: String): String {
     val startIndex = str.indexOf("//") + 2
     val endIndex = str.indexOf("\\n")
 
-    // 구분자가 없으면 빈 문자열 반환
-    if (startIndex <= 2 || endIndex == -1 || startIndex >= endIndex) {
-        return ""
+    val customSeparator = str.substring(startIndex, endIndex)
+
+    // 구분자가 숫자인 경우 예외 발생
+    if (customSeparator.trim().all { it.isDigit() }) {
+        throw IllegalArgumentException("숫자는 커스텀 구분자로 사용할 수 없어요.")
     }
 
     // "//"와 "\n" 사이의 문자열을 추출하여 반환
-    return str.substring(startIndex, endIndex)
+    return customSeparator
 }
 
 fun calculate(strList: List<Int>): Int {
