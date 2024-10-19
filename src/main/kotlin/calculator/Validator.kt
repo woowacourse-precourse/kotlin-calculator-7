@@ -50,4 +50,15 @@ object Validator {
             throw IllegalArgumentException(ERROR_INPUT_NOT_EXPRESSION)
         }
     }
+
+    fun returnNumber(userInput: String): List<Int> {
+        val endOfCustomDelimiter = if (userInput.startsWith(INPUT_DELIMITER_FRONT)) {
+            userInput.indexOf(INPUT_DELIMITER_END) + 2
+        } else {
+            0
+        }
+        val expression = userInput.substring(endOfCustomDelimiter)
+        val numbers = expression.split(Regex("[" + delimiterList.joinToString("") + "]")).map { it.toInt() }
+        return numbers
+    }
 }
