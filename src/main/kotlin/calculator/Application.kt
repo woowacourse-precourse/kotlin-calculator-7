@@ -26,14 +26,14 @@ fun getInput(requestMessage: String): String {
  * @return 파싱된 수들의 리스트
  */
 fun parseInput(input: String): MutableList<Long> {
-    val delimiterList = mutableListOf<Char>(',', ':')
+    val delimiterList = mutableSetOf<Char>(',', ':')
     var expression = input
 
     if (input.startsWith("//")) {
         var idx = 2
         while (true) {
             while (input[idx] != '\\') {
-                delimiterList.addLast(input[idx])
+                delimiterList.add(input[idx])
                 idx++
             }
             // input[idx] = '\\' (backslash)인 상태
@@ -42,7 +42,7 @@ fun parseInput(input: String): MutableList<Long> {
                 break
             }
 
-            delimiterList.addLast(input[idx])
+            delimiterList.add(input[idx])
             idx++
         }
     }
@@ -56,7 +56,7 @@ fun parseInput(input: String): MutableList<Long> {
  * @param delimiterList 구분자로 사용할 문자들의 리스트
  * @return 구분자를 기준으로 분리된 수들의 리스트
  */
-fun parseExpression(expression: String, delimiterList: MutableList<Char>): MutableList<Long> {
+fun parseExpression(expression: String, delimiterList: MutableSet<Char>): MutableList<Long> {
     val numberList = mutableListOf<Long>()
     var number = mutableListOf<Char>()
     for (character in expression) {
@@ -94,7 +94,7 @@ fun printSum(responseMessage: String, numberList: MutableList<Long>) {
  * @param input 사용자로부터 입력받은 문자열
  */
 fun inspectError(input: String) {
-    val delimiterList = mutableListOf<Char>(',', ':')
+    val delimiterList = mutableSetOf<Char>(',', ':')
     var inspectIndex = 0
     var prevCharacter: Char? = null
 
@@ -102,7 +102,7 @@ fun inspectError(input: String) {
         inspectIndex = 2
         while (inspectIndex < input.length) {
             while (input[inspectIndex] != '\\') {
-                delimiterList.addLast(input[inspectIndex])
+                delimiterList.add(input[inspectIndex])
                 inspectIndex++
                 prevCharacter = input[inspectIndex]
             }
@@ -113,7 +113,7 @@ fun inspectError(input: String) {
                 break
             }
 
-            delimiterList.addLast(input[inspectIndex])
+            delimiterList.add(input[inspectIndex])
             prevCharacter = input[inspectIndex]
             inspectIndex++
         }
