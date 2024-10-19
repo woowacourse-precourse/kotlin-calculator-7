@@ -12,18 +12,12 @@ fun main() {
         0 -> {
             // 아무것도 입력하지 않았을 때
         }
-
-        1 -> {
-            // 하나만 입력했을 때
-            result = calc.toIntOrNull()?:throw IllegalArgumentException("Input must be start with number")
-        }
-
         else -> {
             var custom : String? = null
             var delimiters = mutableListOf(",", ":")
 
             // 커스텀 구분자인지 판단
-            if (calc.substring(0..1) == "//") {
+            if (calc.length >= 2 && calc.substring(0..1) == "//") {
                 // 커스텀 구분자인 경우
                 custom = calc.substring(2 until calc.indexOf("\\n"))
                 calc = calc.substring(calc.indexOf("\\n")+2 until calc.length)
