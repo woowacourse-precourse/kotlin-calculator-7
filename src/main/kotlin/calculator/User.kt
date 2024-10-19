@@ -7,29 +7,17 @@ class User {
 
     fun getNumbers(): List<Int> {
         val inputString = UserView.getInput()
-        val delimiters = extract.extractDelimiter(inputString)
-        if (inputException(inputString, delimiters)) {
+        if (inputException(inputString)) {
             throw IllegalArgumentException(ERROR_MESSAGE)
         }
         return extract.extractNumbers(inputString)
     }
 
-    private fun inputException(inputString: String, delimiters: List<String>): Boolean {
-        if (delimiters.size == 2) {
-            val pattern = Regex("[^\\d,:]")
-            val invalidChar = pattern.find(inputString)
-            if (invalidChar != null) {
-                return true
-            }
-        }
-        if (delimiters.size == 3) {
-            val pattern = Regex("[^\\d,:$delimiters[2]]")
-            val inputFiltered = extract.extractString(inputString)
-            val invalidChar = pattern.find(inputFiltered)
-            if (invalidChar != null) {
-                return true
-            }
-        }
-        return false
+    private fun inputException(inputString: String): Boolean {
+        val delimiters = extract.extractDelimiter(inputString)
+        val inputFiltered = extract.extractString(inputString)
+        val pattern = Regex("[^\\d$delimiters]")
+        val invalidChar = pattern.find(inputFiltered)
+        return invalidChar != null
     }
 }
