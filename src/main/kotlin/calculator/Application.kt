@@ -7,11 +7,20 @@ fun input(): String = Console.readLine()
 fun splitNumber(str: String): List<Int> {
     var numberList: List<Int> = listOf()
 
+    var num = ""
+
     str.forEach {
         if (it == ',' || it == ':') {
+            if (num != "") {
+                numberList += num.toInt()
+                num = ""
+            }
             return@forEach
         }
-        numberList += it.toString().toInt()
+        num += it.toString()
+    }
+    if (num != "") {
+        numberList += num.toInt()
     }
 
     return numberList
@@ -31,7 +40,7 @@ fun checkCustom(str: String): Boolean {
     if (str.contains("//") && str.contains("\\n")) {
         return true
     }
-    return false
+    throw IllegalArgumentException()
 }
 
 fun replaceCustom(str: String): String {
