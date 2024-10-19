@@ -19,7 +19,18 @@ fun main() {
     //입력 문자열이 '//'로 시작하는 경우
     if (input.startsWith("//")) {
         val parts = input.split("\\n") //커스텀 구분자 파트와 숫자 파트로 분리
+
+        //'\n'이 없는 경우 IllegalArgumentException 발생, 애플리케이션 종료
+        if (parts.size != 2) {
+            throw IllegalArgumentException()
+        }
+
         val delimiter = parts[0].substring(2) //커스텀 구분자
+
+        //커스텀 구분자가 없는 경우 IllegalArgumentException 발생, 애플리케이션 종료
+        if (delimiter.isEmpty()) {
+            throw IllegalArgumentException()
+        }
 
         //숫자가 없는 경우 결과값은 0
         if (parts[1].isEmpty()) {
