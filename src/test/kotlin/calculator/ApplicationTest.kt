@@ -55,6 +55,13 @@ class ApplicationTest : NsTest() {
             assertThat(output()).contains("결과 : 10")
         }
     }
+    @Test
+    fun `커스텀 구분자 사용 예시4`() {
+        assertSimpleTest{
+            run("//-\\n1-2-3")
+            assertThat(output()).contains("결과 : 6")
+        }
+    }
 
     @Test
     fun `예외 테스트`() {

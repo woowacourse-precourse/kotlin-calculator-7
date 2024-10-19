@@ -5,8 +5,8 @@ import camp.nextstep.edu.missionutils.Console
 fun main() {
     try {
         val str = Console.readLine().trim()
-        val numbers = splitString(str)
-        // val numbers = filteringString(str)
+        // val numbers = splitString(str)
+        val numbers = filteringString(str)
 
         if (numbers.any { it < 0 }) {
             throw IllegalArgumentException("잘못 입력하셨습니다.\n양수를 입력해 주세요.")
@@ -14,9 +14,7 @@ fun main() {
 
         val sum = sumNumbers(numbers)
         printResult(str, sum)
-
-    }
-    finally {
+    } finally {
         Console.close()
     }
 }
