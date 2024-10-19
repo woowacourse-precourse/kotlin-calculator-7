@@ -20,13 +20,13 @@ fun getNumberList(userInput: String, userSeparator: String?): List<Int> {
     try {
         return onlyNumberInputString.split(",|:|${userSeparator}".toRegex()).map { it.toInt() }
     } catch (err: NumberFormatException) {
-        throw IllegalArgumentException("형식에 맞추어 문자열을 입력해주세요.")
+        throw IllegalArgumentException()
     }
 }
 
 fun checkNegative(numberList: List<Int>) {
     if (!numberList.all { it > 0 }) {
-        throw IllegalArgumentException("양수만 입력가능합니다.")
+        throw IllegalArgumentException()
     }
 }
 
