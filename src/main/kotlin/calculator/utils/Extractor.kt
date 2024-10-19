@@ -1,15 +1,14 @@
 package calculator.utils
 
 import calculator.extensions.isContainCustomOperator
-import calculator.extensions.splitWithCustomOperator
 import calculator.extensions.toIntListByOperator
+import calculator.extensions.toIntListAppliedCustomOperator
 
 object Extractor {
 
     fun extractNumbers(input: String): List<Int> {
-        if (!input.isContainCustomOperator()) {
-            return input.toIntListByOperator()
-        }
-        return input.splitWithCustomOperator().map { it.toInt() }
+        return if (!input.isContainCustomOperator()) {
+            input.toIntListByOperator()
+        } else input.toIntListAppliedCustomOperator()
     }
 }
