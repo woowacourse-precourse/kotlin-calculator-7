@@ -11,7 +11,7 @@ class UserView {
             println(INPUT_MESSAGE)
         }
 
-        fun getStringInput(): String {
+        fun getInput(): String {
             return Console.readLine()
         }
 

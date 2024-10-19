@@ -2,5 +2,5 @@ package calculator
 
 fun main() {
     val calc = Calc()
-    calc.addition()
+    calc.add()
 }

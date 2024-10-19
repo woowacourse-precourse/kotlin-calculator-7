@@ -3,51 +3,33 @@ package calculator
 private const val ERROR_MESSAGE = "잘못된 입력입니다."
 
 class User {
-    private val customPattern = Regex("^(//(.)\\\\n)(.*)")
+    private val extract = Extract()
 
     fun getNumbers(): List<Int> {
-        val inputString = UserView.getStringInput()
-        val delimiters = customDelimiter(inputString)
+        val inputString = UserView.getInput()
+        val delimiters = extract.extractDelimiter(inputString)
         if (inputException(inputString, delimiters)) {
             throw IllegalArgumentException(ERROR_MESSAGE)
         }
-        return extractedNumbers(inputString)
+        return extract.extractNumbers(inputString)
     }
 
-    private fun inputException(inputString: String, delimiter: List<String>): Boolean {
-        if (delimiter.size == 2) {
+    private fun inputException(inputString: String, delimiters: List<String>): Boolean {
+        if (delimiters.size == 2) {
             val pattern = Regex("[^\\d,:]")
-            val matchResult = pattern.find(inputString)
-            if (matchResult != null) {
+            val invalidChar = pattern.find(inputString)
+            if (invalidChar != null) {
                 return true
             }
         }
-        if (delimiter.size == 3) {
-            val pattern = Regex("[^\\d,:$delimiter[2]]")
-            val matchResult = customPattern.find(inputString)
-            val inputFiltered = matchResult?.groups?.get(3)?.value ?: inputString
-            val matchFilteredResult = pattern.find(inputFiltered)
-            if (matchFilteredResult != null) {
+        if (delimiters.size == 3) {
+            val pattern = Regex("[^\\d,:$delimiters[2]]")
+            val inputFiltered = extract.extractString(inputString)
+            val invalidChar = pattern.find(inputFiltered)
+            if (invalidChar != null) {
                 return true
             }
         }
         return false
-    }
-
-    private fun customDelimiter(inputString: String): List<String> {
-        val delimiters = mutableListOf(",", ":")
-        val isCustom = customPattern.matches(inputString)
-        if (isCustom) {
-            delimiters.add(inputString[2].toString())
-        }
-        return delimiters
-    }
-
-    private fun extractedNumbers(inputString: String): List<Int> {
-        val numbers = Regex("\\d+")
-        val matchResult = customPattern.find(inputString)
-        val inputFiltered = matchResult?.groups?.get(3)?.value ?: inputString
-        val userNumbers = numbers.findAll(inputFiltered).map{ it.value.toInt() }.toList()
-        return userNumbers
     }
 }
