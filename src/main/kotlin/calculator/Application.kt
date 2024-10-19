@@ -23,6 +23,10 @@ fun main() {
 
         val numberParts = parts[1]
             .split(delimiter, ",", ":") //커스텀 구분자, 쉼표(,)와 콜론(:)으로 문자열 분리
+
+        result = numberParts
+            .map { it.toInt() } //분리한 문자열을 정수로 변환
+            .sum() //변환한 정수의 합을 계산하여 저장
     }
     //입력 문자열이 숫자, 쉼표, 콜론으로 시작하는 경우
     else if (input[0].isDigit() || input[0] == ',' || input[0] == ':') {
