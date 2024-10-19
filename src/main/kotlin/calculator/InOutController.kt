@@ -2,8 +2,7 @@ package calculator
 
 import camp.nextstep.edu.missionutils.Console
 
-class InOutController {
-    private val repo = Repository()
+class InOutController(private val repo: Repository) {
 
     fun input() {
         // 문자열을 입력받고, 커스텀 구분자의 유무를 확인
