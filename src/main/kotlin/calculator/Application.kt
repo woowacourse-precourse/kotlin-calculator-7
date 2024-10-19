@@ -31,10 +31,14 @@ fun totalSum(numbers: List<Int>): Int {
 fun main() {
 
     val input = Console.readLine()
-    val numbers = runException(input)   //예외 처리, 숫자 리스트 반환
-    val result = totalSum(numbers)
+    if (input.isNullOrEmpty()) {
+        println("결과 : 0")
+    } else {
+        val numbers = runException(input)   //예외 처리, 숫자 리스트 반환
+        val result = totalSum(numbers)
 
-    println("결과 : $result")
+        println("결과 : $result")
+    }
 }
 
 
