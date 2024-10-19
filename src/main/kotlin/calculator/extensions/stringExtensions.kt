@@ -1,4 +1,4 @@
-package calculator
+package calculator.extensions
 
 import calculator.eums.DefaultOperator.*
 import calculator.eums.RegexPattern.*
