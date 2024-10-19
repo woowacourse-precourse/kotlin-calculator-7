@@ -9,19 +9,15 @@ fun minusCheck(number : Int) : Int{
 fun sumOfNumber(input : String) : Int{
     if (input.isEmpty()) return 0
 
-    val customDelimiterPattern = """//(.)\n(.*)""".toRegex()
+    val customDelimiterPattern = """//(.)\\n(.*)""".toRegex()
     val matchResult = customDelimiterPattern.matchEntire(input)
 
-    try {
-        return if (matchResult != null) {
-            val delimiter = matchResult.groupValues[1]
-            val numbers = matchResult.groupValues[2]
-            numbers.split("[$delimiter,:]".toRegex()).sumOf { minusCheck(it.toInt()) }
-        } else {
-            input.split("[,:]".toRegex()).sumOf { minusCheck(it.toInt()) }
-        }
-    }catch (e : Exception){
-        throw IllegalArgumentException()
+    return if (matchResult != null) {
+        val delimiter = matchResult.groupValues[1]
+        val numbers = matchResult.groupValues[2]
+        numbers.split("[$delimiter,:]".toRegex()).sumOf { minusCheck(it.toInt()) }
+    } else {
+        input.split("[,:]".toRegex()).sumOf { minusCheck(it.toInt()) }
     }
 }
 fun main() {
@@ -33,8 +29,8 @@ fun main() {
 
 fun test1(){
     println("결과 : ${sumOfNumber("1:2:3,4,5:6")}")
-    println("결과 : ${sumOfNumber("//;\n1;2;3;4")}")
-    println("결과 : ${sumOfNumber("//;\n1;2:3,4,5;6")}")
+    println("결과 : ${sumOfNumber("//;\\n1;2;3;4")}")
+    println("결과 : ${sumOfNumber("//;\\n1;2:3,4,5;6")}")
 }
 
 fun test2(){
