@@ -7,7 +7,7 @@ fun main(args: Array<String>) {
     println("덧셈할 문자열을 입력해 주세요.")
     val input = Console.readLine()
 
-    // try-catch를 이용해서 예외 처리하기
+    // 예외 처리와 결과 출력
     try {
         val result = add(input)
         println("결과 : $result")
@@ -18,15 +18,33 @@ fun main(args: Array<String>) {
 
 // 구분자를 구분하고, 숫자들을 모아서 더한 값을 출력하는 함수
 fun add(input: String): Int {
-    // 빈 문자열 입력 시 0 출력 기능 구현
-    if(input.isEmpty()) return 0
+    // 빈 문자열 처리
+    if (input.isEmpty()) return 0
 
-    // 정규 표현식을 이용한 구분자로 숫자 구분
-    val delimiters = "[,:]".toRegex()
-    val numbers = input.split(delimiters)
+    // 기본 구분자 설정
+    var delimiters = "[,:]".toRegex()
+    var numbers = input
 
-    // 각 숫자를 더한 값을 계산
-    return numbers.map {
-        it.trim().toInt() // 공백 제거 후 숫자로 변환
-    }.sum() // 합산
+    // 커스텀 구분자 처리
+    val customDelimiter = findCustomDelimiter(input)
+    if (customDelimiter != null) {
+        delimiters = Regex(Regex.escape(customDelimiter.first))
+        numbers = customDelimiter.second
+    }
+
+    // 구분자를 사용하여 숫자를 분리하고 합산
+    return numbers.split(delimiters)
+        .mapNotNull { it.trim().toIntOrNull() } // 공백 제거 후 숫자로 변환 가능한 경우만 처리
+        .sum() // 숫자 합산
+}
+
+// 커스텀 구분자를 찾는 함수
+fun findCustomDelimiter(input: String): Pair<String, String>? {
+    if (input.startsWith("//") && input.contains("\\n")) {
+        val delimiterEndIndex = input.indexOf("\\n")
+        val customDelimiter = input.substring(2, delimiterEndIndex) // 커스텀 구분자 추출
+        val numbers = input.substring(delimiterEndIndex + 2) // 숫자 부분 추출
+        return Pair(customDelimiter, numbers)
+    }
+    return null
 }
