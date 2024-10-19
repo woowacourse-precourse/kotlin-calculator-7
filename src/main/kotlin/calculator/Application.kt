@@ -21,6 +21,12 @@ fun main() {
         val parts = input.split("\\n") //커스텀 구분자 파트와 숫자 파트로 분리
         val delimiter = parts[0].substring(2) //커스텀 구분자
 
+        //숫자가 없는 경우 결과값은 0
+        if (parts[1].isEmpty()) {
+            print("결과 : 0")
+            return
+        }
+
         val numberParts = parts[1]
             .split(delimiter, ",", ":") //커스텀 구분자, 쉼표(,)와 콜론(:)으로 문자열 분리
 
