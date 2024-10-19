@@ -59,8 +59,12 @@ fun main() {
     try {
         var inputString = input()
 
-        if (!isValid(inputString) && checkCustom(inputString)) {
-            inputString = replaceCustom(inputString)
+        if (!isValid(inputString)) {
+            if (checkCustom(inputString)) {
+                inputString = replaceCustom(inputString)
+            } else {
+                throw IllegalArgumentException()
+            }
         }
 
         val numbers = splitNumber(inputString)
@@ -69,7 +73,5 @@ fun main() {
 
     } catch (e: NoSuchElementException) {
         println("결과 : 0")
-    } catch (e: IllegalArgumentException) {
-        throw e
     }
 }
