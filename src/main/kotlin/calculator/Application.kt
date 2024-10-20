@@ -21,30 +21,22 @@ fun add(input: String): Int {
     // 빈 문자열 처리
     if (input.isEmpty()) return 0
 
-    // 기본 구분자 설정
-    var delimiters = "[,:]".toRegex()
-    var numbers = input
-
-    // 커스텀 구분자 처리
-    val customDelimiter = findCustomDelimiter(input)
-    if (customDelimiter != null) {
-        delimiters = Regex(Regex.escape(customDelimiter.first))
-        numbers = customDelimiter.second
-    }
+    // 커스텀 구분자 또는 기본 구분자 설정 및 숫자 추출
+    val (delimiters, numbers) = findCustomDelimiter(input) ?: Pair("[,:]".toRegex(), input)
 
     // 구분자를 사용하여 숫자를 분리하고 합산
-    return numbers.split(delimiters)
-        .mapNotNull { it.trim().toIntOrNull() } // 공백 제거 후 숫자로 변환 가능한 경우만 처리
+    return numbers.split(delimiters).mapNotNull { it.trim().toIntOrNull() } // 공백 제거 후 숫자로 변환 가능한 경우만 처리
         .sum() // 숫자 합산
 }
 
-// 커스텀 구분자를 찾는 함수
-fun findCustomDelimiter(input: String): Pair<String, String>? {
-    if (input.startsWith("//") && input.contains("\\n")) {
-        val delimiterEndIndex = input.indexOf("\\n")
-        val customDelimiter = input.substring(2, delimiterEndIndex) // 커스텀 구분자 추출
-        val numbers = input.substring(delimiterEndIndex + 2) // 숫자 부분 추출
-        return Pair(customDelimiter, numbers)
+// 커스텀 구분자 찾는 함수
+fun findCustomDelimiter(input: String): Pair<Regex, String>? {
+    val regex = Regex("//(.)\\\\n(.*)")
+    val matchResult = regex.find(input)
+
+    return matchResult?.let {
+        val customDelimiter = Regex(Regex.escape(it.groupValues[1])) // 커스텀 구분자
+        val numbers = it.groupValues[2] // 숫자 부분
+        Pair(customDelimiter, numbers)
     }
-    return null
 }
