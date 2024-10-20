@@ -15,12 +15,8 @@ fun main() {
     val input = Console.readLine().trim('"', '\'')
 
     // 결과 처리
-    try {
-        val result = calculator(input, defaultSeparators, customSeparatorPattern)
-        println("결과 : $result")
-    } catch (e: IllegalArgumentException) {
-        println("Error : ${e.message}")
-    }
+    val result = calculator(input, defaultSeparators, customSeparatorPattern)
+    println("결과 : $result")
 
 }
 
@@ -45,13 +41,13 @@ fun extractCustomSeparator(input: String, defaultSeparators: List<String>, custo
         val numbersPart = customSeparatorMatch.groupValues[2]
 
         if (customSeparator.length != 1) {
-            throw IllegalArgumentException("Custom delimiter must be a single character: $customSeparator")
+            throw IllegalArgumentException()
         }
         if (customSeparator in defaultSeparators) {
-            throw IllegalArgumentException("Custom delimiter cannot be a default delimiter (comma or colon): $customSeparator")
+            throw IllegalArgumentException()
         }
         if (customSeparator[0].isDigit()) {
-            throw IllegalArgumentException("Custom delimiter cannot be a digit: $customSeparator")
+            throw IllegalArgumentException()
         }
 
         Pair(defaultSeparators + customSeparator, numbersPart)
@@ -70,10 +66,10 @@ fun splitNumbers(input: String, separators: List<String>): List<String> {
 fun sumNumbers(numbers: List<String>): Long {
     val negativeNumbers = numbers.filter { it.toLongOrNull()?.let { num -> num < 0 } == true }
     if (negativeNumbers.isNotEmpty()) {
-        throw IllegalArgumentException("Negatives not allowed: $negativeNumbers")
+        throw IllegalArgumentException()
     }
 
     return numbers
-        .map { it.toLongOrNull() ?: throw IllegalArgumentException("Invalid number format: $it") }
+        .map { it.toLongOrNull() ?: throw IllegalArgumentException() }
         .sum()
 }
