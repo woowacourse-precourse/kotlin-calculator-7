@@ -20,7 +20,13 @@ class Operand(
 
     private fun removeCustomSeparatorPattern() =
         inputValue.replace(generateCustomSeparatorPattern, "")
+    private fun parseStringToIntList(stringOperand: List<String>): List<Int> {
+        return stringOperand.map {
+            it.toIntOrNull() ?: throw IllegalArgumentException(ERROR_INVALID_NUMBER)
+        }
+    }
     companion object {
         private const val GENERATE_CUSTOM_SEPARATOR_PATTERN = "^//(.)\\\\n"
+        private const val ERROR_INVALID_NUMBER = "[ERROR] 숫자만 입력 가능합니다."
     }
 }
