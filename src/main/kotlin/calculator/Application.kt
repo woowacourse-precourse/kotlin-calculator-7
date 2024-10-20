@@ -42,8 +42,15 @@ private fun getDelimiterSet(isCustomDelimiter: Boolean, input: String): Set<Stri
         setOf(BASIC_DELIMITER_COMMA, BASIC_DELIMITER_COLON)
     }
 }
+
+private fun validateNumber(value: String): Long {
+    val number = value.toLongOrNull() ?: throw IllegalArgumentException(MESSAGE_INVALID_NUMBER.replace("%s", value))
+    if (number < 0) throw IllegalArgumentException(MESSAGE_NEGATIVE_NUMBER.replace("%s", number.toString()))
+    return number
+}
+
 private const val CUSTOM_DELIMITER_PREFIX = "//"
 private const val CUSTOM_DELIMITER_SUFFIX = "\\n"
 private const val BASIC_DELIMITER_COMMA = ","
 private const val BASIC_DELIMITER_COLON = ":"
-private const val MESSAGE_RESULT_NUMBER = "결과 : %s"
+private const val MESSAGE_INPUT_NUMBER = "덧셈할 문자열을 입력해 주세요."private const val MESSAGE_INVALID_NUMBER = "숫자가 아닌 값이 포함되어 있습니다: '%s'"private const val MESSAGE_NEGATIVE_NUMBER = "음수는 허용되지 않습니다: '%s'"private const val MESSAGE_RESULT_NUMBER = "결과 : %s"
