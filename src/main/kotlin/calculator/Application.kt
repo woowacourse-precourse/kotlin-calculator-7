@@ -40,6 +40,11 @@ class Calculate(private val input: String) {
         }
     }
 
+    // 숫자 리스트의 합을 반환하는 메서드
+    fun totalSum(numbers: List<Int>): Int {
+        return numbers.sum()
+    }
+
 }
 
 
