@@ -8,17 +8,32 @@ class CalculatorController {
         val input = userInput()
 
         // custom delimiter
+        val calculationNumbers = parseCustomDelimiter(input)
 
         // invalidate
-        input.calculateInputValidate()
+        calculationNumbers.calculateInputValidate()
 
         // split
-        val numbers: List<Int> = input.split(Regex("[$delimiter]"))
-            .filter { it.isNotEmpty() }
-            .map { it.toInt() }
+        val numbers: List<Int> =
+            calculationNumbers
+                .split(Regex("[$delimiter]"))
+                .filter { it.isNotEmpty() }
+                .map { it.toInt() }
 
         // sum operation
         calculatorOutput(numbers.sum())
+    }
+
+    private fun parseCustomDelimiter(input: String): String {
+        val pattern = Regex("""^//(.)\\n(.*)$""")
+        val matchResult = pattern.find(input)
+        matchResult?.let {
+            it.groupValues.forEachIndexed { index, s ->
+                println("$index : $s")
+            }
+            delimiter = it.groupValues[1]
+            return it.groupValues[2]
+        } ?: return input
     }
 
     private fun userInput(): String {
@@ -26,7 +41,7 @@ class CalculatorController {
         return readlnOrNull() ?: USER_BLANK_INPUT
     }
 
-    private fun String.calculateInputValidate(customDelimiter: String? = null) {
+    private fun String.calculateInputValidate() {
         val pattern = Regex("""^\d+([$delimiter]\d+)*$""")
         pattern.isNotMatch(this)
     }
