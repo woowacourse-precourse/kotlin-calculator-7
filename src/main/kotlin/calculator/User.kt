@@ -6,28 +6,20 @@ class User {
     private val calculator = Calculator()
 
     fun run() {
-        // 입력 받기
         val input = readLine()
 
         when (isCustom(input)) {
-            true -> {
-                calculator.calculateCustom(input)
-            }
-
-            false -> {
-                calculator.calculate(input)
-            }
+            true -> calculator.calculateCustom(input)
+            false -> calculator.calculate(input)
         }
-
     }
 
     private fun isCustom(input: String): Boolean {
-        val custom = input.take(CUSTOM_COUNT)
-        return custom.contains("//") && custom.contains("\\n")
+        return input.contains(FRONT_SEPARATOR) && input.contains(LAST_SEPARATOR)
     }
 
     private fun readLine(): String {
-        println("덧셈할 문자열을 입력해 주세요.")
+        println(START_MESSAGE)
         return Console.readLine()
     }
 }

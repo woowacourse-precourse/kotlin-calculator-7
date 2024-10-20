@@ -5,39 +5,35 @@ import kotlin.IllegalArgumentException
 class Calculator {
 
     fun calculate(input: String) {
-        val splitInput = input.split(",", ":")
+        val splitInput = input.split(COMMA, COLON)
         validateInput(splitInput)
-        printResult(splitInput.sumOf { it.toInt() })
+        printResult(splitInput.sumOf { it.toBigInteger() }.toString())
     }
 
     fun calculateCustom(input: String) {
         val (customSeparator, customInput) = input
-            .split("//", "\\n")
+            .split(FRONT_SEPARATOR, LAST_SEPARATOR)
             .filter { it.isNotEmpty() }
         validateInputCustom(customSeparator, customInput)
         val splitInput = customInput.split(customSeparator)
-        printResult(splitInput.sumOf { it.toInt() })
+        printResult(splitInput.sumOf { it.toBigInteger() }.toString())
     }
 
     private fun validateInput(splitInput: List<String>) {
         splitInput.forEach {
-            // 값이 구분자로 나누어지지 않았을 경우
-            if (it.toBigIntegerOrNull() == null) throw IllegalArgumentException("입력된 값이 잘못됐습니다.")
-            // 입력된 값이 음수일 경우
-            if (it[0] == '-') throw IllegalArgumentException("입력된 값이 잘못됐습니다.")
+            if (it.toBigIntegerOrNull() == null) throw IllegalArgumentException(INPUT_VALIDATE_MESSAGE)
+            if (it.first() == MINUS) throw IllegalArgumentException(INPUT_VALIDATE_MESSAGE)
         }
     }
 
     private fun validateInputCustom(customSeparator: String, customInput: String) {
-        // 커스텀 문자가 여러개일 경우
-        if (customSeparator.length != 1) throw IllegalArgumentException("커스텀 문자 입력이 잘못되었습니다")
-        // 커스텀 문자가 문자가 아닐 경우
-        if (customSeparator.first().isDigit()) throw IllegalArgumentException("커스텀 문자 입력이 잘못되었습니다")
+        if (customSeparator.length != 1) throw IllegalArgumentException(CUSTOM_INPUT_VALIDATE_MESSAGE)
+        if (customSeparator.first().isDigit()) throw IllegalArgumentException(CUSTOM_INPUT_VALIDATE_MESSAGE)
 
         validateInput(customInput.split(customSeparator))
     }
 
-    private fun printResult(result: Int) {
-        println("결과 : $result")
+    private fun printResult(result: String) {
+        println("$RESULT_STRING$result")
     }
 }
