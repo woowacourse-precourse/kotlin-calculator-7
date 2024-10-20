@@ -5,8 +5,7 @@ import camp.nextstep.edu.missionutils.Console
 fun input(): String = Console.readLine()
 
 fun splitNumber(str: String): List<Int> {
-    var numberList: List<Int> = listOf()
-
+    val numberList: MutableList<Int> = mutableListOf()
     var num = ""
 
     str.forEach {
@@ -34,22 +33,25 @@ fun isValid(str: String): Boolean {
     return inputRegex.matches(str)
 }
 
-fun checkCustom(str: String): Boolean = str.contains("//") && str.contains("\\n")
+fun checkCustom(str: String): Boolean {
+    if (str.contains("//") && str.contains("\\n")) {
+        val beforeIndex = str.indexOf("//")
+        val afterIndex = str.indexOf("\\n")
+
+        if (beforeIndex < afterIndex && beforeIndex == 0) {
+            return true
+        }
+    }
+    return false
+}
 
 fun replaceCustom(str: String): String {
-    var str = str
-    var newStr = ""
-    var customSeparator = ""
-
-    val beforeIndex = str.indexOf("//")
     val afterIndex = str.indexOf("\\n")
-    if (beforeIndex < afterIndex) {
-        customSeparator = str.substring(beforeIndex + 2, afterIndex)
-        newStr = str.substring(afterIndex + 2)
-        newStr = newStr.replace(customSeparator, ",")
-    } else {
-        throw IllegalArgumentException()
-    }
+
+    val customSeparator = str.substring(2, afterIndex)
+    var newStr = str.substring(afterIndex + 2)
+    newStr = newStr.replace(customSeparator, ",")
+
     return newStr
 }
 
