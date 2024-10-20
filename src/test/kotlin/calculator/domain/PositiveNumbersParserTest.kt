@@ -113,15 +113,6 @@ class PositiveNumbersParserTest {
     }
 
     @Test
-    fun `커스텀 구분자에 new line feed가 있을 경우 커스텀 구분자로 구분된 양수 리스트 반환`() {
-        // act
-        val result = sut.parse("//+\n\n1\n2\n3")
-
-        // assert
-        assertThat(result).isEqualTo(listOf(1.0, 2.0, 3.0))
-    }
-
-    @Test
     fun `커스텀 구분자에 아무것도 추가하지 않을 경우 기본 구분자로 구분된 양수 리스트 반환`() {
         // act
         val result = sut.parse("//\n1,2:3")
