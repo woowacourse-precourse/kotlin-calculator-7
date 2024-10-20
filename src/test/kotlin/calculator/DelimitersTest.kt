@@ -1,18 +1,11 @@
 package calculator
 
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 class DelimitersTest {
 
-    private lateinit var delimiter: Delimiter
-
-    @BeforeEach
-    fun setUp() {
-        delimiter = Delimiter()
-    }
-
+    private val delimiter: Delimiter = Delimiter()
 
     @Test
     fun `문자열에서 구분자 추출 테스트`() {

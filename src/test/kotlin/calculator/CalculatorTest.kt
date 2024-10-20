@@ -1,17 +1,11 @@
 package calculator
 
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 class CalculatorTest {
 
-    lateinit var calculator: Calculator
-
-    @BeforeEach
-    fun setUp() {
-        calculator = Calculator()
-    }
+    private val calculator: Calculator = Calculator()
 
     @Test
     fun `더하기 예외 테스트`() {
