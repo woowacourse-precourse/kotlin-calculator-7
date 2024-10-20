@@ -20,6 +20,13 @@ class Calculate(private val input: String) {
         return input.split(",", ":")
     }
 
+    // 커스텀 구분자에 대해 숫자 분리하는 메서드
+    private fun customDel(): List<String> {
+        val part = input.split("\\n")
+        val delimiter = part[0][2]    // 커스텀 구분자 추출
+        return part[1].split(delimiter.toString())  // \n의 다음 부분을 구분자 기준으로 분리
+    }
+
 }
 
 
