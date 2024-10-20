@@ -22,6 +22,8 @@
 - [x] 프로그래밍 요구 사항에서 달리 명시하지 않는 한 파일, 패키지 등의 이름을 바꾸거나 이동하지 않는다.
 - [x] Kotlin 코드 컨벤션을 지키면서 프로그래밍한다.
 - [x] 기본적으로 Kotlin Style Guide를 원칙으로 한다.
+- [x] camp.nextstep.edu.missionutils에서 제공하는 Console API를 사용하여 구현해야 한다.
+  - 사용자가 입력하는 값은 camp.nextstep.edu.missionutils.Console의 readLine()을 활용한다.
 
 ## 예제
 - 입력: `""` → 출력: `0`
