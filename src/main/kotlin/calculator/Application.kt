@@ -12,7 +12,7 @@ class Calculate(private val input: String) {
             defaultDel()
         }
         runException(numbers)
-        return numbers
+        return numbers.map { it.toInt() }
     }
 
     // 기본 구분자에 대해 숫자 분리하는 메서드
@@ -33,7 +33,8 @@ class Calculate(private val input: String) {
     // 잘못된 숫자와 음수 입력에 대해 예외 발생시키는 메서드
     private fun runException(numbers: List<String>) {
         numbers.forEach { number ->
-            val value = number.toIntOrNull() ?: throw IllegalArgumentException("잘못된 숫자입니다.")    // 문자열을 정수로 변환할 수 없을 경우 예외 발생
+            val value = number.toIntOrNull()
+                ?: throw IllegalArgumentException("잘못된 숫자입니다.")    // 문자열을 정수로 변환할 수 없을 경우 예외 발생
             if (value < 0) {    // 음수일 경우 예외 발생
                 throw IllegalArgumentException("음수는 입력할 수 없습니다.")
             }
@@ -44,6 +45,7 @@ class Calculate(private val input: String) {
     fun totalSum(numbers: List<Int>): Int {
         return numbers.sum()
     }
+}
 
     fun main() {
         println("덧셈할 문자열을 입력해 주세요.")
@@ -59,6 +61,6 @@ class Calculate(private val input: String) {
 
     }
 
-}
+
 
 
