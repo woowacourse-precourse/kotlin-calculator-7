@@ -28,8 +28,6 @@ fun main() {
 
         // 결과값 출력
         println("결과 : $sum")
-    } catch (error: IllegalArgumentException) {
-        println("에러 로그: ${error.message}")
     } finally {
         Console.close()
     }

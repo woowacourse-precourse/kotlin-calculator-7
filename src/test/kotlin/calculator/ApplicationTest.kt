@@ -11,14 +11,14 @@ class ApplicationTest : NsTest() {
     fun `커스텀 구분자 사용`() {
         assertSimpleTest {
             run("//;\\n1")
-            assertThat("결과 : 1").contains("결과 : 1")
+            assertThat(output()).contains("결과 : 1")
         }
     }
 
     @Test
     fun `예외 테스트`() {
         assertSimpleTest {
-            assertThrows<IllegalArgumentException> { throw IllegalArgumentException() }
+            assertThrows<IllegalArgumentException> { runException("-1,2,3") }
         }
     }
 
