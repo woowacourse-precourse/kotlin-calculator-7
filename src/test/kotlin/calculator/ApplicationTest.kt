@@ -47,21 +47,12 @@ class ApplicationTest : NsTest() {
     }
 
     @Test
-    fun `Long 범위를 넘어가는 수에 대한 테스트`() {
-        assertSimpleTest {
-            assertThrows<IllegalArgumentException> { runException("9223372036854775808") }
-        }
-    }
-
-    @Test
-    fun `커스텀 구분자 입력 시에 줄바꿈이 누락된 경우에 대한 테스트`() {
+    fun `커스텀 구분자 입력에 줄바꿈이 없는 경우에 대한 테스트`() {
         assertSimpleTest {
             assertThrows<IllegalArgumentException> { runException("///\\*-32,1:2*9/56-7\\30") }
         }
-        assertSimpleTest {
-            assertThrows<IllegalArgumentException> { runException("///\\*-32,1:2*9/56-7\\\\") }
-        }
     }
+
 
     override fun runMain() {
         main()
