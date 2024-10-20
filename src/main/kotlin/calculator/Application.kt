@@ -33,7 +33,9 @@ private fun checkInputValidity(input: String): Triple<Boolean, String?, String> 
         val newlineIndex = input.indexOf(CUSTOM_DELIMITER_SUFFIX)
 
         if (newlineIndex != CUSTOM_DELIMITER_SUFFIX_NOT_FOUND) {
-            input.substring(CUSTOM_DELIMITER_PREFIX_LENGTH, newlineIndex) to input.substring(newlineIndex + CUSTOM_DELIMITER_PREFIX_LENGTH)
+            input.substring(CUSTOM_DELIMITER_PREFIX_LENGTH, newlineIndex) to input.substring(
+                newlineIndex + CUSTOM_DELIMITER_PREFIX_LENGTH
+            )
         } else return Triple(false, null, "")
 
     } else {
