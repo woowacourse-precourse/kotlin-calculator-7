@@ -8,11 +8,12 @@ private const val CUSTOM_DELIMITER_SUFFIX = "\\n"
 private const val CUSTOM_DELIMITER_SUFFIX_NOT_FOUND = -1
 private const val CUSTOM_DELIMITER_PREFIX_LENGTH = 2
 
+private const val MESSAGE_INPUT_PROMPT = "덧셈할 문자열을 입력해 주세요."
 private const val ERROR_INVALID_INPUT = "입력이 유효하지 않습니다."
 private const val ERROR_SUM_OUT_OF_RANGE = "계산 결과가 Int 범위를 초과합니다."
 
 fun main() {
-    println("덧셈할 문자열을 입력해 주세요.")
+    println(MESSAGE_INPUT_PROMPT)
     val input = Console.readLine()
 
     val (isValid, delimiter, numbersPart) = checkInputValidity(input)
