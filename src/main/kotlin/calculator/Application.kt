@@ -20,7 +20,7 @@ fun main() {
     println("결과 : $result")
 }
 
-fun processDefaultDelimiter(inputString : String) : Int {
+fun processDefaultDelimiter(inputString : String) : Int {   //기본 구분자 처리 함수
     val numberList = inputString.split(',',':')
     if(numberList.any { it.isEmpty() }) throw IllegalArgumentException()
 
@@ -29,13 +29,12 @@ fun processDefaultDelimiter(inputString : String) : Int {
     return numberList.sumOf { it.toInt() }
 }
 
-fun processCustomDelimiter(inputString : String) : Int {
+fun processCustomDelimiter(inputString : String) : Int {    //커스텀 구분자 처리 함수
     val endIndex = inputString.indexOf("\\n")
     if(endIndex == -1) throw IllegalArgumentException()    //\n 이 없는 경우
 
     val customDelimiter = inputString.substring(2, endIndex)
     if(customDelimiter.isEmpty()) throw IllegalArgumentException()     //구분자가 없는 경우
-
 
     val numbers = inputString.substring(endIndex + 2)
     if(numbers.isEmpty()) throw IllegalArgumentException()  //숫자가 없는 경우
