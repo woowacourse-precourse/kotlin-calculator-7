@@ -121,7 +121,7 @@ fun inspectError(input: String) {
 
     while (inspectIndex < input.length) {
         var isDelimiter = false
-        if (delimiterList.find { it == input[inspectIndex] } != null) {
+        if (input[inspectIndex] in delimiterList) {
             isDelimiter = true
         }
 
@@ -129,7 +129,7 @@ fun inspectError(input: String) {
             // 첫 번째 character로 구분자가 나타난 경우
             if (prevCharacter == null) throw IllegalArgumentException()
             // 구분자가 연속 두 번 나타난 경우
-            if (delimiterList.find { it == prevCharacter } != null) throw IllegalArgumentException()
+            if (prevCharacter in delimiterList) throw IllegalArgumentException()
         } else {
             // 숫자가 아닌 경우
             if (!input[inspectIndex].isDigit()) throw IllegalArgumentException()
@@ -138,5 +138,5 @@ fun inspectError(input: String) {
         inspectIndex++
     }
 
-    if (delimiterList.find { it == prevCharacter } != null) throw IllegalArgumentException()
+    if (prevCharacter in delimiterList) throw IllegalArgumentException()
 }
