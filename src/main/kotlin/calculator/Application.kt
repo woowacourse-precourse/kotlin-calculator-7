@@ -1,10 +1,10 @@
 package calculator
 
-import camp.nextstep.edu.missionutils.Console.readLine
-
+const val REQUEST_MESSAGE = "덧셈할 문자열을 입력해 주세요."
+const val RESPONSE_MESSAGE = "결과 : "
 
 fun main() {
     val defaultDelimiters = mutableSetOf(',', ':')
-    val calculator = Calculator("덧셈할 문자열을 입력해 주세요.", defaultDelimiters)
-    calculator.printSum("결과 : ")
+    val calculator = Calculator(REQUEST_MESSAGE, defaultDelimiters)
+    calculator.printSum(RESPONSE_MESSAGE)
 }
