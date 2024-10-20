@@ -18,6 +18,6 @@ class StringSumCalculator {
 
     private fun inputRequest(): List<String> {
         outputView.inputRequest()
-        return inputView.inputCommend().getSplitResult()
+        return inputView.inputCommend().commendSplit()
     }
 }

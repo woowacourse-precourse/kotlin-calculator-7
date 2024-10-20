@@ -5,11 +5,11 @@ class DelimiterSplitter(
 ) {
     init {
         require(customDelimiterFormatCheck())
-        require(allPositiveCheck(getSplitResult()))
+        require(allPositiveCheck(commendSplit()))
     }
 
     // 지정된 구분자를 이용하여 문자열 구분
-    fun getSplitResult(): List<String> {
+    fun commendSplit(): List<String> {
         if (customDelimiterIsUsed()) return customSplit()
         return basicSplit()
     }
