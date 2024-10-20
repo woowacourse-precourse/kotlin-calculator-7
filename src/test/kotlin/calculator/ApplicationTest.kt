@@ -32,12 +32,17 @@ class ApplicationTest : NsTest() {
         }
     }
 
-    /*@Test
-    fun `예외 테스트`() {
+    @Test
+    fun testCalculateException() {
         assertSimpleTest {
             assertThrows<IllegalArgumentException> { runException("-1,2,3") }
         }
-    }*/
+
+        assertSimpleTest {
+            assertThrows<IllegalArgumentException> { runException("a,2,3") }
+        }
+    }
+
 
     override fun runMain() {
         main()

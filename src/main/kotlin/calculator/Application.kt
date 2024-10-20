@@ -37,6 +37,12 @@ fun calculate(input: String): String {
         }
     }
 
+    // 음수 처리
+    val negativeNumbers = numberList.filter { it < 0 }
+    if (negativeNumbers.isNotEmpty()) {
+        throw IllegalArgumentException("음수는 허용되지 않습니다: $negativeNumbers")
+    }
+
     sum = numberList.sum()
 
     return "결과 : $sum"
