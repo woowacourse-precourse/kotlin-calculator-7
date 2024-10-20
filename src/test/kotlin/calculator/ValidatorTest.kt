@@ -13,9 +13,9 @@ class ValidatorTest : NsTest() {
     fun `커스텀구분자 정의만 있는 인풋_에러발생`() {
         assertSimpleTest {
             val input = "//+\\n"
-            val delimiterEndIndex = input.indexOf("\n")
+            val delimiterDefineEndIndex = input.indexOf("\\n") + 2
             assertThrows<IllegalArgumentException> {
-                assertThat(validator.validateDelimiterFormat(delimiterEndIndex))
+                assertThat(validator.validateDelimiterFormat(delimiterDefineEndIndex, input))
             }
         }
     }

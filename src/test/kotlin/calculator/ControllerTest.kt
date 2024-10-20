@@ -44,7 +44,7 @@ class ControllerTest : NsTest() {
     fun `숫자와 구분자 인풋_커스텀구분자 뒤 양수숫자1개_에러발생`() {
         Assertions.assertSimpleTest {
             assertThrows<IllegalArgumentException> {
-                controller.calculate("//;\n")
+                controller.calculate("//;\\n")
             }
         }
     }
@@ -52,7 +52,7 @@ class ControllerTest : NsTest() {
     @Test
     fun `숫자와 커스텀구분자 인풋_숫자와 구분자 반환`() {
         Assertions.assertSimpleTest {
-            val input = "//#\n1#2#3"
+            val input = "//#\\n1#2#3"
             val result = controller.parseCustomDelimiterInput(input)
             assertThat(result).isEqualTo(Pair<String, String>("1#2#3", "#"))
         }
@@ -61,7 +61,7 @@ class ControllerTest : NsTest() {
     @Test
     fun `커스텀구분자 정의가 잘못된 인풋_커스텀구분자 반환`() {
         Assertions.assertSimpleTest {
-            val input = "??#\n1#2:3"
+            val input = "??#\\n1#2:3"
             assertThrows<IllegalArgumentException> {
                 controller.parseInput(input)
             }
@@ -71,8 +71,8 @@ class ControllerTest : NsTest() {
     @Test
     fun `커스텀구분자 포함 인풋_커스텀구분자 1글자_커스텀구분자 반환`() {
         Assertions.assertSimpleTest {
-            val input = "//#\n1#2:3"
-            val idx = input.indexOf("\n")
+            val input = "//#\\n1#2:3"
+            val idx = input.indexOf("\\n")
             assertThat(controller.extractCustomDelimiter(input, idx)).isEqualTo("#")
         }
     }
@@ -80,8 +80,8 @@ class ControllerTest : NsTest() {
     @Test
     fun `커스텀구분자 포함 인풋_커스텀구분자 2글자_커스텀구분자 에러발생`() {
         Assertions.assertSimpleTest {
-            val input = "//##\n1##2:3"
-            val idx = input.indexOf("\n")
+            val input = "//##\\n1##2:3"
+            val idx = input.indexOf("\\n")
             assertThrows<IllegalArgumentException> {
                 controller.extractCustomDelimiter(input, idx)
             }
@@ -91,8 +91,8 @@ class ControllerTest : NsTest() {
     @Test
     fun `커스텀구분자 포함 인풋_숫자부분 반환`() {
         Assertions.assertSimpleTest {
-            val input = "//#\n1#2:3"
-            val idx = input.indexOf("\n")
+            val input = "//#\\n1#2:3"
+            val idx = input.indexOf("\\n") + 2
             assertThat(controller.extractNumberPart(input, idx)).isEqualTo("1#2:3")
         }
     }
