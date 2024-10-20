@@ -13,10 +13,10 @@ object Validator {
             throw IllegalArgumentException(ExceptionConsts.INVALID_DELIMITER)
         }
     }
-    /**마지막 요소가 공백이면(digit이 아닌 letter로 끝난다면) 예외 발생시키는 함수*/
-    fun validateLastElement(){
+    /**처음 또는 마지막 요소가 공백이면(digit이 아닌 letter로 끝난다면) 예외를 발생시키는 함수*/
+    fun validateElement(){
         if(InputManager.splittedList.contains("")){
-            throw IllegalArgumentException(ExceptionConsts.INVALID_LAST_CHARACTER)
+            throw IllegalArgumentException(ExceptionConsts.INVALID_CHARACTER)
         }
     }
 }
