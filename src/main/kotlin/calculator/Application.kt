@@ -8,15 +8,13 @@ import camp.nextstep.edu.missionutils.Console
  */
 
 fun main() {
-    try {
-        println("덧셈할 문자열을 입력해주세요.")
 
-        // Console API를 통해 입력을 받아 StringCalculator에 전달
-        val input = Console.readLine()
-        val sCalculator = StringCalculator()
-        val result = sCalculator.add(input)
-        println("결과 : $result")
-    } catch (e: IllegalArgumentException) {
-        println(e.message)
-    }
+    println("덧셈할 문자열을 입력해주세요.")
+
+    // Console API를 통해 입력을 받아 StringCalculator에 전달
+    val input = Console.readLine()
+    val sCalculator = StringCalculator()
+    val result = sCalculator.add(input)
+    println("결과 : $result")
+
 }
