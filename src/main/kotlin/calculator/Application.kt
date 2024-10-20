@@ -10,6 +10,8 @@ fun main() {
 
     val separatedValues = getSeparatedValues(userInput)
     checkIsValidValue(separatedValues)
+
+    val result = getSumOfNumbers(separatedValues)
 }
 
 private fun checkInputIsEmpty(input: String) {
@@ -49,6 +51,10 @@ private fun checkIsValidValue(numbers: List<String>) {
             throw IllegalArgumentException(MESSAGE_INVALID_INPUT)
         }
     }
+}
+
+private fun getSumOfNumbers(numbers: List<String>): Int {
+    return numbers.sumOf { it.toInt() }
 }
 
 private const val MESSAGE_FOR_GUIDE_CALCULATE = "덧셈할 문자열을 입력해 주세요."
