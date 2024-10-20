@@ -28,6 +28,7 @@ private fun add(input: String): Int {
     val nums = splitNumbers(numberStr, delimiter)
 
     checkForNegativeNumbers(nums)
+    return sum(nums)
 }
 
 private fun parseInput(input: String): Pair<Regex, String> {
@@ -74,4 +75,8 @@ private fun checkForNegativeNumbers(nums: List<String>) {
             throw IllegalArgumentException(NEGATIVE_NUMBER_NOT_ALLOWED_MESSAGE)
         }
     }
+}
+
+private fun sum(nums: List<String>): Int {
+    return nums.sumOf { it.toInt() }
 }
