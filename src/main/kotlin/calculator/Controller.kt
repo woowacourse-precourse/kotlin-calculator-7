@@ -36,7 +36,7 @@ class Controller(private val validator: Validator) {
     // 커스텀 구분자가 있는 입력을 처리하는 함수
     fun parseCustomDelimiterInput(input: String): Pair<String, String> {
         val delimiterEndIndex = input.indexOf("\n")
-        validator.validateDelimiterFormat(delimiterEndIndex, input)
+        validator.validateDelimiterFormat(delimiterEndIndex)
 
         val customDelimiter = extractCustomDelimiter(input, delimiterEndIndex)
         val numberPart = extractNumberPart(input, delimiterEndIndex)
