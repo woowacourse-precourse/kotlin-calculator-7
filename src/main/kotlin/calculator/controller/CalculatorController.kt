@@ -14,10 +14,20 @@ class CalculatorController(
     fun calculateSumOfNumbers() {
         val input = inputView.readLine()
 
-        val delimiter = Delimiter(input).getDelimiters()
+        if (input.isEmpty()) {
+            outputView.printResult(0)
+            return
+        }
 
+        val delimiter = Delimiter(input).getDelimiters()
         val manager = InputManager(delimiter)
         val nums = manager.removeCustomDelimiterDefinition(input).let { manager.findAllNumbers(it) }
+
+        if (nums.isEmpty()) {
+            outputView.printResult(0)
+            return
+        }
+
         manager.isContainNegativeNumber(nums)
 
         val result = Calculator(nums).getResult()
