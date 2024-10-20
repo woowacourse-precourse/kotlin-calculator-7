@@ -33,7 +33,7 @@ class StringCalculator {
     private fun parseInput(input: String): Pair<String, List<String>> {
         // 커스텀 구분자가 있는경우, 개행 문자의 위치 찾아 구분자와 숫자 영역 분리
         return if (input.startsWith("//")) {
-            val endIndex = input.indexOf("\n")
+            val endIndex = input.indexOf("\\n")
             if (endIndex == -1) {
                 // 개행 문자 없으면 예외처리
                 throw IllegalArgumentException("커스텀 구분자 지정이 잘못되었습니다.")
@@ -41,7 +41,7 @@ class StringCalculator {
             // "//" 다음부터 개행 문자까지의 문자열을 구분자로 추출 인덱스 하나만 뽑아내면 됨.
             val delimiter = input.substring(2, endIndex)
             // 개행 문자 이후부터의 문자열을 숫자 영역으로 추출
-            val numberArea = input.substring(endIndex + 1)
+            val numberArea = input.substring(endIndex + 2)
             numberArea to listOf(delimiter)
         } else {
             // 기본 구분자 (쉼표, 콜론)를 사용하는 경우

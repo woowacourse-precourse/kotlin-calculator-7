@@ -15,7 +15,7 @@ fun main() {
         val input = Console.readLine()
         val sCalculator = StringCalculator()
         val result = sCalculator.add(input)
-        println("결과: $result")
+        println("결과 : $result")
     } catch (e: IllegalArgumentException) {
         println(e.message)
     }
