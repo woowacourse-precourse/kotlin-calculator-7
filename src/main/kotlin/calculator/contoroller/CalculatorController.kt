@@ -15,6 +15,7 @@ class CalculatorController {
 
     fun run() {
         try {
+          val stringParser = StringParser(userStringData)
         } catch (e: IllegalArgumentException) {
             throw e
         }
