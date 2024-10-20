@@ -17,5 +17,18 @@ fun main() {
 fun calculate(input: String): String {
     if (input.isBlank()) return "결과 : 0"  // 빈 문자열 처리
 
-    return "결과"
+    var delimiter = ",|:"  // 기본 구분자: 쉼표와 콜론
+    var numbers = input
+    var sum = 0
+
+    // 기본 구분자 처리
+    val numberList = numbers.split(delimiter.toRegex()).map {
+        try {
+            it.toInt()
+        } catch (e: NumberFormatException) {
+            throw IllegalArgumentException("잘못된 값이 입력되었습니다: $it")
+        }
+    }
+
+    return "결과 : $sum"
 }

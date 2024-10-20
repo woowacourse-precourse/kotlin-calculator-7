@@ -16,6 +16,14 @@ class ApplicationTest : NsTest() {
         }
     }
 
+    @Test
+    fun testCalculateDelimiter() {
+        assertSimpleTest {
+            run("1,2:3")
+            assertThat(output()).contains("결과 : 6")
+        }
+    }
+
     /*@Test
     fun `커스텀 구분자 사용`() {
         assertSimpleTest {
