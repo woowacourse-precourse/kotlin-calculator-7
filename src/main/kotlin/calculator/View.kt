@@ -13,7 +13,7 @@ class View(private val controller: Controller) {
     }
 
     fun execute() {
-        val input = Console.readLine()
+        val input = Console.readLine().trim()
         val output = controller.calculate(input)
         printResult(output)
     }
