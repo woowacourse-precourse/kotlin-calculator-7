@@ -11,7 +11,7 @@ fun main() {
         // 사용자 지정 구분자 처리
         if (input.startsWith("//")) {
             // "\n" 기준으로 나누기
-            val parts = input.split("\n") // 이 부분에서 \n으로 나누기
+            val parts = input.split("\\n") // 이 부분에서 \n으로 나누기
 
             // 사용자 지정 구분자 추출
             val customDelimiter = parts[0].substring(2) // "//" 제거
@@ -37,7 +37,7 @@ fun main() {
         }
 
         // 합계 출력
-        println("합계: $sum")
+        println("결과 : $sum")
 
     } catch (e: IllegalArgumentException) {
         // 예외 발생 시 사용자에게 메시지 출력
