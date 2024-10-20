@@ -32,7 +32,7 @@ class TextAddCalculator : TextCalculator {
     private fun checkInputTypeAndValidity(input: List<String>): Boolean {
         return when {
             isInputExceeding(input) -> false
-            isNoCustomDivider(input) -> true
+            isCustomDividerNotUsed(input) -> true
             isInvalidCustom(input) -> false
             else -> {
                 addCustomDivider(input)
@@ -45,10 +45,10 @@ class TextAddCalculator : TextCalculator {
         return input.size >= CUSTOM_DIVIDER_EXCEEDING_SIZE
     }
 
-    private fun isNoCustomDivider(input: List<String>): Boolean {
-        val isNoCustomDivider = input.size == CUSTOM_DIVIDER_NONE_SIZE
-        isCustomDividerUsed = isNoCustomDivider.not()
-        return isNoCustomDivider
+    private fun isCustomDividerNotUsed(input: List<String>): Boolean {
+        val isCustomDividerNotUsed = input.size == CUSTOM_DIVIDER_NONE_SIZE
+        isCustomDividerUsed = isCustomDividerNotUsed.not()
+        return isCustomDividerNotUsed
     }
 
     private fun isInvalidCustom(input: List<String>): Boolean {
