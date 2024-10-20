@@ -41,7 +41,7 @@ fun findCustomDelimiter(input: String): Pair<Regex, String>? {
     }
 
     // 유효한 커스텀 구분자를 찾기 위한 정규 표현식
-    val regex = Regex("//(.)\\\\n(.*)")
+    val regex = Regex("//([^0-9])\\\\n(.*)")
     val matchResult = regex.find(input)
 
     // 커스텀 구분자 형식이 올바르지 않으면 예외 처리
