@@ -14,6 +14,12 @@ class Calculate(private val input: String) {
         runException(numbers)
         return numbers
     }
+
+    // 기본 구분자에 대해 숫자 분리하는 메서드
+    private fun defaultDel(): List<String> {
+        return input.split(",", ":")
+    }
+
 }
 
 
