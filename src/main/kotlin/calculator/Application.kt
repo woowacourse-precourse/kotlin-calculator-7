@@ -14,20 +14,30 @@ fun main() {
 
     for (char in processedCalculation) {
         when {
-            // 구분자인 경우
             separatorList.contains(char.toString()) -> {
-                // 구분자를 만난 경우 이전의 숫자값을 모두 더하는 로직 추가 필요
+                // 구분자인 경우
+                if (currentNumber.isNotEmpty()) {
+                    sum += currentNumber.toString().toIntOrNull()
+                        ?: throw IllegalArgumentException("구분자 사이에 숫자가 아닌 값이 입력되었습니다.")
+                    currentNumber = StringBuilder() // 숫자 초기화
+                } else {
+                    throw IllegalArgumentException("구분자 사이에 숫자가 없습니다. 계산할 숫자를 입력해주세요.")
+                }
             }
 
             // 숫자인 경우
-            char.isDigit() -> {
-                currentNumber.append(char)
-            }
+            char.isDigit() -> currentNumber.append(char)
 
+            // 구분자도 숫자도 아닌 값이 입력된 경우 예외 처리
             else -> {
-                // 구분자도 숫자도 아닌 값이 입력된 경우 예외 처리
                 throw IllegalArgumentException("잘못된 입력입니다. 숫자나 구분자가 아닌 값이 포함되었습니다")
             }
         }
     }
+
+    if (currentNumber.isNotEmpty()) {
+        sum += currentNumber.toString().toIntOrNull() ?: throw IllegalArgumentException("마지막으로 입력된 값이 숫자가 아닙니다.")
+    }
+
+    print(sum)
 }
