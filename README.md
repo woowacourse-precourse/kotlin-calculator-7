@@ -15,7 +15,7 @@
 
 ### 입력
 
-- [ ] 문자열을 입력받을 수 있다.
+- [X] 문자열을 입력받을 수 있다.
     - `camp.nextstep.edu.missionutils.Console`의 `readLine()` 사용
 
 ### 출력
