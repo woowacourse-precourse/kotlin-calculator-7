@@ -55,7 +55,7 @@ object Calculator {
             InputManager.splittedList =
                 InputManager.newInput.split(Regex("[${InputManager.delimiter}]"))
             // 스플릿 리스트에 있는 값들을 더함
-            Validator.validateLastElement() // 마지막 요소
+            Validator.validateElement() // 마지막 요소
             InputManager.splittedList.forEach {
                 InputManager.sum += it.toInt()
             }
