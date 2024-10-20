@@ -20,6 +20,9 @@ fun main() {
     if (!isValid) {
         throw IllegalArgumentException(ERROR_INVALID_INPUT)
     }
+
+    val result = calculateSum(numbersPart, delimiter)
+    println("결과 : $result")
 }
 
 private fun checkInputValidity(input: String): Triple<Boolean, String?, String> {
