@@ -21,7 +21,7 @@ object Calculator {
         // 커스텀타입인지 확인
         val regex = Regex(RegexConsts.CUSTOM_DELIMITER_DEFINE)
 
-        return if (input.length < 4) {
+        return if (input.length < 5) {
             ValidationType.DEFAULT
         } else if (regex.matches(input.substring(0, 5))) {
             ValidationType.CUSTOM
@@ -55,6 +55,7 @@ object Calculator {
             InputManager.splittedList =
                 InputManager.newInput.split(Regex("[${InputManager.delimiter}]"))
             // 스플릿 리스트에 있는 값들을 더함
+            Validator.validateLastElement() // 마지막 요소
             InputManager.splittedList.forEach {
                 InputManager.sum += it.toInt()
             }
