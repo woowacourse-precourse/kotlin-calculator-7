@@ -8,7 +8,7 @@ fun main() {
     val inputString = readLine()
 
     if(inputString.isEmpty()) {
-        throw IllegalArgumentException("Empty String.")
+        throw IllegalArgumentException()
     }
 
     val result = if(inputString.startsWith("//")) {  // 커스텀 구분자
