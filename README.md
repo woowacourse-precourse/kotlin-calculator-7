@@ -53,7 +53,7 @@ camp.nextstep.edu.missionutils.Console: readLine()
     * `//`와 `\n` 사이의 값
     * 두 개 이상의 문자가 지정되면,
         * 두 개의 문자열로 이루어진 한 개의 구분자? 한 개의 문자열로 이루어진 두 개이 구분자?
-            * **두 개의 문자열로 이루어진 한 개의 구분자로 구현**
+            * **한 개의 문자열로 이루어진 두 개의 구분자로 구현**
     * 구분자로 시작하거나 끝나는 문자열 입력
         * 예외 처리
     * `kotlin REGEX`를 사용하여 구분자 추출 [Kotlin Regex](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/-regex/)
