@@ -14,18 +14,13 @@ fun main() {
     }
 }
 
-fun extractDelimiter(userInput: String): Pair<String, String> {
+fun extractDelimiter(userInput: String): Pair<List<Char>, String> {
     return if (userInput.startsWith("//")) {
-        val delimiterEndIndex = userInput.indexOf("\n")
-        if (delimiterEndIndex != -1) {
-            val customDelimiter = userInput.substring(2, delimiterEndIndex)
-            val numbers = userInput.substring(delimiterEndIndex + 1)
-            customDelimiter to numbers
-        } else {
-            "," to userInput
-        }
+        val customDelimiter = userInput[2]
+        val numbers = userInput.substringAfter("\n")
+        listOf(customDelimiter) to numbers
     } else {
-        "[,:]" to userInput
+        listOf(',', ':') to userInput
     }
 }
 
@@ -40,10 +35,6 @@ fun calculateSum(userInput: String?): Int {
 
     val (delimiter, numbers) = extractDelimiter(userInput)
     val parsedNumbers = numbers.split(delimiter)
-
-    if (parsedNumbers.isEmpty()) {
-        throw IllegalArgumentException()
-    }
 
     return parsedNumbers
         .filter { it.isNotEmpty() }
