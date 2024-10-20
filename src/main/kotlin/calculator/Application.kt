@@ -1,5 +1,10 @@
 package calculator
 
+import camp.nextstep.edu.missionutils.Console.readLine
+
 fun main() {
-    // TODO: 프로그램 구현
+    println(MESSAGE_FOR_GUIDE_CALCULATE)
+    val userInput = readLine()
 }
+
+private const val MESSAGE_FOR_GUIDE_CALCULATE = "덧셈할 문자열을 입력해 주세요."
