@@ -13,7 +13,7 @@ fun main() {
 
 
 fun splitInput(input: String): List<String> {
-    var delimiters = ",|;"
+    var delimiters = ",|:"
     var numbers = input
     if (input.startsWith("//")) {
         val inputParts = input.substring(2).split("\\n", limit = 2)
