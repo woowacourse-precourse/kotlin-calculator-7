@@ -13,7 +13,11 @@ class Calculator {
         println(CALCULATOR_INPUT_GUIDE_MESSAGE)
         val inputData: String = Console.readLine()
 
-        checkCalculatorType(inputData)
+        if (inputData.isEmpty()) {
+            println("$CALCULATOR_OUTPUT_MESSAGE $EMPTY_RESULT")
+        } else {
+            checkCalculatorType(inputData)
+        }
     }
 
     private fun checkCalculatorType(inputData: String) {
@@ -40,5 +44,6 @@ class Calculator {
     companion object {
         const val CALCULATOR_INPUT_GUIDE_MESSAGE = "덧셈할 문자열을 입력해 주세요."
         const val CALCULATOR_OUTPUT_MESSAGE = "결과 :"
+        const val EMPTY_RESULT = 0
     }
 }
