@@ -40,33 +40,17 @@ fun extractCustomSeparator(originCalculation: String, separatorList: MutableList
 }
 
 fun calculateSum(processedCalculation: String, separatorList: List<String>): Int {
-    var currentNumber = StringBuilder()
+    // 구분자들을 |로 묶어 정규식 패턴을 만들고 문자열을 쪼갠다
+    val separatorPattern = separatorList.joinToString("|") { Regex.escape(it) }
+    val numbers = processedCalculation.split(Regex(separatorPattern))
     var sum = 0
 
-    for (char in processedCalculation) {
-        when {
-            separatorList.contains(char.toString()) -> {
-                if (currentNumber.isNotEmpty()) {
-                    sum += currentNumber.toString().toIntOrNull()
-                        ?: throw IllegalArgumentException(ErrorMessages.INVALID_NUMBER)
-                    currentNumber = StringBuilder() // 숫자 초기화
-                } else {
-                    throw IllegalArgumentException(ErrorMessages.NUMBER_NOT_PROVIDED)
-                }
-            }
-
-            char.isDigit() -> currentNumber.append(char)
-
-            else -> {
-                throw IllegalArgumentException(ErrorMessages.INVALID_CHARACTER)
-            }
+    for (number in numbers) {
+        if (number.isBlank()) {
+            throw IllegalArgumentException(ErrorMessages.NUMBER_NOT_PROVIDED)
         }
-    }
 
-    if (currentNumber.isNotEmpty()) {
-        sum += currentNumber.toString().toInt()
-    } else {
-        throw IllegalArgumentException(ErrorMessages.LAST_VALUE_NOT_NUMBER)
+        sum += number.toIntOrNull() ?: throw IllegalArgumentException(ErrorMessages.INVALID_CHARACTER)
     }
 
     return sum
@@ -75,8 +59,6 @@ fun calculateSum(processedCalculation: String, separatorList: List<String>): Int
 object ErrorMessages {
     const val CUSTOM_SEPARATOR_NOT_PROVIDED = "커스텀 구분자가 입력되지 않았습니다."
     const val INVALID_CUSTOM_FORMAT = "커스텀 구분자의 형식이 잘못되었습니다."
-    const val INVALID_NUMBER = "구분자 사이에 숫자가 아닌 값이 입력되었습니다."
     const val NUMBER_NOT_PROVIDED = "구분자 사이에 숫자가 없습니다. 계산할 숫자를 입력해주세요."
     const val INVALID_CHARACTER = "잘못된 입력입니다. 숫자나 구분자가 아닌 값이 포함되었습니다"
-    const val LAST_VALUE_NOT_NUMBER = "마지막으로 입력된 값이 숫자가 아닙니다."
 }
