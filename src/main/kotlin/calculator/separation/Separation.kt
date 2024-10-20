@@ -4,13 +4,19 @@ import calculator.constant.DelimiterConst
 import calculator.delimiter.CustomDelimiter
 
 class Separation {
-    fun splitInput(input: String?): List<String>? {
-        if (input == null) return null
-        if (input == "") return listOf<String>()
+    fun splitInput(userInputWithoutCustomDelimiter: String?): List<String>? {
+        if (userInputWithoutCustomDelimiter == null) return null
+
+        if (userInputWithoutCustomDelimiter == "") return listOf<String>()
+
         return if (CustomDelimiter.customDelimiter != null) {
-            input.split(DelimiterConst.CLONE, DelimiterConst.COMMA, CustomDelimiter.customDelimiter!!)
+            userInputWithoutCustomDelimiter.split(
+                DelimiterConst.CLONE,
+                DelimiterConst.COMMA,
+                CustomDelimiter.customDelimiter!!
+            )
         } else {
-            input.split(DelimiterConst.CLONE, DelimiterConst.COMMA)
+            userInputWithoutCustomDelimiter.split(DelimiterConst.CLONE, DelimiterConst.COMMA)
         }
     }
 }

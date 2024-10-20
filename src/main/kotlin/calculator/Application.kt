@@ -10,11 +10,15 @@ import calculator.validation.InputValidation
 fun main() {
     // TODO: 프로그램 구현
     MessageUtil.printInputMessage()
-    val input: String? = UserUtil.getUserInput()
+    val userInput: String? = UserUtil.getUserInput()
 
-    val inputWithoutCustomDelimiter = CustomDelimiter.extractCustomDelimiter(input)
-    val listOfInput: List<String>? = Separation().splitInput(inputWithoutCustomDelimiter)
-    val doneValidation: List<String> = InputValidation().validateInput(listOfInput)
+    val userInputWithoutCustomDelimiter = CustomDelimiter.extractCustomDelimiter(userInput)
+
+    val listOfUserInput: List<String>? = Separation().splitInput(userInputWithoutCustomDelimiter)
+
+    val doneValidation: List<String> = InputValidation().validateInput(listOfUserInput)
+
     val sum = Calculator().calculateInput(doneValidation)
+
     MessageUtil.printOutputMessage(sum)
 }
