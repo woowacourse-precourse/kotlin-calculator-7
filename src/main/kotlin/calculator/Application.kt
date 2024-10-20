@@ -1,5 +1,6 @@
 package calculator
 
+import camp.nextstep.edu.missionutils.Console.close
 import camp.nextstep.edu.missionutils.Console.readLine
 
 fun main() {
@@ -12,6 +13,8 @@ fun main() {
     checkIsValidValue(separatedValues)
 
     val result = getSumOfNumbers(separatedValues)
+    println("결과 : $result")
+    close()
 }
 
 private fun checkInputIsEmpty(input: String) {
