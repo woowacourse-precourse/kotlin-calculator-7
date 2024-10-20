@@ -28,6 +28,12 @@ fun add(input: String): Int {
         Pair("[,:]".toRegex(), input)
     }
 
+    // 연속된 구분자가 있는지 확인하는 정규 표현식
+    val consecutiveDelimiterPattern = "${delimiters.pattern}{2,}".toRegex()
+    if (consecutiveDelimiterPattern.containsMatchIn(numbers)) {
+        throw IllegalArgumentException("구분자가 연속으로 나타날 수 없습니다.")
+    }
+
     // 구분자를 사용하여 숫자를 분리하고 유효하지 않은 문자가 있는지 확인 및 음수 확인
     val parsedNumbers = numbers.split(delimiters).map {
         val trimmed = it.trim()
