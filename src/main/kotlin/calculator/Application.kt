@@ -13,11 +13,21 @@ fun main() {
     var processedCalculation = originCalculation
 
     for (char in processedCalculation) {
-        if (separatorList.contains(char.toString())) {
-            print("구분자 : " + char + "\n")
-        } else {
-            currentNumber.append(char)
-            print("숫자 : " + currentNumber.toString() + "\n")
+        when {
+            // 구분자인 경우
+            separatorList.contains(char.toString()) -> {
+                // 구분자를 만난 경우 이전의 숫자값을 모두 더하는 로직 추가 필요
+            }
+
+            // 숫자인 경우
+            char.isDigit() -> {
+                currentNumber.append(char)
+            }
+
+            else -> {
+                // 구분자도 숫자도 아닌 값이 입력된 경우 예외 처리
+                throw IllegalArgumentException("잘못된 입력입니다. 숫자나 구분자가 아닌 값이 포함되었습니다")
+            }
         }
     }
 }
