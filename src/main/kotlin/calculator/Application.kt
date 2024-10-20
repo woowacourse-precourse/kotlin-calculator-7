@@ -7,11 +7,8 @@ fun main() {
     print("덧셈할 문자열을 입력해 주세요.\n")
     val word = Console.readLine()
     val separator = Separator(word)
-    try {
-        separator.checkIllegalArgumentException()
-    } catch (e: IllegalArgumentException) {
-        close()
-    }
+    separator.checkIllegalArgumentException()
+
 }
 
 class Separator(s: String) {
@@ -58,7 +55,6 @@ class Separator(s: String) {
                     sum += confirmNumber(addWord)
                     addWord = ""
                 }
-
                 "\"" -> continue
                 else -> addWord += i
             }
@@ -87,5 +83,4 @@ class Separator(s: String) {
             throw IllegalArgumentException()
         }
     }
-
 }
