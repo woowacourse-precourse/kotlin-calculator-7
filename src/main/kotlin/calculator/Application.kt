@@ -14,16 +14,18 @@ fun main() {
     }
 }
 
-fun extractDelimiter(userInput: String): Pair<Regex, String> {
-    val customDelimiterRegex = """^//(.)\n(.*)$""".toRegex()
-    val matchResult = customDelimiterRegex.find(userInput)
-
-    return if (matchResult != null) {
-        val customDelimiter = Regex.escape(matchResult.groupValues[1])
-        val numbers = matchResult.groupValues[2]
-        Regex(customDelimiter) to numbers
+fun extractDelimiter(userInput: String): Pair<String, String> {
+    return if (userInput.startsWith("//")) {
+        val delimiterEndIndex = userInput.indexOf("\n")
+        if (delimiterEndIndex != -1) {
+            val customDelimiter = userInput.substring(2, delimiterEndIndex)
+            val numbers = userInput.substring(delimiterEndIndex + 1)
+            customDelimiter to numbers
+        } else {
+            "," to userInput
+        }
     } else {
-        Regex("[,:]") to userInput
+        "[,:]" to userInput
     }
 }
 
