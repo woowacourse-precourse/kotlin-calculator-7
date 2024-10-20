@@ -14,15 +14,23 @@ fun main() {
         val customDelimiter = parts[0].substring(2) // "//" 제거
         // 구분자 업데이트
         delimiters += customDelimiter
-        // 구분자 출력
-        print("delimiters: $delimiters")
-        // parts[1]을 기준으로 숫자를 분리
-        numbers = parts[1].split(*delimiters.toTypedArray())
-
+        // 나머지 부분에서 숫자 분리
+        if (parts.size > 1) {
+            // parts[1]을 기준으로 숫자를 분리
+            numbers = parts[1].split(*delimiters.toTypedArray())
+        }
     } else {
+        // 기본 구분자를 사용하여 숫자 분리
         numbers = input.split(*delimiters.toTypedArray())
     }
 
-    // 출력
-    println(numbers)
+    // 숫자를 정수로 변환하고 합계 계산
+    val sum = numbers.sumOf {
+        // 숫자가 아닌 경우 IllegalArgumentException 발생
+        val number = it.toIntOrNull() ?: throw IllegalArgumentException("[잘못된 입력입니다: $it]")
+        number
+    }
+
+    // 합계 출력
+    println("합계: $sum")
 }
