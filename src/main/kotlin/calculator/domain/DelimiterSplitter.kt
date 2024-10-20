@@ -32,7 +32,7 @@ class DelimiterSplitter(
     // 커스텀 구분자로 나누기
     private fun customSplit(): List<String> {
         val splitResult = value.split(CUSTOM_DELIMITER_FRONT, CUSTOM_DELIMITER_BACK, findCustomDelimiter())
-        return splitResult.drop(2)
+        return splitResult.drop(3)
     }
 
     // 기본 구분자로 나누기
