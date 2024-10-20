@@ -9,7 +9,7 @@ class PositiveNumbersParser {
             val (customDelimiters, customDelimitersEndIndex) = getCustomDelimiters(userInput)
 
             delimiters += customDelimiters
-            positiveNumbersPart = userInput.substring(customDelimitersEndIndex + 1)
+            positiveNumbersPart = userInput.substring(customDelimitersEndIndex + CUSTOM_DELIMITERS_END.length)
         }
 
         positiveNumbersPart.split(*delimiters).map {
@@ -35,6 +35,6 @@ class PositiveNumbersParser {
     companion object {
         private val DEFAULT_DELIMITERS = charArrayOf(',', ':')
         const val CUSTOM_DELIMITERS_START = "//"
-        const val CUSTOM_DELIMITERS_END = '\n'
+        const val CUSTOM_DELIMITERS_END = "\\n"
     }
 }
