@@ -15,11 +15,11 @@ class SumCalculator(
 
     private fun positiveDecimalPattern(result: BigDecimal): String {
         val ori = StringBuilder("#,###.")
-        repeat(countDecimalPlaces(result)) {
-            ori.append("#")
-        }
+        ori.append(generateDecimalPlacesPattern(countDecimalPlaces(result)))
         return ori.toString()
     }
+
+    private fun generateDecimalPlacesPattern(decimalPlaces: Int) = "#".repeat(decimalPlaces)
 
     private fun countDecimalPlaces(result: BigDecimal): Int = "$result".split(".")[1].length
 
