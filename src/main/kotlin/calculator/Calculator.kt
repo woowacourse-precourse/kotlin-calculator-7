@@ -11,6 +11,13 @@ private const val ERROR_SUM_OUT_OF_RANGE = "계산 결과가 Int 범위를 초�
 
 class Calculator(private val input: String) {
 
+    fun calculate(): Number {
+        val (delimiter, numbersPart) = separateNumbersAndDelimiter(input)
+        validateInput(numbersPart, delimiter)
+
+        return calculateSum(numbersPart, delimiter)
+    }
+
     private fun separateNumbersAndDelimiter(input: String): Pair<String?, String> {
         if (input.isEmpty()) return null to ""
 
