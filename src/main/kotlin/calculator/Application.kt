@@ -17,10 +17,10 @@ interface TextCalculator {
 }
 
 class TextSumCalculator : TextCalculator {
-    private val stringParser = StringParser()
+    private val textParser = TextParser()
 
     override fun calculate(input: String): Number {
-        val numbers = stringParser.parse(input)
+        val numbers = textParser.parse(input)
         return numbers.getSum()
     }
 
@@ -31,7 +31,7 @@ class TextSumCalculator : TextCalculator {
     }
 }
 
-class StringParser {
+class TextParser {
     private val divider = mutableListOf<String>(",", ":")
     private var isCustomDividerUsed: Boolean = true
 
