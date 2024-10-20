@@ -21,4 +21,12 @@ class SeparatorHandler(private val input: String) {
     private fun splitWithDefaultSeparator(): List<String> {
         return input.split("[,:]".toRegex())
     }
+
+    fun getSplitNumberList(): List<String> {
+        return if (isExitCustomSeparator()) {
+            splitWithCustomSeparator()
+        } else {
+            splitWithDefaultSeparator()
+        }
+    }
 }
