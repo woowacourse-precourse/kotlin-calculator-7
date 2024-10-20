@@ -28,13 +28,17 @@ fun add(input: String): Int {
         Pair("[,:]".toRegex(), input)
     }
 
-    // 구분자를 사용하여 숫자를 분리하고 음수 확인 후 합산
-    val parsedNumbers = numbers.split(delimiters).mapNotNull { it.trim().toIntOrNull() } // 공백 제거 후 숫자로 변환 가능한 경우만 처리
+    // 구분자를 사용하여 숫자를 분리하고 유효하지 않은 문자가 있는지 확인 및 음수 확인
+    val parsedNumbers = numbers.split(delimiters).map {
+        val trimmed = it.trim()
+        // 숫자 이외의 문자가 있는지 확인
+        val num = trimmed.toIntOrNull() ?: throw IllegalArgumentException("숫자 이외의 문자가 포함되었습니다: $trimmed")
 
-    // 음수가 포함된 경우 예외 처리
-    val negativeNumbers = parsedNumbers.filter { it < 0 }
-    if (negativeNumbers.isNotEmpty()) {
-        throw IllegalArgumentException("음수는 허용되지 않습니다: ${negativeNumbers.joinToString(", ")}")
+        // 음수가 포함된 경우 예외 처리
+        if (num < 0) {
+            throw IllegalArgumentException("음수는 허용되지 않습니다: $num")
+        }
+        num
     }
 
     return parsedNumbers.sum() // 숫자 합산
