@@ -25,7 +25,7 @@ class Calculator(private val requestMessage: String, private val defaultDelimite
     }
 
     /**
-     * 문자열을 입력받고, 이를 String으로 반환합니다.
+     * 콘솔에 requestMessage를 출력하고, 문자열을 입력받습니다.
      *
      * @param requestMessage 문자열 입력을 요청하기 위해 사용자에게 표시되는 메시지
      * */
