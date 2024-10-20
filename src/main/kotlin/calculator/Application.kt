@@ -2,18 +2,14 @@ package calculator
 
 import camp.nextstep.edu.missionutils.Console
 
-fun main(args: Array<String>) {
+fun main() {
     // 사용자로부터 입력값 받기
     println("덧셈할 문자열을 입력해 주세요.")
     val input = Console.readLine()
 
     // 예외 처리와 결과 출력
-    try {
-        val result = add(input)
-        println("결과 : $result")
-    } catch (e: IllegalArgumentException) {
-        println("잘못된 입력입니다: ${e.message}")
-    }
+    val result = add(input)
+    println("결과 : $result")
 }
 
 // 구분자를 구분하고, 숫자들을 모아서 더한 값을 출력하는 함수
