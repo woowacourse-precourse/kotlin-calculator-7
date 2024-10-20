@@ -9,4 +9,5 @@ fun main() {
     println("덧셈할 문자열을 입력해 주세요.")
     val input = readLine()
     val result = Calculator.calculateString(input)
+    println(result)
 }
