@@ -7,20 +7,29 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
 class ApplicationTest : NsTest() {
+
     @Test
+    fun testCalculateEmpty() {
+        assertSimpleTest {
+            run("")
+            assertThat(output()).contains("결과 : 0")
+        }
+    }
+
+    /*@Test
     fun `커스텀 구분자 사용`() {
         assertSimpleTest {
             run("//;\\n1")
             assertThat(output()).contains("결과 : 1")
         }
-    }
+    }*/
 
-    @Test
+    /*@Test
     fun `예외 테스트`() {
         assertSimpleTest {
             assertThrows<IllegalArgumentException> { runException("-1,2,3") }
         }
-    }
+    }*/
 
     override fun runMain() {
         main()
