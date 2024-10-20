@@ -20,6 +20,13 @@ class Operand(
 
     private fun removeCustomSeparatorPattern() =
         inputValue.replace(generateCustomSeparatorPattern, "")
+
+    private fun parseAndAddOperands(stringOperand: List<String>) {
+        val operandList = parseStringToIntList(stringOperand)
+        validateOperandList(operandList)
+        operand.addAll(operandList)
+    }
+
     private fun parseStringToIntList(stringOperand: List<String>): List<Int> {
         return stringOperand.map {
             it.toIntOrNull() ?: throw IllegalArgumentException(ERROR_INVALID_NUMBER)
