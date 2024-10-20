@@ -31,11 +31,11 @@ class Parser {
         return numbers.split(*separators.toTypedArray())
     }
 
-    fun parseNumber(list: List<String>): MutableList<Int> {
-        val numbers = mutableListOf<Int>()
+    fun parseNumber(list: List<String>): MutableList<Long> {
+        val numbers = mutableListOf<Long>()
         list.forEach {
             if (validator.validatePositiveNumber(it)) {
-                numbers.add(it.toInt())
+                numbers.add(it.toLong())
             }
         }
         return numbers

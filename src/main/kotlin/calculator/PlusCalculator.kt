@@ -1,8 +1,8 @@
 package calculator
 
 class PlusCalculator : Calculator {
-    override fun execute(numbers: MutableList<Int>): Int {
-        var sum = 0
+    override fun execute(numbers: MutableList<Long>): Long {
+        var sum = 0L
         numbers.forEach {
             sum += it
         }
