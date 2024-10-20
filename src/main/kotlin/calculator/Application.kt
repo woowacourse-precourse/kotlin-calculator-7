@@ -17,16 +17,30 @@ interface TextCalculator {
 }
 
 class TextSumCalculator : TextCalculator {
+    private val stringParser = StringParser()
+
+    override fun calculate(input: String): Number {
+        val numbers = stringParser.parse(input)
+        return numbers.getSum()
+    }
+
+    private fun List<Double>.getSum(): Number {
+        var sum = 0.0
+        this.forEach { number -> sum += number }
+        return if (sum % 1 == 0.0) sum.toLong() else sum
+    }
+}
+
+class StringParser {
     private val divider = mutableListOf<String>(",", ":")
     private var isCustomDividerUsed: Boolean = true
 
-    override fun calculate(input: String): Number {
+    fun parse(input: String): List<Double> {
         val splitInput = input.split(CUSTOM_DIVIDER_PREFIX, CUSTOM_DIVIDER_SUFFIX)
 
         if (!checkInputTypeAndValidity(splitInput)) throw IllegalArgumentException(INVALID_INPUT_MESSAGE)
 
-        val numbers = splitInput.splitByDivider()
-        return numbers.getSum()
+        return splitInput.splitByDivider()
     }
 
     private fun checkInputTypeAndValidity(input: List<String>): Boolean {
@@ -36,7 +50,7 @@ class TextSumCalculator : TextCalculator {
             isInvalidCustom(input) -> false
             else -> {
                 addCustomDivider(input)
-                return true
+                true
             }
         }
     }
@@ -84,16 +98,6 @@ class TextSumCalculator : TextCalculator {
     private fun checkIsPositiveNumber(number: Double): Double {
         if (number <= 0.0) throw IllegalArgumentException(INVALID_INPUT_MESSAGE)
         return number
-    }
-
-    private fun List<Double>.getSum(): Number {
-        var sum = 0.0
-
-        this.forEach { number ->
-            sum += number
-        }
-
-        return if (sum % 1 == 0.0) sum.toLong() else sum
     }
 
     companion object {
