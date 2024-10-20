@@ -2,19 +2,33 @@ package calculator
 
 import camp.nextstep.edu.missionutils.Console
 
+enum class CalculatorType {
+    STANDARD, CUSTOM
+}
+
 class Calculator {
     private val separator: Separator = Separator()
 
     fun startCalculator() {
         println(CALCULATOR_INPUT_GUIDE_MESSAGE)
-
-        getUserInput()
-    }
-
-    private fun getUserInput() {
         val inputData: String = Console.readLine()
 
-        val splitResult: List<String> = separator.splitSeparator(inputData)
+        checkCalculatorType(inputData)
+    }
+
+    private fun checkCalculatorType(inputData: String) {
+        val calculateType: CalculatorType = separator.checkCustomSeparator(inputData)
+
+        val splitResult = when (calculateType) {
+            CalculatorType.STANDARD -> {
+                separator.splitStandardSeparator(inputData)
+            }
+
+            CalculatorType.CUSTOM -> {
+                separator.splitCustomSeparator(inputData)
+            }
+        }
+
         printCalculateResult(splitResult)
     }
 
