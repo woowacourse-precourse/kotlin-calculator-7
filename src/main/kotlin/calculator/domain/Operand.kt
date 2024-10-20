@@ -7,6 +7,18 @@ class Operand(
     private val operand = mutableListOf<Int>()
     private val generateCustomSeparatorPattern = Regex(GENERATE_CUSTOM_SEPARATOR_PATTERN)
 
+    fun getOperand(): MutableList<Int> {
+        processSeparators()
+        return operand
+    }
+
+    private fun processSeparators() {
+        if (separator.custom == null) {
+            splitByDefaultSeparators()
+        }
+        splitByCustomSeparator()
+    }
+
     private fun splitByDefaultSeparators() {
         val stringOperand = inputValue.split(separator.colon, separator.comma)
         parseAndAddOperands(stringOperand)
