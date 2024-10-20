@@ -10,15 +10,13 @@ class InputManager(
     }
 
     fun findAllNumbers(cleanedInput: String): List<Int> {
+        if (cleanedInput.isEmpty()) return emptyList()
+
         return cleanedInput.split(*delimiters.toTypedArray()).toIntList()
     }
 
-    private fun List<String>.toIntList(): List<Int> {
-        if (this.isEmpty()) return emptyList()
-
-        return this.map {
-            it.toIntOrNull() ?: throw IllegalArgumentException(NON_NUMERIC_MESSAGE)
-        }
+    private fun List<String>.toIntList(): List<Int> = this.map {
+        it.toIntOrNull() ?: throw IllegalArgumentException(NON_NUMERIC_MESSAGE)
     }
 
     fun isContainNegativeNumber(nums: List<Int>): Boolean {
