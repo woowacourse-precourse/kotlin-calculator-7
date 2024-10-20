@@ -1,7 +1,10 @@
 package calculator
 
+import camp.nextstep.edu.missionutils.Console
+
+
 fun main() {
-    val input = readln()
+    val input = Console.readLine()
     val inputNumbers = splitInput(input)
     val sum = addNumbers(inputNumbers)
     println("결과 : $sum")
