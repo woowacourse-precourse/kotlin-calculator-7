@@ -39,6 +39,27 @@ class Calculator(inputWord: String) {
             throw IllegalArgumentException()
         }
     }
+    private fun calculator(divider3: Char) {
+        var num = ""
+        var sum = 0
+        for (i in word) {
+            when (i) {
+                ':', ',', divider3 -> {
+                    checkNumberFormat(num)
+                    if(num.toInt() < 0)
+                        throw IllegalArgumentException()
+                    sum += num.toInt()
+                    num = ""
+                }
+
+                else -> {
+                    num += i
+                }
+            }
+        }
+        sum+=num.toInt()
+        println("결과 : $sum")
+    }
 
 fun calc(dividerType: DividerType) {
     when (dividerType) {
