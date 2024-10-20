@@ -37,5 +37,7 @@ fun calculate(input: String): String {
         }
     }
 
+    sum = numberList.sum()
+
     return "결과 : $sum"
 }
