@@ -1,7 +1,13 @@
 package calculator
 
+import camp.nextstep.edu.missionutils.Console
+
 fun main() {
-    // TODO: 프로그램 구현
+    println(MESSAGE_INPUT_NUMBER)
+
+    val input = Console.readLine()
+
+    if (isEmptyOrSingleNumber(input)) return
 private fun isEmptyOrSingleNumber(input: String): Boolean {
     if (input.isEmpty()) {
         println(MESSAGE_RESULT_NUMBER.replace("%s", "0"))
