@@ -10,6 +10,7 @@ private const val DEFAULT_DELIMITER_PATTERN = "[,:]"
 private const val INVALID_NUMBER_FORMAT_MESSAGE = "잘못된 숫자 형식입니다."
 private const val MULTIPLE_CONSECUTIVE_DELIMITERS_MESSAGE = "여러 개의 구분자가 연속으로 나타날 수 없습니다."
 private const val TRAILING_DELIMITER_MESSAGE = "숫자 뒤에 구분자만 있을 수 없습니다."
+private const val NEGATIVE_NUMBER_NOT_ALLOWED_MESSAGE = "음수는 허용되지 않습니다."
 
 
 fun main() {
@@ -25,6 +26,8 @@ fun main() {
 private fun add(input: String): Int {
     val (delimiter, numberStr) = parseInput(input)
     val nums = splitNumbers(numberStr, delimiter)
+
+    checkForNegativeNumbers(nums)
 }
 
 private fun parseInput(input: String): Pair<Regex, String> {
@@ -62,4 +65,13 @@ private fun splitNumbers(numberStr: String, delimiter: Regex): List<String> {
     }
 
     return nums
+}
+
+private fun checkForNegativeNumbers(nums: List<String>) {
+    nums.forEach {
+        val number = it.toInt()
+        if (number < 0) {
+            throw IllegalArgumentException(NEGATIVE_NUMBER_NOT_ALLOWED_MESSAGE)
+        }
+    }
 }
