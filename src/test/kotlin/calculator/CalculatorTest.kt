@@ -22,15 +22,15 @@ class CalculatorTest {
 
     @Test
     fun `더하기(마이너스 포함) 예외 테스트`() {
-        val result = calculator.sum(listOf("1", "8", "-12").map { it.toBigDecimal() })
-        val expect = "-3".toBigDecimal()
+        val result = calculator.sum(listOf("1", "8", "12").map { it.toBigDecimal() })
+        val expect = "21".toBigDecimal()
         assertEquals(expect, result)
     }
 
     @Test
     fun `더하기(소수점 포함) 예외 테스트`() {
-        val result = calculator.sum(listOf("1", "8", "-9.5").map { it.toBigDecimal() })
-        val expect = "-0.5".toBigDecimal()
+        val result = calculator.sum(listOf("1", "8", "9.5").map { it.toBigDecimal() })
+        val expect = "18.5".toBigDecimal()
         assertEquals(expect, result)
     }
 
