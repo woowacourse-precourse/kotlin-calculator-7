@@ -53,6 +53,13 @@ class ApplicationTest : NsTest() {
         }
     }
 
+    @Test
+    fun `매우 큰 수에 대한 입력`() {
+        assertSimpleTest {
+            run("123456789123456789123456789123456789,123456789123456789123456789123456789")
+            assertThat(output()).contains("결과 : 246913578246913578246913578246913578")
+        }
+    }
 
     override fun runMain() {
         main()
