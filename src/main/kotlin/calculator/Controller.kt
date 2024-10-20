@@ -15,19 +15,28 @@ class Controller(private val validator: Validator) {
 
     // 입력에서 숫자 부분과 구분자를 추출하는 함수
     fun parseInput(input: String): Pair<String, String> {
-        return if (input.startsWith("//")) {
-            // 커스텀 구분자 처리
-            parseCustomDelimiterInput(input)
-        } else {
-            // 기본 구분자 처리
-            parseDefaultDelimiterInput(input)
+        return when {
+            input.startsWith("//") -> {
+                // 커스텀 구분자 처리
+                parseCustomDelimiterInput(input)
+            }
+
+            input.firstOrNull()?.isDigit() == true -> {
+                // 숫자로 시작하면 기본 구분자 처리
+                parseDefaultDelimiterInput(input)
+            }
+
+            else -> {
+                // 잘못된 형식 처리
+                throw IllegalArgumentException("잘못된 형식의 입력입니다.")
+            }
         }
     }
 
     // 커스텀 구분자가 있는 입력을 처리하는 함수
     fun parseCustomDelimiterInput(input: String): Pair<String, String> {
         val delimiterEndIndex = input.indexOf("\n")
-        validator.validateDelimiterFormat(delimiterEndIndex)
+        validator.validateDelimiterFormat(delimiterEndIndex, input)
 
         val customDelimiter = extractCustomDelimiter(input, delimiterEndIndex)
         val numberPart = extractNumberPart(input, delimiterEndIndex)
