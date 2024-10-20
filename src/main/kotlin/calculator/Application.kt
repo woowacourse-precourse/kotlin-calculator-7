@@ -30,21 +30,28 @@ class TextAddCalculator : TextCalculator {
     }
 
     private fun checkInputTypeAndValidity(input: List<String>): Boolean {
-        return when {
-            input.size >= CUSTOM_DIVIDER_EXCEEDING_SIZE -> false
+        if (isInputExceeding(input)) return false
+        if (isNoCustomDivider(input)) return true
+        if (isInvalidCustom(input)) return false
 
-            input.size == CUSTOM_DIVIDER_NONE_SIZE -> {
-                isCustomDividerUsed = false
-                true
-            }
+        updateDividers(input)
+        return true
+    }
 
-            input.first().isNotBlank() -> false
+    private fun isInputExceeding(input: List<String>): Boolean {
+        return input.size >= CUSTOM_DIVIDER_EXCEEDING_SIZE
+    }
 
-            else -> {
-                divider.add(input[CUSTOM_DIVIDER_INDEX])
-                true
-            }
-        }
+    private fun isNoCustomDivider(input: List<String>): Boolean {
+        return input.size == CUSTOM_DIVIDER_NONE_SIZE.also { isCustomDividerUsed = false }
+    }
+
+    private fun isInvalidCustom(input: List<String>): Boolean {
+        return input.first().isNotBlank()
+    }
+
+    private fun updateDividers(input: List<String>) {
+        divider.add(input[CUSTOM_DIVIDER_INDEX])
     }
 
     private fun List<String>.splitByDivider(): List<Double> {
@@ -57,15 +64,21 @@ class TextAddCalculator : TextCalculator {
         }
 
         val splitResult = expression.split(regex)
-        return splitResult.map {
-            try {
-                val number = it.toDouble()
-                if (number <= 0.0) throw IllegalArgumentException(INVALID_INPUT_MESSAGE)
-                number
-            } catch (e: NumberFormatException) {
-                throw IllegalArgumentException(INVALID_INPUT_MESSAGE)
-            }
+        return splitResult.map { it.toValidNumber() }
+    }
+
+    private fun String.toValidNumber(): Double {
+        return try {
+            val number = this.toDouble()
+            checkIsPositiveNumber(number)
+        } catch (e: NumberFormatException) {
+            throw IllegalArgumentException(INVALID_INPUT_MESSAGE)
         }
+    }
+
+    private fun checkIsPositiveNumber(number: Double): Double {
+        if (number <= 0.0) throw IllegalArgumentException(INVALID_INPUT_MESSAGE)
+        return number
     }
 
     private fun List<Double>.getSum(): Number {
