@@ -61,6 +61,14 @@ class ApplicationTest : NsTest() {
         }
     }
 
+    @Test
+    fun `커스텀 구분자 입력에 개행문자가 중복으로 존재`() {
+        assertSimpleTest {
+            run("//*\\n&\\n1\\2n3")
+            assertThat(output()).contains("결과 : 6")
+        }
+    }
+
     override fun runMain() {
         main()
     }
