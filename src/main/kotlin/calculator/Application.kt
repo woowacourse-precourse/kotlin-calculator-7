@@ -8,7 +8,8 @@ fun main() {
     val input = Console.readLine()
 
     if (isEmptyOrSingleNumber(input)) return
-    val isCustomDelimiter = input.substring(0, 2) == CUSTOM_DELIMITER_PREFIX
+    val isCustomDelimiter = input.startsWith(CUSTOM_DELIMITER_PREFIX)
+            && input.contains(CUSTOM_DELIMITER_SUFFIX)
 
     val delimiterSet = getDelimiterSet(isCustomDelimiter, input)
     val regexPattern = getRegexPattern(delimiterSet)
