@@ -6,6 +6,7 @@ fun main() {
     print("덧셈할 문자열을 입력해 주세요.\n")
     val word = Console.readLine()
     val calculator = Calculator(word)
+    calculator.calc(calculator.checkWord())
 }
 
 class Calculator(inputWord: String) {
@@ -38,9 +39,25 @@ class Calculator(inputWord: String) {
             throw IllegalArgumentException()
         }
     }
+
+fun calc(dividerType: DividerType) {
+    when (dividerType) {
+        DividerType.CUSTOM -> {
+            val customWord = word.substring(0, 1)
+            word = word.substring(3)
+            calculator(customWord[0])
+        }
+
+        DividerType.DIVIDER -> {
+            calculator(':')
+        }
+
+        DividerType.NULL ->{
+            print("결과 : 0")
+        }
+    }
 }
-
-
+}
 
 
 enum class DividerType {
