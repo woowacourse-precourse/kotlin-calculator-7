@@ -2,11 +2,10 @@ package calculator
 
 class Validator {
     // 커스텀 구분자 정의만 존재하고 숫자가 없는 경우 예외발생
-    fun validateDelimiterFormat(delimiterEndIndex: Int) {
-        if (delimiterEndIndex == -1) throw IllegalArgumentException(
-            "잘못된 형식입니다."
-        )
+    fun validateDelimiterFormat(delimiterDefineEndIndex: Int, input: String) {
+        if (delimiterDefineEndIndex >= input.length) throw IllegalArgumentException("잘못된 형식입니다.")
     }
+
 
     // 커스텀 구분자가 빈 문자열 또는 한 글자 이상일 경우 예외 발생
     fun validateCustomDelimiter(customDelimiter: String) {
