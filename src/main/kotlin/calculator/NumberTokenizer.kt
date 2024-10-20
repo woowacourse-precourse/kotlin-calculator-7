@@ -1,26 +1,19 @@
 package calculator
 
+import calculator.Constants.CUSTOM_DELIMITER_PREFIX
+import calculator.Constants.CUSTOM_DELIMITER_SUFFIX
 import java.math.BigDecimal
 
-const val DELIMITER_COMMA = ","
-const val DELIMITER_COLON = ":"
-const val DELIMITER_UNIFIED = " "
-const val NUMBER_MINIMUM_LIMIT = 0
-const val CUSTOM_DELIMITER_PREFIX = "//"
-const val CUSTOM_DELIMITER_SUFFIX = "\\n"
-const val INDEX_NOT_FOUND = -1
+private const val DELIMITER_UNIFIED = " "
+private const val NUMBER_MINIMUM_LIMIT = 0
 
 class NumberTokenizer {
 
-    private val delimiters = listOf(DELIMITER_COMMA, DELIMITER_COLON)
-
-    fun tokenize(input: String): List<BigDecimal> {
-        val customDelimiters = extractCustomDelimiters(input)
-        val filteringInput = filterCustom(input, customDelimiters)
-        val totalDelimiters = customDelimiters + delimiters
-        val inputTokens = splitByDelimiters(filteringInput, totalDelimiters)
+    fun tokenize(input: String, delimiters: List<String>): List<BigDecimal> {
+        val filteringInput = filterCustom(input, delimiters)
+        val inputTokens = splitByDelimiters(filteringInput, delimiters)
         val numberTokens = parseNumbers(inputTokens)
-        validateNumbers(numberTokens)
+        validatePositiveNumbers(numberTokens)
         return numberTokens
     }
 
@@ -32,27 +25,11 @@ class NumberTokenizer {
         numberInput.toBigDecimal()
     }
 
-    private fun validateNumbers(numbers: List<BigDecimal>) {
+    private fun validatePositiveNumbers(numbers: List<BigDecimal>) {
         numbers.forEach { number ->
             require(number >= NUMBER_MINIMUM_LIMIT.toBigDecimal())
         }
     }
-
-
-    fun extractCustomDelimiters(input: String): List<String> {
-        val customDelimiters = mutableListOf<String>()
-        val parts = input.split(CUSTOM_DELIMITER_SUFFIX)
-        for (part in parts) {
-            val delimiterPrefixIndex = part.indexOf(CUSTOM_DELIMITER_PREFIX)
-            if (delimiterPrefixIndex == INDEX_NOT_FOUND) break
-            customDelimiters.add(extractDelimiter(part, delimiterPrefixIndex))
-        }
-        return customDelimiters
-    }
-
-    private fun extractDelimiter(part: String, prefixIndex: Int) = part.substring(prefixIndex).removePrefix(
-        CUSTOM_DELIMITER_PREFIX
-    )
 
     private fun filterCustom(input: String, customDelimiters: List<String>): String {
         val filteringInput = customDelimiters.fold(input) { acc, removeDelimiters ->

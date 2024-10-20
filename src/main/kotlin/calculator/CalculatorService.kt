@@ -8,14 +8,15 @@ class CalculatorService(
     private val resultOutput: ResultOutput,
     private val calculator: Calculator,
     private val numberTokenizer: NumberTokenizer,
+    private val delimiter: Delimiter
 ) {
 
     fun execute() {
         guideCalculator()
         val input = userInput.getString()
-        val customDelimiters = numberTokenizer.extractCustomDelimiters(input)
-        val sum = calculateSum(input)
-        resultOutput.outputCustomDelimiters(customDelimiters)
+        val delimiters = delimiter.getDelimiters(input)
+        val sum = calculateSum(input, delimiters)
+        resultOutput.outputCustomDelimiters(delimiters)
         resultOutput.outputAddition(sum)
     }
 
@@ -25,8 +26,8 @@ class CalculatorService(
         guideOutput.guideAdditionInput()
     }
 
-    private fun calculateSum(input: String): BigDecimal {
-        val numbers = numberTokenizer.tokenize(input)
+    private fun calculateSum(input: String, delimiters: List<String>): BigDecimal {
+        val numbers = numberTokenizer.tokenize(input, delimiters)
         return calculator.sum(numbers)
     }
 }

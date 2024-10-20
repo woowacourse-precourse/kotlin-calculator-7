@@ -6,13 +6,15 @@ fun main() {
     val resultOutput = ResultOutput()
     val calculator = Calculator()
     val numberTokenizer = NumberTokenizer()
+    val delimiter = Delimiter()
 
     val calculatorService = CalculatorService(
         userInput = userInput,
         guideOutput = guideOutput,
         resultOutput = resultOutput,
         calculator = calculator,
-        numberTokenizer = numberTokenizer
+        numberTokenizer = numberTokenizer,
+        delimiter = delimiter
     )
     calculatorService.execute()
 }
