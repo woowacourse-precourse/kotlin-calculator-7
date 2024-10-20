@@ -21,7 +21,7 @@ class Parser(private val input: String) {
     fun getParsingList(): List<Long> {
         updatePropertiesOrNone()
         val inputWithoutPrefix = if (hasCustomDelimiter) input.substring(CUSTOM_DELIMITER_FORMAT_LEN) else input
-        val splitRegex = "[${delimiters.joinToString()}]".toRegex()
+        val splitRegex = "[${delimiters.joinToString("")}]".toRegex()
         val parsingList = inputWithoutPrefix.split(splitRegex)
         return parsingList.map { parsingStr -> checkValidAndConvertToLong(parsingStr) }
     }
