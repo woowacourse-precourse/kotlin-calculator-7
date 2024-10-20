@@ -16,6 +16,6 @@ fun main() {
             println("결과 : $result")
         }
     } catch (e: IllegalArgumentException) {
-        println(e.message)
+        throw IllegalArgumentException()
     }
 }
