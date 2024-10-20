@@ -2,7 +2,7 @@ package calculator.delimiter
 
 import calculator.constant.DelimiterConst
 
-class CustomDelimiter {
+object CustomDelimiter {
     private var _customDelimiter: String? = null
 
     val customDelimiter: String?
