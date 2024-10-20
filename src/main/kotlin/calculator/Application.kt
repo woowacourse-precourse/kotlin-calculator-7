@@ -29,16 +29,16 @@ class Calculator(inputWord: String) {
         } else {
             throw IllegalArgumentException()
         }
-
     }
 
-    private fun checkNumberFormat(wordNumberFormat: String) {
+    private fun checkNumberFormat(wordNumberFormat : String) {
         try {
             wordNumberFormat.toInt()
         } catch (e: NumberFormatException) {
             throw IllegalArgumentException()
         }
     }
+
     private fun calculator(divider3: Char) {
         var num = ""
         var sum = 0
@@ -61,25 +61,24 @@ class Calculator(inputWord: String) {
         println("결과 : $sum")
     }
 
-fun calc(dividerType: DividerType) {
-    when (dividerType) {
-        DividerType.CUSTOM -> {
-            val customWord = word.substring(0, 1)
-            word = word.substring(3)
-            calculator(customWord[0])
-        }
+    fun calc(dividerType: DividerType) {
+        when (dividerType) {
+            DividerType.CUSTOM -> {
+                val customWord = word.substring(0, 1)
+                word = word.substring(3)
+                calculator(customWord[0])
+            }
 
-        DividerType.DIVIDER -> {
-            calculator(':')
-        }
+            DividerType.DIVIDER -> {
+                calculator(':')
+            }
 
-        DividerType.NULL ->{
-            print("결과 : 0")
+            DividerType.NULL ->{
+                print("결과 : 0")
+            }
         }
     }
 }
-}
-
 
 enum class DividerType {
     DIVIDER, CUSTOM, NULL
