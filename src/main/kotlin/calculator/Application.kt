@@ -33,6 +33,7 @@ fun main() {
         val sum = numbers.sumOf {
             // 숫자가 아닌 경우 IllegalArgumentException 발생
             val number = it.toIntOrNull() ?: throw IllegalArgumentException("[잘못된 입력입니다: $it]")
+            if (number < 0) throw IllegalArgumentException("[음수 입력: $number]")
             number
         }
 
