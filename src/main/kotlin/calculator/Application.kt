@@ -14,7 +14,6 @@ fun main() {
     }
 }
 
-
 class Separator(s: String) {
     private var word: String
     private lateinit var divider : String
