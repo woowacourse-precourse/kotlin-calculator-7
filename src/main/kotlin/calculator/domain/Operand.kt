@@ -25,8 +25,20 @@ class Operand(
             it.toIntOrNull() ?: throw IllegalArgumentException(ERROR_INVALID_NUMBER)
         }
     }
+
+    private fun validateOperandList(operandList: List<Int>) {
+        operandList.forEach { validatePositive(it) }
+    }
+
+    private fun validatePositive(value: Int) {
+        if (value <= 0) {
+            throw IllegalArgumentException(ERROR_NEGATIVE_NUMBER)
+        }
+    }
+
     companion object {
         private const val GENERATE_CUSTOM_SEPARATOR_PATTERN = "^//(.)\\\\n"
+        private const val ERROR_NEGATIVE_NUMBER = "[ERROR] 입력 값은 양수여야 합니다."
         private const val ERROR_INVALID_NUMBER = "[ERROR] 숫자만 입력 가능합니다."
     }
 }
