@@ -34,7 +34,7 @@ class PositiveNumbersParser {
 
     companion object {
         private val DEFAULT_DELIMITERS = charArrayOf(',', ':')
-        private const val CUSTOM_DELIMITERS_START = "//"
-        private const val CUSTOM_DELIMITERS_END = '\n'
+        const val CUSTOM_DELIMITERS_START = "//"
+        const val CUSTOM_DELIMITERS_END = '\n'
     }
 }
