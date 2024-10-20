@@ -1,9 +1,9 @@
 package calculator.utils
 
-import calculator.eums.DefaultOperator.*
+import calculator.eums.DefaultDelimiter.*
 import calculator.eums.Error.*
 import calculator.eums.RegexPattern.*
-import calculator.extensions.splitWithCustomOperator
+import calculator.extensions.splitWithCustomDelimiter
 
 object Validator {
 
@@ -17,7 +17,7 @@ object Validator {
     }
 
     fun validateInputContainedCustomOperator(input: String) {
-        input.splitWithCustomOperator().forEach {
+        input.splitWithCustomDelimiter().forEach {
             require(it != "") { ONLY_NUMBER.message }
         }
     }

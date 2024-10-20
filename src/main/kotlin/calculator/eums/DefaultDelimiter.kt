@@ -1,6 +1,6 @@
 package calculator.eums
 
-enum class DefaultOperator(val value: String) {
+enum class DefaultDelimiter(val value: String) {
     COMMA(","),
     COLON(":")
 }

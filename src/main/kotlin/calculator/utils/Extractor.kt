@@ -1,8 +1,8 @@
 package calculator.utils
 
 import calculator.extensions.isContainCustomOperator
-import calculator.extensions.toIntListByOperator
-import calculator.extensions.toIntListAppliedCustomOperator
+import calculator.extensions.toIntListByDefaultDelimiter
+import calculator.extensions.toIntListAppliedCustomDelimiter
 
 object Extractor {
 
@@ -11,10 +11,10 @@ object Extractor {
         val result = mutableListOf<Int>()
 
         if (!input.isContainCustomOperator()) {
-            result.addAll(input.toIntListByOperator())
+            result.addAll(input.toIntListByDefaultDelimiter())
         } else {
             Validator.validateInputContainedCustomOperator(input)
-            result.addAll(input.toIntListAppliedCustomOperator())
+            result.addAll(input.toIntListAppliedCustomDelimiter())
         }
 
         Validator.validateNumbers(result)
