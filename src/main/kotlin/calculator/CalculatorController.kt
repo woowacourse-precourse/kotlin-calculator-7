@@ -25,12 +25,9 @@ class CalculatorController {
     }
 
     private fun parseCustomDelimiter(input: String): String {
-        val pattern = Regex("""^//(.)\\n(.*)$""")
+        val pattern = Regex("""^//(.*)\\n(.*)$""")
         val matchResult = pattern.find(input)
         matchResult?.let {
-            it.groupValues.forEachIndexed { index, s ->
-                println("$index : $s")
-            }
             delimiter = it.groupValues[1]
             return it.groupValues[2]
         } ?: return input
