@@ -15,8 +15,9 @@ class Operand(
     private fun processSeparators() {
         if (separator.custom == null) {
             splitByDefaultSeparators()
+        } else {
+            splitByCustomSeparator()
         }
-        splitByCustomSeparator()
     }
 
     private fun splitByDefaultSeparators() {
