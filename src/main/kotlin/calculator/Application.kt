@@ -6,4 +6,9 @@ fun main() {
     println(PROMPT_INPUT_MESSAGE)
 
     val input = Console.readLine()
+    if (input.isEmpty()) {
+        printOutput(0)
+        return
+    }
+
 }
