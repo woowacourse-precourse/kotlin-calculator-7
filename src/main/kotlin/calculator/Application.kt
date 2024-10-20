@@ -1,5 +1,11 @@
 package calculator
 
 fun main() {
-    // TODO: 프로그램 구현
+    val delimiters = mutableListOf(",", ":") // 기본 구분자
+
+    // 입력 받기
+    val input = readlnOrNull() ?: ""
+
+    // 출력
+    println(input)
 }
