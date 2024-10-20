@@ -58,6 +58,9 @@ class ApplicationTest : NsTest() {
         assertSimpleTest {
             assertThrows<IllegalArgumentException> { runException("///\\*-32,1:2*9/56-7\\30") }
         }
+        assertSimpleTest {
+            assertThrows<IllegalArgumentException> { runException("///\\*-32,1:2*9/56-7\\\\") }
+        }
     }
 
     override fun runMain() {
