@@ -6,6 +6,11 @@ class SeparatorFactory(
     private var separator: Separator = Separator()
     private val customSeparatorPatternValue = Regex(CUSTOM_SEPARATOR_PATTERN_VALUE)
 
+    fun generateSeparator(): Separator {
+        processCustomSeparatorPattern()
+        return separator
+    }
+
     private fun processCustomSeparatorPattern() {
         if (customSeparatorPatternValue.matches(inputValue)) {
             validateAndApplyCustomSeparator()
