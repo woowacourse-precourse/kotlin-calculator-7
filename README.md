@@ -59,6 +59,99 @@
   - 커스텀 구분자를 지정할 경우 '//', '\n' 사이에 들어오는 문자가 한개인지 확인하고, 아니면 IllegalArgumentException을 발생시킨다.
 - [X] 사용자가 잘못된 값을 입력할 경우 IllegalArgumentException을 발생시킨 후 애플리케이션을 종료시킨다.
 
+## 문제 해결 과정
+
+### 입력
+```kotlin
+    println("덧셈할 문자열을 입력해 주세요.")
+
+    val inputString = readLine()
+
+    if(inputString.isEmpty()) {
+        throw IllegalArgumentException("Empty String.")
+    }
+```
+- 미션의 요구사항인 camp.nextstep.edu.missionutils.Console의 readLine() 을 사용해서 입력을 받았음.
+- 그리고 입력값이 없으면 IllegalArgumentException이 발생되도록 함.
+
+### 기본 구분자
+```kotlin
+fun processDefaultDelimiter(inputString : String) : Int {   //기본 구분자 처리 함수
+    val numberList = inputString.split(',',':')
+    if(numberList.any { it.isEmpty() }) throw IllegalArgumentException()
+
+    validateNumber(numberList)
+
+    return numberList.sumOf { it.toInt() }
+}
+```
+- `split`을 사용하여 입력받은 문자열에서 `,`, `:` 을 분리한 후 그 값들을 `toInt()`로 정수화 한 뒤 `sumOf`를 사용해서 더해주었음.
+
+### 커스텀 구분자
+```kotlin
+fun processCustomDelimiter(inputString : String) : Int {    //커스텀 구분자 처리 함수
+    val endIndex = inputString.indexOf("\\n")
+    if(endIndex == -1) throw IllegalArgumentException()    //\n 이 없는 경우
+
+    val customDelimiter = inputString.substring(2, endIndex)
+    if(customDelimiter.isEmpty()) throw IllegalArgumentException()     //구분자가 없는 경우
+
+    val numbers = inputString.substring(endIndex + 2)
+    if(numbers.isEmpty()) throw IllegalArgumentException()  //숫자가 없는 경우
+
+    val numberList = numbers.split(customDelimiter)
+    if(numberList.any { it.isEmpty() }) throw IllegalArgumentException()    //구분자 사이에 숫자가 없는 경우
+
+    validateNumber(numberList)
+
+    return numberList.sumOf { it.toInt() }
+}
+```
+- `'\'` 는 인식이 안되어 `\\n`을 사용해서 인식되도록 함.
+- 커스텀 구분자의 경우에는 조건문을 사용하여 입력값의 시작이 `//`인 경우에만 검사하도록 함.
+- 예외 처리 케이스로 아래의 케이스들을 검사하도록 함.
+  - `\n` 이 없는 경우
+  - `//`, `\n` 사이에 아무 문자가 없는 경우
+  - 숫자가 없는 경우
+  - 구분자 사이에 숫자가 없는 경우
+
+
+### 숫자 체크 로직
+```kotlin
+fun validateNumber(numbers : List<String>) {    //숫자 체크 함수
+    for(number in numbers) {
+        if(number.isNotEmpty() && !number.all { it.isDigit() }) {
+            throw IllegalArgumentException()
+        }
+    }
+}
+```
+- 입력된 값이 숫자인지 아닌지 검사하는 함수
+
+
+### 실행 결과
+- 기본 구분자
+  - `,`
+
+  ![img_2.png](img_2.png)
+
+  - `:`
+
+  ![img_3.png](img_3.png)
+
+- 커스텀 구분자
+
+![img_4.png](img_4.png)
+
+- 예외처리
+1. 입력값이 숫자로 시작하지 않은 경우
+
+![img_1.png](img_1.png)
+2. 구분자 사이에 값이 비어있는 경우
+
+![img_5.png](img_5.png)
+
+
 ## 에러 발생
 ![img.png](img.png)
 - 컴파일 도중 해당 에러가 발생하여 프로젝트의 SDK 버전을 21로 설정해주니 해결되었음. 
