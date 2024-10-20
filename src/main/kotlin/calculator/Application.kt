@@ -28,6 +28,11 @@ fun add(input: String): Int {
         Pair("[,:]".toRegex(), input)
     }
 
+    // 커스텀 구분자와 기본 구분자 혼합 사용 시 예외 처리
+    if (input.startsWith("//") && (numbers.contains(",") || numbers.contains(":"))) {
+        throw IllegalArgumentException("커스텀 구분자와 기본 구분자를 혼합하여 사용할 수 없습니다.")
+    }
+
     // 연속된 구분자가 있는지 확인하는 정규 표현식
     val consecutiveDelimiterPattern = "${delimiters.pattern}{2,}".toRegex()
     if (consecutiveDelimiterPattern.containsMatchIn(numbers)) {
