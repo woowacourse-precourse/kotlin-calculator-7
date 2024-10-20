@@ -15,15 +15,20 @@ class Calculator(inputWord: String) {
         this.word = inputWord
     }
 
-    fun checkWord() {
-        if (word.substring(0, 2) == "//" && word.substring(3, 5) == "\\n") {
+    fun checkWord(): DividerType {
+        return if(word.isBlank() || word == ""){
+            DividerType.NULL
+        }
+        else if (word.substring(0, 2) == "//" && word.substring(3, 5) == "\\n") {
             word = word.substring(2)
+            DividerType.CUSTOM
         } else if (word.contains(":") || word.contains(",")) {
             checkNumberFormat(wordNumberFormat = word.replace(",", "").replace(":", ""))
-
+            DividerType.DIVIDER
         } else {
             throw IllegalArgumentException()
         }
+
     }
 
     private fun checkNumberFormat(wordNumberFormat: String) {
@@ -37,3 +42,7 @@ class Calculator(inputWord: String) {
 
 
 
+
+enum class DividerType {
+    DIVIDER, CUSTOM, NULL
+}
