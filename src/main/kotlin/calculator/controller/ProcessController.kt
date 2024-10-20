@@ -1,16 +1,11 @@
-package calculator
+package calculator.controller
 
-import camp.nextstep.edu.missionutils.Console
+import calculator.model.Repository
 
-class InOutController(private val repo: Repository) {
+class ProcessController(private val repo: Repository) {
 
-    fun input() {
-        // 문자열을 입력받고, 커스텀 구분자의 유무를 확인
-        val input = Console.readLine()
-        repo.userInput = input
+    fun processInput() {
         checkCustomDivider(repo.userInput)
-
-        // 문자열 예외 처리
         checkException()
     }
 
@@ -46,13 +41,5 @@ class InOutController(private val repo: Repository) {
 
         // 예외 출력
         if (occurException) throw IllegalArgumentException("잘못된 값을 입력하였습니다.")
-    }
-
-    fun userInputGuide() {
-        println("덧셈할 문자열을 입력해 주세요.")
-    }
-
-    fun printResult() {
-        println("결과 : ${repo.sum}")
     }
 }

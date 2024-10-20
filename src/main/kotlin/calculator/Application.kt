@@ -1,12 +1,18 @@
 package calculator
 
+import calculator.controller.AddController
+import calculator.controller.ProcessController
+import calculator.model.Repository
+import calculator.view.InOutView
+
 fun main() {
     val repo = Repository()
-    val input = InOutController(repo)
+    val process = ProcessController(repo)
     val add = AddController(repo)
+    val inout = InOutView()
 
-    input.userInputGuide()
-    input.input()
+    inout.input(repo)
+    process.processInput()
     add.addNum()
-    input.printResult()
+    inout.printResult(repo)
 }

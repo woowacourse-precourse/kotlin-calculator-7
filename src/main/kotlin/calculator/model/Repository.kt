@@ -1,4 +1,4 @@
-package calculator
+package calculator.model
 
 class Repository {
     var userInput: String = ""

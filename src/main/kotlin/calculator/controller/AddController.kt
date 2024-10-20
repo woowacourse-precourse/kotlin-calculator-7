@@ -1,4 +1,6 @@
-package calculator
+package calculator.controller
+
+import calculator.model.Repository
 
 class AddController(private val repo: Repository) {
 
@@ -11,10 +13,12 @@ class AddController(private val repo: Repository) {
         val input = repo.userInput
 
         val strList = if (repo.customDivider != null)  {
-            input.split(",", ":", repo.customDivider!!)
+            input.split(",", ":", repo.customDivider!!).toMutableList()
         } else {
-            input.split(",", ":")
+            input.split(",", ":").toMutableList()
         }
+
+        strList.removeAll(listOf(""))
 
         return strList.map { it.toInt() }
     }
