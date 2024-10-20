@@ -1,5 +1,8 @@
 package calculator
 
+/**
+ * 큰 수에 대해서 크기 제한 없이 처리할 수 있는 자료구조로, 덧셈 연산을 지원합니다.
+ */
 class BigInt(number: String) {
 
     private val value: MutableList<Short> = mutableListOf()
@@ -14,7 +17,15 @@ class BigInt(number: String) {
         }
     }
 
+
     companion object {
+        /**
+         * 두 BigInt 객체의 값을 더한 새로운 BigInt 객체를 반환합니다.
+         *
+         * @param x 첫 번째 BigInt 객체
+         * @param y 두 번째 BigInt 객체
+         * @return 두 값을 더한 결과를 담은 BigInt 객체
+         */
         fun add(x: BigInt, y: BigInt): BigInt {
             val result = mutableListOf<Int>()
 

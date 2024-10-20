@@ -8,14 +8,10 @@ fun main() {
     inspectError(input)
     val operands: MutableList<BigInt> = parseInput(input)
     printSum("결과 : ", operands)
-
-//    var a = BigInt("1233")
-//    var b = BigInt("23")
-//    println(BigInt.add(a, b))
 }
 
 /**
- * 문자열을 입력받고, 이를 String으로 반환
+ * 문자열을 입력받고, 이를 String으로 반환합니다.
  *
  * @param requestMessage 문자열 입력을 요청하기 위해 사용자에게 표시되는 메시지
  * */
@@ -25,7 +21,7 @@ fun getInput(requestMessage: String): String {
 }
 
 /**
- * 주어진 문자열을 파싱하여, 피연산자인 숫자들의 리스트로 반환
+ * 주어진 문자열을 파싱하여, 피연산자인 숫자들의 리스트로 반환합니다.
  *
  * @param input 사용자로부터 입력받은 문자열
  * @return 파싱된 수들의 리스트
@@ -56,7 +52,7 @@ fun parseInput(input: String): MutableList<BigInt> {
 }
 
 /**
- * 주어진 수식 문자열을 구분자로 split하여 숫자 리스트로 변환
+ * 주어진 수식 문자열을 구분자로 split하여 BigInt 리스트로 변환 후 반환합니다.
  *
  * @param expression 연산자와 구분자로 이루어진 수식 문자열
  * @param delimiterList 구분자로 사용할 문자들의 리스트
@@ -83,9 +79,9 @@ fun parseExpression(expression: String, delimiterList: MutableSet<Char>): Mutabl
 }
 
 /**
- * 주어진 숫자 리스트의 합을 계산하여 출력
+ * 주어진 BigInt 리스트의 합을 계산하여 출력합니다.
  *
- * @param responseMessage 결과 메시지에 포함시킬 문자열 (ex - "결과 : ")
+ * @param responseMessage 결과 메시지의 첫 부분에 출력될 문자열 (ex - "결과 : ")
  * @param numberList 합계를 구할 수들의 리스트
  */
 fun printSum(responseMessage: String, numberList: MutableList<BigInt>) {
@@ -95,7 +91,7 @@ fun printSum(responseMessage: String, numberList: MutableList<BigInt>) {
 }
 
 /**
- * 입력 문자열을 검사하여 잘못된 형식이 있는지 확인하고, 발견 시 IllegalArgumentException을 발생시킴
+ * 입력 문자열을 검사하여 잘못된 형식이 있는지 확인하고, 발견 시 IllegalArgumentException을 발생시킵니다.
  *
  * @param input 사용자로부터 입력받은 문자열
  */
@@ -148,7 +144,6 @@ fun inspectError(input: String) {
         } else {
             // 피연산자이지만 숫자가 아닌 것을 입력받은 경우
             if (!input[inspectIndex].isDigit()) throw IllegalArgumentException()
-
         }
         prevCharacter = input[inspectIndex]
         inspectIndex++
