@@ -15,23 +15,21 @@ class CalculatorApp(
     fun run() {
         val input = inputView.readString()
         val result = extract(input)
-        validate(result)
         val sum = calculate(result)
         displayResult(sum)
     }
 
     private fun extract(input: String): List<Int> = Extractor.extractNumbers(input)
 
-    private fun validate(numbers: List<Int>) {
-        Validator.validateNumbers(numbers)
-    }
-
     private fun calculate(input: List<Int>) = calculator.sum(input)
 
     private fun displayResult(sum: Int) = outputView.printResultOfSum(sum)
 
     companion object {
-        fun create(inputView: InputView, outputView: OutputView, calculator: Calculator): CalculatorApp =
-            CalculatorApp(inputView, outputView, calculator)
+        fun create(
+            inputView: InputView,
+            outputView: OutputView,
+            calculator: Calculator
+        ): CalculatorApp = CalculatorApp(inputView, outputView, calculator)
     }
 }
