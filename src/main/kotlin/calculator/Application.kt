@@ -18,10 +18,10 @@ fun main() {
                 // 구분자인 경우
                 if (currentNumber.isNotEmpty()) {
                     sum += currentNumber.toString().toIntOrNull()
-                        ?: throw IllegalArgumentException("구분자 사이에 숫자가 아닌 값이 입력되었습니다.")
+                        ?: throw IllegalArgumentException(ErrorMessages.INVALID_NUMBER)
                     currentNumber = StringBuilder() // 숫자 초기화
                 } else {
-                    throw IllegalArgumentException("구분자 사이에 숫자가 없습니다. 계산할 숫자를 입력해주세요.")
+                    throw IllegalArgumentException(ErrorMessages.NUMBER_NOT_PROVIDED)
                 }
             }
 
@@ -30,14 +30,22 @@ fun main() {
 
             // 구분자도 숫자도 아닌 값이 입력된 경우 예외 처리
             else -> {
-                throw IllegalArgumentException("잘못된 입력입니다. 숫자나 구분자가 아닌 값이 포함되었습니다")
+                throw IllegalArgumentException(ErrorMessages.INVALID_CHARACTER)
             }
         }
     }
 
     if (currentNumber.isNotEmpty()) {
-        sum += currentNumber.toString().toIntOrNull() ?: throw IllegalArgumentException("마지막으로 입력된 값이 숫자가 아닙니다.")
+        sum += currentNumber.toString().toIntOrNull()
+            ?: throw IllegalArgumentException(ErrorMessages.LAST_VALUE_NOT_NUMBER)
     }
 
     print(sum)
+}
+
+object ErrorMessages {
+    const val INVALID_NUMBER = "구분자 사이에 숫자가 아닌 값이 입력되었습니다."
+    const val NUMBER_NOT_PROVIDED = "구분자 사이에 숫자가 없습니다. 계산할 숫자를 입력해주세요."
+    const val INVALID_CHARACTER = "잘못된 입력입니다. 숫자나 구분자가 아닌 값이 포함되었습니다"
+    const val LAST_VALUE_NOT_NUMBER = "마지막으로 입력된 값이 숫자가 아닙니다."
 }
