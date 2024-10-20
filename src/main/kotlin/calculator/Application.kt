@@ -24,10 +24,20 @@ class Calculate(private val input: String) {
     private fun customDel(): List<String> {
         val part = input.split("\\n")
         if (part.size != 2) {   // \n을 기준으로 입력을 두 부분(구분자 정의와 숫자 부분)으로 분리
-            throw IllegalArgumentException("잘못된 입력입니다. 구분자와 숫자를 포함해야 합니다.")
+            throw IllegalArgumentException("구분자와 숫자를 포함해야 합니다.")
         }
         val delimiter = part[0][2]    // 커스텀 구분자 추출
         return part[1].split(delimiter.toString())  // \n의 다음 부분을 구분자 기준으로 분리
+    }
+
+    // 잘못된 숫자와 음수 입력에 대해 예외 발생시키는 메서드
+    private fun runException(numbers: List<String>) {
+        numbers.forEach { number ->
+            val value = number.toIntOrNull() ?: throw IllegalArgumentException("잘못된 숫자입니다.")    // 문자열을 정수로 변환할 수 없을 경우 예외 발생
+            if (value < 0) {    // 음수일 경우 예외 발생
+                throw IllegalArgumentException("음수는 입력할 수 없습니다.")
+            }
+        }
     }
 
 }
