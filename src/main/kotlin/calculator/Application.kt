@@ -1,15 +1,17 @@
 package calculator
 
+import camp.nextstep.edu.missionutils.Console
+
 fun main() {
     // TODO: 프로그램 구현
 
+
     val parser = Parser()
 
-    println(parser.parse(null))
-    println(parser.parse(""))
-    println(parser.parse("1,2,3"))
-    println(parser.parse("4:5:6"))
-    println(parser.parse("7,8:9"))
+    println("계산할 문자열을 입력하시오... (ex: 1,2,3 또는 //;\n1;2;3): ")
+    val input = Console.readLine()
+    val result = parser.parse(input)
+    println(result)
 }
 
 class Parser {
