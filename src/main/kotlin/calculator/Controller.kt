@@ -35,11 +35,11 @@ class Controller(private val validator: Validator) {
 
     // 커스텀 구분자가 있는 입력을 처리하는 함수
     fun parseCustomDelimiterInput(input: String): Pair<String, String> {
-        val delimiterEndIndex = input.indexOf("\n")
-        validator.validateDelimiterFormat(delimiterEndIndex)
+        val delimiterEndIndex = input.indexOf("\\n")
+        validator.validateDelimiterFormat(delimiterEndIndex + 2, input)
 
         val customDelimiter = extractCustomDelimiter(input, delimiterEndIndex)
-        val numberPart = extractNumberPart(input, delimiterEndIndex)
+        val numberPart = extractNumberPart(input, delimiterEndIndex + 2)
         return Pair(numberPart, customDelimiter)
     }
 
@@ -56,8 +56,8 @@ class Controller(private val validator: Validator) {
     }
 
     // 숫자 부분을 추출하는 함수
-    fun extractNumberPart(input: String, delimiterEndIndex: Int): String {
-        return input.substring(delimiterEndIndex + 1)
+    fun extractNumberPart(input: String, numberStartIndex: Int): String {
+        return input.substring(numberStartIndex)
     }
 
     // 숫자들을 구분자에 따라 분리하고 합산하는 함수
