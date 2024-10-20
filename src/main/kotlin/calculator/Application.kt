@@ -29,7 +29,7 @@ fun extractDelimiter(userInput: String): Pair<Regex, String> {
 
 fun calculateSum(userInput: String?): Int {
     if (userInput == null) {
-        throw IllegalArgumentException("입력값이 없습니다.")
+        throw IllegalArgumentException()
     }
 
     if (userInput.isEmpty()) {
@@ -40,15 +40,15 @@ fun calculateSum(userInput: String?): Int {
     val parsedNumbers = numbers.split(delimiter)
 
     if (parsedNumbers.isEmpty()) {
-        throw IllegalArgumentException("구분자와 양수로 구성된 문자열만 입력해주세요.")
+        throw IllegalArgumentException()
     }
 
     return parsedNumbers
         .filter { it.isNotEmpty() }
         .map {
             val number = it.toIntOrNull()
-                ?: throw IllegalArgumentException("구분자와 양수로 구성된 문자열만 입력해주세요.")
-            require(number >= 0) { "구분자와 양수로 구성된 문자열만 입력해주세요." }
+                ?: throw IllegalArgumentException()
+            require(number >= 0)
             number
         }
         .sum()
