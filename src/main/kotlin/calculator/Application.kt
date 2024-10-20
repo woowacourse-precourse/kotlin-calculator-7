@@ -45,6 +45,20 @@ class Calculate(private val input: String) {
         return numbers.sum()
     }
 
+    fun main() {
+        println("덧셈할 문자열을 입력해 주세요.")
+        val input = Console.readLine()
+        if (input.isNullOrEmpty()) {    // 빈문자열이나 null값을 입력받을 경우 0 출력
+            println("결과 : 0")
+        } else {
+            val calculate = Calculate(input)
+            val numbers = calculate.parseInput()
+            val result = calculate.totalSum(numbers)
+            println("결과 : $result")
+        }
+
+    }
+
 }
 
 
