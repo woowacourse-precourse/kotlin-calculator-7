@@ -20,4 +20,4 @@ fun main() {
     printOutput(result)
 }
 
-fun printOutput(output: Int) = PROMPT_OUTPUT_MESSAGE + output
+fun printOutput(output: Int) = println(PROMPT_OUTPUT_MESSAGE + output)
