@@ -38,7 +38,9 @@ class TextParser {
     fun parse(input: String): List<Double> {
         val splitInput = input.split(CUSTOM_DIVIDER_PREFIX, CUSTOM_DIVIDER_SUFFIX)
 
-        if (!checkInputTypeAndValidity(splitInput)) throw IllegalArgumentException(INVALID_INPUT_MESSAGE)
+        if (!checkInputTypeAndValidity(splitInput)) {
+            throw IllegalArgumentException(INVALID_INPUT_MESSAGE)
+        }
 
         return splitInput.splitByDivider()
     }
