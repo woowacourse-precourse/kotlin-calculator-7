@@ -24,7 +24,11 @@ class Separator(s: String) {
         this.word = s
     }
 
+    private fun checkCustomSeparator() {
+        divider = word.substring(3,4)
+        word = word.substring(6)
 
+    }
 
     private fun checkSeparator() {
         for (i in word) {
@@ -53,7 +57,9 @@ class Separator(s: String) {
     }
 
     fun checkIllegalArgumentException(){
-        if ((word.contains(":") || word.contains(","))) {
+        if (word.contains("//")) {
+            this.checkCustomSeparator()
+        } else if ((word.contains(":") || word.contains(","))) {
             this.checkSeparator()
         } else {
             throw IllegalArgumentException()
