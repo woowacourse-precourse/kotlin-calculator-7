@@ -14,7 +14,7 @@ fun main() {
             val parts = input.split("\\n") // 이 부분에서 \n으로 나누기
 
             // 사용자 지정 구분자 추출
-            val customDelimiter = parts[0].substring(2) // "//" 제거
+            val customDelimiter = parts[0].substring(2).trim() // "//" 제거 후 공백 제거
 
             // 구분자 업데이트
             delimiters += customDelimiter
