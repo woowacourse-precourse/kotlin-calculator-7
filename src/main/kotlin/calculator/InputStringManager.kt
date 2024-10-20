@@ -4,6 +4,18 @@ import calculator.StringUtility.splitByCollection
 
 object InputStringManager {
     /**
+     * Input 문자열을 구분자로 잘라 합산
+     * @param input 원본 입력 문자열
+     * @return 구분자로 끊어 합산한 결과값
+     */
+    fun sumInputString(input: String): Number {
+        if (isIntTypeInput(input)) {
+            return parseInputStringToIntList(input).sum()
+        }
+        return parseInputStringToDoubleList(input).sum()
+    }
+
+    /**
      * 원본 입력 문자열을 문자열 리스트로 분할
      * @param input 원본 입력 문자열
      * @return 분할된 문자열 리스트
@@ -41,29 +53,17 @@ object InputStringManager {
      * @param input 원본 입력 문자열
      * @return 검출한 부울 결과 값
      */
-    fun hasDoubleInput(input: String): Boolean {
+    fun isIntTypeInput(input: String): Boolean {
         val noCommandInput = getCommandRemovedInput(input)
         val delimiters: Set<Char> = DelimiterParser.getDelimiter(input)
 
-        if (delimiters.contains('.')) {
+        if ('.' in delimiters) {
             return true
         }
-        if (noCommandInput.contains('.')) {
+        if ('.' in noCommandInput) {
             return false
         }
         return true
-    }
-
-    /**
-     * Input 문자열을 구분자로 잘라 합산
-     * @param input 원본 입력 문자열
-     * @return 구분자로 끊어 합산한 결과값
-     */
-    fun sumInputString(input: String): Number {
-        if (hasDoubleInput(input)) {
-            return parseInputStringToIntList(input).sum()
-        }
-        return parseInputStringToDoubleList(input).sum()
     }
 
     /**
@@ -76,5 +76,25 @@ object InputStringManager {
             return input.substring(COMMAND_LENGTH until input.length)
         }
         return input
+    }
+
+    /**
+     * 사용자의 입력에서 이용 가능한 숫자를 찾기
+     * @param input 원본 입력 문자열
+     * @return 입력 문자열에서 사용할 수 있는 숫자로 이루어진 Set
+     */
+    fun getAvailableDigits(input: String): Set<Char> {
+        val digits = ('0'..'9').toSet()
+        return digits - DelimiterParser.getDelimiter(input)
+    }
+
+    /**
+     * 사용자의 입력이 비어있는지 검사
+     * @param input 원본 입력 문자열
+     * @return 입력값이 비어있는지 나타내는 부울 값
+     */
+    fun emptyInputChecker(input: String): Boolean {
+        val commandRemovedInput = getCommandRemovedInput(input)
+        return commandRemovedInput.isEmpty()
     }
 }
