@@ -15,10 +15,16 @@ class Calculator {
         val inputData: String = Console.readLine()
 
         val splitResult: List<String> = separator.splitSeparator(inputData)
-        println("출력: 입력 분리값 -> $splitResult")
+        printCalculateResult(splitResult)
+    }
+
+    private fun printCalculateResult(splitResult: List<String>) {
+        val sumResult = splitResult.sumOf { data -> data.toInt() }
+        println("$CALCULATOR_OUTPUT_MESSAGE $sumResult")
     }
 
     companion object {
         const val CALCULATOR_INPUT_GUIDE_MESSAGE = "덧셈할 문자열을 입력해 주세요."
+        const val CALCULATOR_OUTPUT_MESSAGE = "결과 :"
     }
 }
