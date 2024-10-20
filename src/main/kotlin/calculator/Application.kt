@@ -24,3 +24,13 @@ fun extractDelimiter(userInput: String): Pair<Regex, String> {
         Regex("[,:]") to userInput
     }
 }
+
+fun calculateSum(userInput: String): Int {
+    if (userInput.equals("")) return 0
+
+    val (delimiter, numbers) = extractDelimiter(userInput)
+    return numbers.split(delimiter)
+        .map { it.toIntOrNull() ?: throw IllegalArgumentException("구분자와 양수로 구성된 문자열만 입력해주세요.") }
+        .onEach { require(it >= 0) { "구분자와 양수로 구성된 문자열만 입력해주세요." } }
+        .sum()
+}
