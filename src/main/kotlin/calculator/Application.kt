@@ -47,7 +47,9 @@ private fun List<String>.splitByDivider(): List<Double> {
     val splitResult = expression.split(regex)
     return splitResult.map {
         try {
-            it.toDouble()
+            val number = it.toDouble()
+            if (number <= 0.0) throw IllegalArgumentException(INVALID_INPUT_MESSAGE)
+            number
         } catch (e: NumberFormatException) {
             throw IllegalArgumentException(INVALID_INPUT_MESSAGE)
         }
