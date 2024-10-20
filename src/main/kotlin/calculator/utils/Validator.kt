@@ -3,13 +3,22 @@ package calculator.utils
 import calculator.eums.DefaultOperator.*
 import calculator.eums.Error.*
 import calculator.eums.RegexPattern.*
+import calculator.extensions.splitWithCustomOperator
 
 object Validator {
 
-    fun validateInput(input: String) {
+    fun validateDefaultInput(input: String) {
+        require(input != "") { EMPTY_INPUT.message }
         require(!input.contains(" ")) { CONTAIN_GAP.message }
         input.split(COLON.value, COMMA.value).forEach {
             require(!KOREAN_AND_ALPHABET.pattern.toRegex().matches(it)) { ONLY_NUMBER.message }
+            require(it != "") { ONLY_NUMBER.message }
+        }
+    }
+
+    fun validateInputContainedCustomOperator(input: String) {
+        input.splitWithCustomOperator().forEach {
+            require(it != "") { ONLY_NUMBER.message }
         }
     }
 

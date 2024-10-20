@@ -7,12 +7,13 @@ import calculator.extensions.toIntListAppliedCustomOperator
 object Extractor {
 
     fun extractNumbers(input: String): List<Int> {
-        Validator.validateInput(input)
+        Validator.validateDefaultInput(input)
         val result = mutableListOf<Int>()
 
         if (!input.isContainCustomOperator()) {
             result.addAll(input.toIntListByOperator())
         } else {
+            Validator.validateInputContainedCustomOperator(input)
             result.addAll(input.toIntListAppliedCustomOperator())
         }
 
