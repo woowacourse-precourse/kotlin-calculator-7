@@ -21,11 +21,11 @@ class Calculator(private val input: String) {
     private fun separateNumbersAndDelimiter(input: String): Pair<String?, String> {
         if (input.isEmpty()) return null to ""
 
-        return if (input.startsWith(CUSTOM_DELIMITER_PREFIX)) {
-            extractDelimiter(input)
-        } else {
-            null to input
+        if (input.startsWith(CUSTOM_DELIMITER_PREFIX)) {
+            return extractDelimiter(input)
         }
+
+        return null to input
     }
 
     private fun extractDelimiter(input: String): Pair<String, String> {
