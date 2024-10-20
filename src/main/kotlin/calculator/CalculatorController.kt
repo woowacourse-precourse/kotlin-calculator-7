@@ -28,7 +28,7 @@ class CalculatorController {
         val pattern = Regex("""^//(.*)\\n(.*)$""")
         val matchResult = pattern.find(input)
         matchResult?.let {
-            delimiter = it.groupValues[1]
+            delimiter += it.groupValues[1]
             return it.groupValues[2]
         } ?: return input
     }
@@ -45,7 +45,7 @@ class CalculatorController {
 
     private fun Regex.isNotMatch(userInput: String) {
         if (!this.matches(userInput)) {
-            throw IllegalArgumentException()
+            throw IllegalArgumentException(ERROR_MESSAGE)
         }
     }
 
@@ -59,5 +59,7 @@ class CalculatorController {
 
         const val USER_BLANK_INPUT = "0"
         const val DEFAULT_REGEX = ",:"
+
+        const val ERROR_MESSAGE = "잘못된 입력입니다."
     }
 }
