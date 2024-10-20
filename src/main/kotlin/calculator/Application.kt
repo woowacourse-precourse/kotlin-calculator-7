@@ -27,7 +27,26 @@ class Separator(s: String) {
     private fun checkCustomSeparator() {
         divider = word.substring(3,4)
         word = word.substring(6)
-
+        for (i in word) {
+            when ("$i") {
+                ",", ":" -> {
+                    sum += confirmNumber(addWord)
+                    addWord = ""
+                }
+                divider -> {
+                    sum += confirmNumber(addWord)
+                    addWord = ""
+                }
+                "\"" -> continue
+                else -> {
+                    addWord += i
+                }
+            }
+        }
+        if (addWord.isNotEmpty()) {
+            sum += confirmNumber(addWord)
+        }
+        println("결과 : $sum")
     }
 
     private fun checkSeparator() {
