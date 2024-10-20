@@ -8,8 +8,9 @@ class Delimiter(
 
     init {
         val customDelimiters = findCustomDelimiter(input)
-        isValidDelimiter(customDelimiters)
-        delimiters.addAll(customDelimiters)
+        if (isValidDelimiter(customDelimiters)) {
+            delimiters.addAll(customDelimiters)
+        }
     }
 
     fun getDelimiters(): List<String> {
@@ -21,17 +22,12 @@ class Delimiter(
     }
 
     private fun isValidDelimiter(customDelimiters: List<String>): Boolean {
-        customDelimiters.forEach { delimiter ->
-
-            if (delimiter.length != 1) {
-                throw IllegalArgumentException(INVALID_SIZE_MESSAGE)
-            }
-
-            if (delimiter.all { it.isDigit() }) {
-                throw IllegalArgumentException(INVALID_CHARACTER_MESSAGE)
+        for (delimiter in customDelimiters) {
+            when {
+                delimiter.length != 1 -> throw IllegalArgumentException(INVALID_SIZE_MESSAGE)
+                delimiter.all { it.isDigit() } -> throw IllegalArgumentException(INVALID_CHARACTER_MESSAGE)
             }
         }
-
         return true
     }
 

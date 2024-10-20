@@ -2,7 +2,7 @@ package calculator.controller
 
 import calculator.model.Calculator
 import calculator.model.Delimiter
-import calculator.model.InputManager
+import calculator.model.InputParser
 import calculator.view.InputView
 import calculator.view.OutputView
 
@@ -11,26 +11,28 @@ class CalculatorController(
     private val outputView: OutputView = OutputView(),
 ) {
 
-    fun calculateSumOfNumbers() {
-        val input = inputView.readLine()
+    fun sumNumbers() {
+        val userInput = inputView.readLine()
 
-        if (input.isEmpty()) {
+        if (userInput.isEmpty()) {
             outputView.printResult(0)
             return
         }
 
-        val delimiter = Delimiter(input).getDelimiters()
-        val manager = InputManager(delimiter)
-        val nums = manager.removeCustomDelimiterDefinition(input).let { manager.findAllNumbers(it) }
+        val delimiters = Delimiter(userInput).getDelimiters()
+        val inputManager = InputParser(delimiters)
 
-        if (nums.isEmpty()) {
+        val numbers = inputManager.removeDelimiterDefinition(userInput)
+            .let { inputManager.extractNumbers(it) }
+
+        if (numbers.isEmpty()) {
             outputView.printResult(0)
             return
         }
 
-        manager.isContainNegativeNumber(nums)
+        inputManager.containNegativeNumber(numbers)
 
-        val result = Calculator().sum(nums)
-        outputView.printResult(result)
+        val sumResult = Calculator().sum(numbers)
+        outputView.printResult(sumResult)
     }
 }
