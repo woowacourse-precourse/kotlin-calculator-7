@@ -4,6 +4,7 @@ import camp.nextstep.edu.missionutils.Console
 
 fun main() {
     // 사용자 입력
+    println("덧셈할 문자열을 입력해 주세요.")
     val input = Console.readLine()
 
     // 구분자 리스트
@@ -28,7 +29,7 @@ fun main() {
 
     // 합 계산
     if (numbers.hasNegativeNumber()) throw IllegalArgumentException("contains a negative number")
-    print(numbers.getSum())
+    print("결과 : ${numbers.getSum()}")
 }
 
 fun hasCustomDelimiter(regex: Regex, input: String) = input.matches(regex)
