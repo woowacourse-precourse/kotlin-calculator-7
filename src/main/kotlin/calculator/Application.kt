@@ -1,4 +1,5 @@
 package calculator
+
 import camp.nextstep.edu.missionutils.Console
 
 fun main() {
@@ -8,16 +9,15 @@ fun main() {
 
     // 값이 빈 문자열일 경우 0을 반환
     if (input.isBlank()) {
-        println("결과: 0")
+        println("결과 : 0")
         return
     }
     try {
         // 구분자와 구분자를 제외한 문자열 추출
         val (delimiter, numbers) = getDelimiterAndNumbers(input)
-        println(delimiter.toString())
+
         // 구분자를 이용한 문자열 스플릿
         val tokens = numbers.split(delimiter).map { it.trim() }
-        println(tokens)
 
         // 문자열을 숫자로 변환하고 더하기
         val sum = tokens.map { token ->
@@ -38,7 +38,7 @@ fun getDelimiterAndNumbers(input: String): Pair<Regex, String> {
         // 커스텀 구분자 처리
         val delimiterEndIndex = input.lastIndexOf("\\n")
         if (delimiterEndIndex == -1) {
-            throw IllegalArgumentException("잘못된 커스텀 구분자 형식입니다: $input 내에 '\\n'이 존재하지 않습니다.")
+            throw IllegalArgumentException("잘못된 커스텀 구분자 형식입니다: $input")
         }
 
         val customDelimiter = input.substring(2, delimiterEndIndex)
