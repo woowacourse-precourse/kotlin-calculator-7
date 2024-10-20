@@ -4,38 +4,42 @@ import camp.nextstep.edu.missionutils.Console
 
 fun main() {
     try {
-        val str = Console.readLine().trim()
-        // val numbers = splitString(str)
-        val numbers = filteringString(str)
+        val inputStr = Console.readLine().trim()
+        val numbers = splitString(inputStr)
+        // val numbers = filteringString(inputStr)
 
         if (numbers.any { it < 0 }) {
             throw IllegalArgumentException("잘못 입력하셨습니다.\n양수를 입력해 주세요.")
         }
 
         val sum = sumNumbers(numbers)
-        printResult(str, sum)
+        printResult(inputStr, sum)
     } finally {
         Console.close()
     }
 }
 
-
 // 방법1: 문자열을 구분자로 나누는 함수
-fun splitString(str: String): List<Int> {
-    return if (str.contains("/")) {
-        val index = str.indexOf("//")
-        val delimiter = str[index + 2].toString()
-        val result = str.removeRange(index, index + 5)
+fun splitString(inputStr: String): List<Int> {
+    return if (inputStr.contains("//")) {
+        val startIndex = inputStr.indexOf("//")
+        val delimiter = inputStr[startIndex + 2].toString()
+        val result = inputStr.removeRange(startIndex, startIndex + 5)
         result.split(",", ":", delimiter).map { it.toInt() }
     } else {
-        str.split(",", ":").map { it.toInt() }
+        inputStr.split(",", ":").map { it.toInt() }
     }
 }
 
 // 방법2: 문자열에서 숫자만 필터링하는 함수
-fun filteringString(str: String): List<Int> {
-    val regex = "\\d+".toRegex()
-    return regex.findAll(str).map { it.value.toInt() }.toList()
+fun filteringString(inputStr: String): List<Int> {
+    if (inputStr.contains("//-\\n")){
+        val numbers = "\\d+".toRegex()
+        return numbers.findAll(inputStr).map { it.value.toInt() }.toList()
+    } else {
+        val numbers = "-?\\d+".toRegex()
+        return numbers.findAll(inputStr).map { it.value.toInt() }.toList()
+    }
 }
 
 // 숫자의 합을 반환하는 함수
