@@ -1,4 +1,5 @@
 package calculator
+import camp.nextstep.edu.missionutils.Console
 
 fun main() {
     val delimiters = mutableListOf(",", ":") // 기본 구분자
@@ -6,27 +7,32 @@ fun main() {
 
     try {
         // 입력 받기
-        val input = readlnOrNull() ?: ""
+        val input = Console.readLine()?: ""
 
         // 사용자 지정 구분자 처리
         if (input.startsWith("//")) {
             // "\n" 기준으로 나누기
             val parts = input.split("\\n") // 이 부분에서 \n으로 나누기
+            // println("1 : $parts")
 
             // 사용자 지정 구분자 추출
             val customDelimiter = parts[0].substring(2).trim() // "//" 제거 후 공백 제거
+            // println("2: $customDelimiter")
 
             // 구분자 업데이트
             delimiters += customDelimiter
+            // ("3: $parts ")
 
             // 나머지 부분에서 숫자 분리
             if (parts.size > 1) {
                 // parts[1]을 기준으로 숫자를 분리
                 numbers = parts[1].split(*delimiters.toTypedArray())
+                // println("4: $numbers")
             }
         } else {
             // 기본 구분자를 사용하여 숫자 분리
             numbers = input.split(*delimiters.toTypedArray())
+            // println("5: $numbers")
         }
 
         // 숫자를 정수로 변환하고 합계 계산
