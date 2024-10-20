@@ -22,6 +22,20 @@ class ApplicationTest : NsTest() {
         }
     }
 
+    @Test
+    fun `입력한 마지막 요소가 letter`() {
+        assertSimpleTest {
+            assertThrows<IllegalArgumentException> { runException("-1,2:") }
+        }
+    }
+
+    @Test
+    fun `입력한 처음 요소가 letter`() {
+        assertSimpleTest {
+            assertThrows<IllegalArgumentException> { runException("// \\n 1 2 3") }
+        }
+    }
+
     override fun runMain() {
         main()
     }
