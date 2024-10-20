@@ -35,3 +35,21 @@ fun extractCustomDelimiter(input: String): Pair<String, String> {
     }
     throw IllegalArgumentException("유효한 커스텀 구분자가 없습니다.")
 }
+
+// 구분자로 계산할 숫자를 추출하는 함수
+fun extractNumbers(input: String): List<String> {
+    val numbers: List<String>
+
+    // 커스텀 구분자 유무 판단
+    if (isCustomDelimiter(input)) {
+        // 커스텀 구분자 추출
+        val (delimiter, numbersPart) = extractCustomDelimiter(input)
+
+        // 구분자와 ",", ":"로 분할
+        numbers = numbersPart.split(delimiter, ",", ":")
+    } else {
+        // [ , : ]로 분할
+        numbers = input.split("[,:]".toRegex())
+    }
+    return numbers
+}
