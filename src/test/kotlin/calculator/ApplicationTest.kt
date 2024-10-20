@@ -24,13 +24,13 @@ class ApplicationTest : NsTest() {
         }
     }
 
-    /*@Test
-    fun `커스텀 구분자 사용`() {
+    @Test
+    fun testCalculateCustomDelimiter() {
         assertSimpleTest {
-            run("//;\\n1")
-            assertThat(output()).contains("결과 : 1")
+            run("//;\\n1;2;3")
+            assertThat(output()).contains("결과 : 6")
         }
-    }*/
+    }
 
     /*@Test
     fun `예외 테스트`() {

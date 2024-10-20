@@ -21,6 +21,13 @@ fun calculate(input: String): String {
     var numbers = input
     var sum = 0
 
+    // 커스텀 구분자 처리
+    if (input.startsWith("//")) {
+        val customDelimiterArea = input.substring(2, input.indexOf("\n"))
+        delimiter = Regex.escape(customDelimiterArea)  // 커스텀 구분자 설정
+        numbers = input.substring(input.indexOf("\n") + 1)  // 입력된 문자열 부분만 남기기
+    }
+
     // 기본 구분자 처리
     val numberList = numbers.split(delimiter.toRegex()).map {
         try {
