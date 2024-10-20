@@ -44,7 +44,14 @@ class ApplicationTest : NsTest() {
     @Test
     fun `예외 테스트`() {
         assertSimpleTest {
+            assertThrows<IllegalArgumentException> { runException("1,a:3") }
+            assertThrows<IllegalArgumentException> { runException("/;n1,2;3") }
             assertThrows<IllegalArgumentException> { runException("-1,2,3") }
+            assertThrows<IllegalArgumentException> { runException("//;\\n-1;2,3") }
+            assertThrows<IllegalArgumentException> { runException("12 34") }
+
+            assertThrows<IllegalArgumentException> { runException("//1\\n1,2,3") }
+            assertThrows<IllegalArgumentException> { runException("//^;]\\n1;2;3") }
         }
     }
 
