@@ -24,7 +24,7 @@ fun parseNumbers(input: String): List<BigInteger> {
 
     val (delimiter, numbersString) = delimiterExtraction(input)
     val numbers = numbersString.split(Regex(delimiter)).map {
-        //
+        // 숫자로된 문자열로 나누어지지 않을 시 예외처리
         it.toBigIntegerOrNull() ?: throw IllegalArgumentException("잘못된 형식으로 숫자 분류가 실패되었습니다.")
     }
 
@@ -39,7 +39,7 @@ fun parseNumbers(input: String): List<BigInteger> {
 private fun delimiterExtraction(input: String): Pair<String, String> {
     return if (input.startsWith("//")) { // //로 시작할 때 커스텀 구분자로 분류시작
         val delimiterEndIndex = findFirstDigitIndex(input)
-        val delimiter = input.substring(2, delimiterEndIndex-2) + "|,|:" // 커스텀 구분자만 따로 분류하면서 기본 구문자도 인식
+        val delimiter = Regex.escape(input.substring(2, delimiterEndIndex-2)) + "|,|:" // 커스텀 구분자만 따로 분류하면서 기본 구문자도 인식
         val numbersString = input.substring(delimiterEndIndex) // 커스텀 구분자 선언부 제외 문자열 분류
         Pair(delimiter, numbersString)
     } else {
