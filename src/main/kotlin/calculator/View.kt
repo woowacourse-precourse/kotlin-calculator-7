@@ -4,8 +4,10 @@ import camp.nextstep.edu.missionutils.Console
 
 class View(private val controller: Controller) {
     fun start() {
-        printGuide()
-        execute()
+        while (true) {
+            printGuide()
+            execute()
+        }
     }
 
     fun printGuide() {
