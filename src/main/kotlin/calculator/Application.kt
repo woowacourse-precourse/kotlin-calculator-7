@@ -9,22 +9,23 @@ fun main() {
     val separator = Separator(word)
     try {
         separator.checkIllegalArgumentException()
-    }catch (e : IllegalArgumentException){
+    } catch (e: IllegalArgumentException) {
         close()
     }
 }
 
 class Separator(s: String) {
     private var word: String
-    private lateinit var divider : String
+    private lateinit var divider: String
     private var sum: Int = 0
     private var addWord: String = ""
+
     init {
         this.word = s
     }
 
     private fun checkCustomSeparator() {
-        divider = word.substring(3,4)
+        divider = word.substring(3, 4)
         word = word.substring(6)
         for (i in word) {
             when ("$i") {
@@ -32,10 +33,12 @@ class Separator(s: String) {
                     sum += confirmNumber(addWord)
                     addWord = ""
                 }
+
                 divider -> {
                     sum += confirmNumber(addWord)
                     addWord = ""
                 }
+
                 "\"" -> continue
                 else -> {
                     addWord += i
@@ -55,6 +58,7 @@ class Separator(s: String) {
                     sum += confirmNumber(addWord)
                     addWord = ""
                 }
+
                 "\"" -> continue
                 else -> addWord += i
             }
@@ -74,7 +78,7 @@ class Separator(s: String) {
         return sum
     }
 
-    fun checkIllegalArgumentException(){
+    fun checkIllegalArgumentException() {
         if (word.contains("//")) {
             this.checkCustomSeparator()
         } else if ((word.contains(":") || word.contains(","))) {
