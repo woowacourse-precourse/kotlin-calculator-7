@@ -49,9 +49,7 @@ fun calculateSum(parsedInput: String, separators: List<String>): Int {
     var sum = 0
 
     for (number in numbers) {
-        if (number.isBlank()) {
-            throw IllegalArgumentException(NUMBER_NOT_PROVIDED)
-        }
+        number.takeIf { it.isNotBlank() } ?: throw IllegalArgumentException(NUMBER_NOT_PROVIDED)
         sum += number.toIntOrNull() ?: throw IllegalArgumentException(INVALID_CHARACTER)
     }
     return sum
