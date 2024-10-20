@@ -21,6 +21,7 @@ fun main() {
 }
 
 fun calculator(input: String, defaultSeparators: List<String>, customSeparatorPattern: Regex): Long {
+    // 입력 값이 비어있을 경우, 0을 반환
     if (input.isBlank()) return 0L
 
     // 커스텀 구분자가 있는지 확인하고, 없으면 기본 구분자만 사용
