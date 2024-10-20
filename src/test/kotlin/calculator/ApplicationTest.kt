@@ -22,6 +22,13 @@ class ApplicationTest : NsTest() {
         }
     }
 
+    @Test
+    fun `빈 문자열을 전달`(){
+        assertSimpleTest{
+            run("")
+            assertThat(output()).contains("결과 : 0")
+        }
+    }
     override fun runMain() {
         main()
     }
