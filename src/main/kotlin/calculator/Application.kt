@@ -99,18 +99,24 @@ fun inspectError(input: String) {
     var prevCharacter: Char? = null
 
     if (input.startsWith("//")) {
+        // 사용자로부터 커스텀 구분자를 입력받는 경우
         inspectIndex = 2
         while (inspectIndex < input.length) {
-            while (input[inspectIndex] != '\\') {
+            while (inspectIndex < input.length && input[inspectIndex] != '\\') {
                 delimiterList.add(input[inspectIndex])
                 inspectIndex++
-                prevCharacter = input[inspectIndex]
             }
-            // input[idx] = '\\' (backslash)인 상태
+            // 문자열의 끝까지 검사했으나, '\'를 발견하지 못함
+            if (inspectIndex == input.length) throw IllegalArgumentException()
+
+            // 현재 input[inspectIndex] = '\'인 상태임
             if (input[inspectIndex + 1] == 'n') {
                 inspectIndex += 2
                 prevCharacter = 'n'
                 break
+            } else if (inspectIndex + 1 == input.length - 1) {
+                // 문자열의 끝까지 검사했으나, 결국 "\n"을 발견하지 못함
+                throw IllegalArgumentException()
             }
 
             delimiterList.add(input[inspectIndex])
@@ -118,6 +124,7 @@ fun inspectError(input: String) {
             inspectIndex++
         }
     }
+    println(inspectIndex + input.length)
 
     while (inspectIndex < input.length) {
         var isDelimiter = false
@@ -138,5 +145,6 @@ fun inspectError(input: String) {
         inspectIndex++
     }
 
+    // 구분자가 expression의 맨 마지막에 나타남
     if (prevCharacter in delimiterList) throw IllegalArgumentException()
 }
