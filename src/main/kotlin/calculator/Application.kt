@@ -67,7 +67,7 @@ fun main() {
         throw IllegalArgumentException(ErrorMessages.LAST_VALUE_NOT_NUMBER)
     }
 
-    print(sum)
+    print("결과 : $sum")
 }
 
 object ErrorMessages {
