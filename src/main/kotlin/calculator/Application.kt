@@ -41,7 +41,12 @@ fun add(input: String): Int {
     //구분자를 사용하여 숫자 분리
     val splitNumbers = numbers.split(Regex(delimiters))
 
-    // 숫자 변환 후 합산
-    val validNumbers = splitNumbers.map { it.toIntOrNull() ?: throw IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다.") }
+    // 기능4. 숫자 변환 및 예외 처리(음수, 숫자가 아닌 값)
+    val validNumbers = splitNumbers.map {
+        val number = it.toIntOrNull() ?: throw IllegalArgumentException("올바른 숫자가 입력되지 않았습니다.")
+        if (number < 0) throw IllegalArgumentException("음수는 허용되지 않습니다.")
+        number
+    }
+
     return validNumbers.sum()
 }
