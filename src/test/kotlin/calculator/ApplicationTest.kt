@@ -32,6 +32,12 @@ class ApplicationTest : NsTest() {
         assertSimpleTest {
             run("//;\\n1")
             assertThat(output()).contains("결과 : 1")
+
+            run("//;\\n1;2:3")
+            assertThat(output()).contains("결과 : 6")
+
+            run("//a\\n1a2a3")
+            assertThat(output()).contains("결과 : 6")
         }
     }
 
