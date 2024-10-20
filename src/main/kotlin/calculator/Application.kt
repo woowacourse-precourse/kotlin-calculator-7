@@ -7,6 +7,10 @@ private const val CUSTOM_DELIMITER_PREFIX = "//"
 private const val NEW_LINE = """\n"""
 private const val NOT_FOUND_CUSTOM_DELIMITER_MESSAGE = "커스텀 구분자를 찾을 수 없습니다."
 private const val DEFAULT_DELIMITER_PATTERN = "[,:]"
+private const val INVALID_NUMBER_FORMAT_MESSAGE = "잘못된 숫자 형식입니다."
+private const val MULTIPLE_CONSECUTIVE_DELIMITERS_MESSAGE = "여러 개의 구분자가 연속으로 나타날 수 없습니다."
+private const val TRAILING_DELIMITER_MESSAGE = "숫자 뒤에 구분자만 있을 수 없습니다."
+
 
 fun main() {
     println(INPUT_SUM_STRING_MESSAGE)
@@ -16,6 +20,11 @@ fun main() {
         println(0)
         return
     }
+}
+
+private fun add(input: String): Int {
+    val (delimiter, numberStr) = parseInput(input)
+    val nums = splitNumbers(numberStr, delimiter)
 }
 
 private fun parseInput(input: String): Pair<Regex, String> {
@@ -35,4 +44,22 @@ private fun parseInput(input: String): Pair<Regex, String> {
     } else {
         Pair(Regex(DEFAULT_DELIMITER_PATTERN), input)
     }
+}
+
+private fun splitNumbers(numberStr: String, delimiter: Regex): List<String> {
+    val nums = numberStr.split(delimiter).map { it.trim() }.filter { it.isNotEmpty() }
+
+    if (nums.any { it.toIntOrNull() == null }) {
+        throw IllegalArgumentException(INVALID_NUMBER_FORMAT_MESSAGE)
+    }
+
+    if (numberStr.contains(Regex("$delimiter{2,}"))) {
+        throw IllegalArgumentException(MULTIPLE_CONSECUTIVE_DELIMITERS_MESSAGE)
+    }
+
+    if (numberStr.matches(Regex(".*$delimiter$"))) {
+        throw IllegalArgumentException(TRAILING_DELIMITER_MESSAGE)
+    }
+
+    return nums
 }
