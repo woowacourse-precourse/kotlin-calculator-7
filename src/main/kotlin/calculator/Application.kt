@@ -8,4 +8,5 @@ fun main() {
 
     val userInput = ui.requestUserInput()
     val positiveNumbers = PositiveNumbersParser().parse(userInput)
+    val sumOfPositiveNumbers = positiveNumbers.sum()
 }
