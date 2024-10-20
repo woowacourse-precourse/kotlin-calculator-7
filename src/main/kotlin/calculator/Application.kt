@@ -15,7 +15,11 @@ fun main() {
     }
 }
 
-fun extractDelimiter(userInput: String): Pair<Regex, String> {
+fun extractDelimiter(userInput: String?): Pair<Regex, String> {
+    if (userInput.isNullOrEmpty()) {
+        return Regex("[,:]") to ""
+    }
+
     val customDelimiterRegex = """^//(.)\n(.*)$""".toRegex()
     val matchResult = customDelimiterRegex.find(userInput)
 
@@ -28,8 +32,8 @@ fun extractDelimiter(userInput: String): Pair<Regex, String> {
     }
 }
 
-fun calculateSum(userInput: String): Int {
-    if (userInput.isEmpty()) return 0
+fun calculateSum(userInput: String?): Int {
+    if (userInput.isNullOrEmpty()) return 0
 
     val (delimiter, numbers) = extractDelimiter(userInput)
     val parsedNumbers = numbers.split(delimiter)
