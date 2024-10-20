@@ -6,7 +6,7 @@ import java.text.DecimalFormat
 class SumCalculator(
     private val delimitedSplitResult: List<String>
 ) {
-    fun calculateTotal(): String = delimitedSplitResult.sumOf { it.toBigDecimal() }.toNumberFormat()
+    fun calculateSum(): String = delimitedSplitResult.sumOf { it.toBigDecimal() }.toNumberFormat()
 
     private fun BigDecimal.toNumberFormat(): String {
         if (isPositiveDecimal(this)) return DecimalFormat(positiveDecimalPattern(this)).format(this)
