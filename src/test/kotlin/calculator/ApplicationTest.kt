@@ -67,6 +67,27 @@ class ApplicationTest : NsTest() {
     }
 
     @Test
+    fun `음수 예외 테스트`() {
+        assertSimpleTest {
+            assertThrows<IllegalArgumentException> { runException("1,-2,3") }
+        }
+    }
+
+    @Test
+    fun `세 자리 양수 테스트`() {
+        assertSimpleTest {
+            run("123,456:789")
+        }
+    }
+
+    @Test
+    fun `두 자리 양수 커스텀 구분자 테스트`() {
+        assertSimpleTest {
+            run("//as\\n12a45s45")
+        }
+    }
+
+    @Test
     fun `구분자 예외 테스트`() {
         assertSimpleTest {
             assertThrows<IllegalArgumentException> { runException("1 2 3") }
