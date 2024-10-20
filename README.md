@@ -15,14 +15,15 @@
 
 ```
 1. 커스텀 구분자는 “//”와 “\n” 사이에 위치한 문자열
-2. “//”와 “\n”가 여럿 존재하면 가장 마지막에 위치한 커스텀 구분자로 업데이트
-3. 커스텀 구분자는 기본값 구분자와 공존하지 않는다
+2. “\n”가 여럿 존재하면 가장 마지막에 위치한 “\n” 기준으로 커스텀 구분자를 업데이트
+3. 커스텀 구분자는 기본값 구분자를 완전히 대체함
 ```
 
 ### 입력값 예외 처리 기능
 
 ```
 1. 구분자로 추출한 피연산자가 숫자가 아닐 경우 `IllegalArgumentException` 을 발생시킴
-2. 피연산자가 양수 혹은 0이 아닐 경우 `IllegalArgumentException` 을 발생시킴
-3. Exception이 발생되면 애플리케이션은 종료되어야 함 → `camp.nextstep.edu.missionutils.Console` API 활용
+2. 피연산자가 양수가 아닐 경우 `IllegalArgumentException` 을 발생시킴
+3. 만약 “//”는 존재하는데 “\n”이 존재하지 않을 경우, `IllegalArgumentException` 을 발생시킴
+4. Exception이 발생되면 애플리케이션은 종료되어야 함 → `camp.nextstep.edu.missionutils.Console` API 활용
 ```
