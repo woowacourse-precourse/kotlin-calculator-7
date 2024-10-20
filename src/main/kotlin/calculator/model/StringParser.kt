@@ -2,7 +2,7 @@ package calculator
 
 class StringParser(input: String) {
     private val numberList: List<Int>
-    private val delimiters: List<String>g
+    private val delimiters: List<String>
     private val cleanedInput: String
 
     init {

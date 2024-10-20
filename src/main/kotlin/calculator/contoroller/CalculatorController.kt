@@ -21,7 +21,10 @@ class CalculatorController {
 
             val sumCalculator = SumCalculator(numberList)
             val sum = sumCalculator.getSum()
-            println("결과 : $sum")
+
+            val outputView = OutputView()
+            outputView.printSummation(sum)
+
         } catch (e: IllegalArgumentException) {
             throw e
         }
