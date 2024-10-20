@@ -2,7 +2,6 @@ package calculator
 
 import calculator.model.Calculator
 import calculator.utils.Extractor
-import calculator.utils.Validator
 import calculator.view.InputView
 import calculator.view.OutputView
 
