@@ -32,10 +32,18 @@ fun main() {
 
     var typeState = TypeState.INT
 
+    if (convertInfo.isEmpty()) {
+        println("결과 : 0"); return
+    }
+
     val allTotal: String = infoArr.fold("0") { total, sum ->
+        if (sum.trim().isEmpty()) {
+            throw IllegalArgumentException()
+        }
+
         val result = sum(
             total,
-            sum.ifEmpty { "0" }.trim(),
+            sum.trim(),
             typeState)
 
         typeState = result.second
