@@ -51,5 +51,27 @@ fun extractNumbers(input: String): List<String> {
         // [ , : ]로 분할
         numbers = input.split("[,:]".toRegex())
     }
+    validateNumbers(numbers)
     return numbers
+}
+
+// 숫자의 유효성을 검사하는 함수
+fun validateNumbers(numbers: List<String>) {
+    numbers.forEach {
+        // 구분자가 연속되어 입력되는 경우 & 입력값이 비어있을 경우
+        if (it.isEmpty()) {
+            throw IllegalArgumentException("잘못된 입력값입니다.")
+        }
+
+        // 숫자와 구분자 이외에 다른 값이 입력된 경우
+        if (!it.all { char -> char.isDigit() }) {
+            throw IllegalArgumentException("숫자와 구분자 이외에 다른 값이 입력되었습니다.")
+        }
+
+        // 더해야 할 값에 음수가 있는 경우
+        val number = it.toIntOrNull()
+        if (number == null || number < 0) {
+            throw IllegalArgumentException("음수는 허용되지 않습니다.")
+        }
+    }
 }
