@@ -34,7 +34,7 @@
 레포지토리를 Clone 하고 IDE에서 애플리케이션을 실행합니다.
 
 ```git
-git clone -b as --single-branch https://github.com/YooGyeongMo/woowa7th_precoruse_week1.git
+git clone -b as --single-branch https://github.com/YooGyeongMo/kotlin-calculator-7.git
 ```
 
 # 과제 개요
