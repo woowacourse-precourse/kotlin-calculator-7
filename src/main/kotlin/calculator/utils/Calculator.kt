@@ -10,6 +10,7 @@ object Calculator {
         InputManager.type = checkType(InputManager.oldInput) // 타입 체크
         InputManager.newInput = updateInput(InputManager.type) // 피연산 문자열
         InputManager.delimiter = updateDelimiter(InputManager.type) // 구분자 업데이트
+        Validator.validateDelimiter() // 구분자 이외 문자가 들어있는지 체크
 
         return "결과 : ${InputManager.sum}"
     }
