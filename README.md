@@ -15,7 +15,7 @@
 
 ### 입력
 
-- [ ] 구분자와 양수로 구성된 문자열을 입력받을 수 있다.
+- [ ] 문자열을 입력받을 수 있다.
     - `camp.nextstep.edu.missionutils.Console`의 `readLine()` 사용
 
 ### 출력
