@@ -22,6 +22,56 @@ class ApplicationTest : NsTest() {
         }
     }
 
+    @Test
+    fun `정상 테스트`() {
+        assertSimpleTest {
+            run("1,2:3")
+            assertThat(output()).contains("결과 : 6")
+        }
+    }
+
+    @Test
+    fun `두 자리 양수 테스트`() {
+        assertSimpleTest {
+            run("12,45:45")
+        }
+    }
+
+    @Test
+    fun `구분자 예외 테스트`() {
+        assertSimpleTest {
+            assertThrows<IllegalArgumentException> { runException("1 2 3") }
+        }
+    }
+
+    @Test
+    fun `시작 예외 테스트`() {
+        assertSimpleTest {
+            assertThrows<IllegalArgumentException> { runException(" 1,2,3") }
+        }
+    }
+
+    @Test
+    fun `끝 예외 테스트`() {
+        assertSimpleTest {
+            assertThrows<IllegalArgumentException> { runException("1,2,3 ") }
+        }
+    }
+
+    @Test
+    fun `구분자 시작 예외 테스트`() {
+        assertSimpleTest {
+            assertThrows<IllegalArgumentException> { runException(",1,2,3") }
+        }
+    }
+
+    @Test
+    fun `구분자 끝 예외 테스트`() {
+        assertSimpleTest {
+            assertThrows<IllegalArgumentException> { runException("1,2,3,") }
+        }
+    }
+
     override fun runMain() {
         main()
     }
