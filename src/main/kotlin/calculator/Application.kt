@@ -3,20 +3,51 @@ package calculator
 import camp.nextstep.edu.missionutils.Console
 
 fun main() {
-    // TODO: 프로그램 구현
     val calculator = Calculator()
     calculator.start()
 }
 
 class Calculator {
     private val parser = Parser()
-
     fun start() {
-        println("계산할 문자열을 입력하시오... (ex: 1,2,3 또는 //;\n1;2;3): ")
-        val input = Console.readLine()
-        val numbers = parser.parse(input)
+        UserInterface.showInputPrompt()
+        val input = UserInterface.readInput()
+        val numbers = UserInterface.safeRun { parser.parse(input) }
         val result = numbers.sum()
-        println("결과 값: $result")
+        UserInterface.showResult(result)
+    }
+}
+
+object UserInterface {
+    fun showInputPrompt() {
+        println("계산할 문자열을 입력하시오... (ex: 1,2,3 또는 //;\n1;2;3): ")
+    }
+
+    fun readInput(): String {
+        return Console.readLine()
+    }
+
+    fun showResult(result: Int) {
+        println("결과 : $result")
+    }
+
+    private fun showError(message: String) {
+        println("에러: $message")
+    }
+
+    fun <T> safeRun(action: () -> T): T {
+        return try {
+            action()
+        } catch (e: IllegalArgumentException) {
+            showError("잘못된 입력입니다: ${e.message}")
+            throw e
+        } catch (e: NumberFormatException) {
+            showError("숫자 형식이 잘못되었습니다: ${e.message}")
+            throw e
+        } catch (e: Exception) {
+            showError("알 수 없는 오류가 발생했습니다: ${e.message}")
+            throw e
+        }
     }
 }
 
@@ -24,61 +55,34 @@ class Parser {
     private val delimiters = mutableListOf(",", ":")
 
     fun parse(input: String?): List<Int> {
-        val nonNullInput = input ?: return emptyListWithMessage()
-
-        if (hasCustomDelimiter(nonNullInput)) {
-            val parsedNumbers = addCustomDelimiter(nonNullInput)
-            if (parsedNumbers != null) {
-                return parsedNumbers
-            }
-
-            println("숫자를 입력하세요:")
-            val numbersInput = Console.readLine()
-            return parseNumbers(numbersInput)
-        }
-
-        return parseNumbers(nonNullInput)
+        val nonNullInput = input ?: throw IllegalArgumentException("입력이 없습니다.")
+        val numbersInput = addCustomDelimiter(nonNullInput)
+        return parseNumbers(numbersInput)
     }
 
-    private fun emptyListWithMessage(): List<Int> {
-        println("결과 값: []")
-        return emptyList()
-    }
-
-    private fun hasCustomDelimiter(input: String): Boolean {
-        return input.startsWith("//")
-    }
-
-    private fun addCustomDelimiter(input: String): List<Int>? {
-        // "\n" 또는 실제 개행 문자를 기준으로 구분자와 숫자 부분을 분리
+    private fun addCustomDelimiter(input: String): String {
         val processedInput = input.replace("\\n", "\n")
         val splitIndex = processedInput.indexOf('\n')
-        if (splitIndex == -1) {
-            val delimiterSection = processedInput.substring(2)
-            println("구분자 섹션 추출: $delimiterSection")
-            delimiters.add(delimiterSection)
-            return null // 숫자가 없으므로 이후 입력을 받도록 함
-        } else {
-            val delimiterSection = processedInput.substring(2, splitIndex)
-            println("구분자 섹션 추출: $delimiterSection")
-            delimiters.add(delimiterSection)
 
-            // 숫자 부분 추출 및 파싱
-            val numbersInput = processedInput.substring(splitIndex + 1)
-            println("숫자 섹션 추출: $numbersInput")
-            return parseNumbers(numbersInput)
+        if (input.startsWith("//") && splitIndex != -1) {
+            val delimiterSection = processedInput.substring(2, splitIndex)
+            delimiters.add(delimiterSection)
+            return processedInput.substring(splitIndex + 1)
         }
+
+        if (input.startsWith("//")) {
+            val delimiterSection = processedInput.substring(2)
+            delimiters.add(delimiterSection)
+            UserInterface.showInputPrompt()
+            return UserInterface.readInput()
+        }
+
+        return input
     }
 
     private fun parseNumbers(input: String): List<Int> {
-        return try {
-            input.split(*delimiters.toTypedArray())
-                .filter { it.isNotEmpty() }
-                .map { it.toInt() }
-        } catch (e: NumberFormatException) {
-            println("입력 형식이 잘못되었습니다. 숫자만 입력해주세요.")
-            emptyList()
-        }
+        return input.split(*delimiters.toTypedArray())
+            .map { it.toIntOrNull() ?: throw NumberFormatException("숫자가 아닌 값이 포함되어 있습니다.") }
+            .onEach { if (it < 0) throw IllegalArgumentException("음수는 입력할 수 없습니다: $it") }
     }
 }
-
