@@ -19,6 +19,12 @@ fun add(input: String): Int {
     if (input.isEmpty()) {
         return 0
     }
-    throw IllegalArgumentException("입력된 문자열이 유효하지 않습니다.")
-}
 
+    // 기능2. 기본구분자(쉼표 또는 콜론)를 구분자로 가지는 문자열 덧셈
+    val delimiters = "[,:]"
+    val numbers = input.split(Regex(delimiters))
+
+    val validNumbers = numbers.map { it.toIntOrNull() ?: throw IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다.") }
+
+    return validNumbers.sum()
+}
