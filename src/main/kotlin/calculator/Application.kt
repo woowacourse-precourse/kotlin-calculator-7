@@ -2,11 +2,16 @@ package calculator
 
 import camp.nextstep.edu.missionutils.Console.readLine
 
+
 fun main() {
     val input: String = getInput("덧셈할 문자열을 입력해 주세요.")
     inspectError(input)
-    val operands: MutableList<Long> = parseInput(input)
+    val operands: MutableList<BigInt> = parseInput(input)
     printSum("결과 : ", operands)
+
+//    var a = BigInt("1233")
+//    var b = BigInt("23")
+//    println(BigInt.add(a, b))
 }
 
 /**
@@ -25,10 +30,11 @@ fun getInput(requestMessage: String): String {
  * @param input 사용자로부터 입력받은 문자열
  * @return 파싱된 수들의 리스트
  */
-fun parseInput(input: String): MutableList<Long> {
+fun parseInput(input: String): MutableList<BigInt> {
     val delimiterList = mutableSetOf<Char>(',', ':')
     var expression = input
 
+    // 커스텀 구분자 입력 부분 검사
     if (input.startsWith("//")) {
         var idx = 2
         while (true) {
@@ -50,14 +56,14 @@ fun parseInput(input: String): MutableList<Long> {
 }
 
 /**
- * 주어진 수식 문자열을 구분자로 나누어 숫자 리스트로 변환
+ * 주어진 수식 문자열을 구분자로 split하여 숫자 리스트로 변환
  *
  * @param expression 연산자와 구분자로 이루어진 수식 문자열
  * @param delimiterList 구분자로 사용할 문자들의 리스트
  * @return 구분자를 기준으로 분리된 수들의 리스트
  */
-fun parseExpression(expression: String, delimiterList: MutableSet<Char>): MutableList<Long> {
-    val numberList = mutableListOf<Long>()
+fun parseExpression(expression: String, delimiterList: MutableSet<Char>): MutableList<BigInt> {
+    val numberList = mutableListOf<BigInt>()
     var number = mutableListOf<Char>()
     for (character in expression) {
         var isDelimiter = false
@@ -65,14 +71,14 @@ fun parseExpression(expression: String, delimiterList: MutableSet<Char>): Mutabl
             isDelimiter = true
         }
         if (isDelimiter) {
-            numberList.add(number.joinToString("").toLong())
+            numberList.add(BigInt(number.joinToString("")))
             number = mutableListOf<Char>()
             continue
         }
         number.add(character)
     }
 
-    if (number.size > 0) numberList.add(number.joinToString("").toLong())
+    if (number.size > 0) numberList.add(BigInt(number.joinToString("")))
     return numberList
 }
 
@@ -82,9 +88,9 @@ fun parseExpression(expression: String, delimiterList: MutableSet<Char>): Mutabl
  * @param responseMessage 결과 메시지에 포함시킬 문자열 (ex - "결과 : ")
  * @param numberList 합계를 구할 수들의 리스트
  */
-fun printSum(responseMessage: String, numberList: MutableList<Long>) {
-    var sum: Long = 0
-    numberList.forEach { number -> sum += number }
+fun printSum(responseMessage: String, numberList: MutableList<BigInt>) {
+    var sum = BigInt("0")
+    numberList.forEach { number -> sum = BigInt.add(sum, number) }
     println("$responseMessage$sum")
 }
 
@@ -97,7 +103,9 @@ fun inspectError(input: String) {
     val delimiterList = mutableSetOf<Char>(',', ':')
     var inspectIndex = 0
     var prevCharacter: Char? = null
+    // input을 커스텀 구분자 입력 + expression 으로 분리하여 생각
 
+    // 커스텀 구분자 입력 부분
     if (input.startsWith("//")) {
         // 사용자로부터 커스텀 구분자를 입력받는 경우
         inspectIndex = 2
@@ -124,8 +132,8 @@ fun inspectError(input: String) {
             inspectIndex++
         }
     }
-    println(inspectIndex + input.length)
 
+    // expression 부분
     while (inspectIndex < input.length) {
         var isDelimiter = false
         if (input[inspectIndex] in delimiterList) {
@@ -138,8 +146,9 @@ fun inspectError(input: String) {
             // 구분자가 연속 두 번 나타난 경우
             if (prevCharacter in delimiterList) throw IllegalArgumentException()
         } else {
-            // 숫자가 아닌 경우
+            // 피연산자이지만 숫자가 아닌 것을 입력받은 경우
             if (!input[inspectIndex].isDigit()) throw IllegalArgumentException()
+
         }
         prevCharacter = input[inspectIndex]
         inspectIndex++
