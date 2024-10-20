@@ -29,6 +29,24 @@ class ApplicationTest : NsTest() {
             assertThat(output()).contains("결과 : 0")
         }
     }
+
+    @Test
+    fun `문자 없일 경우와 유사`(){
+        assertSimpleTest{
+            run("2:::::4")
+            assertThat(output()).contains("결과 : 6")
+        }
+    }
+
+    @Test
+    fun `하나의 정수만 전달`(){
+        assertSimpleTest{
+            run("123")
+            assertThat(output()).contains("결과 : 123")
+        }
+    }
+
+
     override fun runMain() {
         main()
     }
