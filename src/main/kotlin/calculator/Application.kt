@@ -2,48 +2,43 @@ package calculator
 
 import camp.nextstep.edu.missionutils.Console
 
-val sepList = mutableListOf(",", ":")
+val separators = mutableListOf(",", ":")
 
 fun main() {
     println("덧셈할 문자열을 입력해 주세요.")
-    val str = Console.readLine()
-    val splitStr = splitStr(str)
-    val result = calculate(splitStr)
+    val input = Console.readLine()
+    val splitNumbers = splitString(input)
+    val result = splitNumbers.sum()
     println("결과 : $result")
 }
 
-fun splitStr(str: String): List<Int> {
-    if (str.trim().isEmpty()) {
+fun splitString(input: String): List<Int> {
+    if (input.trim().isEmpty()) {
         throw IllegalArgumentException("구분자와 양수로 구성된 문자열을 입력해 주세요.")
-    } else {
-        val strWithoutSep = findCustomSeparator(str)
-        return strWithoutSep.split(*sepList.toTypedArray())
-            .filter { it.isNotBlank() }
-            .map {
-                try {
-                    convertToIntOrThrow(it.trim()) // 공백 제거하여 메서드 호출
-                } catch (e: NumberFormatException) {
-                    throw IllegalArgumentException("잘못된 문자열 형식이 포함되어 있어요: '$it'")
-                }
-            }
     }
+    val processedInput = findCustomSeparator(input)
+    return processedInput.split(*separators.toTypedArray())
+        .filter { it.isNotBlank() }
+        .map {
+            convertToIntOrThrow(it.trim())
+        }
 }
 
-fun findCustomSeparator(str: String): String {
-    if (str.startsWith("//") && str.contains("\\n")) {
-        val customSeparator = getCustomSeparator(str)
-        sepList.add(customSeparator)
-        return Regex("""//.*\\n""").replace(str, "")
+fun findCustomSeparator(input: String): String {
+    if (input.startsWith("//") && input.contains("\\n")) {
+        val customSeparator = getCustomSeparator(input)
+        separators.add(customSeparator)
+        return Regex("""//.*\\n""").replace(input, "")
     }
-    return str
+    return input
 }
 
-fun getCustomSeparator(str: String): String {
+fun getCustomSeparator(input: String): String {
     // "//"의 끝 위치와 "\n"의 시작 위치 찾기
-    val startIndex = str.indexOf("//") + 2
-    val endIndex = str.indexOf("\\n")
+    val startIndex = input.indexOf("//") + 2
+    val endIndex = input.indexOf("\\n")
 
-    val customSeparator = str.substring(startIndex, endIndex)
+    val customSeparator = input.substring(startIndex, endIndex)
 
     // 커스텀 구분자가 숫자인 경우 예외 발생(빈 문자열인 경우도 숫자로 인식되어 예외 처리)
     if (customSeparator.isNotBlank() && customSeparator.trim().all { it.isDigit() }) {
@@ -54,18 +49,12 @@ fun getCustomSeparator(str: String): String {
     return customSeparator
 }
 
-fun calculate(strList: List<Int>): Int {
-    var sum = 0
-    for (n in strList) {
-        sum += n
-    }
-    return sum
-}
-
-fun convertToIntOrThrow(str: String): Int {
+fun convertToIntOrThrow(value: String): Int {
+    // 문자열이 유효한 정수로 변환될 수 있으면 해당 Int 값을 반환하고, 그렇지 않으면 null을 반환
+    val number = value.toIntOrNull() ?: throw IllegalArgumentException("잘못된 문자열 형식이 포함되어 있어요: '$value'")
     // 양수가 아닌 경우 예외 발생
-    if (str.toInt() <= 0) {
+    if (number <= 0) {
         throw IllegalArgumentException("양수만 입력해 주세요.")
     }
-    return str.toInt()
+    return number
 }
