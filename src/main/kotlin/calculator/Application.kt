@@ -11,7 +11,7 @@ fun main() {
         val result = calculateSum(userInput)
         println("결과 : $result")
     } catch (e: IllegalArgumentException) {
-        println("잘못된 값을 입력하였습니다.")
+        println(e.message)
     }
 }
 
@@ -41,7 +41,10 @@ fun calculateSum(userInput: String?): Int {
     require(parsedNumbers.size >= 2) { "최소 두 개 이상의 숫자가 필요합니다." }
 
     return parsedNumbers
-        .map { it.toIntOrNull() ?: throw IllegalArgumentException("구분자와 양수로 구성된 문자열만 입력해주세요.") }
-        .onEach { require(it >= 0) { "구분자와 양수로 구성된 문자열만 입력해주세요." } }
+        .map {
+            val number = it.toIntOrNull() ?: throw IllegalArgumentException("구분자와 양수로 구성된 문자열만 입력해주세요.")
+            require(number >= 0) { "음수는 허용되지 않습니다." }
+            number
+        }
         .sum()
 }
