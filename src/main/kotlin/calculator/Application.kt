@@ -19,6 +19,7 @@ class CalculatorImpl {
     private fun process(input: String) {
         setCalculator(input)
         print("결과 : ${calculator?.calculate(input = input)}")
+        Console.close()
     }
 
     private fun setCalculator(input: String) {
