@@ -1,6 +1,7 @@
 package calculator
 
 import calculator.Input
+import calculator.model.SumCalculator
 
 class CalculatorController {
     private var userStringData : String
@@ -15,7 +16,12 @@ class CalculatorController {
 
     fun run() {
         try {
-          val stringParser = StringParser(userStringData)
+            val stringParser = StringParser(userStringData)
+            val numberList = stringParser.getNumberList()
+
+            val sumCalculator = SumCalculator(numberList)
+            val sum = sumCalculator.getSum()
+            println("결과 : $sum")
         } catch (e: IllegalArgumentException) {
             throw e
         }

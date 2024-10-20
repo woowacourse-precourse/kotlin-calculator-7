@@ -2,31 +2,42 @@ package calculator
 
 class StringParser(input: String) {
     private val numberList: List<Int>
-    private val delimiters: List<String>
+    private val delimiters: List<String>g
     private val cleanedInput: String
 
     init {
-        val (delimitersFromInput, cleaned) = manageDelimiters(input) // 구분자 관리 및 선언 부분 삭제
+        val (delimitersFromInput, cleaned) = manageDelimiters(input)
         delimiters = delimitersFromInput
         cleanedInput = cleaned
-        numberList = parseNumbers(cleanedInput, delimiters) // 선언 부분 제거 후 숫자 파싱
+        numberList = parseNumbers(cleanedInput, delimiters)
     }
 
     private fun manageDelimiters(input: String): Pair<List<String>, String> {
         val delimitersData = mutableListOf(",", ":")
-        val pattern = Regex("""\/\/(.+?)\\n""")  // 커스텀 구분자 선언 패턴
+        val pattern = Regex("""\/\/(.+?)\\n""")
         val matchResult = pattern.find(input)
 
         if (matchResult != null) {
-            delimitersData.add(matchResult.groupValues[1]) // 커스텀 구분자 추가
-            // 구분자 선언 부분을 삭제한 문자열 반환
+            delimitersData.add(matchResult.groupValues[1])
+            checkForMinusAsDelimiter(delimitersData, input)  // 구분자 목록과 입력 문자열을 넘김
             val cleanedInput = input.replaceFirst(pattern, "")
             return Pair(delimitersData, cleanedInput)
         }
-        return Pair(delimitersData, input) // 구분자가 없으면 원본 문자열 그대로 반환
-
+        checkForMinusAsDelimiter(delimitersData, input)  // 구분자 목록과 입력 문자열을 넘김
+        return Pair(delimitersData, input)
     }
 
+    private fun checkForMinusAsDelimiter(delimiters: List<String>, input: String) {
+        if (delimiters.contains("-")) {
+            println(delimiters)
+            return  // 구분자 목록에 '-'가 있으면 그대로 통과
+        }
+
+        if (input.contains('-')) {
+            // 구분자 목록에 '-'가 없는데 입력에 '-'가 포함된 경우 예외 처리
+            throw IllegalArgumentException("'-'는 커스텀 구분자로 지정되어야 사용 가능합니다.")
+        }
+    }
     private fun parseNumbers(numbersString: String, delimiters: List<String>): List<Int> {
         // 구분자 리스트로 문자열 자르기
         return numbersString
