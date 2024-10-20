@@ -6,7 +6,7 @@ fun main() {
     println("덧셈할 문자열을 입력해 주세요.")
     val input = Console.readLine()
 
-    val textCalculator: TextCalculator = TextAddCalculator()
+    val textCalculator: TextCalculator = TextSumCalculator()
     val result = textCalculator.calculate(input)
 
     println("결과 : $result")
@@ -16,7 +16,7 @@ interface TextCalculator {
     fun calculate(input: String): Number
 }
 
-class TextAddCalculator : TextCalculator {
+class TextSumCalculator : TextCalculator {
     private val divider = mutableListOf<String>(",", ":")
     private var isCustomDividerUsed: Boolean = true
 
