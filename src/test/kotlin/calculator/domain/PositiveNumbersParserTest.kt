@@ -50,9 +50,24 @@ class PositiveNumbersParserTest {
     }
 
     @Test
+    fun `쉼표와 콜론으로 구분된 양수인 실수 입력시 양수 리스트 반환`() {
+        // act
+        val result = sut.parse("1.2,3.4,5.6")
+
+        // assert
+        assertThat(result).isEqualTo(listOf(1.2, 3.4, 5.6))
+    }
+
+    @Test
     fun `빈 문자열을 입력한 경우 예외 발생`() {
         // act, assert
         assertThrows<IllegalArgumentException> { sut.parse("") }
+    }
+
+    @Test
+    fun `등록되지 않은 구분자로 양수를 구분시 예외 발생`() {
+        // act, assert
+        assertThrows<IllegalArgumentException> { sut.parse("1;2;3") }
     }
 
     @Test
@@ -60,7 +75,6 @@ class PositiveNumbersParserTest {
         // act, assert
         assertThrows<IllegalArgumentException> { sut.parse("1,2,-3") }
     }
-
 
     @Test
     fun `0이 존재할 경우 예외 발생`() {
@@ -114,5 +128,44 @@ class PositiveNumbersParserTest {
 
         // assert
         assertThat(result).isEqualTo(listOf(1.0, 2.0, 3.0))
+    }
+
+    @Test
+    fun `커스텀 구분자의 시작 생략시 예외 발생`() {
+        // act, assert
+        assertThrows<IllegalArgumentException> { sut.parse(";\n1,2:3") }
+    }
+
+    @Test
+    fun `커스텀 구분자의 마지막 생략시 예외 발생`() {
+        // act, assert
+        assertThrows<IllegalArgumentException> { sut.parse("//;1,2:3") }
+    }
+
+    @Test
+    fun `커스텀 구분자만 입력시 예외 발생`() {
+        // act, assert
+        assertThrows<IllegalArgumentException> { sut.parse("//;\n") }
+    }
+
+    @Test
+    fun `양수 부분도 커스텀 구분자 내부에 입력시 예외 발생`() {
+        // act, assert
+        assertThrows<IllegalArgumentException> { sut.parse("//;1,2;3:4\n") }
+    }
+
+    @Test
+    fun `커스텀 구분자에 양수 추가시 올바르게 처리될 수 있는 경우 양수 리스트 반환`() {
+        // act
+        val result = sut.parse("//1\n2131415")
+
+        // assert
+        assertThat(result).isEqualTo(listOf(2.0, 3.0, 4.0, 5.0))
+    }
+
+    @Test
+    fun `커스텀 구분자에 양수 추가시 올바르게 처리될 수 없는 경우 예외 발생`() {
+        // act, assert
+        assertThrows<IllegalArgumentException> { sut.parse("//1\n121314") }
     }
 }
