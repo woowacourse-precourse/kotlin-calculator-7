@@ -37,7 +37,7 @@
 
 ### 6. 양수가 아닌 경우 IllegalArgumentException을 발생시키는 기능
 
-- -양수가 아닌 수(0 또는 음수)를 입력하는 경우, IllegalArgumentException을 발생시킨다.
+- 양수가 아닌 수(0 또는 음수)를 입력하는 경우, IllegalArgumentException을 발생시킨다.
 
 ## [예외 처리 목록]
 
