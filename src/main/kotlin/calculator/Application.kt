@@ -8,16 +8,14 @@ private const val INPUT_NOTICE_TEXT = "덧셈할 문자열을 입력해 주세�
 private const val RESULT_TEXT = "결과 : "
 
 fun main() {
-    println(INPUT_NOTICE_TEXT)
-
-    val input = readLine().validate()
-    val customDelimiters = getCustomDelimiter(input)
-    val finalDelimiters = createFinalDelimiters(customDelimiters)
-    val inputStringList = splitByDelimiters(input, finalDelimiters)
-    val inputIntList = inputStringList.toIntList()
-    val sumOfIntList = inputIntList.sum()
-
-    println(RESULT_TEXT + sumOfIntList)
+    executeCalculator {
+        val input = readLine().validate()
+        val customDelimiters = getCustomDelimiter(input)
+        val finalDelimiters = createFinalDelimiters(customDelimiters)
+        val inputStringList = splitByDelimiters(input, finalDelimiters)
+        val inputIntList = inputStringList.toPositiveIntList()
+        inputIntList.sum()
+    }
 }
 
 // 커스텀 구분자를 판별하고 만약 있다면 반환, 없다면 null을 반환한다.
@@ -70,7 +68,7 @@ fun String.validate(): String =
     }
 
 // 문자열 리스트를 정수형 리스트로 변환해준다.
-fun List<String>.toIntList(): List<Int> =
+fun List<String>.toPositiveIntList(): List<Int> =
     this.map {
         val intValue = it.toIntOrNull()
         if (intValue == null || intValue < 0) {
@@ -78,3 +76,10 @@ fun List<String>.toIntList(): List<Int> =
         }
         intValue
     }
+
+// 계산기 로직을 실행하고 결과를 출력한다.
+fun executeCalculator(call: () -> Int) {
+    println(INPUT_NOTICE_TEXT)
+    val sumOfIntList = call()
+    println(RESULT_TEXT + sumOfIntList)
+}
