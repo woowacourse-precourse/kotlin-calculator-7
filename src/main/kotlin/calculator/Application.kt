@@ -12,6 +12,8 @@ fun main() {
 
     val delimiterSet = getDelimiterSet(isCustomDelimiter, input)
     val regexPattern = getRegexPattern(delimiterSet)
+
+    val numbers = getNumbers(input, regexPattern)
 private fun isEmptyOrSingleNumber(input: String): Boolean {
     if (input.isEmpty()) {
         println(MESSAGE_RESULT_NUMBER.replace("%s", "0"))
@@ -24,6 +26,13 @@ private fun isEmptyOrSingleNumber(input: String): Boolean {
         return true
     }
     return false
+}
+
+private fun getNumbers(input: String, regexPattern: Regex): List<Long> {
+    return input
+        .substringAfter(CUSTOM_DELIMITER_SUFFIX)
+        .split(regexPattern)
+        .map { validateNumber(it) }
 }
 
 private fun getRegexPattern(delimiterSet: Set<String>): Regex {
