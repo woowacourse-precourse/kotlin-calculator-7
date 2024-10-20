@@ -11,7 +11,6 @@ fun main() {
         if (numbers.any { it < 0 }) {
             throw IllegalArgumentException("잘못 입력하셨습니다.\n양수를 입력해 주세요.")
         }
-
         val sum = sumNumbers(numbers)
         printResult(inputStr, sum)
     } finally {
@@ -33,21 +32,20 @@ fun splitString(inputStr: String): List<Int> {
 
 // 방법2: 문자열에서 숫자만 필터링하는 함수
 fun filteringString(inputStr: String): List<Int> {
-    if (inputStr.contains("//-\\n")){
-        val numbers = "\\d+".toRegex()
-        return numbers.findAll(inputStr).map { it.value.toInt() }.toList()
+    val numbers = if (inputStr.contains("//-\\n")){
+        "\\d+".toRegex()
     } else {
-        val numbers = "-?\\d+".toRegex()
-        return numbers.findAll(inputStr).map { it.value.toInt() }.toList()
+        "-?\\d+".toRegex()
     }
+    return numbers.findAll(inputStr).map { it.value.toInt() }.toList()
 }
 
 // 숫자의 합을 반환하는 함수
 fun sumNumbers(numbers: List<Int>): Int = numbers.sum()
 
 // 출력 형식대로 출력하는 함수
-fun printResult(str: String, sum: Int) {
+fun printResult(inputStr: String, result: Int) {
     println("덧셈할 문자열을 입력해 주세요.")
-    println(str)
-    println("결과 : $sum")
+    println(inputStr)
+    println("결과 : $result")
 }
