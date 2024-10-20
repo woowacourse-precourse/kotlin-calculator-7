@@ -117,12 +117,11 @@ class Calculator(private val requestMessage: String, private val defaultDelimite
      * @param delimiters 구분자 집합
      */
     private fun validateExpression(expression: String, delimiters: MutableSet<Char>) {
-        var inspectIndex = 0
         var prevCharacter: Char? = null
 
-        while (inspectIndex < expression.length) {
+        for (currentCharacter in expression) {
             var isDelimiter = false
-            if (expression[inspectIndex] in delimiters) {
+            if (currentCharacter in delimiters) {
                 isDelimiter = true
             }
 
@@ -133,10 +132,9 @@ class Calculator(private val requestMessage: String, private val defaultDelimite
                 if (prevCharacter in delimiters) throw IllegalArgumentException()
             } else {
                 // 피연산자이지만 숫자가 아닌 것을 입력받은 경우
-                if (!expression[inspectIndex].isDigit()) throw IllegalArgumentException()
+                if (!currentCharacter.isDigit()) throw IllegalArgumentException()
             }
-            prevCharacter = expression[inspectIndex]
-            inspectIndex++
+            prevCharacter = currentCharacter
         }
         // expression의 맨 마지막 character로 구분자가 나타난 경우
         if (prevCharacter in delimiters) throw IllegalArgumentException()
