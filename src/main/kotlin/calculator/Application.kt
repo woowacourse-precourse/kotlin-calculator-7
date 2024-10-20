@@ -11,12 +11,27 @@ fun main() {
         if(userInput=="end")break
 
         try {
-            val result = delimiterExtraction(userInput)
+            val result = parseNumbers(userInput)
             println("결과 : $result")
         } catch (e: IllegalArgumentException) {
             println("오류: ${e.message}")
         }
     }
+}
+
+//구분자로 문자열 파싱하는 함수
+fun parseNumbers(input: String): List<BigInteger> {
+
+    val (delimiter, numbersString) = delimiterExtraction(input)
+    val numbers = numbersString.split(Regex(delimiter)).map {
+        it.toBigIntegerOrNull() ?: throw IllegalArgumentException("잘못된 형식으로 숫자 분류가 실패되었습니다.")
+    }
+
+    //숫자가 음수인 경우 예외처리
+    if (numbers.any { it < BigInteger.ZERO }) {
+        throw IllegalArgumentException("양수를 입력해주세요.")
+    }
+    return numbers //파싱한 문자열 반환
 }
 
 //구분자 추출하는 함수
