@@ -1,6 +1,7 @@
 package calculator
 
 class Parser(private val input: String) {
+    private var hasCustomDelimiter = false
     private val delimiters = mutableListOf(DEFAULT_DELIMITER_COMMA, DEFAULT_DELIMITER_COLON)
 
     private fun findCustomDelimiter(): Boolean {
@@ -10,14 +11,18 @@ class Parser(private val input: String) {
         return isMatch
     }
 
-    private fun updateDelimiters() {
-        if (findCustomDelimiter()) delimiters.add(input[CUSTOM_DELIMITER_INDEX])
+    private fun updatePropertiesOrNone() {
+        if (findCustomDelimiter()) {
+            hasCustomDelimiter = true
+            delimiters.add(input[CUSTOM_DELIMITER_INDEX])
+        }
     }
 
     fun getParsingList(): List<Long> {
-        updateDelimiters()
+        updatePropertiesOrNone()
+        val inputWithoutPrefix = if (hasCustomDelimiter) input.substring(CUSTOM_DELIMITER_FORMAT_LEN) else input
         val splitRegex = "[${delimiters.joinToString()}]".toRegex()
-        val parsingList = input.split(splitRegex)
+        val parsingList = inputWithoutPrefix.split(splitRegex)
         return parsingList.map { parsingStr -> checkValidAndConvertToLong(parsingStr) }
     }
 
