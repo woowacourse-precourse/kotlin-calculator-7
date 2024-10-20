@@ -46,3 +46,8 @@ private fun isValidNumber(value: String): Boolean {
 
     return number != null && number > 0 && number <= Int.MAX_VALUE
 }
+
+private fun separateNumbers(numbers: String, delimiter: String?): List<Double> {
+    return numbers.split(delimiter ?: ",", ":")
+        .mapNotNull { it.trim().toDoubleOrNull() }
+}
