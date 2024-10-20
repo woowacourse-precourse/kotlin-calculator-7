@@ -13,7 +13,7 @@ object Extractor {
         if (!input.isContainCustomOperator()) {
             result.addAll(input.toIntListByDefaultDelimiter())
         } else {
-            Validator.validateInputContainedCustomOperator(input)
+            Validator.validateInputContainedCustomDelimiter(input)
             result.addAll(input.toIntListAppliedCustomDelimiter())
         }
 

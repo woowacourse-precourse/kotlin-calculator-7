@@ -16,7 +16,7 @@ object Validator {
         }
     }
 
-    fun validateInputContainedCustomOperator(input: String) {
+    fun validateInputContainedCustomDelimiter(input: String) {
         input.splitWithCustomDelimiter().forEach {
             require(it != "") { ONLY_NUMBER.message }
         }
