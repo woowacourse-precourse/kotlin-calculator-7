@@ -11,26 +11,31 @@ private const val ERROR_SUM_OUT_OF_RANGE = "계산 결과가 Int 범위를 초�
 
 class Calculator(private val input: String) {
 
-    private fun checkInputValidity(input: String): Triple<Boolean, String?, String> {
-        if (input.isEmpty()) return Triple(false, null, "")
+    private fun separateNumbersAndDelimiter(input: String): Pair<String?, String> {
+        if (input.isEmpty()) return null to ""
 
-        val (delimiter, numbers) = if (input.startsWith(CUSTOM_DELIMITER_PREFIX)) {
-            val delimiterIndex = input.indexOf(CUSTOM_DELIMITER_SUFFIX)
-
-            if (delimiterIndex != CUSTOM_DELIMITER_SUFFIX_NOT_FOUND) {
-                input.substring(CUSTOM_DELIMITER_PREFIX_LENGTH, delimiterIndex) to input.substring(
-                    delimiterIndex + CUSTOM_DELIMITER_PREFIX_LENGTH
-                )
-            } else return Triple(false, null, "")
-
+        return if (input.startsWith(CUSTOM_DELIMITER_PREFIX)) {
+            extractDelimiter(input)
         } else {
             null to input
         }
+    }
 
-        val isValid =
-            numbers.split(delimiter ?: ",", ":").all { it.isEmpty() || isValidNumber(it.trim()) }
+    private fun extractDelimiter(input: String): Pair<String, String> {
+        val delimiterIndex = input.indexOf(CUSTOM_DELIMITER_SUFFIX)
 
-        return Triple(isValid, delimiter, numbers)
+        if (delimiterIndex == CUSTOM_DELIMITER_SUFFIX_NOT_FOUND) {
+            throw IllegalArgumentException(ERROR_INVALID_INPUT)
+        }
+
+        val delimiter = input.substring(CUSTOM_DELIMITER_PREFIX_LENGTH, delimiterIndex)
+        val numbers = input.substring(delimiterIndex + CUSTOM_DELIMITER_SUFFIX.length)
+        return delimiter to numbers
+    }
+
+    private fun validateInput(numbersPart: String, delimiter: String?) {
+        val isValid = numbersPart.split(delimiter ?: ",", ":").all { isValidNumber(it.trim()) }
+        if (!isValid) throw IllegalArgumentException(ERROR_INVALID_INPUT)
     }
 
     private fun isValidNumber(value: String): Boolean {
