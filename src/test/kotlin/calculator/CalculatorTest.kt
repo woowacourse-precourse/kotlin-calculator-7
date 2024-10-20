@@ -13,7 +13,7 @@ class CalculatorTest {
         val input = listOf(1, 2, 3)
         val expected = 6
 
-        val result = Calculator(input).getResult()
+        val result = Calculator().sum(input)
         assertEquals(expected, result)
     }
 }

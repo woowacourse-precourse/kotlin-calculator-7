@@ -30,7 +30,7 @@ class CalculatorController(
 
         manager.isContainNegativeNumber(nums)
 
-        val result = Calculator(nums).getResult()
+        val result = Calculator().sum(nums)
         outputView.printResult(result)
     }
 }
