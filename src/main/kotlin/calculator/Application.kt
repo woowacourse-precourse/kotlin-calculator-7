@@ -9,7 +9,18 @@ fun main() {
     println("덧셈할 문자열을 입력해 주세요.")
     val input = Console.readLine()
 
+    // 합을 계산하는 함수 호출
+    val result = calculateSum(input)
+    println("결과 : $result")
 }
+
+// 숫자들의 합을 계산하는 함수
+fun calculateSum(input: String): Int {
+    // 반환된 숫자 배열의 합을 계산
+    val numbers = extractNumbers(input).mapNotNull { it.toIntOrNull() }
+    return numbers.sum()
+}
+
 // 커스텀 구분자 사용 여부 확인 함수
 fun isCustomDelimiter(input: String): Boolean {
     return input.startsWith("//")
