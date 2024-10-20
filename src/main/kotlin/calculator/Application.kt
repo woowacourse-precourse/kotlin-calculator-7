@@ -4,12 +4,15 @@ import camp.nextstep.edu.missionutils.Console
 
 fun main() {
     // TODO: 프로그램 구현
-    var userInput: String
-
     println("덧셈할 문자열을 입력해 주세요.")
-    userInput = Console.readLine()
+    val userInput = Console.readLine() ?: ""
 
-
+    try {
+        val result = calculateSum(userInput)
+        println("결과 : $result")
+    } catch (e: IllegalArgumentException) {
+        println("잘못된 값을 입력하였습니다.")
+    }
 }
 
 fun extractDelimiter(userInput: String): Pair<Regex, String> {
