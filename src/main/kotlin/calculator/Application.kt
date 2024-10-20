@@ -16,7 +16,8 @@ fun main() {
 
     // 결과 처리
     try {
-        val result = extractCustomSeparator(input, defaultSeparators, customSeparatorPattern)
+        val (separators, numbersPart) = extractCustomSeparator(input, defaultSeparators, customSeparatorPattern)
+        val result = splitNumbers(numbersPart, separators)
         println("결과 : $result")
     } catch (e: IllegalArgumentException) {
         println("Error : ${e.message}")
@@ -44,4 +45,11 @@ fun extractCustomSeparator(input: String, defaultSeparators: List<String>, custo
     } else {
         Pair(defaultSeparators, input)
     }
+}
+
+fun splitNumbers(input: String, separators: List<String>): List<String> {
+    val regex = separators.joinToString("|") { Regex.escape(it) }.toRegex()
+    val result = input.split(regex).filter { it.isNotEmpty() }
+
+    return result
 }
