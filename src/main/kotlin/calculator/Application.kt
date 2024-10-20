@@ -11,6 +11,7 @@ private const val INVALID_NUMBER_FORMAT_MESSAGE = "잘못된 숫자 형식입니
 private const val MULTIPLE_CONSECUTIVE_DELIMITERS_MESSAGE = "여러 개의 구분자가 연속으로 나타날 수 없습니다."
 private const val TRAILING_DELIMITER_MESSAGE = "숫자 뒤에 구분자만 있을 수 없습니다."
 private const val NEGATIVE_NUMBER_NOT_ALLOWED_MESSAGE = "음수는 허용되지 않습니다."
+private const val PRINT_RESULT_MESSAGE = "결과 : %d"
 
 
 fun main() {
@@ -21,6 +22,9 @@ fun main() {
         println(0)
         return
     }
+
+    val result = add(input)
+    println(String.format(PRINT_RESULT_MESSAGE, result))
 }
 
 private fun add(input: String): Int {
