@@ -51,13 +51,13 @@ class Calculator(private val input: String) {
         return number != null && number > 0 && number <= Int.MAX_VALUE
     }
 
-    private fun separateNumbers(numbers: String, delimiter: String?): List<Double> {
+    private fun extractNumbers(numbers: String, delimiter: String?): List<Double> {
         return numbers.split(delimiter ?: ",", ":")
             .mapNotNull { it.trim().toDoubleOrNull() }
     }
 
     private fun calculateSum(numbers: String, delimiter: String?): Number {
-        val separateNumbers = separateNumbers(numbers, delimiter)
+        val separateNumbers = extractNumbers(numbers, delimiter)
         val sum = separateNumbers.sum()
 
         if (sum > Int.MAX_VALUE) {
