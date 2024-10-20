@@ -12,7 +12,7 @@ fun main() {
         } else {
             sumOfStringList(str.split(",", ":"))
         }
-        println(sum)
+        println("결과 : $sum")
     } catch (e: Exception) {
         throw IllegalArgumentException("잘못된 입력 형식입니다.")
     }
@@ -28,4 +28,9 @@ fun splitByCustomDelimiter(str: String): Pair<String, String> {
     return splitList[1] to splitList[2]
 }
 
-fun sumOfStringList(list: List<String>) = list.sumOf { it.toInt() }
+fun sumOfStringList(list: List<String>) =
+    list.sumOf {
+        val n = it.toInt()
+        if (n <= 0) throw IllegalArgumentException("잘못된 입력 형식입니다.")
+        n
+    }
