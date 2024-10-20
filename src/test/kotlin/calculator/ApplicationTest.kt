@@ -33,6 +33,9 @@ class ApplicationTest : NsTest() {
         assertSimpleTest {
             assertThrows<IllegalArgumentException> { runException("-1,2,3") }
         }
+        assertSimpleTest {
+            assertThrows<IllegalArgumentException> { runException("-1") }
+        }
     }
 
     override fun runMain() {

@@ -31,6 +31,11 @@ fun main() {
                 }
 
             }
+            numbers.forEach{
+                if (it < 0) {
+                    throw IllegalArgumentException("Input values must be positive numbers only.")
+                }
+            }
             result = numbers.sum()
 
         }
