@@ -6,17 +6,21 @@ fun main() {
     println("덧셈할 문자열을 입력해 주세요.")
     val input = Console.readLine()
 
-    val calculator = Calculator()
-    val result = calculator.calculate(input)
+    val textCalculator: TextCalculator = TextAddCalculator()
+    val result = textCalculator.calculate(input)
 
     println("결과 : $result")
 }
 
-class Calculator {
+interface TextCalculator {
+    fun calculate(input: String): Number
+}
+
+class TextAddCalculator : TextCalculator {
     private val divider = mutableListOf<String>(",", ":")
     private var isCustomDividerUsed: Boolean = true
 
-    fun calculate(input: String): Number {
+    override fun calculate(input: String): Number {
         val splitInput = input.split(CUSTOM_DIVIDER_PREFIX, CUSTOM_DIVIDER_SUFFIX)
 
         if (!checkInputTypeAndValidity(splitInput)) throw IllegalArgumentException(INVALID_INPUT_MESSAGE)
@@ -76,7 +80,6 @@ class Calculator {
 
     companion object {
         private const val INVALID_INPUT_MESSAGE = "유효하지 않은 입력입니다."
-
         private const val CUSTOM_DIVIDER_PREFIX = "//"
         private const val CUSTOM_DIVIDER_SUFFIX = "\\n"
 
