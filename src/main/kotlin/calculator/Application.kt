@@ -4,29 +4,9 @@ import camp.nextstep.edu.missionutils.Console
 
 fun input(): String = Console.readLine()
 
-fun splitNumber(str: String): List<Int> {
-    val numberList: MutableList<Int> = mutableListOf()
-    var num = ""
-
-    str.forEach {
-        if (it == ',' || it == ':') {
-            if (num != "") {
-                numberList += num.toInt()
-                num = ""
-            }
-            return@forEach
-        }
-        num += it.toString()
-    }
-    if (num != "") {
-        numberList += num.toInt()
-    }
-
-    return numberList
-}
+fun splitNumber(str: String): List<Int> = str.split("[,:]".toRegex()).map { it.toInt() }
 
 fun sum(numbers: List<Int>): Int = numbers.sum()
-
 
 fun isValid(str: String): Boolean {
     val inputRegex = "^[0-9,:]*$".toRegex()
@@ -47,7 +27,6 @@ fun checkCustom(str: String): Boolean {
 
 fun replaceCustom(str: String): String {
     val afterIndex = str.indexOf("\\n")
-
     val customSeparator = str.substring(2, afterIndex)
     var newStr = str.substring(afterIndex + 2)
     newStr = newStr.replace(customSeparator, ",")
