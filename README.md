@@ -206,7 +206,7 @@ AngularJS Git Commit Messa:ge Conventions을 참고해 커밋 메시지를 작�
 
 ---
 
-### TC10
+### TC10(deprecated)
 
 커스텀 구분자를 등록 하기전에 미리 사용한 경우로 정상적이지 않은 입력을 했을 경우의 테스트 케이스이다.
 
