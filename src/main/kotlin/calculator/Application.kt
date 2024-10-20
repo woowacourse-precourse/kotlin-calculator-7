@@ -24,6 +24,7 @@ fun parseNumbers(input: String): List<BigInteger> {
 
     val (delimiter, numbersString) = delimiterExtraction(input)
     val numbers = numbersString.split(Regex(delimiter)).map {
+        //
         it.toBigIntegerOrNull() ?: throw IllegalArgumentException("잘못된 형식으로 숫자 분류가 실패되었습니다.")
     }
 
@@ -53,10 +54,15 @@ fun findFirstDigitIndex(input: String): Int {
             return i // 숫자가 발견되면 그 인덱스를 반환
         }
     }
+    //숫자가 입력되지 않은 경우 예외처리
     return throw IllegalArgumentException("숫자를 입력해주세요.")
 }
 
+//파싱한 배열의 합을 구하는 함수 추가
 fun add(input: String): BigInteger {
+
+    //입력값이 비어있는 경우 0을 반환
+    if (input.isBlank()) return BigInteger.ZERO
 
     val numbers = parseNumbers(input)
     val sum = numbers.sumOf { it }
