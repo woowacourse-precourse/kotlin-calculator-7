@@ -37,11 +37,13 @@ class Calculator(private val input: String) {
 
         val delimiter = input.substring(CUSTOM_DELIMITER_PREFIX_LENGTH, delimiterIndex)
         val numbers = input.substring(delimiterIndex + CUSTOM_DELIMITER_SUFFIX.length)
+
         return delimiter to numbers
     }
 
     private fun validateInput(numbersPart: String, delimiter: String?) {
         val isValid = numbersPart.split(delimiter ?: ",", ":").all { isValidNumber(it.trim()) }
+
         if (!isValid) throw IllegalArgumentException(ERROR_INVALID_INPUT)
     }
 
