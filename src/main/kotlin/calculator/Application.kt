@@ -45,8 +45,8 @@ fun getCustomSeparator(str: String): String {
 
     val customSeparator = str.substring(startIndex, endIndex)
 
-    // 구분자가 숫자인 경우 예외 발생
-    if (customSeparator.trim().all { it.isDigit() }) {
+    // 커스텀 구분자가 숫자인 경우 예외 발생(빈 문자열인 경우도 숫자로 인식되어 예외 처리)
+    if (customSeparator.isNotBlank() && customSeparator.trim().all { it.isDigit() }) {
         throw IllegalArgumentException("숫자는 커스텀 구분자로 사용할 수 없어요.")
     }
 
