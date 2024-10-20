@@ -1,29 +1,39 @@
 package calculator
 
 import camp.nextstep.edu.missionutils.Console
-import camp.nextstep.edu.missionutils.Console.close
-import javax.swing.JToolBar.Separator
 
 fun main() {
     print("덧셈할 문자열을 입력해 주세요.\n")
     val word = Console.readLine()
-    println(word.substring(word.indexOf("//") , word.indexOf("\\n")))
-
+    val calculator = Calculator(word)
 }
 
-class Calculator(inputWord : String){
-    private lateinit var word: String
+class Calculator(inputWord: String) {
+    private var word: String
 
     init {
         this.word = inputWord
     }
 
-    fun Separator(){
-        if(word.substring(0,2) == "//" && word.substring(3,5) == "\\n"){
+    fun checkWord() {
+        if (word.substring(0, 2) == "//" && word.substring(3, 5) == "\\n") {
+            word = word.substring(2)
+        } else if (word.contains(":") || word.contains(",")) {
+            checkNumberFormat(wordNumberFormat = word.replace(",", "").replace(":", ""))
 
+        } else {
+            throw IllegalArgumentException()
         }
-        else{
+    }
+
+    private fun checkNumberFormat(wordNumberFormat: String) {
+        try {
+            wordNumberFormat.toInt()
+        } catch (e: NumberFormatException) {
             throw IllegalArgumentException()
         }
     }
 }
+
+
+
