@@ -11,7 +11,7 @@ fun main() {
         if(userInput=="end")break
 
         try {
-            val result = parseNumbers(userInput)
+            val result = add(userInput)
             println("결과 : $result")
         } catch (e: IllegalArgumentException) {
             println("오류: ${e.message}")
@@ -38,7 +38,7 @@ fun parseNumbers(input: String): List<BigInteger> {
 private fun delimiterExtraction(input: String): Pair<String, String> {
     return if (input.startsWith("//")) { // //로 시작할 때 커스텀 구분자로 분류시작
         val delimiterEndIndex = findFirstDigitIndex(input)
-        val delimiter = input.substring(2, delimiterEndIndex-2) // 커스텀 구분자만 따로 분류
+        val delimiter = input.substring(2, delimiterEndIndex-2) + "|,|:" // 커스텀 구분자만 따로 분류하면서 기본 구문자도 인식
         val numbersString = input.substring(delimiterEndIndex) // 커스텀 구분자 선언부 제외 문자열 분류
         Pair(delimiter, numbersString)
     } else {
@@ -54,4 +54,12 @@ fun findFirstDigitIndex(input: String): Int {
         }
     }
     return throw IllegalArgumentException("숫자를 입력해주세요.")
+}
+
+fun add(input: String): BigInteger {
+
+    val numbers = parseNumbers(input)
+    val sum = numbers.sumOf { it }
+
+    return sum
 }
