@@ -14,29 +14,24 @@ fun main() {
         if (customDelimiter.toIntOrNull() != null) {
             throw IllegalArgumentException()
         }
-        val numbers: List<Int> = runCatching {
-            val newInput: String = input.substring(5)
-            val split: List<String> = newInput.split(",", ":", customDelimiter).map { it.ifEmpty { "0" } }
-            split.map { it.toInt() }
-        }.getOrElse { throw IllegalArgumentException() }
-
-        if (numbers.any { it < 0 }) {
-            throw IllegalArgumentException()
-        }
-
-        numbers.sum()
+        validateInputAndSum(input, ",", ":", customDelimiter)
     } else {
-        val numbers: List<Int> = runCatching {
-            val split: List<String> = input.split(",", ":").map { it.ifEmpty { "0" } }
-            split.map { it.toInt() }
-        }.getOrElse { throw IllegalArgumentException() }
-
-        if (numbers.any { it < 0 }) {
-            throw IllegalArgumentException()
-        }
-
-        numbers.sum()
+        validateInputAndSum(input, ",", ":")
     }
 
     println("결과 : $sum")
+}
+
+private fun validateInputAndSum(input: String, vararg delimiters: String): Int {
+    val numbers: List<Int> = runCatching {
+        val newInput: String = if (delimiters.size > 2) input.substring(5) else input
+        val split: List<String> = newInput.split(delimiters = delimiters).map { it.ifEmpty { "0" } }
+        split.map { it.toInt() }
+    }.getOrElse { throw IllegalArgumentException() }
+
+    if (numbers.any { it < 0 }) {
+        throw IllegalArgumentException()
+    }
+
+    return numbers.sum()
 }
