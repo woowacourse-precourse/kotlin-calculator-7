@@ -50,10 +50,10 @@ fun main() {
 
     //분리된 문자열 순회하며 값들 더하기
     for (i in arr){
-        if(i.toInt()<=0){
-            throw IllegalArgumentException()
-        }
         try {
+            if(i.toInt()<=0){
+                throw IllegalArgumentException()
+            }
             total+=i.toInt()
         }
         catch (e: Exception){
