@@ -7,10 +7,30 @@ fun main() {
     val userInput = readLine()
 
     checkInputIsEmpty(userInput)
+
+    val separatedValues = getSeparatedValues(userInput)
 }
 
 private fun checkInputIsEmpty(input: String) {
     if (input.isEmpty()) throw IllegalArgumentException(MESSAGE_INPUT_EMPTY)
+}
+
+private fun getSeparatedValues(input: String): List<String> {
+    val rangeForDetermineSeparatorState = 0..4
+    val contentForDetermineSeparatorState = input.substring(rangeForDetermineSeparatorState)
+
+    return when (val separatorState = getSeparatorState(contentForDetermineSeparatorState)) {
+        is SeparatorState.CustomSeparator -> {
+            val separator = separatorState.separator
+            val contentToSeparate = input.drop(SEPARATOR_HEADER_LENGTH)
+            contentToSeparate.split(separator)
+        }
+
+        is SeparatorState.DefaultSeparator -> {
+            val separators = arrayOf(separatorState.COLON, separatorState.COMMA)
+            input.split(*separators)
+        }
+    }
 }
 
 private fun getSeparatorState(input: String): SeparatorState {
@@ -23,3 +43,4 @@ private fun getSeparatorState(input: String): SeparatorState {
 }
 private const val MESSAGE_FOR_GUIDE_CALCULATE = "덧셈할 문자열을 입력해 주세요."
 private const val MESSAGE_INPUT_EMPTY = "빈 값을 입력하였습니다."
+private const val SEPARATOR_HEADER_LENGTH = 5
