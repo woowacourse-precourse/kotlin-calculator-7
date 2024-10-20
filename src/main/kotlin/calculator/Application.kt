@@ -30,11 +30,11 @@ private fun checkInputValidity(input: String): Triple<Boolean, String?, String> 
     if (input.isEmpty()) return Triple(false, null, "")
 
     val (delimiter, numbers) = if (input.startsWith(CUSTOM_DELIMITER_PREFIX)) {
-        val newlineIndex = input.indexOf(CUSTOM_DELIMITER_SUFFIX)
+        val delimiterIndex = input.indexOf(CUSTOM_DELIMITER_SUFFIX)
 
-        if (newlineIndex != CUSTOM_DELIMITER_SUFFIX_NOT_FOUND) {
-            input.substring(CUSTOM_DELIMITER_PREFIX_LENGTH, newlineIndex) to input.substring(
-                newlineIndex + CUSTOM_DELIMITER_PREFIX_LENGTH
+        if (delimiterIndex != CUSTOM_DELIMITER_SUFFIX_NOT_FOUND) {
+            input.substring(CUSTOM_DELIMITER_PREFIX_LENGTH, delimiterIndex) to input.substring(
+                delimiterIndex + CUSTOM_DELIMITER_PREFIX_LENGTH
             )
         } else return Triple(false, null, "")
 
