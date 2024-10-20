@@ -2,6 +2,16 @@ package calculator
 
 import calculator.InputStringManager as ISM
 
+enum class ErrorType(val message: String) {
+    START_WITH_NUMBER("오류: 커맨드를 제외한 입력값은 숫자로 시작해야 합니다."),
+    END_WITH_NUMBER("오류: 커맨드를 제외한 입력값은 숫자로 끝나야 합니다."),
+    DELIMITER_BETWEEN_NUMBERS("오류: 구분자는 숫자 사이에 입력해야 합니다."),
+    DOT_IN_START_OR_ENDS("오류: 각각의 숫자는 .으로 시작하거나 끝날 수 없습니다."),
+    INVALID_DELIMITER("오류: 잘못된 구분자 입력입니다."),
+    POSITIVE_NUMBERS_ONLY("오류: 양수만 입력해 주세요."),
+    INVALID_DELIMITER_TYPE("오류: 지원하지 않는 구분자 타입입니다.")
+}
+
 object ErrorChecker {
     /**
      * 원본 입력 문자열을 Parse하여 예외를 체크
@@ -27,10 +37,10 @@ object ErrorChecker {
         val commandRemovedInput = ISM.getCommandRemovedInput(input)
 
         if (commandRemovedInput.first() !in availableDigits) {
-            throw IllegalArgumentException("오류: 커맨드를 제외한 입력값은 숫자로 시작해야 합니다.")
+            throw IllegalArgumentException(ErrorType.START_WITH_NUMBER.message)
         }
         if (commandRemovedInput.last() !in availableDigits) {
-            throw IllegalArgumentException("오류: 커맨드를 제외한 입력값은 숫자로 끝나야 합니다.")
+            throw IllegalArgumentException(ErrorType.END_WITH_NUMBER.message)
         }
     }
 
@@ -46,10 +56,10 @@ object ErrorChecker {
     ) {
         splitInputString.forEach { splitInputElement ->
             if (splitInputElement.isEmpty()) {
-                throw IllegalArgumentException("오류: 구분자는 숫자 사이에 입력해야 합니다.")
+                throw IllegalArgumentException(ErrorType.DELIMITER_BETWEEN_NUMBERS.message)
             }
             if (splitInputElement.first() == '.' || splitInputElement.last() == '.') {
-                throw IllegalArgumentException("오류: 각각의 숫자는 .으로 시작하거나 끝날 수 없습니다.")
+                throw IllegalArgumentException(ErrorType.DOT_IN_START_OR_ENDS.message)
             }
         }
         checkMultipleDotInElement(splitInputString, availableDigits)
@@ -76,7 +86,7 @@ object ErrorChecker {
                     hasSeenPoint = true
                     continue
                 }
-                throw IllegalArgumentException("오류: 잘못된 구분자 입력입니다.")
+                throw IllegalArgumentException(ErrorType.INVALID_DELIMITER.message)
             }
         }
     }
@@ -93,7 +103,7 @@ object ErrorChecker {
                 false -> ISM.parseInputStringToDoubleList(input)
             }
         if (0 in parsedList || 0.0 in parsedList) {
-            throw IllegalArgumentException("오류: 양수만 입력해 주세요.")
+            throw IllegalArgumentException(ErrorType.POSITIVE_NUMBERS_ONLY.message)
         }
     }
 }

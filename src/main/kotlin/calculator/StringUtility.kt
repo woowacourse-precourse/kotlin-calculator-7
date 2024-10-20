@@ -13,7 +13,7 @@ object StringUtility {
             when (it) {
                 is Char -> Regex.escape(it.toString())
                 is String -> Regex.escape(it)
-                else -> throw IllegalArgumentException("지원하지 않는 구분자 타입 입니다.")
+                else -> throw IllegalArgumentException(ErrorType.INVALID_DELIMITER_TYPE.message)
             }
         }
         val regex = escapedDelimiters.joinToString("|").toRegex()
