@@ -6,9 +6,9 @@ class Calculate(private val input: String) {
 
     // 문자열을 숫자 리스트로 변환하고 예외 처리 하는 메서드
     fun parseInput(): List<Int> {
-        val numbers = if (input.startsWith("//")) {
+        val numbers = if (input.startsWith("//")) {    // 커스텀 구분자인 경우
             customDel()
-        } else {
+        } else {    // 기본 구분자인 경우
             defaultDel()
         }
         runException(numbers)
@@ -33,8 +33,7 @@ class Calculate(private val input: String) {
     // 잘못된 숫자와 음수 입력에 대해 예외 발생시키는 메서드
     private fun runException(numbers: List<String>) {
         numbers.forEach { number ->
-            val value = number.toIntOrNull()
-                ?: throw IllegalArgumentException("잘못된 숫자입니다.")    // 문자열을 정수로 변환할 수 없을 경우 예외 발생
+            val value = number.toIntOrNull() ?: throw IllegalArgumentException("잘못된 숫자입니다.")    // 문자열을 정수로 변환할 수 없을 경우 예외 발생
             if (value < 0) {    // 음수일 경우 예외 발생
                 throw IllegalArgumentException("음수는 입력할 수 없습니다.")
             }
@@ -47,19 +46,19 @@ class Calculate(private val input: String) {
     }
 }
 
-    fun main() {
-        println("덧셈할 문자열을 입력해 주세요.")
-        val input = Console.readLine()
-        if (input.isNullOrEmpty()) {    // 빈문자열이나 null값을 입력받을 경우 0 출력
-            println("결과 : 0")
-        } else {
-            val calculate = Calculate(input)
-            val numbers = calculate.parseInput()
-            val result = calculate.totalSum(numbers)
-            println("결과 : $result")
-        }
-
+fun main() {
+    println("덧셈할 문자열을 입력해 주세요.")
+    val input = Console.readLine()
+    if (input.isNullOrEmpty()) {    // 빈문자열이나 null값을 입력받을 경우 0 출력
+        println("결과 : 0")
+    } else {
+        val calculate = Calculate(input)    // Calculate 클래스 호출
+        val numbers = calculate.parseInput()
+        val result = calculate.totalSum(numbers)
+        println("결과 : $result")
     }
+
+}
 
 
 
