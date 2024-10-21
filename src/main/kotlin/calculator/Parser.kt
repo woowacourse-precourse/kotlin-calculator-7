@@ -1,36 +1,23 @@
 package calculator
 
+import calculator.utils.InputUtil
+
 class Parser {
     private val validator = Validator()
 
-    private fun getSeparators(input: String): List<String> {
-        val defalutSeparators = listOf(",", ":")
-        val regex = """^//(.+)\\n(.*)""".toRegex()
-        val matchResult = regex.find(input)
-
-        return if (matchResult != null) {
-            val customSeparator = matchResult.groupValues[1]
-            defalutSeparators + customSeparator
-        } else {
-            defalutSeparators
-        }
-    }
-
-    private fun getNumbers(input: String, separator: List<String>): String {
-        return if (separator.size > 2) {
-            input.substringAfter("\\n")
-        } else {
-            input
-        }
-    }
-
+    /**
+     * String 형태의 숫자를 구분자로 파싱
+     */
     fun parseSeparator(input: String): List<String> {
-        val separators = getSeparators(input)
-        val numbers = getNumbers(input, separators)
+        val separators = InputUtil.getSeparators(input)
+        val numbers = InputUtil.getNumbers(input, separators)
 
         return numbers.split(*separators.toTypedArray())
     }
 
+    /**
+     * 파싱된 리스트를 숫자로 변환
+     */
     fun parseNumber(list: List<String>): List<Long> {
         val numbers = mutableListOf<Long>()
         list.forEach {
