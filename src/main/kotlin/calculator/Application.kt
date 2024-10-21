@@ -9,10 +9,8 @@ fun main() {
 
 fun calculate(string: String): Int {
     if (string == "") return 0
-    
     val strings = split(string)
     val numbers = changeToInt(strings)
-
     return numbers.sum()
 }
 

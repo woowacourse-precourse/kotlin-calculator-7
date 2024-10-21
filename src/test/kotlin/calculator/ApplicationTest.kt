@@ -77,7 +77,7 @@ class ApplicationTest : NsTest() {
             assertThrows<IllegalArgumentException> { calculate("//,\n-1,2,3") }
         }
     }
-    
+
     override fun runMain() {
         main()
     }
