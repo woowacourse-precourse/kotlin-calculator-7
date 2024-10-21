@@ -3,6 +3,7 @@ package calculator
 fun main() {
     lateinit var userInputList: List<String>
     var sum = 0
+    println("덧셈할 문자열을 입력해 주세요.")
     val userInput = readlnOrNull()
     if (userInput != null) {
         if (userInput.startsWith("//")) {
