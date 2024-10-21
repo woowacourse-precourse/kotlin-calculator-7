@@ -7,7 +7,7 @@ fun main() {
     val input = readLine() ?: throw IllegalArgumentException("문자열은 구분자와 양수로만 이루어져야 합니다.")
 
     val result = calculateString(input)
-    println("덧셈 결과: $result")
+    println("결과 : $result")
 
 }
 
@@ -20,14 +20,16 @@ fun calculateString(input: String): Int {
 
     // 커스텀 구분자 처리
     if (input.startsWith("//")) {
-        val parts = input.split("\n", limit = 2)
-        if (parts.size < 2) throw IllegalArgumentException("커스텀 구분자 사용 방식에 맞지 않습니다.")
-        val customDelimiter = parts[0].substring(2)
+        val delimiterEndIndex = input.indexOf("\\n")
+        if (delimiterEndIndex == -1) throw IllegalArgumentException("커스텀 구분자 사용 방식에 맞지 않습니다.")
+
+        val customDelimiter = input.substring(2, delimiterEndIndex)
         delimiters.add(customDelimiter)
-        numbersPart = parts[1]
+        numbersPart = input.substring(delimiterEndIndex + 2)
     }
 
     val numbers = split(numbersPart, delimiters)
+
     val intNumbers = numbers.map {
         val num = it.toIntOrNull() ?: throw IllegalArgumentException("입력 형식에 맞지 않습니다.: $it")
         if (num < 0) throw IllegalArgumentException("양수만 입력할 수 있습니다. $num")
