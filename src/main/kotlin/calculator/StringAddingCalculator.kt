@@ -34,7 +34,7 @@ class StringAddingCalculator {
 
             Pair(numbers, listOf(customDelimiter))
         } else {
-            Pair(inputText, DEFAULT_DELIMITERS.split(""))
+            Pair(inputText, DEFAULT_DELIMITERS)
         }
     }
 
@@ -57,7 +57,7 @@ class StringAddingCalculator {
         private const val EMPTY_STRING_ERROR = "빈 문자열은 입력할 수 없습니다."
         private const val INVALID_DELIMITER_FORMAT_ERROR = "구분자 형식이 올바르지 않습니다."
         private const val NEGATIVE_NUMBER_ERROR = "음수는 입력할 수 없습니다: "
-        private const val DEFAULT_DELIMITERS = ",:"
+        private val DEFAULT_DELIMITERS = listOf(",", ":")
         private const val CUSTOM_DELIMITER_PREFIX = "//"
         private const val CUSTOM_DELIMITER_END = "\\n"
     }
