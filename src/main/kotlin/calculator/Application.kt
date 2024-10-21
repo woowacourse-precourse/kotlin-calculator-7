@@ -6,12 +6,18 @@ fun main() {
     println("덧셈할 문자열을 입력해 주세요.")
     val userInput = Console.readLine()
 
-    try {
-        val result = calculateSum(userInput)
-        println("결과 : $result")
+    val result = try {
+        when {
+            userInput.isBlank() -> 0
+            userInput.startsWith("//") -> extractCustomDelimiter(userInput)
+            userInput[0].isDigit() || userInput[0] == ',' || userInput[0] == ':' -> extractDefaultDelimiter(userInput)
+            else -> throw IllegalArgumentException()
+        }
     } catch (e: IllegalArgumentException) {
-        println(e.message)
+        throw IllegalArgumentException()
     }
+
+    println("결과 : $result")
 }
 
 fun extractCustomDelimiter(userInput: String): Int {
