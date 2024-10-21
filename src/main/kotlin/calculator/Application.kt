@@ -1,5 +1,12 @@
 package calculator
 
+import calculator.Constants.CUSTOM_SEPARATOR_POS
+import calculator.Constants.CUSTOM_SEPARATOR_PREFIX
+import calculator.Constants.CUSTOM_SEPARATOR_SUFFIX
+import calculator.Constants.MESSAGE_FOR_GUIDE_CALCULATE
+import calculator.Constants.MESSAGE_INPUT_EMPTY
+import calculator.Constants.MESSAGE_INVALID_INPUT
+import calculator.Constants.SEPARATOR_HEADER_LENGTH
 import camp.nextstep.edu.missionutils.Console.close
 import camp.nextstep.edu.missionutils.Console.readLine
 
