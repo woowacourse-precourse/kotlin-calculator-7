@@ -3,12 +3,14 @@ package calculator
 import camp.nextstep.edu.missionutils.Console
 
 fun main() {
-    val userInputString = userInputString()
-    println(findCustomDelimiter(userInputString))
-//    val splitList = splitString(userInputString)
-//    val sum = sumSplitList(splitList)
-//    println(sum)
+    calculate()
+}
 
+fun calculate() {
+    val userInputString = userInputString()
+    val splitList = splitString(userInputString)
+    val sum = sumSplitList(splitList)
+    println(sum)
 }
 
 fun userInputString():String {
@@ -17,10 +19,15 @@ fun userInputString():String {
 }
 
 fun splitString(userInputString:String):List<Int> {
-
-    val basicSplitList = userInputString.split(",",":").map{it.toInt()}
-    return basicSplitList
-
+    if(userInputString.startsWith("//")){
+        val customDelimiter = findCustomDelimiter(userInputString)
+        val realUserInputString = realUserInputString(userInputString)
+        val customSplitList = realUserInputString.split(customDelimiter).map{it.toInt()}
+        return customSplitList
+    } else {
+        val basicSplitList = userInputString.split(",",":").map{it.toInt()}
+        return basicSplitList
+    }
 }
 
 fun sumSplitList(splitList:List<Int>):Int {
@@ -32,4 +39,9 @@ fun findCustomDelimiter(userInputString:String):String {
     val start = userInputString.indexOf("//")
     val end = userInputString.indexOf("\\n")
     return userInputString.substring(start+2,end)
+}
+
+fun realUserInputString(userInputString:String):String {
+    val end = userInputString.indexOf("\\n")
+    return userInputString.substring(end+2)
 }
