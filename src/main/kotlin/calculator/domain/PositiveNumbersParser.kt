@@ -21,7 +21,7 @@ class PositiveNumbersParser {
     }
 
     private fun getCustomDelimiters(userInput: String): CustomDelimitersResult {
-        val customDelimitersEndIndex = userInput.indexOf(CUSTOM_DELIMITERS_END).also { require(it != -1) }
+        val customDelimitersEndIndex = userInput.indexOf(CUSTOM_DELIMITERS_END).also { require(it.isFound()) }
 
         val customDelimiters =
             userInput.substring(CUSTOM_DELIMITERS_START.length, customDelimitersEndIndex).toCharArray()
@@ -31,6 +31,8 @@ class PositiveNumbersParser {
             customDelimitersEndIndex = customDelimitersEndIndex
         )
     }
+
+    private fun Int.isFound(): Boolean = this != -1
 
     companion object {
         private val DEFAULT_DELIMITERS = charArrayOf(',', ':')
