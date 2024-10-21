@@ -1,5 +1,7 @@
 package calculator
 
+import calculator.Constant.CUSTOM_DELIMITER_WRONG_INPUT
+
 object DelimiterExtractor {
 
     /**
@@ -13,11 +15,12 @@ object DelimiterExtractor {
             val customDelimiter = matchResult.groupValues[1]
             val numbersString = matchResult.groupValues[2]
             Pair(listOf(customDelimiter), numbersString)
+        } else if (input.startsWith("//")) {
+            throw IllegalArgumentException(CUSTOM_DELIMITER_WRONG_INPUT)
         } else {
-            val defaultDelimiters = listOf(Constant.DEFAULT_DELIMITER_COMMA, Constant.DEFAULT_DELIMITER_COLON)
+            val defaultDelimiters = listOf(",", ":")
             Pair(defaultDelimiters, input)
         }
     }
-
 
 }

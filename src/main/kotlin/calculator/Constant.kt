@@ -8,8 +8,7 @@ object Constant {
     const val OUTPUT_PROMPT = "결과 : "
 
     private const val INVALID_INPUT_MESSAGE = "잘못된 입력입니다."
-    const val CUSTOM_DELIMITER_NEWLINE_MISSING = "$INVALID_INPUT_MESSAGE 커스텀 구분자 다음에 줄 바꿈이 필요합니다."
-    const val CUSTOM_DELIMITER_EMPTY = "$INVALID_INPUT_MESSAGE 커스텀 구분자가 비어 있습니다."
+    const val CUSTOM_DELIMITER_WRONG_INPUT = "$INVALID_INPUT_MESSAGE 잘못된 커스텀 구분자 형식입니다."
 
     const val NO_NUMBERS_INPUT = "$INVALID_INPUT_MESSAGE 입력되지 않았습니다."
     const val EMPTY_TOKEN = "$INVALID_INPUT_MESSAGE 빈 값은 숫자로 변환할 수 없습니다."
