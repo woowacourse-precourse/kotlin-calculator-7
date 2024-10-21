@@ -28,6 +28,9 @@ fun extractNumber(input: String): List<String> {
 fun makeCustomStandard(input: String) {
     val startIndex = input.indexOf("//")
     val endIndex = input.indexOf("\\n")
+    if (endIndex == -1) {
+        throw IllegalArgumentException("wrong input")
+    }
     val customStandard = input.substring(startIndex, endIndex)
     standard.add(customStandard)
 }
