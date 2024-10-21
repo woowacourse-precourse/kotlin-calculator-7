@@ -5,6 +5,10 @@ fun main() {
     // 입력을 받는 부분
     println("덧셈할 문자열을 입력해 주세요.")
     val input = readLine() ?: throw IllegalArgumentException("문자열은 구분자와 양수로만 이루어져야 합니다.")
+
+    val result = calculateString(input)
+    println("덧셈 결과: $result")
+
 }
 
 fun calculateString(input: String): Int {
@@ -25,7 +29,7 @@ fun calculateString(input: String): Int {
 
     val numbers = split(numbersPart, delimiters)
     val intNumbers = numbers.map { it.toIntOrNull() ?: throw IllegalArgumentException("입력 형식에 맞지 않습니다.: $it") }
-    
+
     return intNumbers.sum()
 }
 
