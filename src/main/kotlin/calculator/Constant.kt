@@ -1,9 +1,6 @@
 package calculator
 
 object Constant {
-    // 커스텀 구분자
-    const val CUSTOM_DELIMITER_PREFIX = "//"
-    const val CUSTOM_DELIMITER_SUFFIX = "\n"
     const val DEFAULT_DELIMITER_COMMA = ","
     const val DEFAULT_DELIMITER_COLON = ":"
 
