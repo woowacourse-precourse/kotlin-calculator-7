@@ -48,4 +48,12 @@ class NumberTokenizerTest {
             numberTokenizer.tokenize("//;\\n1;23,a43", delimiter)
         }
     }
+
+    @Test
+    fun `커스텀 구분자 형식이 맞지 않을 경우 예외 처리 테스트`() {
+        val delimiter = defaultDelimiter + listOf(";")
+        assertThrows<IllegalArgumentException> {
+            numberTokenizer.tokenize("/;\\n1;23,a43", delimiter)
+        }
+    }
 }
