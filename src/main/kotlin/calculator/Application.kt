@@ -16,5 +16,8 @@ fun add(input: String?): Int {
     if (input.isNullOrEmpty()) {
         return 0
     }
-    return -1  // 나머지 기능은 이후에 구현
+
+    val delimiters = arrayOf(",", ":")
+    val tokens = input.split(*delimiters)
+    return tokens.sumOf { it.toInt() }
 }
