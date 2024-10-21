@@ -8,7 +8,7 @@ import calculator.constants.Constants.DOUBLE_SLASH
 class Calculator {
     private val errorCheck = ErrorCheck()
 
-    fun defaultCal(inputValue: String): Int {
+    fun defaultCal(inputValue: String): Int {   //기본 구분자일 때 계산
         val inputValueList = inputValue.split(COMMA, COLON)
 
         if (errorCheck.negativeNumberCheck(inputValueList) ||
@@ -20,7 +20,7 @@ class Calculator {
         return total
     }
 
-    fun customCal(inputValue: String): Int {
+    fun customCal(inputValue: String): Int {    //커스텀 구분자일 때 계산
         val startIndex = inputValue.indexOf(DOUBLE_SLASH) + 2
         val endIndex = inputValue.indexOf(DOUBLE_BACKSLASH_N)
         val customDivider = inputValue.substring(startIndex, endIndex)
