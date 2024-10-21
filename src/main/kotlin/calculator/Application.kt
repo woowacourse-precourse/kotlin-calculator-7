@@ -12,6 +12,8 @@ fun main() {
         makeCustomDelimiter(input)
     }
 
+    calculateSum(extractNumber(input))
+
     println("결과 : $sum")
 }
 
