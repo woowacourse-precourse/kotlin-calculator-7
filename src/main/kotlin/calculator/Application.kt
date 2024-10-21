@@ -31,6 +31,14 @@ fun parseNumber(txt: String): Int {
     val num = Integer.parseInt(txt)
     return num
 }
+fun calculate(text: List<String>): Int {
+    var result = 0;
+    for (txt in text) {
+        result += parseNumber(txt)
+    }
+    return result
+}
+
 fun main() {
     // TODO: 프로그램 구현
 }
