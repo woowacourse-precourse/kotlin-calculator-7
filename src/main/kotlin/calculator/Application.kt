@@ -3,7 +3,6 @@ package calculator
 import camp.nextstep.edu.missionutils.Console.readLine
 
 val delimiter = mutableListOf(",", ":")
-var sum = 0
 
 fun main() {
     val input = getInput()
@@ -12,9 +11,7 @@ fun main() {
         makeCustomDelimiter(input)
     }
 
-    sum = calculateSum(extractNumber(input))
-
-    println("결과 : $sum")
+    println("결과 : ${calculateSum(extractNumber(input))}")
 }
 
 fun getInput(): String {
