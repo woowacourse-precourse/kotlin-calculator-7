@@ -8,4 +8,6 @@ object Constants {
     const val DEFAULT_SEPARATOR_COMMA = ","
     const val SEPARATOR_HEADER_LENGTH = 5
     const val CUSTOM_SEPARATOR_POS = 2
+    const val CUSTOM_SEPARATOR_PREFIX = "//"
+    const val CUSTOM_SEPARATOR_SUFFIX = "\\n"
 }
