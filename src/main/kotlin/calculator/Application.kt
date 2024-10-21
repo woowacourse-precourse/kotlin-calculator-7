@@ -4,13 +4,16 @@ fun main() {
 
     //readLine() 표준 입력에서 한 줄을 읽어서 문자열로 반환해주는 표준 코틀린 함수
     //?: <엘비스 연산자> 왼쪽 표현식이 null이 아니면 그 값을 반환하고, null이면 오른쪽의 값을 반환합니다.
+
+    val start = "덧셈할 문자열을 입력해 주세요."
+    println(start)
+
     val input = readLine() ?: ""
     try {
         val result = add(input)
-        println("The sum is: $result")
+        println("결과 : $result")
     }catch (e: IllegalArgumentException){
-        println(e.message)
-        System.exit(1)//예외 발생 시 애플리케이션 종료
+        throw IllegalArgumentException("Invalid input")
     }
 }
 
@@ -23,7 +26,7 @@ fun add(input: String): Int {
         // 커스텀 구분자를 처리하는 로직
         val customDelimiterEndIndex = input.indexOf("\\n")
         if (customDelimiterEndIndex == -1) {
-            throw IllegalArgumentException("Invalid input: missing newline after custom delimiter")
+            throw IllegalArgumentException("Invalid input")
         }
         val customDelimiter = input.substring(2, customDelimiterEndIndex) // 커스텀 구분자를 추출
         customDelimiter to input.substring(customDelimiterEndIndex+2) // 숫자 부분을 추출
