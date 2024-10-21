@@ -4,19 +4,13 @@ import java.math.BigDecimal
 import camp.nextstep.edu.missionutils.Console
 
 fun main() {
-    while(true) {
-        print("덧셈할 문자열 입력: ")
-        val userInput = Console.readLine()
 
-        if(userInput=="end")break
+    print("덧셈할 문자열 입력: ")
+    val userInput = Console.readLine()
 
-        try {
-            val result = add(userInput)
-            println("결과 : $result")
-        } catch (e: IllegalArgumentException) {
-            println("오류: ${e.message}")
-        }
-    }
+    val result = add(userInput)
+    println("결과 : $result")
+
 }
 
 //구분자로 문자열 파싱하는 함수
@@ -39,7 +33,7 @@ fun parseNumbers(input: String): List<BigDecimal> {
 private fun delimiterExtraction(input: String): Pair<String, String> {
     return if (input.startsWith("//")) { // //로 시작할 때 커스텀 구분자로 분류시작
         val delimiterEndIndex = findFirstDigitIndex(input)
-        val delimiter = input.substring(2, delimiterEndIndex-2)
+        val delimiter = input.substring(2, delimiterEndIndex)
         // 다수 커스텀 구분자들을 받아서 등록
         val delimiters = delimiter.toList().map { Regex.escape(it.toString()) }.joinToString("|") + "|,|:"
         val numbersString = input.substring(delimiterEndIndex) // 커스텀 구분자 선언부 제외 문자열 분류
