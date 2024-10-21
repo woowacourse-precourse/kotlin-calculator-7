@@ -15,8 +15,10 @@ class Controller {
 
         if (result >= 0)
             outputView.resultPrompt(result)
-        else
+        else {
             outputView.exitPrompt()
+            throw IllegalArgumentException()
+        }
     }
 
     private fun calculate(input: String): Int {
