@@ -30,8 +30,8 @@ class Calculator {
     private fun operateCalculatorWithCustomSeparatorLogic(inputString: String) {
         val separatedInputFromSeparator: List<String> =
             inputString.drop(Separator.CUSTOM_SEPARATOR_DECLARE_LENGTH).split(
-                separator.colonSeparator,
-                separator.commaSeparator,
+                Separator.COLON_SEPARATOR,
+                Separator.COMMA_SEPARATOR,
                 separator.customSeparator ?: "",
             )
 
@@ -45,7 +45,7 @@ class Calculator {
 
     private fun operateCalculatorWithDefaultSeparatorLogic(inputString: String) {
         val separatedInputFromSeparator: List<String> =
-            inputString.split(separator.colonSeparator, separator.commaSeparator)
+            inputString.split(Separator.COLON_SEPARATOR, Separator.COMMA_SEPARATOR)
 
         val separatedInputNumber: List<Int> = separatedInputFromSeparator
             .filter { it.matches(DIGIT_REGEX) }

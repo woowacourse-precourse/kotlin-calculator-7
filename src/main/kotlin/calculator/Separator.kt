@@ -1,8 +1,6 @@
 package calculator
 
 class Separator {
-    val colonSeparator: String = ":"
-    val commaSeparator: String = ","
     var customSeparator: String? = null
         private set
 
@@ -37,6 +35,9 @@ class Separator {
     }
 
     companion object {
+        const val COLON_SEPARATOR = ":"
+        const val COMMA_SEPARATOR = ","
+
         const val CUSTOM_SEPARATOR_DECLARE_LENGTH: Int = 5
         private const val CUSTOM_SEPARATOR_DECLARE_INDEX_FIRST = 0
         private const val CUSTOM_SEPARATOR_DECLARE_INDEX_SECOND = 1
