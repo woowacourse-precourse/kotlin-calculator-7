@@ -27,3 +27,7 @@ fun calculateSum(input: String): Int {
     val numbers = extractNumbers(input)
     return numbers.sum()
 }
+// 숫자추출
+fun extractNumbers(input: String): List<Int> {
+    val numberList: List<String>
+}
