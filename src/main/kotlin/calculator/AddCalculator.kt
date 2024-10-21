@@ -11,8 +11,18 @@ class AddCalculator {
     }
 
     fun getDelimiter(input: String): String {
-        TODO()
+        if (input.startsWith("//")) {
+            if (input.contains("\n")) {
+                return input.substring(2, input.indexOf("\n"))
+            }else{
+                throw IllegalArgumentException("커스텀 구분자 입력이 잘못되었습니다.")
+            }
+        }else{
+            return ",|:"
+        }
     }
+
+
     fun splitNumbers(input:String, delimiter:String):List<Int>{
         TODO()
     }
