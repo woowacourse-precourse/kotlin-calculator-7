@@ -21,7 +21,7 @@ class StringCalculator {
 
         val (delimiter, numbers) = customDelimiter(input)
         val tokens = numbers.split(delimiter.toRegex())
-        return tokens.sumOf { it.toInt() }
+        return tokens.map { it.toInt() }.filter { it >= 0 }.sum()
     }
 
     fun isValid(input: String): Boolean {
