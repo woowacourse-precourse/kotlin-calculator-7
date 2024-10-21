@@ -33,12 +33,17 @@ class Calculator(
             return
         }
 
-        val stringNumbers: List<String> = expression.split(*delimiters.toTypedArray())
-        for (number in stringNumbers) {
-            val n = number.toInt()
-            validatePositiveNumber(n)
+        val parsedExpression: List<String> = expression.split(*delimiters.toTypedArray())
+        for (number in parsedExpression) {
+            val n = number.toIntOrNull()
+            validateNumber(n)
+            validatePositiveNumber(n!!)
             numbers.add(n)
         }
+    }
+
+    private fun validateNumber(number: Int?) {
+        if (number == null) throw IllegalArgumentException()
     }
 
     private fun validatePositiveNumber(number: Int) {
