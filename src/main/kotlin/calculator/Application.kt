@@ -9,7 +9,7 @@ fun main() {
 
 }
 
-fun calculate(input: String?): Int {
+fun calculate(input: String?): Long {
     if (input.isNullOrEmpty()) return 0
     var calc = input
     val delimiters = mutableListOf(",", ":")
@@ -25,9 +25,9 @@ fun calculate(input: String?): Int {
     return numbers.sum()
 }
 
-fun isProperNumber(it: String): Int {
+fun isProperNumber(it: String): Long {
     try {
-        val number = it.toInt()
+        val number = it.toLong()
         if (number < 0) throw IllegalArgumentException("Input values must be positive numbers only.")
         return number
     } catch(e: NumberFormatException) {
