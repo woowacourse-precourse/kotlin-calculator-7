@@ -6,11 +6,18 @@ fun main() {
     println("덧셈할 문자열을 입력해 주세요.")
     val input = readLine() ?: ""
     try {
+        validateLastCharacter(input)
         val result = add(input)
         println("결과 : $result")
     } catch (e: IllegalArgumentException) {
         println(e.message)
         throw e
+    }
+}
+
+fun validateLastCharacter(input: String) {
+    if (input.isNotEmpty() && !input.last().isDigit()) {
+        throw IllegalArgumentException("입력된 문자열의 마지막 글자는 숫자여야 합니다.")
     }
 }
 
