@@ -67,14 +67,14 @@ class ApplicationTest : NsTest() {
     @Test
     fun `예외 테스트`() {
         assertSimpleTest {
-            assertThrows<IllegalArgumentException> { calculate("//;\n1;2,3") }
-            assertThrows<IllegalArgumentException> { calculate("//,\n1,2:3") }
+            assertThrows<IllegalArgumentException> { calculate("//;\\n1;2,3") }
+            assertThrows<IllegalArgumentException> { calculate("//,\\n1,2:3") }
             assertThrows<IllegalArgumentException> { calculate("2:3;4") }
             assertThrows<IllegalArgumentException> { calculate("a:50") }
             assertThrows<IllegalArgumentException> { calculate("a,b,c") }
             assertThrows<IllegalArgumentException> { calculate("a,b,c:100") }
-            assertThrows<IllegalArgumentException> { calculate("//,\n1,2,c") }
-            assertThrows<IllegalArgumentException> { calculate("//,\n-1,2,3") }
+            assertThrows<IllegalArgumentException> { calculate("//,\\n1,2,c") }
+            assertThrows<IllegalArgumentException> { calculate("//,\\n-1,2,3") }
         }
     }
 
