@@ -5,16 +5,22 @@ class Controller(private val view: View) {
         val delimiters = mutableListOf(",", ":")
         val customDelimiterPattern = Regex("//(.)\\n*")
         val matchResult = customDelimiterPattern.find(input)
-        val customDelimiter = matchResult?.groupValues?.get(1) // 구분자만 추출
-        if (customDelimiter != null) {
-            delimiters.add(customDelimiter) // 구분자 리스트에 추가
+        var contentToSplit = input
+
+        if(matchResult != null){
+            val customDelimiter = matchResult?.groupValues?.get(1)
+            if (customDelimiter != null) {
+                delimiters.add(customDelimiter)
+            }
+            contentToSplit = input.substring(matchResult.range.last+3)
         }
 
-        println("정규식: $customDelimiterPattern")
-        println("추출된 구분자: $customDelimiter")
+        val delimiterPattern = delimiters.joinToString("|")
+        val regex = Regex(delimiterPattern)
+        val foundNumByDelimiter = contentToSplit.split(regex).toList()
+        val numbers = foundNumByDelimiter.map { it.toInt() }
         println("구분자 리스트: $delimiters")
-        val numbers = listOf(-1)
-
+        println("숫자 리스트: $numbers")
         return Data(numbers, delimiters)
     }
 
