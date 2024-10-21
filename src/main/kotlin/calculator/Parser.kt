@@ -16,7 +16,7 @@ object Parser {
         return value.substringAfter("\\n")
     }
 
-    fun parseToIntList(value: String): List<Double> {
+    fun parseToNumberList(value: String): List<Double> {
         val valueAfterExtractCustomDelimiters = extractCustomDelimitersIfExist(value)
         val splitList = valueAfterExtractCustomDelimiters.split(*delimiters.toTypedArray())
         runCatching { splitList.map { element -> element.toDouble() } }.onSuccess { return it }
