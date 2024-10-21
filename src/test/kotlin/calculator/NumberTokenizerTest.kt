@@ -10,21 +10,7 @@ class NumberTokenizerTest {
     private val defaultDelimiter: List<String> = listOf(",", ":")
 
     @Test
-    fun `문자열을 쉼표를 통해 나누기`() {
-        val result = numberTokenizer.tokenize("1,3,56.5,7", defaultDelimiter)
-        val expect = listOf("1", "3", "56.5", "7").map { it.toBigDecimal() }
-        assertEquals(expect, result)
-    }
-
-    @Test
-    fun `문자열을 콜론을 통해 나누기`() {
-        val result = numberTokenizer.tokenize("1:3:56.5:7", defaultDelimiter)
-        val expect = listOf("1", "3", "56.5", "7").map { it.toBigDecimal() }
-        assertEquals(expect, result)
-    }
-
-    @Test
-    fun `문자열을 콜론과 쉼표를 통해 나누기`() {
+    fun `문자열을 기본 구분자를 통해 나누기`() {
         val result =
             numberTokenizer.tokenize(
                 "1,3:531236.512873921873298472394827928719242591283792187413984731984713:7,82",
