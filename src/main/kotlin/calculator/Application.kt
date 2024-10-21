@@ -10,13 +10,13 @@ fun main() {
 fun calculate(string: String): Int {
     if (string == "") return 0
     
-    val strings = splitForCalculate(string)
+    val strings = split(string)
     val numbers = changeToInt(strings)
 
     return numbers.sum()
 }
 
-fun splitForCalculate(string: String): List<String> {
+fun split(string: String): List<String> {
     if (string.length > 5 &&
         string.startsWith("//") &&
         string.slice(3 until 5) == "\\n") {
