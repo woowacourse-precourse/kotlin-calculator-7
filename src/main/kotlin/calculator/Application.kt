@@ -47,11 +47,10 @@ private fun getSeparatedValues(input: String): List<String> {
 }
 
 private fun getSeparatorState(input: String): SeparatorState {
-    return if (input.startsWith(CUSTOM_SEPARATOR_PREFIX) && input.contains(CUSTOM_SEPARATOR_SUFFIX)) {
-        SeparatorState.CustomSeparator(input[CUSTOM_SEPARATOR_POS])
-    } else {
-        SeparatorState.DefaultSeparator
+    if (input.startsWith(CUSTOM_SEPARATOR_PREFIX) and input.contains(CUSTOM_SEPARATOR_SUFFIX)) {
+        return SeparatorState.CustomSeparator(input[CUSTOM_SEPARATOR_POS])
     }
+    return SeparatorState.DefaultSeparator
 }
 
 private fun checkIsValidValue(numbers: List<String>) {
