@@ -7,15 +7,14 @@ class SeparatorHandler(private val input: String) {
     }
 
     private fun getCustomSeparator(): String {
-        val customSeparatorEndIndex = input.indexOf("\\n")
-        return input.substring(2, customSeparatorEndIndex)
+        val customSeparatorEndIndex = input.indexOf(CUSTOM_SEPARATOR_END_CHAR)
+        return input.substring(CUSTOM_SEPARATOR_START_INDEX, customSeparatorEndIndex)
     }
 
     private fun splitWithCustomSeparator(): List<String> {
         val customSeparator = getCustomSeparator()
-        val numberStartIndex = input.indexOf("\\n") + 2
-        val numbers = input.substring(numberStartIndex)
-        return numbers.split(customSeparator)
+        val numberStartIndex = input.indexOf(CUSTOM_SEPARATOR_END_CHAR) + 2
+        return input.substring(numberStartIndex).split(customSeparator)
     }
 
     private fun splitWithDefaultSeparator(): List<String> {
