@@ -2,6 +2,18 @@ package calculator
 
 import camp.nextstep.edu.missionutils.Console.readLine
 
+fun main() {
+    println("덧셈할 문자열을 입력해 주세요.")
+    val input = readLine() ?: ""
+    try {
+        val result = add(input)
+        println("결과 : $result")
+    } catch (e: IllegalArgumentException) {
+        println(e.message)
+        throw e
+    }
+}
+
 fun add(input: String): Int {
     if (input.isEmpty()) return 0
 
@@ -9,7 +21,7 @@ fun add(input: String): Int {
     return calculateSum(numbers, delimiter)
 }
 
-fun parseInput(input: String): Pair<String, String> =
+private fun parseInput(input: String): Pair<String, String> =
     if (input.startsWith("//")) {
         val parts = input.split("\\n", limit = 2)
         if (parts.size != 2 || parts[0].length < 3) {
@@ -21,7 +33,7 @@ fun parseInput(input: String): Pair<String, String> =
         ",|:" to input
     }
 
-fun calculateSum(numbers: String, delimiter: String): Int {
+private fun calculateSum(numbers: String, delimiter: String): Int {
     if (numbers.isEmpty()) return 0
 
     val tokens = numbers.split(delimiter.toRegex())
