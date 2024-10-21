@@ -21,12 +21,12 @@ fun add(input: String): Int {
 
     val (delimiter, numbers) = if (input.startsWith("//")){
         // 커스텀 구분자를 처리하는 로직
-        val customDelimiterEndIndex = input.indexOf("\n")
+        val customDelimiterEndIndex = input.indexOf("\\n")
         if (customDelimiterEndIndex == -1) {
             throw IllegalArgumentException("Invalid input: missing newline after custom delimiter")
         }
         val customDelimiter = input.substring(2, customDelimiterEndIndex) // 커스텀 구분자를 추출
-        customDelimiter to input.substring(customDelimiterEndIndex+1) // 숫자 부분을 추출
+        customDelimiter to input.substring(customDelimiterEndIndex+2) // 숫자 부분을 추출
     } else {
         // 기본 구분자(쉼표 또는 콜론)를 사용하는 경우
         "[,|:]".toRegex() to input
