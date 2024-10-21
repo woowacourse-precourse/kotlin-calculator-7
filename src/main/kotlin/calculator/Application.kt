@@ -38,10 +38,10 @@ fun parseInput(input: String): Pair<String, String> {
 
 fun splitNumbers(input: String, delimiter: String): List<String> {
     val result = if(delimiter.equals(",|:")) {
-        input.split(Regex(delimiter))
+        input.split(",",":")
     }
     else{
-        input.split(delimiter)
+        input.split(delimiter,",",":")
     }
 
     return result
