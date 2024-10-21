@@ -31,6 +31,7 @@ fun calculateSum(input: String): Int {
 fun extractNumbers(input: String): List<Int> {
     val numberList: List<String>
 
+
     // 커스텀 구분자 사용 여부
     fun hasCustomDelimiter(input: String): Boolean {
         return input.startsWith("//")
@@ -50,3 +51,21 @@ fun extractNumbers(input: String): List<Int> {
         }
         throw IllegalArgumentException("올바른 커스텀 구분자가 없습니다.")
 }
+    // 숫자의 유효성을 검사&반환
+    fun validateAndConvertNumbers(numbers: List<String>): List<Int> {
+        return numbers.map { numberString ->
+            if (numberString.isEmpty()) {
+                throw IllegalArgumentException("잘못된 입력값임")
+            }
+
+            if (!numberString.all { char -> char.isDigit() }) {
+                throw IllegalArgumentException("유효하지 않은 값 포함")
+            }
+
+            val number = numberString.toIntOrNull()
+            if (number == null || number < 0) {
+                throw IllegalArgumentException("음수는 허용되지 않음")
+            }
+            number
+        }
+    }
