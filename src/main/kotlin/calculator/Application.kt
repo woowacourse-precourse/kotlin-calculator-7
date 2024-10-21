@@ -30,7 +30,7 @@ fun makeCustomDelimiter(input: String) {
     if (endIndex == -1) {
         throw IllegalArgumentException("wrong input")
     }
-    val customDelimiter = input.substring(startIndex, endIndex)
+    val customDelimiter = input.substring(startIndex+2, endIndex)
     delimiter.add(customDelimiter)
 }
 
