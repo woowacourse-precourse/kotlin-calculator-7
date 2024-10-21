@@ -17,8 +17,10 @@ fun calculate(string: String): Int {
 }
 
 fun splitForCalculate(string: String): List<String> {
-    if (Regex("//.\\n(.+)").matches(string)) {
-        return string.substring(4).split(string[2])
+    if (string.length > 5 &&
+        string.startsWith("//") &&
+        string.slice(3 until 5) == "\\n") {
+        return string.substring(5).split(string[2])
     }
 
     return string.split(",", ":")
