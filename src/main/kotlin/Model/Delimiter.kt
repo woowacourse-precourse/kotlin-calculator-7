@@ -5,9 +5,23 @@ class Delimiter(private val input: String) {
     fun numberSplit(): List<Int> {
         val delimiter = getDelimiter()
 
-        val numbers = input.substring(specified).split(*delimiter).map { it.toInt() }
+        if (checkInputValidation(input, delimiter)) {
+            val numbers = input.substring(specified).split(*delimiter).map { it.toInt() }
 
-        return numbers
+            return numbers
+        } else {
+            return listOf()
+        }
+    }
+
+    private fun checkInputValidation(input: String, delimiter: Array<String>): Boolean {
+        try {
+            Exception().isInputValid(input, delimiter)
+            return true
+        } catch (e: IllegalArgumentException) {
+            println(e.message)
+            return false
+        }
     }
 
     private fun getDelimiter(): Array<String> {

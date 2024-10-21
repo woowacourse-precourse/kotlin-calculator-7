@@ -13,12 +13,19 @@ class Controller {
 
         val result = calculate(input)
 
-        outputView.resultPrompt(result)
+        if (result >= 0)
+            outputView.resultPrompt(result)
+        else
+            outputView.exitPrompt()
     }
 
     private fun calculate(input: String): Int {
         val numbers = Delimiter(input).numberSplit()
 
-        return Calculate().getSum(numbers)
+        return if (numbers.isEmpty()) {
+            -1
+        } else {
+            Calculate().getSum(numbers)
+        }
     }
 }
