@@ -1,8 +1,5 @@
 package calculator
 
-import org.assertj.core.internal.Numbers
-import java.text.NumberFormat
-
 class Controller(private val view: View) {
     private fun parseInput(input: String): Data {
         val delimiters = mutableListOf(",", ":")
@@ -13,15 +10,34 @@ class Controller(private val view: View) {
         if (matchResult != null) {
             val customDelimiter = matchResult.groupValues[1]
             delimiters.add(customDelimiter)
-            contentToSplit = input.substring(matchResult.range.last + 3)
+            contentToSplit = input.substring(0, matchResult.range.first) + input.substring(matchResult.range.last + 3)
         }
 
         val delimiterPattern = delimiters.joinToString("|")
         val regex = Regex(delimiterPattern)
         val foundNumByDelimiter = contentToSplit.split(regex).toList()
 
+        runExceptionForString(foundNumByDelimiter)
+        val numbers = foundNumByDelimiter.map { it.toInt() }
+        runExceptionForInt(numbers)
 
-        val numbers = foundNumByDelimiter.map {
+        return Data(numbers, delimiters)
+    }
+
+    private fun add(data: Data): Int {
+        return data.numbers.sum()
+    }
+
+    private fun runExceptionForInt(numbers: List<Int>) {
+        numbers.forEach { num ->
+            if (num < 0) {
+                throw IllegalArgumentException("음수는 허용되지 않습니다: $num")
+            }
+        }
+    }
+
+    private fun runExceptionForString(numbers: List<String>) {
+        numbers.map {
             try {
                 it.toInt()
             } catch (e: NumberFormatException) {
@@ -33,27 +49,10 @@ class Controller(private val view: View) {
                 )
             }
         }
-
-        runException(numbers)
-
-        return Data(numbers, delimiters)
-    }
-
-    private fun add(data: Data): Int {
-        return data.numbers.sum()
-    }
-
-    fun runException(numbers: List<Int>) {
-        numbers.forEach { num ->
-            if(num <0){
-                throw IllegalArgumentException("음수는 허용되지 않습니다: $num")
-            }
-        }
     }
 
     fun run() {
         val input = view.getInput()
-        println("$input 입력받았습니다.")
         val data = parseInput(input)
         val result = add(data)
         view.showResult(result)
