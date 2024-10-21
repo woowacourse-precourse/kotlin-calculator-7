@@ -6,7 +6,7 @@ class Calculator {
     var result: Int = 0
 
     // calculator 초기화
-    private fun init() {
+    private fun setInput() {
         println("덧셈할 문자열을 입력해주세요.")
         input = Console.readLine()
     }
