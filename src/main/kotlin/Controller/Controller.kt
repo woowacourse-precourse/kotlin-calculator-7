@@ -20,12 +20,16 @@ class Controller {
     }
 
     private fun calculate(input: String): Int {
-        val numbers = Delimiter(input).numberSplit()
+        if (input.isEmpty())
+            return 0
+        else {
+            val numbers = Delimiter(input).numberSplit()
 
-        return if (numbers.isEmpty()) {
-            -1
-        } else {
-            Calculate().getSum(numbers)
+            return if (numbers.isEmpty()) {
+                -1
+            } else {
+                Calculate().getSum(numbers)
+            }
         }
     }
 }
