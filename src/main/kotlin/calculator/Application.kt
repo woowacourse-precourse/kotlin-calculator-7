@@ -5,6 +5,13 @@ fun main() {
     var sum = 0
     val userInput = readlnOrNull()
     if (userInput != null) {
-        userInputList = userInput.split(",", ":")
+        if (userInput.startsWith("//")) {
+            val separatorList = userInput.split("\\n")
+            val indicator = separatorList[0].substring(2)
+            userInputList = separatorList[1].split(indicator)
+        }
+        else {
+            userInputList = userInput.split(",", ":")
+        }
     }
 }
