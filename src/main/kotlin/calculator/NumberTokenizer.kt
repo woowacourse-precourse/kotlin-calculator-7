@@ -4,9 +4,6 @@ import calculator.Constants.CUSTOM_DELIMITER_PREFIX
 import calculator.Constants.CUSTOM_DELIMITER_SUFFIX
 import java.math.BigDecimal
 
-private const val DELIMITER_UNIFIED = " "
-private const val NUMBER_MINIMUM_LIMIT = 0
-
 class NumberTokenizer {
 
     fun tokenize(input: String, delimiters: List<String>): List<BigDecimal> {
@@ -36,5 +33,10 @@ class NumberTokenizer {
             acc.replace(CUSTOM_DELIMITER_PREFIX + removeDelimiters + CUSTOM_DELIMITER_SUFFIX, "")
         }
         return filteringInput
+    }
+
+    companion object {
+        private const val DELIMITER_UNIFIED = " "
+        private const val NUMBER_MINIMUM_LIMIT = 0
     }
 }

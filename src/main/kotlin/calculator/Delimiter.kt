@@ -3,10 +3,6 @@ package calculator
 import calculator.Constants.CUSTOM_DELIMITER_PREFIX
 import calculator.Constants.CUSTOM_DELIMITER_SUFFIX
 
-private const val DELIMITER_COMMA = ","
-private const val DELIMITER_COLON = ":"
-private const val INDEX_NOT_FOUND = -1
-
 class Delimiter {
 
     private val delimiters = listOf(DELIMITER_COMMA, DELIMITER_COLON)
@@ -27,4 +23,10 @@ class Delimiter {
     private fun extractDelimiter(part: String, prefixIndex: Int) = part.substring(prefixIndex).removePrefix(
         CUSTOM_DELIMITER_PREFIX
     )
+
+    companion object {
+        private const val DELIMITER_COMMA = ","
+        private const val DELIMITER_COLON = ":"
+        private const val INDEX_NOT_FOUND = -1
+    }
 }
