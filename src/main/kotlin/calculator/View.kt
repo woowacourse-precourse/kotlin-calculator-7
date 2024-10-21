@@ -9,7 +9,7 @@ class View() {
         println("더할 숫자를 구분자로 구분하여 입력해주세요.")
         println("디폴트 구분자 : ',', ':'")
         println("다른 구분자를 사용하려면 \"//*\\n\"과 같이 구분자를 지정하고 사용해주세요.")
-        println("입력 : ")
+        print("입력 : ")
         return readlnOrNull() ?: ""
     }
 
