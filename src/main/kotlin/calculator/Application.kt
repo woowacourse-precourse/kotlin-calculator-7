@@ -20,6 +20,8 @@ fun main() {
 private fun defaultSeparator(
     input: String,
 ) {
+    errorSeparator(input)
+
     var result = 0
     val numList = mutableListOf<String>()
 
@@ -51,6 +53,8 @@ private fun customSeparator(
     val newSeparator = input.substringAfter("//").substringBefore("\\n")
     val newInput = input.substringAfter("\\n")
 
+    errorSeparator(newInput, newSeparator)
+
     for (n in newInput.split(newSeparator)) {
         if (n.contains(":")) {
             for (s in n.split(":")) {
@@ -79,5 +83,13 @@ private fun customSeparator(
 private fun errorNotPositiveNumber(s: String) {
     if (s.toInt() < 1) {
         throw IllegalArgumentException("양수로 구성된 문자열을 입력해 주세요.")
+    }
+}
+
+private fun errorSeparator(input: String, newSeparator: String = "") {
+    val regex = "[^0-9,:$newSeparator]".toRegex()
+    val invalidChar = regex.findAll(input).map { it.value }.joinToString("")
+    if (invalidChar.isNotEmpty()) {
+        throw IllegalArgumentException("${invalidChar}는 구분자가 아닙니다.")
     }
 }
