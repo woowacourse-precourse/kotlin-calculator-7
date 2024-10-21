@@ -5,13 +5,13 @@ class DelimiterExtractor {
     fun extract(input: String): Pair<String, String> {
         return if (input.startsWith("//")) { // //로 시작할 때 커스텀 구분자로 분류시작
             val delimiterEndIndex = findFirstDigitIndex(input)
-            val delimiter = input.substring(2, delimiterEndIndex)
+            val delimiter = input.substring(2, delimiterEndIndex-2)
             // 다수 커스텀 구분자들을 받아서 등록
             val delimiters = delimiter.toList().map { Regex.escape(it.toString()) }.joinToString("|") + "|,|:"
             val numbersString = input.substring(delimiterEndIndex)
             Pair(delimiters, numbersString)
         } else {
-            Pair("[,|:]", input) // 기본 구문자 선언
+            Pair(",|:", input) // 기본 구문자 선언
         }
     }
 
