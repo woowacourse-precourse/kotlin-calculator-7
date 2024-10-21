@@ -10,7 +10,7 @@ fun checkString(input: String?): Boolean {
      */
 
     if (input == null) { // 입력값이 null인 경우 예외 발생
-        throw throw IllegalArgumentException("ERROR: IllegalArgumentException")
+        throw IllegalArgumentException("ERROR: IllegalArgumentException")
     }
 
     return if (input.any() { it.isDigit() }) { // 문자열에 숫자가 있는지 검사
@@ -48,23 +48,42 @@ fun identifyCustomDelimiter(input: String): List<String> {
     return delimiters // 구분자 목록 반환
 }
 
+// 3. 숫자 분리
+fun extractNumbers(input: String, delimiters: List<String>): List<Int> {
+    /**
+     * 문자열에서 구분자를 이용하여 숫자들을 분리하고, List(Int)로 반환하는 함수
+     *
+     * @param input 숫자를 포함한 입력 문자열
+     * @param delimiters 문자열을 분리할 구분자들의 리스트
+     * @return 입력 문자열에서 구분자를 기준으로 분리된 정수 리스트
+     */
+    val extractedNumbers = input.split(*delimiters.toTypedArray()) // 구분자 리스트를 이용하여 숫자 분리 후 리스트(String)로 변환
+        .map { it.toInt() } // 리스트 내 값들을 정수로 변환
+    return extractedNumbers
+}
+
 fun main() {
     // TODO: 프로그램 구현
     var firstCheck = false // 1. 문자열 검사 결과
     var secondCheck = false // 2. 커스텀 구분자 식별 결과
 
     // 입력값 요청
-    val input = readlnOrNull()
+    val inputValue = readlnOrNull()
 
     // 1. 문자열 검사
-    if (checkString(input)) {
+    if (checkString(inputValue)) {
         firstCheck = true
     }
 
     // 2. 커스텀 구분자 식별
     if (firstCheck) {
-        val delimiters = identifyCustomDelimiter(input!!)
+        val identifiedDelimiters = identifyCustomDelimiter(inputValue)
         secondCheck = true
+    }
+
+    // 3. 숫자 분리
+    if (secondCheck) {
+        val extractedNumbers = extractNumbers(inputValue, identifiedDelimiters)
     }
 }
 // 최종 출력의 형태: "결과 : n"
