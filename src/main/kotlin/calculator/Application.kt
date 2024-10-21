@@ -6,9 +6,6 @@ const val PROMPT_INPUT_MESSAGE = "덧셈할 문자열을 입력해 주세요."
 const val PROMPT_OUTPUT_MESSAGE = "결과 : "
 
 fun main() {
-    println(PROMPT_INPUT_MESSAGE)
-
-    val input = Console.readLine()
     val inputHandler = InputHandler()
     val input = inputHandler.readInput()
 
@@ -22,10 +19,13 @@ fun main() {
     printOutput(result)
 }
 
-fun printOutput(output: Int) = println(PROMPT_OUTPUT_MESSAGE + output)
 class InputHandler {
     fun readInput(): String {
         println(PROMPT_INPUT_MESSAGE)
         return Console.readLine()
     }
+}
+
+class OutputHandler {
+    fun printOutput(output: Int) = println(PROMPT_OUTPUT_MESSAGE + output)
 }
