@@ -17,7 +17,21 @@ fun add(input: String?): Int {
         return 0
     }
 
-    val delimiters = arrayOf(",", ":")
-    val tokens = input.split(*delimiters)
+    var numbers = input
+    var delimiters = arrayOf(",", ":")
+
+    if (input.startsWith("//")) {
+        val delimiterEnd = input.indexOf("\n")
+
+        if (delimiterEnd == -1) {
+            throw IllegalArgumentException("Invalid input format: 줄바꿈 문자가 필요합니다.")
+        }
+
+        val customDelimiter = input.substring(2, delimiterEnd)
+        delimiters += customDelimiter
+        numbers = input.substring(delimiterEnd + 1)
+    }
+
+    val tokens = numbers.split(*delimiters)
     return tokens.sumOf { it.toInt() }
 }
