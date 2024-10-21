@@ -2,8 +2,12 @@ package calculator
 
 class SeparatorHandler(private val input: String) {
 
-    private fun isExitCustomSeparator(): Boolean {
-        return input.startsWith("//") && input.contains("\\n")
+    fun getSplitNumberList(): List<String> {
+        return if (hasCustomSeparator()) {
+            splitByCustomSeparator()
+        } else {
+            splitByDefaultSeparator()
+        }
     }
 
     private fun hasCustomSeparator(): Boolean = input.startsWith(CUSTOM_SEPARATOR_START_CHAR)
