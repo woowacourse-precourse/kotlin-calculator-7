@@ -19,14 +19,26 @@ class StringCalculator {
     fun calculate(input: String): Int {
         if (input.isEmpty()) return 0
 
-        val numbers = input.split(",", ":")
-        return numbers.map { it.toInt() }.sum()
+        val (delimiter, numbers) = customDelimiter(input)
+        val tokens = numbers.split(delimiter.toRegex())
+        return tokens.sumOf { it.toInt() }
     }
 
     fun isValid(input: String): Boolean {
         if (input.isEmpty()) return true
 
-        val numbers = input.split(",", ":")
-        return numbers.all { it.toIntOrNull() != null }
+        val (delimiter, numbers) = customDelimiter(input)
+        val tokens = numbers.split(delimiter.toRegex())
+        return tokens.all { it.toIntOrNull() != null }
+    }
+
+    private fun customDelimiter(input: String): Pair<String, String> {
+        return if (input.startsWith("//")) {
+            val parts = input.split("""\n""", limit = 2)
+            val delimiter = parts[0].substring(2)
+            Pair(delimiter, parts[1])
+        } else {
+            Pair("[,:]", input)
+        }
     }
 }
