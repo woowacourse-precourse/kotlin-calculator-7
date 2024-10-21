@@ -19,7 +19,15 @@ object Parser {
     fun parseToNumberList(value: String): List<Double> {
         val valueAfterExtractCustomDelimiters = extractCustomDelimitersIfExist(value)
         val splitList = valueAfterExtractCustomDelimiters.split(*delimiters.toTypedArray())
-        runCatching { splitList.map { element -> element.toDouble() } }.onSuccess { return it }
-        throw IllegalArgumentException()
+        val numberList = runCatching { splitList.map { element -> element.toDouble() } }.getOrElse {
+            throw IllegalArgumentException()
+        }
+        if (!numberList.areAllPositive) {
+            throw IllegalArgumentException()
+        }
+        return numberList
     }
+
+    private val List<Double>.areAllPositive: Boolean
+        get() = all { it > 0 }
 }
