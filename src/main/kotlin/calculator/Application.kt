@@ -7,7 +7,7 @@ class InputExpression(val expression: String?) {
     var spliter = Seperator(expression)
 
     fun splitExpression(): List<String> {
-        if (spliter.usedCustomSeperator()){
+        if (spliter.usedCustomSeperator()) {
             spliter.seperator = ",|:|${spliter.findSeperator()!!}"
             text = expression!!.substring(5)
         }
@@ -28,6 +28,7 @@ class Seperator(val expression: String?) {
     fun usedCustomSeperator(): Boolean {
         return expression?.matches(Regex(CUSTOM_PATTERN)) ?: false
     }
+
     fun findSeperator(): String? {
         val regex = Regex(CUSTOM_PATTERN)
         val matchResult = regex.find(expression!!)
@@ -36,15 +37,16 @@ class Seperator(val expression: String?) {
 }
 
 fun parseNumber(txt: String?): Int {
-    if(txt.isNullOrEmpty()) {
+    if (txt.isNullOrEmpty()) {
         return 0
     }
     val num = Integer.parseInt(txt)
-    if(num < 0) {
+    if (num < 0) {
         throw IllegalArgumentException("[ERROR] 음수는 입력할 수 없습니다.")
     }
     return num
 }
+
 fun calculate(text: List<String>): Int {
     var result = 0;
     for (txt in text) {
@@ -54,7 +56,6 @@ fun calculate(text: List<String>): Int {
 }
 
 fun main() {
-    // TODO: 프로그램 구현
     println("덧셈할 문자열을 입력해 주세요.")
     val inputExpression = InputExpression(readLine())
     println("결과 : ${calculate(inputExpression.splitExpression())}")

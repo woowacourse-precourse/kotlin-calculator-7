@@ -28,7 +28,6 @@ class ApplicationTest : NsTest() {
     @Test
     fun `커스텀 구분자 찾기`() {
         val spliter = Seperator("//;\\n1;2;3")
-        val m = spliter.findSeperator()
         assertThat(spliter.findSeperator()).isEqualTo(";")
     }
 
