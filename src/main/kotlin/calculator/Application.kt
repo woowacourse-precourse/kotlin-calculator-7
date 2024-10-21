@@ -12,7 +12,7 @@ fun main() {
         makeCustomDelimiter(input)
     }
 
-    calculateSum(extractNumber(input))
+    sum = calculateSum(extractNumber(input))
 
     println("결과 : $sum")
 }
