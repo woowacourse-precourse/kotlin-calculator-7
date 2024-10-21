@@ -57,14 +57,15 @@ class ApplicationTest : NsTest() {
     }
 
     @Test
-    fun `커스텀 구분자 설정`() {
+    fun `커스텀 구분자 사용`() {
         assertSimpleTest {
-            assertThat(calculate("//;\n1;2;3")).isEqualTo(6)
+            assertThat(calculate("//;\\n1;2;3")).isEqualTo(6)
+            assertThat(calculate("//;\\n1")).isEqualTo(1)
         }
     }
 
     @Test
-    fun `잘못된 문자열 입력 시 Exception 표시`() {
+    fun `예외 테스트`() {
         assertSimpleTest {
             assertThrows<IllegalArgumentException> { calculate("//;\n1;2,3") }
             assertThrows<IllegalArgumentException> { calculate("//,\n1,2:3") }
@@ -73,26 +74,10 @@ class ApplicationTest : NsTest() {
             assertThrows<IllegalArgumentException> { calculate("a,b,c") }
             assertThrows<IllegalArgumentException> { calculate("a,b,c:100") }
             assertThrows<IllegalArgumentException> { calculate("//,\n1,2,c") }
+            assertThrows<IllegalArgumentException> { calculate("//,\n-1,2,3") }
         }
     }
-
-
-
-//    @Test
-//    fun `커스텀 구분자 사용`() {
-//        assertSimpleTest {
-//            run("//;\\n1")
-//            assertThat(output()).contains("결과 : 1")
-//        }
-//    }
-//
-//    @Test
-//    fun `예외 테스트`() {
-//        assertSimpleTest {
-//            assertThrows<IllegalArgumentException> { runException("-1,2,3") }
-//        }
-//    }
-//
+    
     override fun runMain() {
         main()
     }
