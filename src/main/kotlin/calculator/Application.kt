@@ -1,6 +1,7 @@
 package calculator
 
 import calculator.ValidData.Companion.delimiters
+import calculator.ValidData.Companion.validNumbers
 import java.lang.IllegalArgumentException
 
 fun main() {
@@ -24,7 +25,7 @@ fun add(input: String): Int {
     // 기능2. 기본구분자(쉼표 또는 콜론)를 구분자로 가지는 문자열 덧셈
     var numbers = input
 
-        // 기능3. 커스텀 구분자 지정
+    // 기능3. 커스텀 구분자 지정
     if (input.startsWith("//")) {
         val customDelimiterPattern = Regex("//(.)\\\\n(.*)")
         val matchResult = customDelimiterPattern.find(input)
@@ -41,12 +42,12 @@ fun add(input: String): Int {
     //구분자를 사용하여 숫자 분리
     val splitNumbers = numbers.split(Regex(delimiters))
 
-        // 기능4. 숫자 변환 및 예외 처리(음수, 숫자가 아닌 값)
-    ValidData.validNumbers = splitNumbers.map {
+    // 기능4. 숫자 변환 및 예외 처리(음수, 숫자가 아닌 값)
+    validNumbers = splitNumbers.map {
         val number = it.toIntOrNull() ?: throw IllegalArgumentException("올바른 숫자가 입력되지 않았습니다.")
         if (number < 0) throw IllegalArgumentException("음수는 허용되지 않습니다.")
         number
     }.toMutableList()
 
-    return ValidData.validNumbers.sum()
+    return Calculator.sumNumbers(validNumbers)
 }
