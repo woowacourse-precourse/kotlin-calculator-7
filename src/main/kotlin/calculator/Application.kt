@@ -3,16 +3,19 @@ package calculator
 import camp.nextstep.edu.missionutils.Console
 
 fun main() {
-    try {
-        println("덧셈할 문자열을 입력해 주세요.")
-        val inputText = Console.readLine()
-        val (inputNumbers, delimiters) = divideDelimiters(inputText)
-        val numberList = divideNumbers(inputNumbers, delimiters)
-        val sum = calculateSum(numberList)
-        println(inputNumbers)
-        println("결과 : $sum")
-    } catch (e: IllegalArgumentException) {
-        println(e.message)
+    while (true) {
+        try {
+            println("덧셈할 문자열을 입력해 주세요.")
+            val inputText = Console.readLine()
+            val (inputNumbers, delimiters) = divideDelimiters(inputText)
+            val numberList = divideNumbers(inputNumbers, delimiters)
+            val sum = calculateSum(numberList)
+            println(inputNumbers)
+            println("결과 : $sum")
+        } catch (e: IllegalArgumentException) {
+            println(e.message)
+            break
+        }
     }
 }
 
@@ -45,15 +48,11 @@ fun divideNumbers(inputNumbers: String, delimiters: List<String>): List<String> 
 }
 
 fun calculateSum(numberList: List<String>): Int {
-    try {
-        return numberList.sumOf { number ->
-            val parsedNumber = number.toInt()
-            if (parsedNumber < 0) {
-                throw IllegalArgumentException("음수는 입력할 수 없습니다.")
-            }
-            parsedNumber
+    return numberList.sumOf { number ->
+        val parsedNumber = number.toIntOrNull() ?: throw IllegalArgumentException("숫자 형식이 올바르지 않습니다.")
+        if (parsedNumber < 0) {
+            throw IllegalArgumentException("음수는 입력할 수 없습니다: $parsedNumber")
         }
-    } catch (e: NumberFormatException) {
-        throw IllegalArgumentException("숫자 형식이 올바르지 않습니다.")
+        parsedNumber
     }
 }
