@@ -29,4 +29,12 @@ class AddCalculator {
     fun checkCustom(input:String):Boolean{
         TODO()
     }
+
+    private fun toPositive(number: String): Int {
+        return if (number.toInt()< 0) {
+            throw IllegalArgumentException("음수는 입력할 수 없습니다.")
+        } else {
+            number.toInt()
+        }
+    }
 }
