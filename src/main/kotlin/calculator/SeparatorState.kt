@@ -1,9 +1,12 @@
 package calculator
 
+import calculator.Constants.DEFAULT_SEPARATOR_COLON
+import calculator.Constants.DEFAULT_SEPARATOR_COMMA
+
 sealed class SeparatorState {
-    data class CustomSeparator(val separator: String) : SeparatorState()
+    data class CustomSeparator(val separator: Char) : SeparatorState()
     object DefaultSeparator : SeparatorState() {
-        const val COLON = ":"
-        const val COMMA = ","
+        const val COLON = DEFAULT_SEPARATOR_COLON
+        const val COMMA = DEFAULT_SEPARATOR_COMMA
     }
 }
