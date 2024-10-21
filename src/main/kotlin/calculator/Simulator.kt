@@ -7,6 +7,9 @@ class Simulator {
     val parser = Parser()
     val calculator = PlusCalculator()
 
+    /**
+     * 전체적인 실행을 진행
+     */
     fun run() {
         val parsedSeparator = parser.parseSeparator(user.enterString())
         val parsedNumbers = parser.parseNumber(parsedSeparator)
