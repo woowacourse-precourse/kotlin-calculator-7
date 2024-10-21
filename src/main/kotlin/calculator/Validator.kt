@@ -1,5 +1,7 @@
 package calculator
 
+import calculator.constants.Message
+
 class Validator {
 
     fun validatePositiveNumber(number: String): Boolean {
@@ -7,10 +9,10 @@ class Validator {
             if (number.toLong() >= 0) {
                 true
             } else {
-                throw IllegalArgumentException("입력하신 숫자는 양수가 아닙니다.")
+                throw IllegalArgumentException(Message.POSITIVE_NUMBER_ERROR)
             }
         } catch (e: NumberFormatException) {
-            throw IllegalArgumentException("유효한 숫자를 입력해주세요.")
+            throw IllegalArgumentException(Message.INPUT_NUMBER_ERROR)
         }
     }
 }

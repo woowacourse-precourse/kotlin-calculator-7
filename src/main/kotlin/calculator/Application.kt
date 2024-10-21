@@ -1,5 +1,7 @@
 package calculator
 
+import calculator.constants.Message
+
 fun main() {
     val user = User()
     val parser = Parser()
@@ -8,7 +10,7 @@ fun main() {
     fun run() {
         val parsedSeparator = parser.parseSeparator(user.enterString())
         val parsedNumbers = parser.parseNumber(parsedSeparator)
-        println("결과 : ${calculator.execute(parsedNumbers)}")
+        println(Message.RESULT + calculator.execute(parsedNumbers))
 
     }
     run()
