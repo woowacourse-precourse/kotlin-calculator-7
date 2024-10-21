@@ -12,8 +12,8 @@ fun main() {
     }
 
     fun customSeparator(input: String): Int {
-        val delimiter = input.substringAfter("//").substringBefore("\n")
-        val values = input.substringAfter("\n")
+        val delimiter = input.substring(2, 3)
+        val values = input.substring(5)
         val numbers = values.split(delimiter).map { it.toInt() }
         return numbers.sum()
     }
