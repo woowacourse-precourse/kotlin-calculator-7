@@ -12,8 +12,8 @@ class Calculator {
     }
 
     private fun findCustom(line: String): Char? {
-        val regex = "^//.\\n".toRegex()
-        if (regex.matches(line)) {
+        val regex = "^//.\\\\n".toRegex()
+        if (regex.containsMatchIn(line)) {
             return line.elementAt(2)
         }
         return null
@@ -35,9 +35,8 @@ class Calculator {
             }
         } else {
             val noCustom = line.substring(5)
-            println(noCustom)
             for (each in noCustom) {
-                if (each == ':' || each == ',' || each == custom) {
+                if (each == custom) {
                     numbers.add(number)
                     number = 0
                 } else if (each in '0'..'9') {
