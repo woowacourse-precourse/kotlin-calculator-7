@@ -6,12 +6,12 @@ class InputExpression(val expression: String?) {
     var text = expression
     var spliter = Seperator(expression)
 
-    fun splitExpression(): Any {
+    fun splitExpression(): List<String> {
         if(spliter.usedCustomSeperator()){
             spliter.seperator = spliter.findSeperator()!!
             text = expression!!.substring(5)
         }
-        return text?.split(Regex(spliter.seperator)) ?: 0
+        return text?.split(Regex(spliter.seperator)) ?: listOf("0")
     }
 }
 
