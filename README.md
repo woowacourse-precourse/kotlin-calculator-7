@@ -63,6 +63,11 @@
 `negativeNumberCheck`:
 - `inputValueList`를 매개변수로 지정한다.
 - `inputValueList`의 원소에 음수가 있다면 `true`를 반환한다.
+
+`isNumberCheck`:
+- `inputValueList`를 매개변수로 지정한다.
+- `inputValueList`에 숫자이외의 값이 있다면 `true`를 반환한다.
+
 ## [view]
 ### - MsgView
 `inputMsg`: 
