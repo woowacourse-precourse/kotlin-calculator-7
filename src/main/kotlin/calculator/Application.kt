@@ -26,6 +26,11 @@ fun extractCustomDelimiter(userInput: String): Int {
         .calculateSum()
 }
 
+fun extractDefaultDelimiter(userInput: String): Int {
+    return userInput.split(",", ":")
+        .calculateSum()
+}
+
 fun calculateSum(userInput: String): Int {
     if (userInput.isBlank()) return 0
 
