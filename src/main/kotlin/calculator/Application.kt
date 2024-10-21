@@ -12,6 +12,8 @@ fun main() {
         input.startsWith("//") -> getCustomDelimiter(input)
         else -> throw IllegalArgumentException()
     }
+
+    println("결과 : $result")
 }
 
 fun getCustomDelimiter(input: String): Int {
