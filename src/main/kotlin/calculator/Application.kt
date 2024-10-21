@@ -24,8 +24,9 @@ fun calculateString(input: String): Int {
     }
 
     val numbers = split(numbersPart, delimiters)
-
-    return input.length
+    val intNumbers = numbers.map { it.toIntOrNull() ?: throw IllegalArgumentException("입력 형식에 맞지 않습니다.: $it") }
+    
+    return intNumbers.sum()
 }
 
 fun split(input: String, delimiters: List<String>): List<String> {
