@@ -9,17 +9,25 @@ fun main() {
 
 fun calculate(string: String): Int {
     if (string == "") return 0
-    
-    val strings = splitForCalculate(string)
-    val numbers = strings.map { it.toInt() }
-
+    val strings = split(string)
+    val numbers = changeToInt(strings)
     return numbers.sum()
 }
 
-fun splitForCalculate(string: String): List<String> {
-    if (Regex("//.\\n(.+)").matches(string)) {
-        return string.substring(4).split(string[2])
+fun split(string: String): List<String> {
+    if (string.length > 5 &&
+        string.startsWith("//") &&
+        string.slice(3 until 5) == "\\n") {
+        return string.substring(5).split(string[2])
     }
 
     return string.split(",", ":")
+}
+
+fun changeToInt(list: List<String>): List<Int> {
+    try {
+        return list.map { it.toInt() }
+    } catch (e: NumberFormatException) {
+        throw IllegalArgumentException("잘못된 입력입니다.", e)
+    }
 }
