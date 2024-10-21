@@ -3,7 +3,6 @@ package calculator
 import calculator.utils.InputUtil
 
 class Parser {
-    private val validator = Validator()
 
     /**
      * String 형태의 숫자를 구분자로 파싱
@@ -21,7 +20,7 @@ class Parser {
     fun parseNumber(list: List<String>): List<Long> {
         val numbers = mutableListOf<Long>()
         list.forEach {
-            if (validator.validatePositiveNumber(it)) {
+            if (Validator.validatePositiveNumber(it)) {
                 numbers.add(it.toLong())
             }
         }

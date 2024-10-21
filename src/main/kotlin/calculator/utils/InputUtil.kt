@@ -1,5 +1,7 @@
 package calculator.utils
 
+import calculator.Validator
+
 object InputUtil {
 
     /**
@@ -10,11 +12,20 @@ object InputUtil {
         val regex = """^//(.+)\\n(.*)""".toRegex()
         val matchResult = regex.find(input)
 
-        return if (matchResult != null) {
-            val customSeparator = matchResult.groupValues[1]
-            defalutSeparators + customSeparator
-        } else {
-            defalutSeparators
+        return when {
+            matchResult != null -> {
+                val customSeparator = matchResult.groupValues[1]
+                when {
+                    Validator.validateCustomSeparatorLength(customSeparator) -> {
+                        Validator.validateCustomSeparator(customSeparator.single())
+                        defalutSeparators + customSeparator
+                    }
+
+                    else -> defalutSeparators
+                }
+            }
+
+            else -> defalutSeparators
         }
     }
 
