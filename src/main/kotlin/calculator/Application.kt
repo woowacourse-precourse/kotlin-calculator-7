@@ -59,8 +59,3 @@ private fun checkIsValidValue(numbers: List<String>) {
 private fun getSumOfNumbers(numbers: List<String>): Int {
     return numbers.sumOf { it.toInt() }
 }
-
-private const val MESSAGE_FOR_GUIDE_CALCULATE = "덧셈할 문자열을 입력해 주세요."
-private const val MESSAGE_INPUT_EMPTY = "빈 값을 입력하였습니다."
-private const val MESSAGE_INVALID_INPUT = "잘못된 입력입니다"
-private const val SEPARATOR_HEADER_LENGTH = 5
