@@ -1,10 +1,11 @@
 package calculator
 
-class View() {
+class View {
 
     fun getInput(): String {
         println("덧셈할 문자열을 입력해 주세요.")
-        return readlnOrNull() ?: ""
+        val input = readln()
+        return input
     }
 
     fun showResult(result: Int) {
