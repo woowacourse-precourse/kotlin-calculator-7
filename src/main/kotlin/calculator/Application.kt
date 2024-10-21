@@ -17,6 +17,8 @@ fun main() {
     val splitNumberList = SeparatorHandler(input).getSplitNumberList()
     val result = Calculator(splitNumberList).sumOfSplitNumbers()
     printOutput(result)
+    val result = if (input.isEmpty()) {
+        throw IllegalArgumentException(ErrorType.INVALID_EMPTY_INPUT.message)
 }
 
 class InputHandler {
