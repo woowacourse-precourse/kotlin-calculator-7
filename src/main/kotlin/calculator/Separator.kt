@@ -24,6 +24,14 @@ class Separator {
             if (endIndex+customSeparates.second.length == input.length) return listOf(0)
         }
 
+        input.split(*separates.toCharArray()).forEach { item ->
+            item.toIntOrNull()?.let {
+                result.add(it)
+            } ?: run {
+                throw IllegalArgumentException("구분된 ${item}은 숫자가 아닙니다.")
+            }
+        }
+
         return result
     }
 }
