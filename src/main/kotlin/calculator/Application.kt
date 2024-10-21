@@ -7,9 +7,12 @@ fun main() {
     val input = Console.readLine()
 
     val calculator = StringCalculator()
-    val result = calculator.calculate(input)
-
-    println("결과 : $result")
+    if (calculator.isValid(input)) {
+        val result = calculator.calculate(input)
+        println("결과 : $result")
+    } else {
+        println("잘못된 입력입니다.")
+    }
 }
 
 class StringCalculator {
@@ -18,5 +21,12 @@ class StringCalculator {
 
         val numbers = input.split(",", ":")
         return numbers.map { it.toInt() }.sum()
+    }
+
+    fun isValid(input: String): Boolean {
+        if (input.isEmpty()) return true
+
+        val numbers = input.split(",", ":")
+        return numbers.all { it.toIntOrNull() != null }
     }
 }
