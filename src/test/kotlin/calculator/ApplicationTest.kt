@@ -4,6 +4,7 @@ import camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest
 import camp.nextstep.edu.missionutils.test.NsTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 class ApplicationTest : NsTest() {
     @Test
@@ -61,6 +62,25 @@ class ApplicationTest : NsTest() {
             assertThat(calculate("//;\n1;2;3")).isEqualTo(6)
         }
     }
+
+    @Test
+    fun `잘못된 문자열 입력 시 Exception 표시`() {
+        assertSimpleTest {
+            assertThrows<IllegalArgumentException> {
+                calculate("//;\n1;2,3")
+            }
+
+            assertThrows<IllegalArgumentException> {
+                calculate("//,\n1,2:3")
+            }
+
+            assertThrows<IllegalArgumentException> {
+                calculate("2:3;4")
+            }
+        }
+    }
+
+
 
 //    @Test
 //    fun `커스텀 구분자 사용`() {
