@@ -2,28 +2,36 @@ package calculator.model
 
 import calculator.constants.Constants.COLON
 import calculator.constants.Constants.COMMA
+import calculator.constants.Constants.DOUBLE_BACKSLASH_N
+import calculator.constants.Constants.DOUBLE_SLASH
 
 class Calculator {
     private val errorCheck = ErrorCheck()
 
     fun defaultCal(inputValue: String): Int {
-        val inputValueList = inputValue
-            .split(COMMA, COLON)
-            .map { it.toInt() }
-        if (errorCheck.negativeNumberCheck(inputValueList)) return -1
-        val total = inputValueList.sum()
+        val inputValueList = inputValue.split(COMMA, COLON)
+
+        if (errorCheck.negativeNumberCheck(inputValueList) ||
+            errorCheck.isNumberCheck(inputValueList)) {
+            return -1
+        }
+        val total = inputValueList.sumOf { it.toInt() }
 
         return total
     }
 
     fun customCal(inputValue: String): Int {
-        val customDivider = inputValue[2]
+        val startIndex = inputValue.indexOf(DOUBLE_SLASH) + 2
+        val endIndex = inputValue.indexOf(DOUBLE_BACKSLASH_N)
+        val customDivider = inputValue.substring(startIndex, endIndex)
         val inputValueList = inputValue
-            .substring(5)
+            .substring(endIndex + 2)
             .split(customDivider)
-            .map { it.toInt() }
-        if (errorCheck.negativeNumberCheck(inputValueList)) return -1
-        val total = inputValueList.sum()
+        if (errorCheck.negativeNumberCheck(inputValueList) ||
+            errorCheck.isNumberCheck(inputValueList)) {
+            return -1
+        }
+        val total = inputValueList.sumOf { it.toInt() }
 
         return total
     }
