@@ -4,17 +4,14 @@ import camp.nextstep.edu.missionutils.Console
 
 class StringAddingCalculator {
     fun runCalculator() {
-        while (true) {
             try {
                 println("덧셈할 문자열을 입력해 주세요.")
                 val inputText = Console.readLine()
                 val sum = calculateSum(inputText)
                 println("결과 : $sum")
             } catch (e: IllegalArgumentException) {
-                println(e.message)
-                break
+                throw e
             }
-        }
     }
 
     private fun calculateSum(inputText: String): Int {
