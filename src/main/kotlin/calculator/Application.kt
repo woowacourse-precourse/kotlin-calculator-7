@@ -3,6 +3,7 @@ package calculator
 import camp.nextstep.edu.missionutils.Console.readLine
 
 val standard = mutableListOf(",", ":")
+var sum = 0
 
 fun main() {
     val input = getInput()
@@ -11,6 +12,7 @@ fun main() {
         makeCustomStandard(input)
     }
 
+    println("결과 : $sum")
 }
 
 fun getInput(): String {
@@ -29,3 +31,8 @@ fun makeCustomStandard(input: String) {
     val customStandard = input.substring(startIndex, endIndex)
     standard.add(customStandard)
 }
+
+fun calculateSum(numList: List<String>): Int {
+    return numList.sumOf {
+        it.toInt()
+    }}
