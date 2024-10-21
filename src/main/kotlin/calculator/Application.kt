@@ -7,6 +7,10 @@ val standard = mutableListOf(",", ":")
 fun main() {
     val input = getInput()
 
+    if (input.startsWith("//")) {
+        makeCustomStandard(input)
+    }
+
 }
 
 fun getInput(): String {
@@ -16,5 +20,12 @@ fun getInput(): String {
 }
 
 fun extractNumber(input: String): List<String> {
-    return input.split(*standard.toTypedArray())
+    return input.substringAfter("\\n").split(*standard.toTypedArray())
+}
+
+fun makeCustomStandard(input: String) {
+    val startIndex = input.indexOf("//")
+    val endIndex = input.indexOf("\\n")
+    val customStandard = input.substring(startIndex, endIndex)
+    standard.add(customStandard)
 }
