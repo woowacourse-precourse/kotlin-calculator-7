@@ -33,11 +33,16 @@ class Calculator(
             return
         }
 
-        val stringNumbers: List<String>  = expression.split(*delimiters.toTypedArray())
+        val stringNumbers: List<String> = expression.split(*delimiters.toTypedArray())
         for (number in stringNumbers) {
             val n = number.toInt()
+            validatePositiveNumber(n)
             numbers.add(n)
         }
+    }
+
+    private fun validatePositiveNumber(number: Int) {
+        if (number <= 0) throw IllegalArgumentException(ERROR_NUMBER_NOT_POSITIVE)
     }
 
     companion object {
@@ -45,5 +50,7 @@ class Calculator(
         private const val BASIC_DELIMITER_COLON = ":"
         private const val CUSTOM_DELIMITER_PREFIX = "//"
         private const val CUSTOM_DELIMITER_SUFFIX = "\\n"
+
+        private const val ERROR_NUMBER_NOT_POSITIVE = "[ERROR] 숫자는 0 이상이어야 합니다."
     }
 }
