@@ -16,9 +16,64 @@ class ApplicationTest : NsTest() {
     }
 
     @Test
-    fun `예외 테스트`() {
+    fun `커스텀 구분자 사용 및 계산`() {
+        assertSimpleTest {
+            run("//*\\n1*4*7")
+            assertThat(output()).contains("결과 : 12")
+        }
+    }
+
+    @Test
+    fun `기본 구분자 사용 및 계산`() {
+        assertSimpleTest {
+            run("1,4,5")
+            assertThat(output()).contains("결과 : 10")
+        }
+    }
+
+    @Test
+    fun `기본 구분자 혼합 사용`() {
+        assertSimpleTest {
+            run("1,4:5")
+            assertThat(output()).contains("결과 : 10")
+        }
+    }
+
+    @Test
+    fun `기본 구분자 다중 사용`() {
+        assertSimpleTest {
+            run(":1,4:5,")
+            assertThat(output()).contains("결과 : 10")
+        }
+    }
+
+    @Test
+    fun `커스텀 구분자 다중 사용`() {
+        assertSimpleTest {
+            run("//;\\n;1;3;")
+            assertThat(output()).contains("결과 : 4")
+        }
+    }
+
+
+    @Test
+    fun `음수 예외 테스트`() {
         assertSimpleTest {
             assertThrows<IllegalArgumentException> { runException("-1,2,3") }
+        }
+    }
+
+    @Test
+    fun `빈 문자열 예외 테스트`() {
+        assertSimpleTest {
+            assertThrows<IllegalArgumentException> { runException(" ") }
+        }
+    }
+
+    @Test
+    fun `잘못된 구분자 예외 테스트`() {
+        assertSimpleTest {
+            assertThrows<IllegalArgumentException> { runException("1;2;3") }
         }
     }
 
