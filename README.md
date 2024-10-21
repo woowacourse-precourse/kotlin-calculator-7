@@ -49,3 +49,11 @@
 ### 6. 총합을 출력한다.
 
 `UserInterface`의 책임
+
+## 학습 노트
+
+- `*` 키워드의 역할
+
+  **[Variable number of arguments (varargs)](https://kotlinlang.org/docs/functions.html#variable-number-of-arguments-varargs)
+
+  `vararg`를 인자로 받는 함수에 원시 타입으로 전달하고 싶다면 `*` 연산자를 사용할 수 있다.
