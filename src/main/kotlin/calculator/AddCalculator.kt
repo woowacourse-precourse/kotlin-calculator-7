@@ -22,12 +22,13 @@ class AddCalculator {
         }
     }
 
-
-    fun splitNumbers(input:String, delimiter:String):List<Int>{
-        TODO()
-    }
-    fun checkCustom(input:String):Boolean{
-        TODO()
+    private fun splitNumbers(input: String, delimiter: String): List<Int> {
+        val numbers = if (input.startsWith("//")) {
+            input.substringAfter("\\n")
+        } else {
+            input
+        }
+        return numbers.split(Regex(delimiter)).map { toPositive(it) }
     }
 
     private fun toPositive(number: String): Int {
