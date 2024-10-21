@@ -19,7 +19,7 @@ fun calculate(input: String): String {
 
     var delimiter = "[,:]"  // 기본 구분자: 쉼표와 콜론
     var numbers = input
-    var sum = 0
+    val sum: Int
 
     // 커스텀 구분자 처리
     if (input.startsWith("//")) {
