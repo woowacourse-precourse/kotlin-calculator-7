@@ -16,4 +16,7 @@ class AddCalculator {
     fun splitNumbers(input:String, delimiter:String):List<Int>{
         TODO()
     }
+    fun checkCustom(input:String):Boolean{
+        TODO()
+    }
 }
