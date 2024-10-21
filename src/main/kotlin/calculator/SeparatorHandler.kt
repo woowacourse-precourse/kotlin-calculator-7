@@ -22,11 +22,10 @@ class SeparatorHandler(private val input: String) {
         return input.split("[,:]".toRegex())
     }
 
-    fun getSplitNumberList(): List<String> {
-        return if (isExitCustomSeparator()) {
-            splitWithCustomSeparator()
-        } else {
-            splitWithDefaultSeparator()
-        }
+    companion object {
+        const val CUSTOM_SEPARATOR_END_CHAR = "\\n"
+        const val CUSTOM_SEPARATOR_START_CHAR = "//"
+        const val CUSTOM_SEPARATOR_START_INDEX = 2
+        const val DEFAULT_SEPARATOR = "[,:]"
     }
 }
