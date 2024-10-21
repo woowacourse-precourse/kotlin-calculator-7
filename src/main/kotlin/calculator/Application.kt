@@ -50,4 +50,11 @@ class Calculator {
     fun plus(numbers:List<Int>):Int{
         return numbers.sum()
     }
+    fun input():String {
+        println("덧셈할 문자열을 입력해 주세요.")
+        return readln()
+    }
+    fun output(total:Int){
+        println("결과 : $total")
+    }
 }
