@@ -28,7 +28,11 @@ fun calculateString(input: String): Int {
     }
 
     val numbers = split(numbersPart, delimiters)
-    val intNumbers = numbers.map { it.toIntOrNull() ?: throw IllegalArgumentException("입력 형식에 맞지 않습니다.: $it") }
+    val intNumbers = numbers.map {
+        val num = it.toIntOrNull() ?: throw IllegalArgumentException("입력 형식에 맞지 않습니다.: $it")
+        if (num < 0) throw IllegalArgumentException("양수만 입력할 수 있습니다. $num")
+        num
+    }
 
     return intNumbers.sum()
 }
