@@ -56,15 +56,17 @@ private fun customSeparator(
     errorSeparator(newInput, newSeparator)
 
     for (n in newInput.split(newSeparator)) {
-        if (n.contains(":")) {
+        if (n.contains(":") || n.contains(",")) {
             for (s in n.split(":")) {
-                errorNotPositiveNumber(s)
-                numList.add(s)
-            }
-        } else if (n.contains(",")) {
-            for (s in n.split(",")) {
-                errorNotPositiveNumber(s)
-                numList.add(s)
+                if (s.contains(",")) {
+                    for (c in s.split(",")) {
+                        errorNotPositiveNumber(c)
+                        numList.add(c)
+                    }
+                } else {
+                    errorNotPositiveNumber(s)
+                    numList.add(s)
+                }
             }
         } else {
             errorNotPositiveNumber(n)
@@ -87,7 +89,7 @@ private fun errorNotPositiveNumber(s: String) {
 }
 
 private fun errorSeparator(input: String, newSeparator: String = "") {
-    val regex = "[^0-9,:$newSeparator]".toRegex()
+    val regex = "[^0-9,:-$newSeparator]".toRegex()
     val invalidChar = regex.findAll(input).map { it.value }.joinToString("")
     if (invalidChar.isNotEmpty()) {
         throw IllegalArgumentException("${invalidChar}는 구분자가 아닙니다.")
