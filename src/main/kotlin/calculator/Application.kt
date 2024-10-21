@@ -14,4 +14,5 @@ fun main() {
             userInputList = userInput.split(",", ":")
         }
     }
+    val intInputList = userInputList.map { it.toIntOrNull() ?: throw IllegalArgumentException("잘못된 값을 입력했습니다.") }
 }
