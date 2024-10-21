@@ -31,8 +31,8 @@ class Parser {
         return numbers.split(*separators.toTypedArray())
     }
 
-    fun parseNumber(list: List<String>): MutableList<Long> {
-        val numbers = mutableListOf<Long>()
+    fun parseNumber(list: List<String>): List<Long> {
+        var numbers = mutableListOf<Long>()
         list.forEach {
             if (validator.validatePositiveNumber(it)) {
                 numbers.add(it.toLong())
