@@ -15,7 +15,8 @@ fun main() {
             userInputList = userInput.split(",", ":")
         }
     }
-    val intInputList = userInputList.map { it.toIntOrNull() ?: throw IllegalArgumentException("잘못된 값을 입력했습니다.") }
+    val uIntInputList = userInputList.map { it.toUIntOrNull() ?: throw IllegalArgumentException("잘못된 값($it)을 입력했습니다.") }
+    val intInputList = uIntInputList.map { it.toInt() }
     sum += intInputList.sum()
     println("결과 : $sum")
 }
