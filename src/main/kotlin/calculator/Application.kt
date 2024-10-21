@@ -116,7 +116,7 @@ class Calculator {
     private fun String.toValidNum(): Int {
         // 문자열이 비었을 경우 0으로 처리한다.
         val convertInt = if(isBlank()) 0 else toInt()
-        if(convertInt < 0) throw IllegalArgumentException()
+        if(convertInt <= 0) throw IllegalArgumentException()
         return convertInt
     }
 }
