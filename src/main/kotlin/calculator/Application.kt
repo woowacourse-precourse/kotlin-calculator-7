@@ -14,35 +14,28 @@ fun main() {
     }
 }
 
-fun extractDelimiter(userInput: String): Pair<List<Char>, String> {
-    return if (userInput.startsWith("//")) {
-        val customDelimiter = userInput[2]
-        val numbers = userInput.substringAfter("\n")
-        listOf(customDelimiter) to numbers
-    } else {
-        listOf(',', ':') to userInput
-    }
+fun extractCustomDelimiter(userInput: String): Int {
+    val segments = userInput.split("\\n")
+    if(segments.size != 2) throw IllegalArgumentException()
+
+    val customDelimiter = segments[0].substring(2)
+    if(customDelimiter.isEmpty()) throw IllegalArgumentException()
+
+    return segments[1].ifEmpty{ return 0 }
+        .split(customDelimiter)
+        .calculateSum()
 }
 
-fun calculateSum(userInput: String?): Int {
-    if (userInput == null) {
-        throw IllegalArgumentException()
-    }
+fun calculateSum(userInput: String): Int {
+    if (userInput.isBlank()) return 0
 
-    if (userInput.isEmpty()) {
-        return 0
-    }
+    val (delimiters, numbers) = extractDelimiter(userInput)
 
-    val (delimiter, numbers) = extractDelimiter(userInput)
-    val parsedNumbers = numbers.split(delimiter)
-
-    return parsedNumbers
+    return numbers.split(*delimiters.toCharArray())
         .filter { it.isNotEmpty() }
         .map {
-            val number = it.toIntOrNull()
-                ?: throw IllegalArgumentException()
-            require(number >= 0)
-            number
+            it.toIntOrNull() ?: throw IllegalArgumentException()
         }
+        .onEach { require(it >= 0){} }
         .sum()
 }
