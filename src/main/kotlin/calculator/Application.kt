@@ -37,5 +37,5 @@ fun main() {
         }
     }
     sum += num
-    println("결과 : "+sum)
+    println("결과 : $sum")
 }
