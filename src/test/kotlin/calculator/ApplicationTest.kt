@@ -32,6 +32,31 @@ class ApplicationTest : NsTest() {
     }
 
     @Test
+    fun `기본 구분자 혼합 사용`() {
+        assertSimpleTest {
+            run("1,4:5")
+            assertThat(output()).contains("결과 : 10")
+        }
+    }
+
+    @Test
+    fun `기본 구분자 다중 사용`() {
+        assertSimpleTest {
+            run(":1,4:5,")
+            assertThat(output()).contains("결과 : 10")
+        }
+    }
+
+    @Test
+    fun `커스텀 구분자 다중 사용`() {
+        assertSimpleTest {
+            run("//;\\n;1;3;")
+            assertThat(output()).contains("결과 : 4")
+        }
+    }
+
+
+    @Test
     fun `음수 예외 테스트`() {
         assertSimpleTest {
             assertThrows<IllegalArgumentException> { runException("-1,2,3") }
