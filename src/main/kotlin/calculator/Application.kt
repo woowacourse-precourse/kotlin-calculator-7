@@ -31,6 +31,11 @@ fun calculateSum(input: String): Int {
 fun extractNumbers(input: String): List<Int> {
     val numberList: List<String>
 
+    // 커스텀 구분자 사용 여부
+    fun hasCustomDelimiter(input: String): Boolean {
+        return input.startsWith("//")
+    }
+
     // 유효한 커스텀 구분자를 추출하고 반환하는 함수
     fun getCustomDelimiter(input: String): Pair<String, String> {
         if (input[3] == '\\' && input[4] == 'n') {
