@@ -62,6 +62,16 @@ fun extractNumbers(input: String, delimiters: List<String>): List<Int> {
     return extractedNumbers
 }
 
+// 4. 연산 수행
+fun getResult(listOfNumbers: List<Int>): Int {
+    /**
+     * 분리된 숫자들의 리스트를 받아 연산을 수행함.
+     * @param listOfNumbers extractedNumbers 함수의 반환 값
+     * @return 정수들의 합
+     */
+    return listOfNumbers.sum()
+}
+
 fun main() {
     // TODO: 프로그램 구현
     var firstCheck = false // 1. 문자열 검사 결과
@@ -84,6 +94,8 @@ fun main() {
     // 3. 숫자 분리
     if (secondCheck) {
         val extractedNumbers = extractNumbers(inputValue, identifiedDelimiters)
+        // 4. 연산 수행
+        val result = getResult(extractedNumbers)
+        println("결과: $result")
     }
 }
-// 최종 출력의 형태: "결과 : n"
