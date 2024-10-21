@@ -1,5 +1,17 @@
 package calculator
 
+import calculator.domain.Calculator
+import calculator.view.InputView
+import calculator.view.OutputView
+
 fun main() {
-    // TODO: 프로그램 구현
+    val calculator = Calculator()
+    val inputView = InputView()
+    val outputView = OutputView()
+    val controller = CalculatorController(calculator, inputView, outputView)
+    try {
+        controller.run()
+    } catch (e: Exception) {
+        throw e
+    }
 }

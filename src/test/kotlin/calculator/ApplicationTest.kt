@@ -7,21 +7,62 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
 class ApplicationTest : NsTest() {
+
     @Test
-    fun `커스텀 구분자 사용`() {
+    fun `valid input`() {
         assertSimpleTest {
-            run("//;\\n1")
-            assertThat(output()).contains("결과 : 1")
+            run("1,2,3")
+            assertThat(output()).contains("결과 : 6")
         }
     }
 
     @Test
-    fun `예외 테스트`() {
+    fun `empty string input`() {
+        assertSimpleTest {
+            // An empty string input means the user just presses enter.
+            run("\n")
+            assertThat(output()).contains("결과 : 0")
+        }
+    }
+
+    @Test
+    fun `invalid input`() {
+        assertSimpleTest {
+            assertThrows<IllegalArgumentException> { runException("1,2,3,") }
+        }
+    }
+
+    @Test
+    fun `custom delimiter usage`() {
+        assertSimpleTest {
+            run("//;\\n1;3,3")
+            assertThat(output()).contains("결과 : 7")
+        }
+    }
+
+    @Test
+    fun `input contains negative numbers`() {
         assertSimpleTest {
             assertThrows<IllegalArgumentException> { runException("-1,2,3") }
         }
     }
 
+    //minus 기호가 delimiter로 사용되는 경우
+    @Test
+    fun `input contains minus sign custom delimiter`() {
+        assertSimpleTest {
+            run("//-\\n2-1,2,3")
+            assertThat(output()).contains("결과 : 8")
+        }
+    }
+    // Single number input
+    @Test
+    fun `single number input`() {
+        assertSimpleTest {
+            run("2")
+            assertThat(output()).contains("결과 : 2")
+        }
+    }
     override fun runMain() {
         main()
     }
