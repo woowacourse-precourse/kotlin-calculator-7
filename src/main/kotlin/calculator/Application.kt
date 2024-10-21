@@ -27,6 +27,10 @@ class Seperator(val expression: String?) {
     }
 }
 
+fun parseNumber(txt: String): Int {
+    val num = Integer.parseInt(txt)
+    return num
+}
 fun main() {
     // TODO: 프로그램 구현
 }

@@ -41,6 +41,11 @@ class ApplicationTest : NsTest() {
     }
 
         assertThat(inputExpression.splitExpression()).isEqualTo(listOf("1", "2", "3"))
+    @Test
+    fun `문자열을 숫자로 변환`() {
+        assertThat(parseNumber("1")).isEqualTo(1)
+    }
+
     }
 
     @Test
