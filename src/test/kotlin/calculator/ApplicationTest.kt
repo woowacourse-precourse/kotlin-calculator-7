@@ -51,6 +51,22 @@ class ApplicationTest : NsTest() {
     }
 
     @Test
+    fun `잘못된 값을 입력할 경우 에러가 발생한다`() {
+        val inputExpression1 = InputExpression("1,2, 3")
+        val inputExpression2 = InputExpression(",1,2")
+        val inputExpression3 = InputExpression("-1,-2,3")
+        assertThrows<IllegalArgumentException> {
+            inputExpression1.splitExpression()
+        }
+        assertThrows<IllegalArgumentException> {
+            inputExpression2.splitExpression()
+        }
+        assertThrows<IllegalArgumentException> {
+            inputExpression3.splitExpression()
+        }
+    }
+
+    @Test
     fun `커스텀 구분자 사용`() {
         assertSimpleTest {
             run("//;\\n1")

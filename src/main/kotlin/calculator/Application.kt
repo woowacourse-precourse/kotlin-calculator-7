@@ -7,11 +7,19 @@ class InputExpression(val expression: String?) {
     var spliter = Seperator(expression)
 
     fun splitExpression(): List<String> {
-        if(spliter.usedCustomSeperator()){
+        if (spliter.usedCustomSeperator()){
             spliter.seperator = ",|:|${spliter.findSeperator()!!}"
             text = expression!!.substring(5)
         }
-        return text?.split(Regex(spliter.seperator)) ?: listOf("0")
+        val splitedText = text?.split(Regex(spliter.seperator)) ?: listOf("0")
+
+        for (txt in splitedText) {
+            if (!txt.matches(Regex("[0-9]+"))) {
+                throw IllegalArgumentException("[ERROR] 잘못된 입력: $txt")
+            }
+        }
+
+        return splitedText
     }
 }
 
@@ -32,6 +40,9 @@ fun parseNumber(txt: String?): Int {
         return 0
     }
     val num = Integer.parseInt(txt)
+    if(num < 0) {
+        throw IllegalArgumentException("[ERROR] 음수는 입력할 수 없습니다.")
+    }
     return num
 }
 fun calculate(text: List<String>): Int {
