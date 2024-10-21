@@ -22,6 +22,19 @@ class ApplicationTest : NsTest() {
         }
     }
 
+    @Test
+    fun `예외 테스트_문자`() {
+        assertSimpleTest {
+            assertThrows<IllegalArgumentException> { runException("가,a,3") }
+        }
+    }
+    @Test
+    fun `예외 테스트_빈칸`() {
+        assertSimpleTest {
+            assertThrows<IllegalArgumentException> { runException(" ,,  ") }
+        }
+    }
+
     override fun runMain() {
         main()
     }
