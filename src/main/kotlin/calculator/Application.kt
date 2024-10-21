@@ -11,7 +11,7 @@ fun main() {
             // 아무것도 입력하지 않았을 때
         }
         else -> {
-            var custom : String? = null
+            var custom: String? = null
             var delimiters = mutableListOf(",", ":")
 
             // 커스텀 구분자인지 판단
