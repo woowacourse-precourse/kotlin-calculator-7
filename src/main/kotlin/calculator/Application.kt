@@ -14,12 +14,13 @@ fun calculate(input: String?): Int {
     var calc = input
     val delimiters = mutableListOf(",", ":")
     // 커스텀 구분자인지 판단
-    if (calc.startsWith("//")) {
+    if (calc.startsWith("//") && calc.contains("\\n")) {
         // 커스텀 구분자인 경우
         val custom = calc.substring(2 until calc.indexOf("\\n"))
         calc = calc.substring(calc.indexOf("\\n")+2 until calc.length)
         delimiters.add(custom)
     }
+    if (calc.isNullOrEmpty()) return 0
     val numbers = calc.split(*delimiters.toTypedArray()).map { isProperNumber(it)}
     return numbers.sum()
 }
