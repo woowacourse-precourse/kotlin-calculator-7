@@ -14,7 +14,7 @@ class Calculator {
         return null
     }
 
-    fun separate(line: String, custom: Char?) {
+    fun separate(line: String, custom: Char?) :List<Int>{
         val numbers = mutableListOf<Int>()
         if (custom == null) {
             var number = 0
@@ -44,5 +44,10 @@ class Calculator {
                 }
             }
         }
+        return numbers
+    }
+
+    fun plus(numbers:List<Int>):Int{
+        return numbers.sum()
     }
 }
