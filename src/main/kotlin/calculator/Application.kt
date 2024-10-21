@@ -33,5 +33,12 @@ fun add(input: String?): Int {
     }
 
     val tokens = numbers.split(*delimiters)
-    return tokens.sumOf { it.toInt() }
+    val numberList = tokens.map { it.toInt() }
+
+    val negativeNumbers = numberList.filter { it < 0 }
+    if (negativeNumbers.isNotEmpty()) {
+        throw IllegalArgumentException("Negative numbers not allowed: $negativeNumbers")
+    }
+
+    return numberList.sum()
 }
