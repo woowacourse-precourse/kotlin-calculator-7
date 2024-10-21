@@ -12,7 +12,7 @@ class ApplicationTest : NsTest() {
     fun `valid input`() {
         assertSimpleTest {
             run("1,2,3")
-            assertThat(output()).contains("결과: 6")
+            assertThat(output()).contains("결과 : 6")
         }
     }
 
@@ -21,7 +21,7 @@ class ApplicationTest : NsTest() {
         assertSimpleTest {
             // An empty string input means the user just presses enter.
             run("\n")
-            assertThat(output()).contains("결과: 0")
+            assertThat(output()).contains("결과 : 0")
         }
     }
 
@@ -36,7 +36,7 @@ class ApplicationTest : NsTest() {
     fun `custom delimiter usage`() {
         assertSimpleTest {
             run("//;\\n1;3,3")
-            assertThat(output()).contains("결과: 7")
+            assertThat(output()).contains("결과 : 7")
         }
     }
 
@@ -52,10 +52,17 @@ class ApplicationTest : NsTest() {
     fun `input contains minus sign custom delimiter`() {
         assertSimpleTest {
             run("//-\\n2-1,2,3")
-            assertThat(output()).contains("결과: 8")
+            assertThat(output()).contains("결과 : 8")
         }
     }
-
+    // Single number input
+    @Test
+    fun `single number input`() {
+        assertSimpleTest {
+            run("2")
+            assertThat(output()).contains("결과 : 2")
+        }
+    }
     override fun runMain() {
         main()
     }
