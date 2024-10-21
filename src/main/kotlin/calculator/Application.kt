@@ -18,7 +18,12 @@ fun main() {
         return numbers.sum()
     }
 
-    val result: Int = customSeparator(input)
+    val result = when {
+        input.isBlank() -> 0
+        input.startsWith("//") -> customSeparator(input)
+        else -> defaultSeparator(input)
+    }
+
     println("결과: $result")
 }
 
