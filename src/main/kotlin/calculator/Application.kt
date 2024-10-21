@@ -9,6 +9,8 @@ fun main() {
     println(PROMPT_INPUT_MESSAGE)
 
     val input = Console.readLine()
+    val inputHandler = InputHandler()
+    val input = inputHandler.readInput()
 
     if (input.isEmpty()) {
         printOutput(0)
@@ -21,3 +23,9 @@ fun main() {
 }
 
 fun printOutput(output: Int) = println(PROMPT_OUTPUT_MESSAGE + output)
+class InputHandler {
+    fun readInput(): String {
+        println(PROMPT_INPUT_MESSAGE)
+        return Console.readLine()
+    }
+}
