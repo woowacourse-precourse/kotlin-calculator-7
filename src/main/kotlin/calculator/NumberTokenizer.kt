@@ -7,11 +7,18 @@ import java.math.BigDecimal
 class NumberTokenizer {
 
     fun tokenize(input: String, delimiters: List<String>): List<BigDecimal> {
-        val filteringInput = filterCustom(input, delimiters)
+        val filteringInput = filterOutCustomDelimiters(input, delimiters)
         val inputTokens = splitByDelimiters(filteringInput, delimiters)
         val numberTokens = parseNumbers(inputTokens)
         validatePositiveNumbers(numberTokens)
         return numberTokens
+    }
+
+    private fun filterOutCustomDelimiters(input: String, delimiter: List<String>): String {
+        val filteringInput = delimiter.fold(input) { acc, removeDelimiters ->
+            acc.replace(CUSTOM_DELIMITER_PREFIX + removeDelimiters + CUSTOM_DELIMITER_SUFFIX, EMPTY_STRING)
+        }
+        return filteringInput
     }
 
     private fun splitByDelimiters(input: String, delimiters: List<String>) = delimiters.fold(input) { acc, delimiter ->
@@ -28,12 +35,6 @@ class NumberTokenizer {
         }
     }
 
-    private fun filterCustom(input: String, customDelimiters: List<String>): String {
-        val filteringInput = customDelimiters.fold(input) { acc, removeDelimiters ->
-            acc.replace(CUSTOM_DELIMITER_PREFIX + removeDelimiters + CUSTOM_DELIMITER_SUFFIX, EMPTY_STRING)
-        }
-        return filteringInput
-    }
 
     companion object {
         private const val DELIMITER_UNIFIED = " "
