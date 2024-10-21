@@ -1,5 +1,6 @@
 package calculator
 
+import camp.nextstep.edu.missionutils.Console.readLine
 fun main() {
     // 입력을 받는 부분
     println("덧셈할 문자열을 입력해 주세요.")
@@ -16,11 +17,18 @@ fun calculateString(input: String): Int {
     // 커스텀 구분자 처리
     if (input.startsWith("//")) {
         val parts = input.split("\n", limit = 2)
-        if (parts.size < 2) throw IllegalArgumentException("Invalid custom delimiter format")
+        if (parts.size < 2) throw IllegalArgumentException("커스텀 구분자 사용 방식에 맞지 않습니다.")
         val customDelimiter = parts[0].substring(2)
         delimiters.add(customDelimiter)
         numbersPart = parts[1]
     }
 
+    val numbers = split(numbersPart, delimiters)
+
     return input.length
+}
+
+fun split(input: String, delimiters: List<String>): List<String> {
+    val regex = delimiters.joinToString("|") { Regex.escape(it) }.toRegex()
+    return input.split(regex)
 }
