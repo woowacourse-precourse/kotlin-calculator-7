@@ -4,6 +4,12 @@ import camp.nextstep.edu.missionutils.Console
 class CalculatorManager {
     fun start(){
         val input = promptUserInput()
+
+        if (input.isBlank()) {
+            displayResult(0)
+            return
+        }
+
         val (delimiters, numbersString) = DelimiterExtractor.extractDelimiters(input)
         val tokens = StringSplitter.split(numbersString, delimiters)
         val numbers = NumberParser.parseNumbers(tokens)
