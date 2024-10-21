@@ -11,7 +11,14 @@ fun main() {
         return numbers.sum()
     }
 
-    val result: Int = defaultSeparator(input)
+    fun customSeparator(input: String): Int {
+        val delimiter = input.substringAfter("//").substringBefore("\n")
+        val values = input.substringAfter("\n")
+        val numbers = values.split(delimiter).map { it.toInt() }
+        return numbers.sum()
+    }
+
+    val result: Int = customSeparator(input)
     println("결과: $result")
 }
 
