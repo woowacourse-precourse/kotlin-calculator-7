@@ -10,10 +10,10 @@ object Parser {
 
     private fun extractCustomDelimitersIfExist(value: String): String {
         if (!value.startsWith("//")) return value
-        val customSeparator = value.substringAfter("//").substringBefore("\n")
+        val customSeparator = value.substringAfter("//").substringBefore("\\n")
         if (customSeparator == ".") throw IllegalArgumentException()
         addDelimiters(customSeparator)
-        return value.substringAfter("\n")
+        return value.substringAfter("\\n")
     }
 
     fun parseToIntList(value: String): List<Double> {
