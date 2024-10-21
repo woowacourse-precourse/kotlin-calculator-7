@@ -4,13 +4,13 @@ import camp.nextstep.edu.missionutils.Console
 
 fun main() {
     println("덧셈할 문자열을 입력해 주세요.")
-    val strInput = Console.readLine()
+    val strInput = Console.readLine().trim()
 
     // \n을 개행 문자로 바꿔주기
     val formattedInput = strInput.replace("\\n", "\n")
     val result = addNumbers(formattedInput)
 
-    println("결과: $result")
+    println("결과 : $result")
     Console.close()
 }
 
