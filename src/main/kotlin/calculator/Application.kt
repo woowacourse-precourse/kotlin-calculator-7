@@ -9,6 +9,11 @@ class Seperator(val expression: String) {
     fun usedCustomSeperator(): Boolean {
         return expression.matches(Regex(CUSTOM_PATTERN))
     }
+    fun findSeperator(): String? {
+        val regex = Regex(CUSTOM_PATTERN)
+        val matchResult = regex.find(expression)
+        return matchResult?.groupValues?.get(1)
+    }
 }
 
 fun main() {
