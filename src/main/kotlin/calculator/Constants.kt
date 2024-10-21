@@ -7,4 +7,5 @@ object Constants {
     const val DEFAULT_SEPARATOR_COLON = ":"
     const val DEFAULT_SEPARATOR_COMMA = ","
     const val SEPARATOR_HEADER_LENGTH = 5
+    const val CUSTOM_SEPARATOR_POS = 2
 }
