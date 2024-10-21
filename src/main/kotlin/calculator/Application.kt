@@ -32,9 +32,7 @@ class Tokenizer(code:String="") {
     var reader = CharReader(code)
     var customOperator:MutableList<Char> = mutableListOf()
 
-    fun exceptionThrower() {
-        throw IllegalArgumentException("잘못된 값을 입력하셨습니다")
-    }
+
 
     fun tokenize():Token {
         var char = reader.read()
@@ -70,7 +68,6 @@ class Tokenizer(code:String="") {
                 }
 
             } else {
-                this.exceptionThrower()
             }
 
         } else if (char in "0123456789") {
@@ -91,7 +88,6 @@ class Tokenizer(code:String="") {
 
         } else {
             if (customOperator.size == 0) {
-                this.exceptionThrower()
             }
             for ((iter, customChar) in customOperator.withIndex()) {
                 if (char == customChar) {
@@ -102,7 +98,6 @@ class Tokenizer(code:String="") {
                     }
 
                 } else {
-                    this.exceptionThrower()
                 }
             }
 
