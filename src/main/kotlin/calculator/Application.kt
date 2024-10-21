@@ -41,12 +41,15 @@ class Calculator {
     private fun getNumbers(input: String): List<Int> {
         // 커스텀 구분자가 있는지 확인
         val isValidCustom = isCustomDelimiter(input)
-        val delimiter = arrayOf(
+        val delimiter =
             // 커스텀 구분자
-            if(isValidCustom) getCustomDelimiter(input)
+            if(isValidCustom) {
+                arrayOf(getCustomDelimiter(input), ",", ":")
+            }
             // 기본 구분자
-            else ",", ":"
-        )
+            else {
+                arrayOf(",", ":")
+            }
         val validInput = if(isValidCustom) input.removeCustomDelimiter() else input
 
         val numbers = validInput.split(*delimiter).map {

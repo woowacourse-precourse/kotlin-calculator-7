@@ -19,6 +19,12 @@ class ApplicationTest : NsTest() {
     fun `예외 테스트`() {
         assertSimpleTest {
             assertThrows<IllegalArgumentException> { runException("-1,2,3") }
+
+    @Test
+    fun `커스텀 구분자+기본 구분자 사용`() {
+        assertSimpleTest {
+            run("//;\\n1;2:45,3")
+            assertThat(output()).contains("결과 : 51")
         }
     }
 
