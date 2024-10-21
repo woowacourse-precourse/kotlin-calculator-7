@@ -54,7 +54,7 @@ class PositiveNumbersParserTest {
     @Test
     fun `쉼표와 콜론으로 구분된 양수인 실수 입력시 양수 리스트 반환`() {
         // act
-        val result = sut.parse("1.2,3.4,5.6")
+        val result = sut.parse("1.2,3.4:5.6")
 
         // assert
         assertThat(result).isEqualTo(listOf(1.2, 3.4, 5.6))
