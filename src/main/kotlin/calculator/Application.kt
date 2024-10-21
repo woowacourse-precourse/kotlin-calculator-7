@@ -11,6 +11,7 @@ fun calculate(string: String): Int {
     if (string == "") return 0
     val strings = split(string)
     val numbers = changeToInt(strings)
+    exceptNegativeNumbers(numbers)
     return numbers.sum()
 }
 
@@ -29,5 +30,11 @@ fun changeToInt(list: List<String>): List<Int> {
         return list.map { it.toInt() }
     } catch (e: NumberFormatException) {
         throw IllegalArgumentException("잘못된 입력입니다.", e)
+    }
+}
+
+fun exceptNegativeNumbers(numbers: List<Int>) {
+    if (numbers.any { it < 0 }) {
+        throw IllegalArgumentException("음수는 입력할 수 없습니다.")
     }
 }
