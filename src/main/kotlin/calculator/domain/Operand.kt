@@ -32,7 +32,7 @@ class Operand(
     }
 
     private fun removeCustomSeparatorPattern() =
-        inputValue.replace(generateCustomSeparatorPattern, "")
+        inputValue.replace(generateCustomSeparatorPattern, REPLACEMENT)
 
     private fun parseAndAddOperands(stringOperand: List<String>) {
         val operandList = parseStringToIntList(stringOperand)
@@ -55,6 +55,7 @@ class Operand(
     companion object {
         private const val GENERATE_CUSTOM_SEPARATOR_PATTERN = "^//(.)\\\\n"
         private const val ZERO = 0
+        private const val REPLACEMENT = ""
         private const val ERROR_NEGATIVE_NUMBER = "[ERROR] 입력 값은 양수여야 합니다."
         private const val ERROR_INVALID_NUMBER = "[ERROR] 숫자만 입력 가능합니다."
     }
