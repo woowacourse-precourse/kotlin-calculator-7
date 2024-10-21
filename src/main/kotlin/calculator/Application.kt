@@ -11,7 +11,7 @@ fun calculate() {
         val userInputString = getUserInput()
         val splitList = splitString(userInputString)
         val sum = sumSplitList(splitList)
-        println(sum)
+        println("결과 : $sum")
     } catch (e:Exception) {
         throw IllegalArgumentException()
     }
