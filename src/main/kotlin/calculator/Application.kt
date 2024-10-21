@@ -1,5 +1,7 @@
 package calculator
 
+import camp.nextstep.edu.missionutils.Console
+
 fun main() {
 
     //readLine() 표준 입력에서 한 줄을 읽어서 문자열로 반환해주는 표준 코틀린 함수
@@ -8,7 +10,7 @@ fun main() {
     val start = "덧셈할 문자열을 입력해 주세요."
     println(start)
 
-    val input = readLine() ?: ""
+    val input = Console.readLine()  // Console API 사용
     try {
         val result = add(input)
         println("결과 : $result")
