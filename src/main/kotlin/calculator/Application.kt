@@ -7,10 +7,14 @@ fun main() {
 }
 
 fun calculate() {
-    val userInputString = userInputString()
-    val splitList = splitString(userInputString)
-    val sum = sumSplitList(splitList)
-    println(sum)
+    try {
+        val userInputString = userInputString()
+        val splitList = splitString(userInputString)
+        val sum = sumSplitList(splitList)
+        println(sum)
+    } catch (e:Exception) {
+        throw IllegalArgumentException()
+    }
 }
 
 fun userInputString():String {
