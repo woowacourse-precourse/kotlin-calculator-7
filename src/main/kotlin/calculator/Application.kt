@@ -37,7 +37,12 @@ fun parseInput(input: String): Pair<String, String> {
 }
 
 fun splitNumbers(input: String, delimiter: String): List<String> {
-    val result = input.split(delimiter)
+    val result = if(delimiter.length ==1) {
+        input.split(delimiter)
+    }
+    else{
+        input.split(Regex(delimiter))
+    }
 
     return result
 }
