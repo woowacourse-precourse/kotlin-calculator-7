@@ -31,7 +31,7 @@ class ApplicationTest : NsTest() {
     }
 
     @Test
-    fun `구분자로 구분된 문자열이 Blank일때`() {
+    fun `구분자로 구분된 문자열이 Empty일때`() {
         assertSimpleTest {
             run("1,2,,")
             assertThat(output()).contains("결과 : 3")

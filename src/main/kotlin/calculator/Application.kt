@@ -37,9 +37,6 @@ class Calculator {
     private fun getInput(): String {
         println(INPUT_MESSAGE)
         val input = Console.readLine()
-        // 문자열이 비었을 경우 0으로 처리한다.
-        println(input)
-        if(input.isBlank()) return "0"
         return input
     }
 
@@ -48,6 +45,9 @@ class Calculator {
      * @return 분리한 숫자들이 저장되어있는 List
      */
     private fun getNumbers(input: String): List<Int> {
+        // 문자열이 비었을 경우 0으로 처리한다.
+        if(input.isEmpty()) return listOf(0)
+
         // 커스텀 구분자가 있는지 확인
         val isValidCustom = isCustomDelimiter(input)
         val delimiter =
@@ -115,7 +115,9 @@ class Calculator {
      */
     private fun String.toValidNum(): Int {
         // 문자열이 비었을 경우 0으로 처리한다.
-        val convertInt = if(isBlank()) 0 else toInt()
+        if (isEmpty()) return 0
+
+        val convertInt = toInt()
         if(convertInt <= 0) throw IllegalArgumentException()
         return convertInt
     }
