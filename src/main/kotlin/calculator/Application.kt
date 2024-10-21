@@ -10,6 +10,11 @@ fun calculate() {
     try {
         val userInputString = getUserInput()
         val splitList = splitString(userInputString)
+
+        if (checkNegative(splitList)) {
+            throw IllegalArgumentException()
+        }
+
         val sum = sumSplitList(splitList)
         println("결과 : $sum")
     } catch (e:Exception) {
@@ -40,4 +45,8 @@ fun findCustomDelimiter(userInputString:String):String {
 fun getRealUserInput(userInputString: String): String {
     val end = userInputString.indexOf("\\n")
     return userInputString.substring(end + 2)
+}
+
+fun checkNegative(splitList: List<Int>):Boolean {
+    return splitList.any { it < 0 }
 }
