@@ -12,4 +12,18 @@ fun main() {
         println("결과: 0")
         return
     }
+    // 총합 계산 및 출력
+    try {
+        val totalSum = calculateSum(userInput)
+        println("결과: $totalSum")
+    } catch (e: IllegalArgumentException) {
+        println(e.message)
+    } finally {
+        Console.close()
+    }
+}
+// 총합계산
+fun calculateSum(input: String): Int {
+    val numbers = extractNumbers(input)
+    return numbers.sum()
 }
