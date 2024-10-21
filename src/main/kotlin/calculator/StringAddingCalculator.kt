@@ -4,14 +4,10 @@ import camp.nextstep.edu.missionutils.Console
 
 class StringAddingCalculator {
     fun runCalculator() {
-        try {
             println("덧셈할 문자열을 입력해 주세요.")
             val inputText = Console.readLine()
             val sum = calculateSum(inputText)
             println("결과 : $sum")
-        } catch (e: IllegalArgumentException) {
-            throw e
-        }
     }
 
     private fun calculateSum(inputText: String): Int {
@@ -49,15 +45,12 @@ class StringAddingCalculator {
     }
 
     private fun sumValidNumbers(numberList: List<String>): Int {
-        return numberList.sumOf { number ->
-            val parsedNumber = parseAndValidateNumber(number)
-            parsedNumber
-        }
+        return numberList.sumOf { parseAndValidateNumber(it) }
     }
 
     private fun parseAndValidateNumber(number: String): Int {
         return number.toIntOrNull()?.takeIf { it >= 0 }
-            ?: throw IllegalArgumentException(NEGATIVE_NUMBER_ERROR)
+            ?: throw IllegalArgumentException("$NEGATIVE_NUMBER_ERROR $number")
     }
 
     companion object {
