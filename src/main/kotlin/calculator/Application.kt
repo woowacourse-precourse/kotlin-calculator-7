@@ -1,5 +1,6 @@
 package calculator
 
 fun main() {
-    // TODO: 프로그램 구현
+    val calculator = Calculator()
+    println("결과 : ${calculator.getSum()}")
 }
