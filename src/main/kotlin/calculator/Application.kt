@@ -7,7 +7,9 @@ fun main() {
     val inputText = Console.readLine()
     val (inputNumbers, delimiters) = divideDelimiters(inputText)
     val numberList = divideNumbers(inputNumbers, delimiters)
-    println("$delimiters $numberList")
+    val sum = calculateSum(numberList)
+    println(inputNumbers)
+    println("결과 : $sum")
 }
 
 fun divideDelimiters(inputText: String): Pair<String, List<String>> {
@@ -28,4 +30,8 @@ fun divideNumbers(inputNumbers: String, delimiters: List<String>): List<String> 
     return inputNumbers.split(*delimiters.toTypedArray())
         .filter { it.isNotEmpty() }
         .map { it.trim() }
+}
+
+fun calculateSum(numberList: List<String>): Int {
+    return numberList.sumOf { it.toInt() }
 }
