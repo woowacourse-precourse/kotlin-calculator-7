@@ -30,7 +30,7 @@ class NumberTokenizer {
 
     private fun filterCustom(input: String, customDelimiters: List<String>): String {
         val filteringInput = customDelimiters.fold(input) { acc, removeDelimiters ->
-            acc.replace(CUSTOM_DELIMITER_PREFIX + removeDelimiters + CUSTOM_DELIMITER_SUFFIX, "")
+            acc.replace(CUSTOM_DELIMITER_PREFIX + removeDelimiters + CUSTOM_DELIMITER_SUFFIX, EMPTY_STRING)
         }
         return filteringInput
     }
@@ -38,5 +38,6 @@ class NumberTokenizer {
     companion object {
         private const val DELIMITER_UNIFIED = " "
         private const val NUMBER_MINIMUM_LIMIT = 0
+        private const val EMPTY_STRING = ""
     }
 }
