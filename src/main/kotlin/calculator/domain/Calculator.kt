@@ -1,10 +1,9 @@
 package calculator.domain
 
 class Calculator(
-    private var input: String
+    private var expression: String
 ) {
     private val delimiters = mutableSetOf(BASIC_DELIMITER_COMMA, BASIC_DELIMITER_COLON)
-    private var stringNumbers: String = input
     private val numbers = mutableListOf<Int>()
 
     init {
@@ -17,20 +16,28 @@ class Calculator(
     }
 
     private fun parseCustomDelimiter() {
-        if (input.startsWith(CUSTOM_DELIMITER_PREFIX)) {
+        if (expression.startsWith(CUSTOM_DELIMITER_PREFIX)) {
             val customDelimiterStartIndex = CUSTOM_DELIMITER_PREFIX.length
-            val customDelimiterEndIndex = input.indexOf(CUSTOM_DELIMITER_SUFFIX)
+            val customDelimiterEndIndex = expression.indexOf(CUSTOM_DELIMITER_SUFFIX)
 
             if (customDelimiterEndIndex != -1) {
-                val customDelimiter = input.substring(customDelimiterStartIndex, customDelimiterEndIndex)
+                val customDelimiter = expression.substring(customDelimiterStartIndex, customDelimiterEndIndex)
                 delimiters.add(customDelimiter)
-                stringNumbers = input.substring(customDelimiterEndIndex + CUSTOM_DELIMITER_SUFFIX.length)
+                expression = expression.substring(customDelimiterEndIndex + CUSTOM_DELIMITER_SUFFIX.length)
             }
         }
     }
 
     private fun parseNumbers() {
-        numbers.addAll(stringNumbers.split(*delimiters.toTypedArray()).map { it.toInt() })
+        if (expression.isBlank()) {
+            return
+        }
+
+        val stringNumbers: List<String>  = expression.split(*delimiters.toTypedArray())
+        for (number in stringNumbers) {
+            val n = number.toInt()
+            numbers.add(n)
+        }
     }
 
     companion object {
