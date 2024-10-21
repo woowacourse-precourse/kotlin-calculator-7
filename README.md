@@ -32,7 +32,7 @@
 
 4-2 입력 받은 문자열로 합산을 계산한다.
 
-### feature 5: 잘못된 값이 입력된 경우 에러 반환
+### feature 5: 잘못된 값이 입력된 경우 IllegalArgumentException 발생
 5-1 "a:50"을 입력했을 경우 IllegalArgumentException을 발생시킨 후 애플리케이션은 종료된다.
 
 5-2 "a,b,c"을 입력했을 경우 IllegalArgumentException을 발생시킨 후 애플리케이션은 종료된다.
