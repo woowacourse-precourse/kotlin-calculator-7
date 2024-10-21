@@ -20,6 +20,7 @@ class Calculator {
             printSum(numbers)
         } catch (e: Exception) {
             println(ERROR_MESSAGE)
+            throw IllegalArgumentException()
         }
     }
 
@@ -47,7 +48,10 @@ class Calculator {
             else ",", ":"
         )
         val validInput = if(isValidCustom) input.removeCustomDelimiter() else input
-        val numbers = validInput.split(*delimiter).map { it.toInt() }
+
+        val numbers = validInput.split(*delimiter).map {
+            it.toValidNum()
+        }
         return numbers
     }
 
@@ -89,5 +93,17 @@ class Calculator {
     private fun printSum(numbers: List<Int>) {
         val sum = numbers.sum()
         println("결과 : $sum")
+    }
+
+    /**
+     * 문자열을 유효한 정수로 변환한다.
+     * 정수가 유효할 조건 : 양수
+     * 유효하지 않을 경우 IllegalArgumentException()를 throw 한다.
+     * @return 변환된 숫자
+     */
+    private fun String.toValidNum(): Int {
+        val convertInt = toInt()
+        if(convertInt < 0) throw IllegalArgumentException()
+        return convertInt
     }
 }
