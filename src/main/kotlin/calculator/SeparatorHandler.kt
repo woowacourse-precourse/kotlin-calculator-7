@@ -11,15 +11,13 @@ class SeparatorHandler(private val input: String) {
         return input.substring(CUSTOM_SEPARATOR_START_INDEX, customSeparatorEndIndex)
     }
 
-    private fun splitWithCustomSeparator(): List<String> {
+    private fun splitByCustomSeparator(): List<String> {
         val customSeparator = getCustomSeparator()
         val numberStartIndex = input.indexOf(CUSTOM_SEPARATOR_END_CHAR) + 2
         return input.substring(numberStartIndex).split(customSeparator)
     }
 
-    private fun splitWithDefaultSeparator(): List<String> {
-        return input.split("[,:]".toRegex())
-    }
+    private fun splitByDefaultSeparator(): List<String> = input.split(DEFAULT_SEPARATOR.toRegex())
 
     companion object {
         const val CUSTOM_SEPARATOR_END_CHAR = "\\n"
