@@ -46,7 +46,7 @@ object Validator {
             0
         }
         val expression = userInput.substring(endOfCustomDelimiter)
-        if (!expression.matches(Regex("^\\d+([${delimiterList.joinToString("")}]\\d+)*\$"))) {
+        if (expression.isNotEmpty() && !expression.matches(Regex("^\\d+([${delimiterList.joinToString("")}]\\d*)*\$"))) {
             throw IllegalArgumentException(ERROR_INPUT_NOT_EXPRESSION)
         }
     }
@@ -58,7 +58,9 @@ object Validator {
             0
         }
         val expression = userInput.substring(endOfCustomDelimiter)
-        val numbers = expression.split(Regex("[" + delimiterList.joinToString("") + "]")).map { it.toInt() }
+        val numbers = expression.split(Regex("[" + delimiterList.joinToString("") + "]"))
+            .map { it.ifEmpty { "0" } }
+            .map { it.toInt() }
         return numbers
     }
 }
