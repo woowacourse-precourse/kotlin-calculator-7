@@ -34,7 +34,11 @@ class ApplicationTest : NsTest() {
 
     @Test
     fun `구분자로 입력식 쪼개기`() {
-        val inputExpression = InputExpression("1,2:3")
+        val inputExpression1 = InputExpression("1,2:3")
+        val inputExpression2 = InputExpression("//;\\n1;2;3")
+        assertThat(inputExpression1.splitExpression()).isEqualTo(listOf("1", "2", "3"))
+        assertThat(inputExpression2.splitExpression()).isEqualTo(listOf("1", "2", "3"))
+    }
 
         assertThat(inputExpression.splitExpression()).isEqualTo(listOf("1", "2", "3"))
     }
