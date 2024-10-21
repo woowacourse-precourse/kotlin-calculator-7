@@ -5,7 +5,8 @@ import camp.nextstep.edu.missionutils.Console
 fun main() {
     val userInputString = userInputString()
     val splitList = splitString(userInputString)
-    println(splitList)
+    val sum = sumSplitList(splitList)
+    println(sum)
 }
 
 fun userInputString():String {
@@ -16,4 +17,10 @@ fun userInputString():String {
 fun splitString(userInputString:String):List<Int> {
     val basicSplitList = userInputString.split(",",":").map{it.toInt()}
     return basicSplitList
+
+}
+
+fun sumSplitList(splitList:List<Int>):Int {
+    val sum = splitList.sum()
+    return sum
 }
