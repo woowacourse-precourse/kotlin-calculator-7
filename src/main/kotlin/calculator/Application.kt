@@ -2,11 +2,16 @@ package calculator
 
 import camp.nextstep.edu.missionutils.Console
 
+private const val ERROR_STR = "IllegalArgumentException : 프로그램을 종료합니다."
 fun main() {
     // TODO: 프로그램 구현
-    val input = getInput()
-    val numbers = getNumbers(input)
-    printSum(numbers)
+    try {
+        val input = getInput()
+        val numbers = getNumbers(input)
+        printSum(numbers)
+    } catch (e: Exception) {
+        println(ERROR_STR)
+    }
 }
 
 private const val INPUT_STR = "덧셈할 문자열을 입력해 주세요."
