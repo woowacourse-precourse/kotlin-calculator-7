@@ -7,11 +7,13 @@ fun main() {
     val input = Console.readLine()
 
     val calculator = StringCalculator()
-    if (calculator.isValid(input)) {
+
+    try {
+        calculator.isValid(input)
         val result = calculator.calculate(input)
         println("결과 : $result")
-    } else {
-        println("잘못된 입력입니다.")
+    } catch (e: IllegalArgumentException) {
+        println("${e.message}")
     }
 }
 
@@ -21,15 +23,24 @@ class StringCalculator {
 
         val (delimiter, numbers) = customDelimiter(input)
         val tokens = numbers.split(delimiter.toRegex())
-        return tokens.map { it.toInt() }.filter { it >= 0 }.sum()
+
+        return tokens.sumOf { it.toInt() }
     }
 
-    fun isValid(input: String): Boolean {
-        if (input.isEmpty()) return true
+    fun isValid(input: String) {
+        if (input.isEmpty()) return
 
         val (delimiter, numbers) = customDelimiter(input)
         val tokens = numbers.split(delimiter.toRegex())
-        return tokens.all { it.toIntOrNull() != null }
+
+        tokens.forEach {
+            it.toIntOrNull() ?: throw IllegalArgumentException("잘못된 입력값이 포함되어 있습니다: $it")
+        }
+
+        val minusNum = tokens.map { it.toInt() }.filter { it < 0 }
+        if (minusNum.isNotEmpty()) {
+            throw IllegalArgumentException("음수는 허용되지 않습니다.: $minusNum")
+        }
     }
 
     private fun customDelimiter(input: String): Pair<String, String> {
