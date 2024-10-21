@@ -1,14 +1,16 @@
 package calculator
 
+import camp.nextstep.edu.missionutils.Console
+
 fun main() {
     val calculator = Calculator()
     calculator.calculate()
 }
 
 class Calculator {
-    fun calculate(){
+    fun calculate() {
         val line = input()
-        output(plus(separate(line,findCustom(line))))
+        output(plus(separate(line, findCustom(line))))
     }
 
     private fun findCustom(line: String): Char? {
@@ -19,45 +21,37 @@ class Calculator {
         return null
     }
 
-    private fun separate(line: String, custom: Char?) :List<Int>{
+    private fun separate(line: String, custom: Char?): List<Int> {
+        var noCustom = line
+        if (custom != null) {
+            noCustom = line.substring(5)
+        }
         val numbers = mutableListOf<Int>()
         var number = 0
-        if (custom == null) {
-            for (each in line) {
-                if (each == ':' || each == ',') {
-                    numbers.add(number)
-                    number = 0
-                } else if (each in '0'..'9') {
-                    number = number * 10 + each.digitToInt()
-                } else {
-                    throw IllegalArgumentException()
-                }
-            }
-        } else {
-            val noCustom = line.substring(5)
-            for (each in noCustom) {
-                if (each == custom) {
-                    numbers.add(number)
-                    number = 0
-                } else if (each in '0'..'9') {
-                    number = number * 10 + each.digitToInt()
-                } else {
-                    throw IllegalArgumentException()
-                }
+        for (each in noCustom) {
+            if (each == ':' || each == ',' || (custom != null && each == custom)) {
+                numbers.add(number)
+                number = 0
+            } else if (each in '0'..'9') {
+                number = number * 10 + each.digitToInt()
+            } else {
+                throw IllegalArgumentException()
             }
         }
         numbers.add(number)
         return numbers
     }
 
-    private fun plus(numbers:List<Int>):Int{
+    private fun plus(numbers: List<Int>): Int {
         return numbers.sum()
     }
-    private fun input():String {
+
+    private fun input(): String {
         println("덧셈할 문자열을 입력해 주세요.")
-        return readln()
+        return Console.readLine()
     }
-    private fun output(total:Int){
+
+    private fun output(total: Int) {
         println("결과 : $total")
     }
 }
