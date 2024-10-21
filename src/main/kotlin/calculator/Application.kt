@@ -5,28 +5,43 @@ import camp.nextstep.edu.missionutils.Console
 fun main() {
     println("문자열을 입력해주세요.")
     val input = Console.readLine()
-
-    try {
-        checkValid(input)
-
-    } catch (e: IllegalArgumentException) {
-        println("잘못 된 값을 입력했습니다") // 예외 메시지를 출력
-    }
+    checkValid(input)
 }
 
-fun checkValid(inputText: String) {
+private fun checkValid(inputText: String) {
+
     val (numbers, customDelimiters) = tokenizeString(inputText)
     if (numbers.isEmpty()) {
         return print(0)
     }
+
     val numberRegex = customDelimiters.joinToString("|") { "\\$it" } // 각 구분자를 이스케이프 처리
+
     val numberList = numbers.split(Regex(numberRegex))
+
     for (number in numberList) {
-        if (number.toIntOrNull() == null) {
-            throw IllegalArgumentException()
+
+        if (number.toInt() < 0) { // 음수 체크 추가
+
+            throw IllegalArgumentException("음수를 입력 할 수 없습니다.")
         }
     }
+    println("결과 : " + addList(numberList))
 }
+
+
+private fun addList(numbers: List<String>): Int {
+    var sum = 0
+    for (number in numbers) {
+        // 문자열을 정수로 변환하고, null인 경우는 무시
+        val intValue = number.toIntOrNull()
+        if (intValue != null) {
+            sum += intValue
+        }
+    }
+    return sum
+}
+
 
 private fun tokenizeString(inputText: String): Pair<String, List<String>> {
     return if (inputText.startsWith("//")) {
@@ -39,9 +54,10 @@ private fun tokenizeString(inputText: String): Pair<String, List<String>> {
         val defaultDelimiters = listOf(",", ":")
         // 마지막 \n을 기준으로 나누기
         val parts = inputText.split("\n")
-        val operators = parts.dropLast(1).joinToString("") // 마지막 \n 앞의 모든 부분을 연산자로
+        val operators = defaultDelimiters.filter { inputText.contains(it) } // 기본 구분자 중 입력에 포함된 것만 필터링
         val numbers = parts.last() // 마지막 부분을 숫자로
-        Pair(numbers, defaultDelimiters + operators) // 숫자와 기본 구분자 + 연산자 반환
+
+        Pair(numbers, operators) // 숫자와 연산자 반환
     }
 }
 
