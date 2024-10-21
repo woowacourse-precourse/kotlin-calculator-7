@@ -7,6 +7,7 @@ import camp.nextstep.edu.missionutils.Console
 class CalculatorManager {
     fun start(){
         val userInput = getUserInput()
+        // 사용자가 입력한 문자열 검증을 위한 함수
         Validator.validateUserInput(userInput)
         val result = NumberCalculator.addNumbers(userInput)
         printCalculate(result)
