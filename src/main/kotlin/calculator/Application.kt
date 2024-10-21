@@ -23,7 +23,7 @@ fun add(input: String): Int {
 
     // 커스텀 구분자 확인
     if (input.startsWith("//")) {
-        val specCharEnd = input.indexOf("\\n")
+        val specCharEnd = input.indexOf("\n")
 
         if (specCharEnd == -1) {
             throw IllegalArgumentException("잘못된 형식입니다.")
