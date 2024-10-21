@@ -11,7 +11,7 @@ fun calculate(string: String): Int {
     if (string == "") return 0
     
     val strings = splitForCalculate(string)
-    val numbers = strings.map { it.toInt() }
+    val numbers = changeToInt(strings)
 
     return numbers.sum()
 }
@@ -22,4 +22,12 @@ fun splitForCalculate(string: String): List<String> {
     }
 
     return string.split(",", ":")
+}
+
+fun changeToInt(list: List<String>): List<Int> {
+    try {
+        return list.map { it.toInt() }
+    } catch (e: NumberFormatException) {
+        throw IllegalArgumentException("잘못된 입력입니다.", e)
+    }
 }
