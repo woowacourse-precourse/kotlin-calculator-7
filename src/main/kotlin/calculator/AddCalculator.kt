@@ -10,14 +10,15 @@ class AddCalculator {
         return numbers.sum()
     }
 
-    fun getDelimiter(input: String): String {
+    private fun getDelimiter(input: String): String {
         if (input.startsWith("//")) {
-            if (input.contains("\n")) {
-                return input.substring(2, input.indexOf("\n"))
-            }else{
+            if (input.contains("\\n")) {
+                val customDelimiter = input.substring(2, input.indexOf("\\n"))
+                return customDelimiter.toCharArray().joinToString("|") { Regex.escape(it.toString()) }
+            } else {
                 throw IllegalArgumentException("커스텀 구분자 입력이 잘못되었습니다.")
             }
-        }else{
+        } else {
             return ",|:"
         }
     }
