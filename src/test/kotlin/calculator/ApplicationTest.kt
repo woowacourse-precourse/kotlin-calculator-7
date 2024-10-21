@@ -45,6 +45,9 @@ class ApplicationTest : NsTest() {
         assertThat(parseNumber("1")).isEqualTo(1)
     }
 
+    @Test
+    fun `문자열을 더해주는 메인 메소드`() {
+        assertThat(calculate(listOf("1", "2", "3"))).isEqualTo(6)
     }
 
     @Test
