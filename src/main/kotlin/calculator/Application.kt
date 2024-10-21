@@ -11,11 +11,16 @@ fun main() {
 
     val result = addNumbers(formattedInput)
     println("결과: $result")
+    Console.close()
 }
 
 fun addNumbers(input: String): Int {
+    if (input.isEmpty()) {
+        return 0
+    }
     val (delimiter, numbers) = parseInput(input)
     val numberList = splitNumbers(numbers, delimiter)
+    validateNumbers(numberList)
     return numberList.sumOf { it.toInt() }
 }
 
@@ -32,4 +37,12 @@ fun parseInput(input: String): Pair<String, String> {
 
 fun splitNumbers(input: String, delimiter: String): List<String> {
     return input.split(Regex(delimiter))
+}
+fun validateNumbers(numbers: List<String>) {
+    for (number in numbers) {
+        val num = number.toIntOrNull() ?: throw IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다.")
+        if (num < 0) {
+            throw IllegalArgumentException("음수는 허용되지 않습니디: $num")
+        }
+    }
 }
