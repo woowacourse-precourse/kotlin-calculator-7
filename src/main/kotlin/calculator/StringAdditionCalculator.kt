@@ -3,18 +3,13 @@ package calculator
 import camp.nextstep.edu.missionutils.Console
 
 class StringAdditionCalculator {
-    private var isInputValid: Boolean = true
-
     fun runCalculator() {
         println("덧셈할 문자열을 입력해 주세요.")
         val inputText = Console.readLine()
 
         if (inputText.isBlank()) {
-            println("오류: $EMPTY_STRING_ERROR")
-            isInputValid = false
-            return
+            throw IllegalArgumentException(EMPTY_STRING_ERROR)
         }
-
         val sum = calculateSum(inputText)
         println("결과 : $sum")
     }
