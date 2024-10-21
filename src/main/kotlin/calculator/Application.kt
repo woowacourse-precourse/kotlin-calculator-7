@@ -31,16 +31,8 @@ fun extractDefaultDelimiter(userInput: String): Int {
         .calculateSum()
 }
 
-fun calculateSum(userInput: String): Int {
-    if (userInput.isBlank()) return 0
-
-    val (delimiters, numbers) = extractDelimiter(userInput)
-
-    return numbers.split(*delimiters.toCharArray())
-        .filter { it.isNotEmpty() }
-        .map {
-            it.toIntOrNull() ?: throw IllegalArgumentException()
-        }
-        .onEach { require(it >= 0){} }
-        .sum()
+fun List<String>.calculateSum(): Int {
+    return sumOf {number ->
+        number.toIntOrNull() ?: throw IllegalArgumentException()
+    }
 }
