@@ -26,7 +26,7 @@ class Separator {
             if (endIndex+customSeparates.second.length == input.length) return listOf(0)
         }
 
-        input.split(*separates.toCharArray()).forEach { item ->
+        input.substring(endIndex + customSeparates.second.length).split(*separates.toCharArray()).forEach { item ->
             item.toIntOrNull()?.let {
                 result.add(it)
             } ?: run {
