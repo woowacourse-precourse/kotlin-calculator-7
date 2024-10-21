@@ -1,12 +1,17 @@
 package calculator
 
 fun main() {
-
+    val calculator = Calculator()
+    calculator.calculate()
 }
 
 class Calculator {
+    fun calculate(){
+        val line = input()
+        output(plus(separate(line,findCustom(line))))
+    }
 
-    fun findCustom(line: String): Char? {
+    private fun findCustom(line: String): Char? {
         val regex = "^//.\\n".toRegex()
         if (regex.matches(line)) {
             return line.elementAt(2)
@@ -14,15 +19,14 @@ class Calculator {
         return null
     }
 
-    fun separate(line: String, custom: Char?) :List<Int>{
+    private fun separate(line: String, custom: Char?) :List<Int>{
         val numbers = mutableListOf<Int>()
+        var number = 0
         if (custom == null) {
-            var number = 0
             for (each in line) {
                 if (each == ':' || each == ',') {
                     numbers.add(number)
                     number = 0
-                    continue
                 } else if (each in '0'..'9') {
                     number = number * 10 + each.digitToInt()
                 } else {
@@ -31,12 +35,11 @@ class Calculator {
             }
         } else {
             val noCustom = line.substring(5)
-            var number = 0
+            println(noCustom)
             for (each in noCustom) {
                 if (each == ':' || each == ',' || each == custom) {
                     numbers.add(number)
                     number = 0
-                    continue
                 } else if (each in '0'..'9') {
                     number = number * 10 + each.digitToInt()
                 } else {
@@ -44,17 +47,18 @@ class Calculator {
                 }
             }
         }
+        numbers.add(number)
         return numbers
     }
 
-    fun plus(numbers:List<Int>):Int{
+    private fun plus(numbers:List<Int>):Int{
         return numbers.sum()
     }
-    fun input():String {
+    private fun input():String {
         println("덧셈할 문자열을 입력해 주세요.")
         return readln()
     }
-    fun output(total:Int){
+    private fun output(total:Int){
         println("결과 : $total")
     }
 }
