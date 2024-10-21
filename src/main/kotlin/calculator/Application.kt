@@ -9,16 +9,13 @@ fun main() {
     val inputHandler = InputHandler()
     val input = inputHandler.readInput()
 
-    if (input.isEmpty()) {
-        printOutput(0)
-        return
-    }
-
-    val splitNumberList = SeparatorHandler(input).getSplitNumberList()
-    val result = Calculator(splitNumberList).sumOfSplitNumbers()
-    printOutput(result)
     val result = if (input.isEmpty()) {
         throw IllegalArgumentException(ErrorType.INVALID_EMPTY_INPUT.message)
+    } else {
+        val splitNumberList = SeparatorHandler(input).getSplitNumberList()
+        Calculator(splitNumberList).sumOfSplitNumbers()
+    }
+    OutputHandler().printOutput(result)
 }
 
 class InputHandler {
