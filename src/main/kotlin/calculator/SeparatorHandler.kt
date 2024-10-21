@@ -6,6 +6,10 @@ class SeparatorHandler(private val input: String) {
         return input.startsWith("//") && input.contains("\\n")
     }
 
+    private fun hasCustomSeparator(): Boolean = input.startsWith(CUSTOM_SEPARATOR_START_CHAR)
+        .also { if (it && !input.contains(CUSTOM_SEPARATOR_END_CHAR)) throw IllegalArgumentException(ErrorType.INVALID_CUSTOM_DELIMITER.message) }
+
+
     private fun getCustomSeparator(): String {
         val customSeparatorEndIndex = input.indexOf(CUSTOM_SEPARATOR_END_CHAR)
         return input.substring(CUSTOM_SEPARATOR_START_INDEX, customSeparatorEndIndex)
