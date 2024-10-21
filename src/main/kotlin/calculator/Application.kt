@@ -18,18 +18,18 @@ fun calculate(input: String): String {
     if (input.isBlank()) return "결과 : 0"  // 빈 문자열 처리
 
     var delimiter = "[,:]"  // 기본 구분자: 쉼표와 콜론
-    var numbers = input
+    var inputString = input
     val sum: Int
 
     // 커스텀 구분자 처리
     if (input.startsWith("//")) {
         val customDelimiterArea = input.substring(2, input.indexOf("\\n"))
         delimiter = Regex.escape(customDelimiterArea)  // 커스텀 구분자 설정
-        numbers = input.substring(input.indexOf("\\n") + 2)  // 입력된 문자열 부분만 남기기
+        inputString = input.substring(input.indexOf("\\n") + 2)  // 입력된 문자열 부분만 남기기
     }
 
     // 기본 구분자 처리
-    val numberList = numbers.split(delimiter.toRegex()).map {
+    val numberList = inputString.split(delimiter.toRegex()).map {
         try {
             it.toInt()
         } catch (e: NumberFormatException) {
