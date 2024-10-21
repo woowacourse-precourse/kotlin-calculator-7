@@ -30,13 +30,14 @@ fun main() {
     try {
         var inputString = input()
 
-        if (!isValid(inputString)) {
-            if (checkCustom(inputString)) {
-                inputString = replaceCustom(inputString)
-            } else {
-                throw IllegalArgumentException()
-            }
+        if (checkCustom(inputString)) {
+            inputString = replaceCustom(inputString)
         }
+
+        if (!isValid(inputString) and !checkCustom(inputString)) {
+            throw IllegalArgumentException()
+        }
+
         val numbers = splitNumber(inputString)
         val result = sum(numbers)
         println("결과 : $result")
