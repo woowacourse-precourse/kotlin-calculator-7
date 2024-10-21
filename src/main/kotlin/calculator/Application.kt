@@ -4,6 +4,7 @@ import camp.nextstep.edu.missionutils.Console
 import java.math.BigDecimal
 
 fun main() {
+
     val delimiterExtractor = DelimiterExtractor()
     val calculator = Calculator(delimiterExtractor)
 

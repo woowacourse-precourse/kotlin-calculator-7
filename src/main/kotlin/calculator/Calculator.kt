@@ -24,6 +24,6 @@ class Calculator(private val delimiterExtractor: DelimiterExtractor) {
         if (numbers.any { it < BigDecimal.ZERO }) {
             throw IllegalArgumentException("양수를 입력해주세요.")
         }
-        return numbers //파싱한 문자열 반환
+        return numbers
     }
 }
