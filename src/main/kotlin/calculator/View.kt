@@ -13,9 +13,8 @@ class View() {
         return readlnOrNull() ?: ""
     }
 
-    fun showResult(result: Int, numbs: List<Int>) {
-        val numAsString = numbs.joinToString(separator = "+")
-        println("$numAsString 는 $result 입니다.")
+    fun showResult(result: Int) {
+        println("결과 : $result")
     }
 
     fun showError(e: Exception) {

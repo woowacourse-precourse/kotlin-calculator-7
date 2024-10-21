@@ -24,15 +24,17 @@ class Controller(private val view: View) {
         return Data(numbers, delimiters)
     }
 
-    fun add(data: Data): Int {
+    private fun add(data: Data): Int {
         return data.numbers.sum()
     }
 
     fun run() {
         try {
-            var input = view.getInput()
+            val input = view.getInput()
             println("$input 입력받았습니다.")
             val data = parseInput(input)
+            val result = add(data)
+            view.showResult(result)
         } catch (e: IllegalArgumentException) {
             view.showError(e)
         }
