@@ -10,14 +10,12 @@ class Calculator {
         println("덧셈할 문자열을 입력해 주세요.")
         val inputString: String = Console.readLine()
 
-        when (inputString.isEmpty()) {
-            true -> {
-                showResult()
-                return
-            }
-
-            false -> operateCalculatorLogic(inputString)
+        if (inputString.isEmpty()) {
+            showResult()
+            return
         }
+
+        operateCalculatorLogic(inputString)
     }
 
     private fun operateCalculatorLogic(inputString: String) {
@@ -35,7 +33,7 @@ class Calculator {
                 separator.colonSeparator,
                 separator.commaSeparator,
                 separator.customSeparator ?: "",
-            ).map { it }
+            )
 
         val separatedInputNumber: List<Int> = separatedInputFromSeparator
             .filter { it.matches(DIGIT_REGEX) }
@@ -47,7 +45,7 @@ class Calculator {
 
     private fun operateCalculatorWithDefaultSeparatorLogic(inputString: String) {
         val separatedInputFromSeparator: List<String> =
-            inputString.split(separator.colonSeparator, separator.commaSeparator).map { it }
+            inputString.split(separator.colonSeparator, separator.commaSeparator)
 
         val separatedInputNumber: List<Int> = separatedInputFromSeparator
             .filter { it.matches(DIGIT_REGEX) }
