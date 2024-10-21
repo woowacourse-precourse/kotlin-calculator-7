@@ -1,6 +1,7 @@
 package calculator
 
 import camp.nextstep.edu.missionutils.Console
+import java.util.NoSuchElementException
 
 fun main() {
     val calculator = Calculator()
@@ -19,8 +20,13 @@ class Calculator {
             val numbers = getNumbers(input)
             printSum(numbers)
         } catch (e: Exception) {
-            println(ERROR_MESSAGE)
-            throw IllegalArgumentException()
+            if(e is NoSuchElementException) {
+                printSum(listOf(0))
+            }
+            else {
+                println(ERROR_MESSAGE)
+                throw IllegalArgumentException()
+            }
         }
     }
 
@@ -31,6 +37,9 @@ class Calculator {
     private fun getInput(): String {
         println(INPUT_MESSAGE)
         val input = Console.readLine()
+        // 문자열이 비었을 경우 0으로 처리한다.
+        println(input)
+        if(input.isBlank()) return "0"
         return input
     }
 
@@ -100,12 +109,13 @@ class Calculator {
 
     /**
      * 문자열을 유효한 정수로 변환한다.
-     * 정수가 유효할 조건 : 양수
+     * 정수가 유효할 조건 : 양수, 0
      * 유효하지 않을 경우 IllegalArgumentException()를 throw 한다.
      * @return 변환된 숫자
      */
     private fun String.toValidNum(): Int {
-        val convertInt = toInt()
+        // 문자열이 비었을 경우 0으로 처리한다.
+        val convertInt = if(isBlank()) 0 else toInt()
         if(convertInt < 0) throw IllegalArgumentException()
         return convertInt
     }
