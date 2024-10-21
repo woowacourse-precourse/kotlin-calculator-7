@@ -1,5 +1,10 @@
 package calculator
 
 fun main() {
-    // TODO: 프로그램 구현
+    lateinit var userInputList: List<String>
+    var sum = 0
+    val userInput = readlnOrNull()
+    if (userInput != null) {
+        userInputList = userInput.split(",", ":")
+    }
 }
