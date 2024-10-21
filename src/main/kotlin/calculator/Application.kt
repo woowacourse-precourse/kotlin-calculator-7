@@ -28,14 +28,13 @@ fun calculateSum(numbers: String, delimiter: String): Int {
     var sum = 0
     for (token in tokens) {
         if (token.isNotEmpty()) {
-            val number = token.toInt()
+            val number = token.toIntOrNull()
+                ?: throw IllegalArgumentException("입력값이 올바르지 않습니다.")
+            if (number < 0) {
+                throw IllegalArgumentException("음수는 허용되지 않습니다.: $number")
+            }
             sum += number
         }
     }
     return sum
-}
-
-
-fun main() { // test
-    println(add("//;\\n1;2;3"))
 }
