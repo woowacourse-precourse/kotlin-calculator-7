@@ -25,9 +25,9 @@
 
 ### ✅ 체크리스트
 
-- [ ] 시작점이 application의 main 함수인가?
-- [ ] 프로그램 종료 시 System.exit() 또는 exitProcess()를 호출하지 않았는가?
-- [ ] 요구사항에 명시된 출력 형식을 따랐는가?
-- [ ] 사용자가 입력하는 값은 ```camp.nextstep.edu.missionutils.Console```의 ```readLine()```을 활용했는가?
-- [ ] 기능 별로 커밋했는가?
-- [ ] [코틀린 코드 컨벤션](https://kotlinlang.org/docs/coding-conventions.html)을 지키며 프로그래밍했는가?
+- [X] 시작점이 application의 main 함수인가?
+- [X] 프로그램 종료 시 System.exit() 또는 exitProcess()를 호출하지 않았는가?
+- [X] 요구사항에 명시된 출력 형식을 따랐는가?
+- [X] 사용자가 입력하는 값은 ```camp.nextstep.edu.missionutils.Console```의 ```readLine()```을 활용했는가?
+- [X] 기능 별로 커밋했는가?
+- [X] [코틀린 코드 컨벤션](https://kotlinlang.org/docs/coding-conventions.html)을 지키며 프로그래밍했는가?
