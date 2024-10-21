@@ -1,9 +1,14 @@
 package calculator
 
+const val CUSTOM_PATTERN = "//(.)\\\\n(.*)"
+
 class InputExpression(val expression: String?)
 
-class Seperator() {
+class Seperator(val expression: String) {
     var seperator = ",|:"
+    fun usedCustomSeperator(): Boolean {
+        return expression.matches(Regex(CUSTOM_PATTERN))
+    }
 }
 
 fun main() {

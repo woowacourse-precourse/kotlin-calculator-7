@@ -15,8 +15,14 @@ class ApplicationTest : NsTest() {
 
     @Test
     fun `구분자를 가진다`() {
-        val spliter = Seperator()
+        val spliter = Seperator("1,2:3")
         assertThat(spliter.seperator).isEqualTo(",|:")
+    }
+
+    @Test
+    fun `커스텀 구분자가 존재하는지 체크`() {
+        val spliter = Seperator("//;\\n1;2;3")
+        assertThat(spliter.usedCustomSeperator()).isTrue()
     }
 
     @Test
