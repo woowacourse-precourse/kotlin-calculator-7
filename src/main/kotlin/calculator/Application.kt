@@ -33,7 +33,14 @@ fun add(input: String?): Int {
     }
 
     val tokens = numbers.split(*delimiters)
-    val numberList = tokens.map { it.toInt() }
+
+    val numberList = tokens.map {
+        try {
+            it.toInt()
+        } catch (e: NumberFormatException) {
+            throw IllegalArgumentException("Invalid input: $it")
+        }
+    }
 
     val negativeNumbers = numberList.filter { it < 0 }
     if (negativeNumbers.isNotEmpty()) {
