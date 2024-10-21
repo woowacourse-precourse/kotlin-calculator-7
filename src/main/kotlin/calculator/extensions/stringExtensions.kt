@@ -13,7 +13,6 @@ fun String.isContainCustomOperator(): Boolean {
     return result
 }
 
-
 fun String.splitWithCustomDelimiter(): List<String> {
     val regex = Regex(SPLIT_DELIMITER.pattern)
     val matchResult = regex.find(this)
