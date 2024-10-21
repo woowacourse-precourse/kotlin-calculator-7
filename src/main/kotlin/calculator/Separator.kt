@@ -7,6 +7,7 @@ class Separator {
     private var endIndex = 0
     private val result: MutableList<Int> = mutableListOf(0)
 
+    // 커스텀 구분자가 있는 경우 separates 변수에 추가하는 함수
     private fun getCustomSeparate(input: String) {
         if (!input.startsWith(customSeparates.first)) return
 
@@ -17,6 +18,7 @@ class Separator {
         separates.addAll(input.substring(startIndex, endIndex).toList())
     }
 
+    // 구분자를 통해 구분하는 함수
     fun run(input: String): List<Int> {
         if (input.isBlank()) return listOf(0)
 
