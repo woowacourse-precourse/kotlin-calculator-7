@@ -1,5 +1,7 @@
 package calculator
 
+import camp.nextstep.edu.missionutils.Console
+
 const val CUSTOM_PATTERN = "//(.)\\\\n(.*)"
 
 class InputExpression(val expression: String?) {
@@ -57,6 +59,6 @@ fun calculate(text: List<String>): Int {
 
 fun main() {
     println("덧셈할 문자열을 입력해 주세요.")
-    val inputExpression = InputExpression(readLine())
+    val inputExpression = InputExpression(Console.readLine())
     println("결과 : ${calculate(inputExpression.splitExpression())}")
 }
