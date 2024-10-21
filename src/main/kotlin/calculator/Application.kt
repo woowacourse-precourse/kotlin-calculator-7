@@ -1,5 +1,13 @@
 package calculator
 
+import calculator.controller.CalculatorController
+import calculator.model.CalculatorModel
+import calculator.view.CalculatorView
+
 fun main() {
-    // TODO: 프로그램 구현
+    val model = CalculatorModel()
+    val view = CalculatorView()
+    val controller = CalculatorController(model, view)
+
+    controller.runCalculator()
 }
