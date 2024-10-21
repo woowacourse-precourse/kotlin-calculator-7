@@ -66,17 +66,9 @@ class ApplicationTest : NsTest() {
     @Test
     fun `잘못된 문자열 입력 시 Exception 표시`() {
         assertSimpleTest {
-            assertThrows<IllegalArgumentException> {
-                calculate("//;\n1;2,3")
-            }
-
-            assertThrows<IllegalArgumentException> {
-                calculate("//,\n1,2:3")
-            }
-
-            assertThrows<IllegalArgumentException> {
-                calculate("2:3;4")
-            }
+            assertThrows<IllegalArgumentException> { calculate("//;\n1;2,3") }
+            assertThrows<IllegalArgumentException> { calculate("//,\n1,2:3") }
+            assertThrows<IllegalArgumentException> { calculate("2:3;4") }
         }
     }
 
