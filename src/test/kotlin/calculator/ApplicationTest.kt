@@ -8,6 +8,12 @@ import org.junit.jupiter.api.assertThrows
 
 class ApplicationTest : NsTest() {
     @Test
+    fun `입력식을 가진다`() {
+        val inputExpression = InputExpression("1,2:3")
+        assertThat(inputExpression.expression).isEqualTo("1,2:3")
+    }
+
+    @Test
     fun `커스텀 구분자 사용`() {
         assertSimpleTest {
             run("//;\\n1")
