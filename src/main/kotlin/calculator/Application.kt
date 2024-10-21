@@ -47,9 +47,8 @@ private fun getSeparatedValues(input: String): List<String> {
 }
 
 private fun getSeparatorState(input: String): SeparatorState {
-    return if (input.startsWith("//") && input.contains("\\n")) {
-        val rangeForFindSeparator = 2..3
-        SeparatorState.CustomSeparator(input.substring(rangeForFindSeparator))
+    return if (input.startsWith(CUSTOM_SEPARATOR_PREFIX) && input.contains(CUSTOM_SEPARATOR_SUFFIX)) {
+        SeparatorState.CustomSeparator(input[CUSTOM_SEPARATOR_POS])
     } else {
         SeparatorState.DefaultSeparator
     }
