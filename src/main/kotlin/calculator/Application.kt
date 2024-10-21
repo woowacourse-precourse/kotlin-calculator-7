@@ -1,5 +1,14 @@
 package calculator
 
+import calculator.domain.PositiveNumbersParser
+import calculator.ui.Ui
+
 fun main() {
-    // TODO: 프로그램 구현
+    val ui = Ui()
+
+    val userInput = ui.requestUserInput()
+    val positiveNumbers = PositiveNumbersParser().parse(userInput)
+    val sumOfPositiveNumbers = positiveNumbers.sum()
+
+    ui.displaySum(sumOfPositiveNumbers)
 }
