@@ -37,5 +37,8 @@ fun makeCustomStandard(input: String) {
 
 fun calculateSum(numList: List<String>): Int {
     return numList.sumOf {
-        it.toInt()
+        val num = it.toIntOrNull() ?: throw IllegalArgumentException("wrong input")
+        if (num < 0) throw IllegalArgumentException("wrong input")
+
+        num
     }}
