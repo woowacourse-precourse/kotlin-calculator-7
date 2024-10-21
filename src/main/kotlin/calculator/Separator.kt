@@ -2,7 +2,7 @@ package calculator
 
 class Separator {
     private val separates: MutableList<Char> = mutableListOf(',', ':')
-    private val customSeparates = Pair("//", "\n")
+    private val customSeparates = Pair("//", "\\n")
     private var startIndex = 0
     private var endIndex = 0
     private val result: MutableList<Int> = mutableListOf(0)
@@ -13,8 +13,7 @@ class Separator {
 
         startIndex = customSeparates.first.length
         endIndex = input.indexOf(customSeparates.second)
-        require(endIndex != 1) {"커스텀 구분자를 이용하려면 //, \n 사이에 작성하세요."}
-
+        require(endIndex != -1) {"커스텀 구분자를 이용하려면 //, \\n 사이에 작성하세요."}
         separates.addAll(input.substring(startIndex, endIndex).toList())
     }
 
