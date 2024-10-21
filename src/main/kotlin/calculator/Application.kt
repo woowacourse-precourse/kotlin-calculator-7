@@ -46,5 +46,12 @@ fun main() {
         result = numFromInput.sum()
     }
 
+    // 구분자가 없는 경우
+    else {
+        Console.close()
+        println("다시 시도해주세요. 프로그램을 종료합니다.")
+        throw IllegalArgumentException("프로그램을 종료합니다.")
+    }
+
     println("결과 : $result")
 }
