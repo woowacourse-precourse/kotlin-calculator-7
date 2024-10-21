@@ -8,15 +8,34 @@ fun main() {
     var textArray: List<String>;
 
     if (input.contains("//") && input.contains("\\n")) {
-        val temp = input.split("//", "\\n");
-        textArray = temp[2].split(temp[1], ",", ":");
+        if (input.startsWith("//")) {
+            val temp = input.split("//", "\\n");
+            textArray = temp[2].split(temp[1], ",", ":");
+        } else {
+            throw IllegalArgumentException("잘못된 입력입니다.");
+        }
+    } else if (input == ""){
+        textArray = listOf("0");
     } else {
         textArray = input.split(",", ":");
     }
 
-    var result = 0;
-    textArray.forEach {
-        result += Integer.parseInt(it);
+    var result: Int? = 0;
+    try {
+        textArray.forEach {
+            if (Integer.parseInt(it) > 0) {
+                result = result?.plus(Integer.parseInt(it));
+            } else {
+                throw IllegalArgumentException("잘못된 입력입니다.");
+            }
+        }
+    } catch (e: NumberFormatException) {
+        result = null;
     }
-    println(result);
+
+    if (result == null) {
+        throw IllegalArgumentException("잘못된 입력입니다.");
+    } else {
+        println("결과 : $result");
+    }
 }
