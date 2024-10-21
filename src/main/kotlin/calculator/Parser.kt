@@ -32,7 +32,7 @@ class Parser {
     }
 
     fun parseNumber(list: List<String>): List<Long> {
-        var numbers = mutableListOf<Long>()
+        val numbers = mutableListOf<Long>()
         list.forEach {
             if (validator.validatePositiveNumber(it)) {
                 numbers.add(it.toLong())
