@@ -8,13 +8,11 @@ fun main() {
 
     val calculator = StringCalculator()
 
-    try {
-        calculator.isValid(input)
-        val result = calculator.calculate(input)
-        println("결과 : $result")
-    } catch (e: IllegalArgumentException) {
-        println("${e.message}")
-    }
+    calculator.isValid(input)
+
+    val result = calculator.calculate(input)
+
+    println("결과 : $result")
 }
 
 class StringCalculator {
