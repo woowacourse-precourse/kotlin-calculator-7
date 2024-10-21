@@ -61,9 +61,12 @@ class PositiveNumbersParserTest {
     }
 
     @Test
-    fun `빈 문자열을 입력한 경우 예외 발생`() {
-        // act, assert
-        assertThrows<IllegalArgumentException> { sut.parse("") }
+    fun `빈 문자열을 입력한 경우 빈 리스트 반환`() {
+        // act
+        val result = sut.parse("")
+
+        // assert
+        assertThat(result).isEmpty()
     }
 
     @Test
@@ -136,19 +139,21 @@ class PositiveNumbersParserTest {
     }
 
     @Test
-    fun `커스텀 구분자만 입력시 예외 발생`() {
-        // act, assert
-        assertThrows<IllegalArgumentException> {
-            sut.parse("${CUSTOM_DELIMITERS_START};${CUSTOM_DELIMITERS_END}")
-        }
+    fun `커스텀 구분자만 입력시 빈 리스트 반환`() {
+        // act
+        val result = sut.parse("${CUSTOM_DELIMITERS_START};${CUSTOM_DELIMITERS_END}")
+
+        // assert
+        assertThat(result).isEmpty()
     }
 
     @Test
-    fun `양수 부분도 커스텀 구분자 내부에 입력시 예외 발생`() {
-        // act, assert
-        assertThrows<IllegalArgumentException> {
-            sut.parse("${CUSTOM_DELIMITERS_START};1,2;3:4${CUSTOM_DELIMITERS_END}")
-        }
+    fun `양수 부분도 커스텀 구분자 내부에 입력시 빈 리스트 반환`() {
+        // act
+        val result = sut.parse("${CUSTOM_DELIMITERS_START};1,2;3:4${CUSTOM_DELIMITERS_END}")
+
+        // assert
+        assertThat(result).isEmpty()
     }
 
     @Test

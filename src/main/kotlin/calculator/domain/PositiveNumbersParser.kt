@@ -1,23 +1,27 @@
 package calculator.domain
 
 class PositiveNumbersParser {
-    fun parse(userInput: String): List<Double> = try {
-        var delimiters = DEFAULT_DELIMITERS
-        var positiveNumbersPart = userInput
+    fun parse(userInput: String): List<Double> {
+        try {
+            var delimiters = DEFAULT_DELIMITERS
+            var positiveNumbersPart = userInput
 
-        if (userInput.startsWith(CUSTOM_DELIMITERS_START)) {
-            val (customDelimiters, customDelimitersEndIndex) = getCustomDelimiters(userInput)
+            if (userInput.startsWith(CUSTOM_DELIMITERS_START)) {
+                val (customDelimiters, customDelimitersEndIndex) = getCustomDelimiters(userInput)
 
-            delimiters += customDelimiters
-            positiveNumbersPart = userInput.substring(customDelimitersEndIndex + CUSTOM_DELIMITERS_END.length)
+                delimiters += customDelimiters
+                positiveNumbersPart = userInput.substring(customDelimitersEndIndex + CUSTOM_DELIMITERS_END.length)
+            }
+
+            if (positiveNumbersPart.isEmpty()) return emptyList()
+
+            return positiveNumbersPart.split(*delimiters).map {
+                require(!it.any { char -> char.isWhitespace() }) // toDouble은 자체적으로 trim을 하므로 공백있는지 체크
+                it.toDouble().also { number -> require(number > 0) }
+            }
+        } catch (_: NumberFormatException) {
+            throw IllegalArgumentException()
         }
-
-        positiveNumbersPart.split(*delimiters).map {
-            require(!it.any { char -> char.isWhitespace() }) // toDouble은 자체적으로 trim을 하므로 공백있는지 체크
-            it.toDouble().also { number -> require(number > 0) }
-        }
-    } catch (_: NumberFormatException) {
-        throw IllegalArgumentException()
     }
 
     private fun getCustomDelimiters(userInput: String): CustomDelimitersResult {
