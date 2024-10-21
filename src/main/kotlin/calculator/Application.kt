@@ -17,7 +17,7 @@ fun main() {
 fun calculate(input: String): String {
     if (input.isBlank()) return "결과 : 0"  // 빈 문자열 처리
 
-    var delimiter = ",|:"  // 기본 구분자: 쉼표와 콜론
+    var delimiter = "[,:]"  // 기본 구분자: 쉼표와 콜론
     var numbers = input
     var sum = 0
 
