@@ -13,4 +13,10 @@ fun main() {
     } else {
         textArray = input.split(",", ":");
     }
+
+    var result = 0;
+    textArray.forEach {
+        result += Integer.parseInt(it);
+    }
+    println(result);
 }
