@@ -6,7 +6,8 @@ fun main() {
     println("덧셈할 문자열을 입력해 주세요.")
     val inputText = Console.readLine()
     val (inputNumbers, delimiters) = divideDelimiters(inputText)
-    println(delimiters)
+    val numberList = divideNumbers(inputNumbers, delimiters)
+    println("$delimiters $numberList")
 }
 
 fun divideDelimiters(inputText: String): Pair<String, List<String>> {
@@ -21,4 +22,10 @@ fun divideDelimiters(inputText: String): Pair<String, List<String>> {
             Pair(inputText, listOf(",", ":"))
         }
     }
+}
+
+fun divideNumbers(inputNumbers: String, delimiters: List<String>): List<String> {
+    return inputNumbers.split(*delimiters.toTypedArray())
+        .filter { it.isNotEmpty() }
+        .map { it.trim() }
 }
