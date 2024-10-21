@@ -27,7 +27,10 @@ class Seperator(val expression: String?) {
     }
 }
 
-fun parseNumber(txt: String): Int {
+fun parseNumber(txt: String?): Int {
+    if(txt.isNullOrEmpty()) {
+        return 0
+    }
     val num = Integer.parseInt(txt)
     return num
 }
