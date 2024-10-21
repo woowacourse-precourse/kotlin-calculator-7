@@ -5,7 +5,8 @@ import camp.nextstep.edu.missionutils.Console
 fun main() {
     // TODO: 프로그램 구현
     val input = getInput()
-    val nums = getNumbers(input)
+    val numbers = getNumbers(input)
+    printSum(numbers)
 }
 
 private const val INPUT_STR = "덧셈할 문자열을 입력해 주세요."
@@ -67,4 +68,12 @@ private fun String.removeCustomDelimiter(): String {
     val delimiterEndIndex = indexOf("""\n""")
     val removeDelimiterStr = substring(delimiterEndIndex + 2)
     return removeDelimiterStr
+}
+
+/**
+ * 숫자 리스트의 값들을 더한 결과값을 출력한다.
+ */
+fun printSum(numbers: List<Int>) {
+    val sum = numbers.sum()
+    println("결과 : $sum")
 }
