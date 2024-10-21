@@ -21,6 +21,8 @@ fun getInput(): String {
 }
 
 fun extractNumber(input: String): List<String> {
+    if (input == "") return listOf("0")
+
     return input.substringAfter("\\n").split(*delimiter.toTypedArray())
 }
 
