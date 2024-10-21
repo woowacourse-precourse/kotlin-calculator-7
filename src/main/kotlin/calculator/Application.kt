@@ -32,6 +32,18 @@ fun extractNumbers(input: String): List<Int> {
     val numberList: List<String>
 
 
+    // 커스텀 구분자의 존재 여부
+    if (hasCustomDelimiter(input)) {
+        val (customDelimiter, numberSegment) = getCustomDelimiter(input)
+        numberList = numberSegment.split(customDelimiter, ",", ":")
+    } else {
+        numberList = input.split("[,:]".toRegex())
+    }
+
+    return validateAndConvertNumbers(numberList)
+}
+
+
     // 커스텀 구분자 사용 여부
     fun hasCustomDelimiter(input: String): Boolean {
         return input.startsWith("//")
