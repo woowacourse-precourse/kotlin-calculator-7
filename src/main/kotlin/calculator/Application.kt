@@ -13,17 +13,7 @@ fun isValid(str: String): Boolean {
     return inputRegex.matches(str)
 }
 
-fun checkCustom(str: String): Boolean {
-    if (str.contains("//") && str.contains("\\n")) {
-        val beforeIndex = str.indexOf("//")
-        val afterIndex = str.indexOf("\\n")
-
-        if (beforeIndex < afterIndex && beforeIndex == 0) {
-            return true
-        }
-    }
-    return false
-}
+fun checkCustom(str: String): Boolean = str.contains("^//.+\\\\n".toRegex())
 
 fun replaceCustom(str: String): String {
     val afterIndex = str.indexOf("\\n")
@@ -47,7 +37,6 @@ fun main() {
                 throw IllegalArgumentException()
             }
         }
-
         val numbers = splitNumber(inputString)
         val result = sum(numbers)
         println("결과 : $result")

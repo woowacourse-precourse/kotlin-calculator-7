@@ -92,6 +92,21 @@ class ApplicationTest : NsTest() {
         }
     }
 
+    @Test
+    fun `올바르지 않은 접미사 커스텀 예외 테스트`() {
+        assertSimpleTest {
+            assertThrows<IllegalArgumentException> { runException("//*\\*n1*2") }
+        }
+    }
+
+    @Test
+    fun `올바르지 않은 접두사 커스텀 예외 테스트`() {
+        assertSimpleTest {
+            assertThrows<IllegalArgumentException> { runException("/,/*\\n1*2") }
+        }
+    }
+
+
     override fun runMain() {
         main()
     }
