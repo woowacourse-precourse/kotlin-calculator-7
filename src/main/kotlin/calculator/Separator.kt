@@ -1,11 +1,11 @@
 package calculator
 
 class Separator {
-    val separates: MutableList<Char> = mutableListOf(',', ':')
-    val customSeparates = Pair("//", "\n")
-    var startIndex = 0
-    var endIndex = 0
-    val result: MutableList<Int> = mutableListOf(0)
+    private val separates: MutableList<Char> = mutableListOf(',', ':')
+    private val customSeparates = Pair("//", "\n")
+    private var startIndex = 0
+    private var endIndex = 0
+    private val result: MutableList<Int> = mutableListOf(0)
 
     private fun getCustomSeparate(input: String) {
         if (!input.startsWith(customSeparates.first)) return
@@ -19,6 +19,7 @@ class Separator {
 
     fun run(input: String): List<Int> {
         if (input.isBlank()) return listOf(0)
+
         if (input.startsWith(customSeparates.first)) {
             getCustomSeparate(input)
             if (endIndex+customSeparates.second.length == input.length) return listOf(0)
