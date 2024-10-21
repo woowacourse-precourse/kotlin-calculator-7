@@ -2,8 +2,8 @@ package calculator
 import camp.nextstep.edu.missionutils.Console
 
 class Calculator {
-    var input: String = ""
-    val separator = Separator()
+    private var input: String = ""
+    private val separator = Separator()
 
     // calculator 초기화하는 함수
     private fun setInput() {
