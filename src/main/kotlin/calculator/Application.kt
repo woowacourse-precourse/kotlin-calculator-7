@@ -10,11 +10,23 @@ fun main() {
         checkValid(input)
 
     } catch (e: IllegalArgumentException) {
-        println(e.message) // 예외 메시지를 출력
+        println("잘못 된 값을 입력했습니다") // 예외 메시지를 출력
     }
 }
 
-
+fun checkValid(inputText: String) {
+    val (numbers, customDelimiters) = tokenizeString(inputText)
+    if (numbers.isEmpty()) {
+        return print(0)
+    }
+    val numberRegex = customDelimiters.joinToString("|") { "\\$it" } // 각 구분자를 이스케이프 처리
+    val numberList = numbers.split(Regex(numberRegex))
+    for (number in numberList) {
+        if (number.toIntOrNull() == null) {
+            throw IllegalArgumentException()
+        }
+    }
+}
 
 private fun tokenizeString(inputText: String): Pair<String, List<String>> {
     return if (inputText.startsWith("//")) {
