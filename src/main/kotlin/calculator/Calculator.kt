@@ -2,8 +2,8 @@ package calculator
 import camp.nextstep.edu.missionutils.Console
 
 class Calculator {
-    var input: String? = null
-    var result: Int = 0
+    var input: String = ""
+    val separator = Separator()
 
     // calculator 초기화
     private fun setInput() {
@@ -12,9 +12,7 @@ class Calculator {
     }
 
     fun getSum(): Int {
-        init()
-        if (input.isNullOrBlank()) return 0
-
-        return result
+        setInput()
+        return separator.run(input).sum()
     }
 }
