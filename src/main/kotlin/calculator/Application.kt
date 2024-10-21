@@ -29,7 +29,7 @@ fun main() {
                 break
             }
         }
-        print("기본 구분자로 작성된 문자열에서 분리한 수 : $numFromInput")
+        result=numFromInput.sum()
     }
 
     else if (input.contains("//") || input.contains("\\n")) {
@@ -54,6 +54,7 @@ fun main() {
                 break
             }
         }
-        println(numFromInput)
+        result = numFromInput.sum()
     }
+    println("결과 : $result")
 }
