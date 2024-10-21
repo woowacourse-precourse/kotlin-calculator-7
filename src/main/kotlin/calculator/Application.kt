@@ -8,7 +8,7 @@ fun main() {
 
 fun calculate() {
     try {
-        val userInputString = userInputString()
+        val userInputString = getUserInput()
         val splitList = splitString(userInputString)
         val sum = sumSplitList(splitList)
         println(sum)
@@ -17,27 +17,19 @@ fun calculate() {
     }
 }
 
-fun userInputString():String {
-    val input = Console.readLine()
-    return input
-}
+fun getUserInput(): String = Console.readLine()
 
-fun splitString(userInputString:String):List<Int> {
-    if(userInputString.startsWith("//")){
+fun splitString(userInputString: String): List<Int> {
+    return if (userInputString.startsWith("//")) {
         val customDelimiter = findCustomDelimiter(userInputString)
-        val realUserInputString = realUserInputString(userInputString)
-        val customSplitList = realUserInputString.split(customDelimiter).map{it.toInt()}
-        return customSplitList
+        val realInput = getRealUserInput(userInputString)
+        realInput.split(customDelimiter).map { it.toInt() }
     } else {
-        val basicSplitList = userInputString.split(",",":").map{it.toInt()}
-        return basicSplitList
+        userInputString.split(",", ":").map { it.toInt() }
     }
 }
 
-fun sumSplitList(splitList:List<Int>):Int {
-    val sum = splitList.sum()
-    return sum
-}
+fun sumSplitList(splitList: List<Int>): Int = splitList.sum()
 
 fun findCustomDelimiter(userInputString:String):String {
     val start = userInputString.indexOf("//")
@@ -45,7 +37,7 @@ fun findCustomDelimiter(userInputString:String):String {
     return userInputString.substring(start+2,end)
 }
 
-fun realUserInputString(userInputString:String):String {
+fun getRealUserInput(userInputString: String): String {
     val end = userInputString.indexOf("\\n")
-    return userInputString.substring(end+2)
+    return userInputString.substring(end + 2)
 }
