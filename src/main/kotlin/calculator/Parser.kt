@@ -27,7 +27,4 @@ object Parser {
         }
         return numberList
     }
-
-    private val List<Double>.areAllPositive: Boolean
-        get() = all { it > 0 }
 }
