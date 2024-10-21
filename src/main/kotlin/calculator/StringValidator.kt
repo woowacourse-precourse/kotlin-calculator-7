@@ -17,7 +17,7 @@ class StringValidator {
 
             if (matchResult != null) {
                 val customDelimiter = matchResult.groupValues[1] // 커스텀 구분자
-                // 구분자가 하나일 경우만 허용 (길이 제한 추가)
+
                 if (customDelimiter.length != 1) {
                     throw IllegalArgumentException("커스텀 구분자의 길이는 1이어야 합니다.")
                 }
