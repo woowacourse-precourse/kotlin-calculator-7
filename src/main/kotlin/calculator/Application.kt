@@ -8,7 +8,7 @@ class InputExpression(val expression: String?) {
 
     fun splitExpression(): List<String> {
         if(spliter.usedCustomSeperator()){
-            spliter.seperator = spliter.findSeperator()!!
+            spliter.seperator = ",|:|${spliter.findSeperator()!!}"
             text = expression!!.substring(5)
         }
         return text?.split(Regex(spliter.seperator)) ?: listOf("0")
