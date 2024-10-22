@@ -10,7 +10,7 @@ fun main() {
     val input = inputHandler.readInput()
 
     val result = if (input.isEmpty()) {
-        throw IllegalArgumentException(ErrorType.INVALID_EMPTY_INPUT.message)
+        0
     } else {
         val splitNumberList = SeparatorHandler(input).getSplitNumberList()
         Calculator(splitNumberList).sumOfSplitNumbers()
