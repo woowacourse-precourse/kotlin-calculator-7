@@ -7,20 +7,42 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
 class ApplicationTest : NsTest() {
+
     @Test
-    fun `커스텀 구분자 사용`() {
+    fun testCalculateEmpty() {
         assertSimpleTest {
-            run("//;\\n1")
-            assertThat(output()).contains("결과 : 1")
+            run("")
+            assertThat(output()).contains("결과 : 0")
         }
     }
 
     @Test
-    fun `예외 테스트`() {
+    fun testCalculateDelimiter() {
+        assertSimpleTest {
+            run("1,2:3")
+            assertThat(output()).contains("결과 : 6")
+        }
+    }
+
+    @Test
+    fun testCalculateCustomDelimiter() {
+        assertSimpleTest {
+            run("//;\\n1;2;3")
+            assertThat(output()).contains("결과 : 6")
+        }
+    }
+
+    @Test
+    fun testCalculateException() {
         assertSimpleTest {
             assertThrows<IllegalArgumentException> { runException("-1,2,3") }
         }
+
+        assertSimpleTest {
+            assertThrows<IllegalArgumentException> { runException("a,2,3") }
+        }
     }
+
 
     override fun runMain() {
         main()
