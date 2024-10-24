@@ -1,5 +1,9 @@
 # kotlin-calculator-precourse
 
+## 서비스 소개
+
+양수들을 구분자와 함께 입력받아 총합을 출력하는 서비스입니다.
+
 ## 구현할 기능 목록
 
 - 문자열을 입력받고 출력받는 역할의 `UserInterface` 구현
