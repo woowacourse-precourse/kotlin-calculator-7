@@ -1,6 +1,7 @@
 package calculator
 
 interface View {
-    fun readUserInput(): String
+    fun read(): String
     fun show(content: String)
+    fun sum()
 }
