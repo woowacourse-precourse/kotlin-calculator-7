@@ -1,4 +1,10 @@
 package calculator
 
-val List<Double>.areAllPositive: Boolean
-    get() = all { it > 0 }
+object Validator {
+    fun areNumbersValid(numbers: List<Double>): Boolean {
+        return numbers.areAllPositive
+    }
+
+    private val List<Double>.areAllPositive: Boolean
+        get() = all { it > 0 }
+}
