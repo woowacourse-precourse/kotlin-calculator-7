@@ -1,6 +1,6 @@
 package calculator
 
-interface UserInterface {
+interface View {
     fun readUserInput(): String
     fun show(content: String)
 }
