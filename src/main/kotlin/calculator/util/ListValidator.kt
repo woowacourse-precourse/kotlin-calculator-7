@@ -1,6 +1,6 @@
 package calculator.util
 
-object Validator {
+object ListValidator {
     fun areNumbersValid(numbers: List<Double>): Boolean {
         return numbers.areAllPositive
     }
