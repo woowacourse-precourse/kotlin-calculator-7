@@ -11,7 +11,7 @@ object Parser {
     private fun extractDelimiter(value: String): String? {
         if (!StringValidator.doesDelimiterExist(value)) return null
         val delimiter = value.substringAfter("//").substringBefore("\\n")
-        if (StringValidator.isDelimiterValid(delimiter)) throw IllegalArgumentException()
+        if (!StringValidator.isDelimiterValid(delimiter)) throw IllegalArgumentException()
         return delimiter
     }
 
