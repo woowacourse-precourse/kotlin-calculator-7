@@ -1,5 +1,8 @@
 package calculator
 
+import calculator.view.CommandLineView
+import calculator.view.View
+
 fun main() {
     CalculatorApp.run()
 }

@@ -1,4 +1,7 @@
-package calculator
+package calculator.view
+
+import calculator.domain.Calculator
+import calculator.util.Parser
 
 class ViewModel {
     var userInput: String? = null

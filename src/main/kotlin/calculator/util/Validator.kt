@@ -1,4 +1,4 @@
-package calculator
+package calculator.util
 
 object Validator {
     fun areNumbersValid(numbers: List<Double>): Boolean {

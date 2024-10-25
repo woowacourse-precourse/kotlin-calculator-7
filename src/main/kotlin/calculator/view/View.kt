@@ -1,4 +1,4 @@
-package calculator
+package calculator.view
 
 interface View {
     fun read(): String

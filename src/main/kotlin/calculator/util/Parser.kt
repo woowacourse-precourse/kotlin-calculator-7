@@ -1,4 +1,4 @@
-package calculator
+package calculator.util
 
 object Parser {
     private val defaultDelimiters: List<String> = listOf(",", ":")
@@ -6,7 +6,7 @@ object Parser {
     private var delimiters: List<String> = defaultDelimiters
 
     private fun addDelimiters(vararg delimiters: String) {
-        this.delimiters = this.delimiters.plus(delimiters)
+        Parser.delimiters = Parser.delimiters.plus(delimiters)
     }
 
     private fun extractDelimiter(value: String): String? {
