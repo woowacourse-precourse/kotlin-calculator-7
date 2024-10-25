@@ -2,7 +2,6 @@ package calculator.util
 
 object Parser {
     private val defaultDelimiters: List<String> = listOf(",", ":")
-    private val prohibitedDelimiters: List<String> = listOf(".")
     private var delimiters: List<String> = defaultDelimiters
 
     private fun addDelimiters(vararg delimiters: String) {
@@ -10,9 +9,9 @@ object Parser {
     }
 
     private fun extractDelimiter(value: String): String? {
-        if (!value.startsWith("//")) return null
+        if (!StringValidator.doesDelimiterExist(value)) return null
         val delimiter = value.substringAfter("//").substringBefore("\\n")
-        if (delimiter in prohibitedDelimiters) throw IllegalArgumentException()
+        if (StringValidator.isDelimiterValid(delimiter)) throw IllegalArgumentException()
         return delimiter
     }
 
@@ -29,7 +28,7 @@ object Parser {
     fun parseToNumbers(input: String): List<Double> {
         extractDelimiter(input)?.let { delimiter -> addDelimiters(delimiter) }
         val numbers: List<Double> = extractNumbers(input)
-        if (!Validator.areNumbersValid(numbers)) throw IllegalArgumentException()
+        if (!ListValidator.areNumbersValid(numbers)) throw IllegalArgumentException()
         return numbers
     }
 }
