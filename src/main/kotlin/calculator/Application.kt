@@ -1,7 +1,9 @@
 package calculator
 
+import camp.nextstep.edu.missionutils.Console.readLine
+
 fun main() {
-    // TODO: 프로그램 구현
+
     println("덧셈할 문자열을 입력해 주세요.")
 
     val str = readLine()
@@ -17,9 +19,6 @@ fun main() {
         throw IllegalArgumentException("잘못된 입력 형식입니다.")
     }
 }
-
-
-fun readLine(): String = camp.nextstep.edu.missionutils.Console.readLine()
 
 fun hasCustomDelimiter(str: String) = Regex("//.*\\n").containsMatchIn(str.replace("\\n", "\n"))
 
