@@ -16,7 +16,7 @@ fun main() {
         }
         println("결과 : $sum")
     } catch (e: Exception) {
-        throw IllegalArgumentException("잘못된 입력 형식입니다.")
+        throw IllegalArgumentException("${e.message}")
     }
 }
 
@@ -30,6 +30,10 @@ fun splitByCustomDelimiter(str: String): Pair<String, String> {
 fun sumOfStringList(list: List<String>) =
     list.sumOf {
         val n = it.toInt()
-        if (n <= 0) throw IllegalArgumentException("잘못된 입력 형식입니다.")
+        checkNegativeNum(n)
         n
     }
+
+fun checkNegativeNum(n: Int) {
+    if (n <= 0) throw IllegalArgumentException("음수를 입력하였습니다.")
+}
