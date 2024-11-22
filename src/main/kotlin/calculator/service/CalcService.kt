@@ -2,6 +2,6 @@ package calculator.service
 
 import calculator.validator.InputValidator
 
-class CalcService {
+object CalcService {
     fun getSum(input: String) = InputValidator.getValidNumbers(input).sum()
 }
