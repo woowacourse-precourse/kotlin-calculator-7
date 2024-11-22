@@ -6,9 +6,14 @@ object InputValidator {
         require(isAllPositive(input)) { IS_ANY_NEGATIVE }
     }
 
+    fun getValidNumbers(input: String): List<Int> {
+        val separators = setSeparators(input)
+        return input.split(*separators.toCharArray()).map { it.toInt() }
+    }
+
     private fun isAllPositive(input: String): Boolean {
         val separators = setSeparators(input)
-        val numbers = input.split(*separators.toCharArray()).map { it.toInt() }
+        val numbers = getValidNumbers(input)
         return numbers.all { it >= 0 }
     }
 
