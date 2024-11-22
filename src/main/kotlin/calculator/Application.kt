@@ -43,15 +43,6 @@ fun calculate(numbers: List<Int>): Int {
     return numbers.sum()
 }
 
-// 커스텀 구분자 유무 확인
-fun isCustomSeparator(string: String): Boolean {
-    val regex = Regex("^//.\\\\n")
-    return if (string.length >= 5) {
-        regex.containsMatchIn(string)
-    } else {
-        false
-    }
-}
 
 fun main() {
     val string = input()
