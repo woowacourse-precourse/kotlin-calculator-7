@@ -1,5 +1,9 @@
 package calculator
 
+import calculator.controller.CalcController
+import calculator.view.InputView
+import calculator.view.OutputView
+
 fun main() {
-    // TODO: 프로그램 구현
+    CalcController(InputView(), OutputView()).run()
 }
