@@ -8,7 +8,10 @@ object InputValidator {
 
     fun getValidNumbers(input: String): List<Int> {
         val separators = setSeparators(input)
-        return input.split(*separators.toCharArray()).map { it.toInt() }
+        val processedInput = getProcessedInput(input)
+        if (processedInput.isEmpty())
+            return listOf(0)
+        return processedInput.split(*separators.toCharArray()).map { it.toInt() }
     }
 
     private fun isAllPositive(input: String): Boolean {
@@ -17,11 +20,21 @@ object InputValidator {
         return numbers.all { it >= 0 }
     }
 
+    // 커스텀 구분자 지정 공간 이후 문자열 반환
+    private fun getProcessedInput(input: String): String {
+        if (isCustomSeparator(input))
+            return input.substring(5)
+        return input
+    }
+
     // 문자열이 유효한 형식인지 validate
     private fun isValidInputType(input: String): Boolean {
+        val processedInput = getProcessedInput(input)
+        if (processedInput.isEmpty()) return true
+
         val separators = setSeparators(input)
         try {
-            input.split(*separators.toCharArray()).map { it.toInt() }
+            processedInput.split(*separators.toCharArray()).map { it.toInt() }
         } catch (e: NumberFormatException) {
             return false
         }
