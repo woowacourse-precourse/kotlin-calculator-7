@@ -2,12 +2,6 @@ package calculator
 
 import camp.nextstep.edu.missionutils.Console
 
-// 입력
-fun input(): String {
-    println("덧셈할 문자열을 입력해 주세요.")
-    return Console.readLine()
-}
-
 // 문자열 유효성 검사
 fun isValidString(string: String): Boolean {
     val isCustomSeparator = isCustomSeparator(string)
@@ -47,11 +41,6 @@ fun extractNumbers(string: String): List<Int> {
 // 연산
 fun calculate(numbers: List<Int>): Int {
     return numbers.sum()
-}
-
-// 출력
-fun printResult(result: Int) {
-    print("결과 : $result")
 }
 
 // 커스텀 구분자 유무 확인
